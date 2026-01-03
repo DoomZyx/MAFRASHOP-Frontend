@@ -1,0 +1,232 @@
+// CSS de base : MOBILE FIRST
+.search-products-header {
+  position: relative;
+  z-index: 1000;
+  padding-top: 2rem;
+}
+
+.search-products-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 390px;
+  margin: 0 auto;
+}
+
+.search-products {
+  position: relative;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 10px;
+  margin-top: 5rem;
+
+  input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #d32f2f;
+    }
+  }
+
+  .search-btn {
+    display: none;
+  }
+}
+
+.search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+.search-results-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 20px;
+  right: 20px;
+  max-height: 60vh;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .search-results-header {
+    padding: 12px 20px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #666;
+  }
+
+  .search-results-list {
+    flex: 1;
+    overflow-y: auto;
+    
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f5f5f5;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 10px;
+
+      &:hover {
+        background: #999;
+      }
+    }
+
+    .search-result-item {
+      display: flex;
+      gap: 15px;
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s ease;
+      cursor: pointer;
+
+      &:hover {
+        background: #f9f9f9;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      img {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        background: #f5f5f5;
+        border-radius: 4px;
+        padding: 5px;
+        flex-shrink: 0;
+      }
+
+      .search-result-info {
+        flex: 1;
+        min-width: 0;
+
+        h4 {
+          font-size: 0.95rem;
+          font-weight: 600;
+          color: #1a1a1a;
+          margin: 0 0 5px 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .search-result-ref {
+          font-size: 0.8rem;
+          color: #666;
+          margin: 3px 0;
+        }
+
+        .search-result-category {
+          font-size: 0.8rem;
+          color: #888;
+          margin: 3px 0;
+          text-transform: uppercase;
+        }
+
+        .search-result-price {
+          font-size: 0.9rem;
+          font-weight: 700;
+          color: #d32f2f;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+
+  .search-no-results {
+    padding: 40px 20px;
+    text-align: center;
+
+    p {
+      color: #666;
+      font-size: 1rem;
+      margin: 0;
+    }
+  }
+}
+
+// Tablette
+@media (min-width: 769px) {
+  .search-products-header {
+    padding-top: 70px;
+  }
+
+  .search-products-wrapper {
+    max-width: 700px;
+  }
+
+  .search-results-dropdown {
+    .search-results-list {
+      .search-result-item {
+        img {
+          width: 100px;
+          height: 100px;
+        }
+
+        .search-result-info {
+          h4 {
+            font-size: 1rem;
+          }
+
+          .search-result-ref,
+          .search-result-category {
+            font-size: 0.85rem;
+          }
+
+          .search-result-price {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Desktop
+@media (min-width: 1025px) {
+  .search-products-header {
+    padding-top: 3em; 
+    margin-bottom: -3rem;
+  }
+
+  .search-products-wrapper {
+    max-width: 800px;
+  }
+
+  .search-products {
+    padding: 30px;
+  }
+
+  .search-results-dropdown {
+    left: 30px;
+    right: 30px;
+  }
+}

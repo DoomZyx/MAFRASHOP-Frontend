@@ -1,0 +1,25 @@
+.hero-catalogue {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  z-index: -1;
+}
+
+@media (min-width: 768px) {
+  body .hero-catalogue {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+ }
+}
+
+@media (max-width: 1024px) {
+  html body .hero-catalogue {
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}

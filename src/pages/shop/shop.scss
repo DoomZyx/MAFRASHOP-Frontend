@@ -1,0 +1,17 @@
+// CSS de base : MOBILE FIRST
+.shop-layout {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+// Desktop : layout avec sidebar
+@media (min-width: 1025px) {
+  .shop-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,313 @@
+.race-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 20px auto 0;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .race-carousel-btn {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.75rem;
+    z-index: 11;
+    top: 30%;
+    transform: translateY(-50%);
+
+    &.race-carousel-btn-prev {
+      left: 2px;
+    }
+
+    &.race-carousel-btn-next {
+      right: 2px;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    &:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+  }
+
+  .race-carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .race-carousel-track {
+    position: relative;
+    display: flex;
+    height: 230px;
+
+    .race-card {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease-in-out;
+      opacity: 0;
+      padding: 10px 0;
+      pointer-events: none;
+
+      &.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      display: flex;
+      flex-direction: column;
+      background-color: #000;
+      border-radius: 12px;
+      overflow: visible;
+
+      .race-card-image-wrapper {
+        position: relative;
+        width: 100%;
+        height: 120px;
+        overflow: visible;
+
+        .race-background {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .race-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.7)
+          );
+          z-index: 1;
+        }
+
+        .race-dates {
+          position: absolute;
+          bottom: -25px;
+          left: 25%;
+          transform: translateX(-50%);
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          z-index: 4;
+
+          .date-block {
+            background-color: #ff1919;
+            padding: 5px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 45px;
+
+            .date-day {
+              font-size: 1.2rem;
+              font-weight: 700;
+              color: white;
+              line-height: 1;
+            }
+
+            .date-month {
+              font-size: 0.5rem;
+              font-weight: 600;
+              color: white;
+              margin: 1px 0;
+            }
+
+            .date-year {
+              font-size: 0.6rem;
+              font-weight: 600;
+              color: white;
+            }
+          }
+
+          .date-separator {
+            font-size: 0.8rem;
+            color: white;
+          }
+        }
+      }
+
+      .race-info {
+        flex: 1;
+        padding: 10px;
+        background-color: #000;
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        .race-track-image {
+          width: 100px;
+          height: auto;
+          position: relative;
+          bottom: 30%;
+        }
+
+        .race-title {
+          color: white;
+          font-size: 0.9rem;
+          font-weight: 500;
+          margin: 0px 0px 20px 0px;
+          text-transform: uppercase;
+          letter-spacing: 0.3px;
+        }
+      }
+    }
+  }
+
+  .race-carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 35px;
+
+    .indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: none;
+      background-color: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+
+      &.active {
+        background-color: #d32f2f;
+        width: 20px;
+        border-radius: 4px;
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+}
+
+// Tablette
+@media (min-width: 769px) {
+  .race-carousel {
+    max-width: 380px;
+
+    .race-carousel-track {
+      height: 320px;
+
+      .race-card {
+        .race-card-image-wrapper {
+          height: 180px;
+
+          .race-dates {
+            gap: 18px;
+            transform: translateX(-40%);
+
+            .date-block {
+              min-width: 75px;
+              padding: 10px 15px;
+
+              .date-day {
+                font-size: 1.8rem;
+              }
+
+              .date-month {
+                font-size: 0.7rem;
+              }
+
+              .date-year {
+                font-size: 0.8rem;
+              }
+            }
+          }
+        }
+
+        .race-info {
+          padding: 18px;
+
+          .race-track-image {
+            width: 90px;
+          }
+
+          .race-title {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Desktop
+@media (min-width: 1200px) {
+  .race-carousel {
+    max-width: 400px;
+
+    .race-carousel-btn {
+      width: 38px;
+      height: 38px;
+      font-size: 1.1rem;
+    }
+
+    .race-carousel-track {
+      height: 340px;
+
+      .race-card {
+        .race-card-image-wrapper {
+          height: 190px;
+
+          .race-dates {
+            .date-block {
+              min-width: 80px;
+              padding: 10px 16px;
+
+              .date-day {
+                font-size: 1.9rem;
+              }
+
+              .date-month {
+                font-size: 0.75rem;
+              }
+
+              .date-year {
+                font-size: 0.85rem;
+              }
+            }
+          }
+        }
+
+        .race-info {
+          padding: 20px;
+
+          .race-track-image {
+            width: 100px;
+          }
+
+          .race-title {
+            font-size: 1.05rem;
+          }
+        }
+      }
+    }
+  }
+}

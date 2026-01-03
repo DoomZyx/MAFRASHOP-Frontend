@@ -1,0 +1,118 @@
+// CSS de base : MOBILE FIRST
+.filters-sidebar {
+  display: none;
+}
+
+// Desktop : afficher la sidebar
+@media (min-width: 1025px) {
+  .filters-sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    min-width: 350px;
+    max-height: 80vh;
+    background: #4a4a4a;
+    border: 3px solid #323232;
+    border-radius: 8px;
+    overflow: hidden;
+
+    .filters-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+      .filters-logo {
+        width: 100px;
+        height: auto;
+      }
+
+      .filters-btn {
+        background: #5a5a5a;
+        color: white;
+        border: 1px solid #8a8a8a;
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: default;
+      }
+    }
+
+    .filters-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+
+      // Custom scrollbar
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.5);
+        }
+      }
+
+      .filter-section {
+        margin-bottom: 30px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        h3 {
+          color: white;
+          font-size: 0.95rem;
+          font-weight: 600;
+          margin: 0 0 15px 0;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .filter-options {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+
+          .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            color: white;
+            font-size: 0.85rem;
+
+            input[type="checkbox"] {
+              width: 18px;
+              height: 18px;
+              cursor: pointer;
+              accent-color: white;
+              background: transparent;
+              border: 2px solid #8a8a8a;
+              border-radius: 4px;
+            }
+
+            span {
+              user-select: none;
+            }
+
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
+      }
+    }
+  }
+}

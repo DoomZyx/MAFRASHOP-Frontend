@@ -1,0 +1,172 @@
+// CSS de base : MOBILE FIRST
+.product-detail-container {
+  position: relative;
+  z-index: 1;
+  padding: 80px 20px 40px;
+  min-height: 100vh;
+
+  .loading-message,
+  .error-message {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    padding: 40px 20px;
+  }
+
+  .error-message {
+    color: #d32f2f;
+  }
+
+  .product-detail-content {
+    background-color: #373737;
+    max-width: 1000px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    .product-image-section {
+      margin-bottom: 20px;
+
+      img {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+        object-fit: contain;
+        margin: 0 auto;
+        display: block;
+        border-radius: 8px;
+        padding: 20px;
+      }
+    }
+
+    .product-info-section {
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #ffffff;
+        margin: 0 0 15px 0;
+      }
+
+      .product-format {
+        font-size: 0.95rem;
+        color: #f1f1f1;
+        margin-bottom: 10px;
+
+        .category-label,
+        .format-label {
+          font-weight: 600;
+          margin-right: 5px;
+        }
+      }
+
+      .product-description {
+        margin: 20px 0;
+        p {
+          font-size: 1rem;
+          color: #f1f1f1;
+          line-height: 1.6;
+        }
+      }
+
+      .price-item {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 12px;
+
+        font-size: 1rem;
+
+        .price-label {
+          font-weight: 600;
+          color: #666;
+        }
+
+        .price-value {
+          font-size: 1.2rem;
+          font-weight: 500;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}
+
+// Tablette
+@media (min-width: 769px) {
+  .product-detail-container {
+    padding: 100px 40px 60px;
+
+    .product-detail-content {
+      padding: 30px;
+
+      .product-image-section {
+        img {
+          max-width: 500px;
+        }
+      }
+
+      .product-info-section {
+        h1 {
+          font-size: 2rem;
+        }
+
+        .product-ref {
+          font-size: 1rem;
+        }
+
+        .product-description {
+          h2 {
+            font-size: 1.4rem;
+          }
+
+          p {
+            font-size: 1.05rem;
+          }
+        }
+
+        .product-pricing {
+          .price-item {
+            font-size: 1.1rem;
+
+            .price-value {
+              font-size: 1.4rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Desktop
+@media (min-width: 1025px) {
+  .product-detail-container {
+    padding: 250px 60px 80px;
+
+    .product-detail-content {
+      display: flex;
+      gap: 40px;
+      padding: 40px;
+
+      .product-image-section {
+        flex: 1;
+        margin-bottom: 0;
+
+        img {
+          max-width: 70%;
+          height: auto;
+        }
+      }
+
+      .product-info-section {
+        flex: 1;
+
+        h1 {
+          font-size: 2.2rem;
+        }
+      }
+    }
+  }
+}
