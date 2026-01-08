@@ -44,11 +44,13 @@ function Catalogue() {
             {product.FORMAT && (
               <p className="product-format">{product.FORMAT}</p>
             )}
-            <p className="product-price">
-              {product.PUBLIC_HT !== null
-                ? `${product.PUBLIC_HT.toFixed(2)}€ HT`
-                : "Prix non disponible"}
-            </p>
+            {product.GARAGE !== null && (
+              <div className="price-item">
+                <span className="price-value">
+                  {product.GARAGE.toFixed(2)}€
+                </span>
+              </div>
+            )}
           </Link>
         ))}
       </div>

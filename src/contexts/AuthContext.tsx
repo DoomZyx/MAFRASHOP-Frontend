@@ -1,5 +1,6 @@
 import { createContext, ReactNode } from "react";
 import { User } from "../API/auth/api";
+import { useAuthProvider } from "../hooks/useAuthProvider";
 
 export interface AuthContextType {
   user: User | null;
@@ -24,4 +25,12 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 
 export interface AuthProviderProps {
   children: ReactNode;
+}
+
+export function AuthProvider({ children }: AuthProviderProps) {
+  const authValue = useAuthProvider();
+
+  return (
+    <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>
+  );
 }

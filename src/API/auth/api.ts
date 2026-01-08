@@ -5,11 +5,27 @@ export interface User {
   email: string;
   firstName: string;
   lastName: string;
+  phone: string;
+  address: string;
+  city: string;
+  zipCode: string;
   avatar?: string;
   googleId?: string;
   authProvider: "local" | "google";
   isVerified: boolean;
   role: "user" | "admin";
+  isPro?: boolean;
+  proStatus?: "none" | "pending" | "validated" | "rejected";
+  company?: {
+    name?: string;
+    siret?: string;
+    address?: string;
+    city?: string;
+    zipCode?: string;
+    phone?: string;
+    email?: string;
+  };
+
   createdAt: string;
   updatedAt: string;
 }
@@ -99,6 +115,23 @@ export const authAPI = {
     });
     return response.json();
   },
+
+  updateProfile: async (data: {
+    firstName: string;
+    lastName: string;
+    address: string;
+    city: string;
+    zipCode: string;
+    phone: string;
+  }): Promise<{ success: boolean; message: string; data: { user: User } }> => {
+    const response = await fetch(`${API_BASE_URL}/api/auth/profile`, {
+      method: "PUT",
+      headers: getAuthHeaders(),
+      body: JSON.stringify(data),
+    });
+    return response.json();
+  },
 };
+
 
 

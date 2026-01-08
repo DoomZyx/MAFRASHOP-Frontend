@@ -63,7 +63,7 @@ function Nav() {
                   <Link to="/">ACCUEIL</Link>
                 </li>
                 <li>
-                  <Link to="/sav">SAV</Link>
+                  <Link to="/shop">Catalogue</Link>
                 </li>
                 <li>
                   <Link to="/expertise">NOTRE EXPERTISE</Link>
@@ -89,9 +89,11 @@ function Nav() {
                   <i className="bi bi-heart"></i>
                 </button>
                 {isAuthenticated && (
-                  <button className="nav-icon-btn">
-                    <i className="bi bi-person"></i>
-                  </button>
+                  <Link to="/profile">
+                    <button className="nav-icon-btn">
+                      <i className="bi bi-person"></i>
+                    </button>
+                  </Link>
                 )}
               </div>
               {isAuthenticated ? (
