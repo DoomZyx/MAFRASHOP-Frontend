@@ -8,7 +8,7 @@ function Footer() {
       <div className="footer-container">
         <div className="footer-logo-section">
           <img
-            src="/images/fanatecLogo.webp"
+            src="/public/images/fanatecLogo.webp"
             alt="Logo FANATEC"
             className="footer-logo"
           />
