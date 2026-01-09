@@ -92,7 +92,7 @@ function Nav() {
           </div>
 
           <div className="nav-center">
-            <img src="/logoMAFRA.webp" alt="MAFRA" className="nav-logo" />
+            <img src="/images/logoMAFRA.webp" alt="MAFRA" className="nav-logo" />
           </div>
 
           <div className="nav-right">
