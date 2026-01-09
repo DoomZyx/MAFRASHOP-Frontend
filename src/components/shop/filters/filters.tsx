@@ -22,7 +22,11 @@ function Filters({ onToggleFilter, isFilterActive }: FiltersProps) {
   return (
     <aside className="filters-sidebar">
       <div className="filters-header">
-        <img src="/logoMAFRA.webp" alt="Logo MAFRA" className="filters-logo" />
+        <img
+          src="/images/logoMAFRA.webp"
+          alt="Logo MAFRA"
+          className="filters-logo"
+        />
         <button className="filters-btn">FILTRES</button>
       </div>
 
