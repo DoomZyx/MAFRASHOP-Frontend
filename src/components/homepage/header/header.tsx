@@ -18,7 +18,7 @@ function Header() {
 
         <div className="logo-section">
           <img
-            src="/public/images/logoMAFRA.webp"
+            src="/images/logoMAFRA.webp"
             alt="Logo Mafra Shop"
             className="main-logo"
           />
