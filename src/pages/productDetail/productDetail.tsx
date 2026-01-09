@@ -1,13 +1,21 @@
 import { useParams } from "react-router-dom";
 import { useProduct } from "../../hooks/useProducts";
+import { useCart } from "../../hooks/useCart";
+import { useFavorites } from "../../hooks/useFavorites";
+import { useAuth } from "../../hooks/useAuth";
 import Nav from "../../components/nav/nav";
+import ProductPrice from "../../components/shared/ProductPrice";
 import "./productDetail.scss";
 import Footer from "../../components/footer/footer";
 import HeroBg from "../../components/shop/herobg/heroBg";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 function ProductDetail() {
   const { id } = useParams<{ id: string }>();
   const { product, loading, error } = useProduct(id || "");
+  const { addToCart, isInCart } = useCart();
+  const { toggleFavorite, isFavorite } = useFavorites();
+  const { isAuthenticated } = useAuth();
 
   if (loading) {
     return (
@@ -59,16 +67,59 @@ function ProductDetail() {
               </div>
             )}
 
-              {product.GARAGE !== null && (
-                <div className="price-item">
-                  <span className="price-value">
-                    {product.GARAGE.toFixed(2)}€
+            <ProductPrice product={product} className="product-price" />
+
+            {isAuthenticated && (
+              <div className="product-actions">
+                <button
+                  className={`product-action-btn favorite-btn ${
+                    isFavorite(product._id) ? "active" : ""
+                  }`}
+                  onClick={() => toggleFavorite(product._id)}
+                  title={
+                    isFavorite(product._id)
+                      ? "Retirer des favoris"
+                      : "Ajouter aux favoris"
+                  }
+                >
+                  <i
+                    className={`bi ${
+                      isFavorite(product._id) ? "bi-heart-fill" : "bi-heart"
+                    }`}
+                  ></i>
+                  <span>
+                    {isFavorite(product._id)
+                      ? "Retirer des favoris"
+                      : "Ajouter aux favoris"}
                   </span>
-                </div>
-              )}
-            </div>
+                </button>
+                <button
+                  className={`product-action-btn cart-btn ${
+                    isInCart(product._id) ? "active" : ""
+                  }`}
+                  onClick={() => addToCart(product._id)}
+                  title={
+                    isInCart(product._id)
+                      ? "Déjà dans le panier"
+                      : "Ajouter au panier"
+                  }
+                >
+                  <i
+                    className={`bi ${
+                      isInCart(product._id) ? "bi-cart-check-fill" : "bi-cart"
+                    }`}
+                  ></i>
+                  <span>
+                    {isInCart(product._id)
+                      ? "Déjà dans le panier"
+                      : "Ajouter au panier"}
+                  </span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
+      </div>
       <Footer />
     </>
   );

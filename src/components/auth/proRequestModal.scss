@@ -1,0 +1,235 @@
+@import "../../utils/mixins/queries/queries.scss";
+
+.pro-request-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100001;
+  padding: 20px;
+}
+
+.pro-request-modal {
+  background-color: white;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.3s ease-out;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pro-request-modal-close {
+  position: sticky;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+  z-index: 10;
+  float: right;
+  margin: 15px 15px 0 0;
+
+  &:hover {
+    color: #d32f2f;
+  }
+}
+
+.pro-request-modal-content {
+  padding: 40px 30px;
+  clear: both;
+}
+
+.pro-request-modal-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #27292a;
+  text-align: center;
+  margin: 0 0 15px 0;
+  letter-spacing: 1px;
+}
+
+.pro-request-modal-description {
+  text-align: center;
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0 0 30px 0;
+  line-height: 1.6;
+}
+
+.pro-request-modal-error {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  text-align: center;
+  border-left: 4px solid #d32f2f;
+}
+
+.pro-request-modal-success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  text-align: center;
+  border-left: 4px solid #4caf50;
+}
+
+.pro-request-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pro-request-modal-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 15px;
+}
+
+.pro-request-modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #27292a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    .required {
+      color: #d32f2f;
+    }
+  }
+
+  input {
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: "Titillium Web", sans-serif;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #d32f2f;
+    }
+
+    &:disabled {
+      background-color: #f5f5f5;
+      cursor: not-allowed;
+    }
+  }
+
+  .pro-request-modal-hint {
+    font-size: 0.8rem;
+    color: #999;
+    margin-top: -5px;
+  }
+}
+
+.pro-request-modal-submit {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  letter-spacing: 1px;
+  margin-top: 10px;
+
+  &:hover:not(:disabled) {
+    background-color: #b71c1c;
+  }
+
+  &:disabled {
+    background-color: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+  }
+}
+
+.pro-request-modal-info {
+  margin-top: 25px;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  border-left: 4px solid #2196f3;
+
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    i {
+      color: #2196f3;
+      font-size: 1.1rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .pro-request-modal {
+    max-width: 100%;
+    margin: 0 10px;
+  }
+
+  .pro-request-modal-content {
+    padding: 30px 20px;
+  }
+
+  .pro-request-modal-title {
+    font-size: 1.5rem;
+  }
+
+  .pro-request-modal-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .pro-request-modal {
+    max-width: 550px;
+  }
+}

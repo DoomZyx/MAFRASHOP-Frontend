@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./nav.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -8,10 +9,17 @@ import MenuBurger from "../menuBurger/menu";
 import MenuDesktop from "../menuDesktop/menu";
 import useModal from "../../hooks/useModal";
 import { useNav } from "../../hooks/useNav";
+import { useCart } from "../../hooks/useCart";
 import AuthModal from "../auth/AuthModal";
+import ProRequestModal from "../auth/ProRequestModal";
+import CartModal from "../cart/CartModal";
+import FavoritesModal from "../favorites/FavoritesModal";
 
 function Nav() {
   const { isModalOpen, toggleModal } = useModal();
+  const [isProModalOpen, setIsProModalOpen] = useState(false);
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
   const deviceType = useResponsive();
   const {
     isAuthModalOpen,
@@ -21,6 +29,14 @@ function Nav() {
     closeAuthModal,
     handleLogout,
   } = useNav();
+  const { getCartCount } = useCart();
+
+  // Afficher le bouton pro si l'utilisateur est connecté mais pas pro (ou demande rejetée)
+  const showProButton =
+    isAuthenticated &&
+    user &&
+    !user.isPro &&
+    (user.proStatus === "none" || user.proStatus === "rejected");
 
   return (
     <nav>
@@ -82,12 +98,27 @@ function Nav() {
           <div className="nav-right">
             <div className="nav-right-content">
               <div className="nav-icons">
-                <button className="nav-icon-btn">
-                  <i className="bi bi-cart"></i>
-                </button>
-                <button className="nav-icon-btn">
-                  <i className="bi bi-heart"></i>
-                </button>
+                {isAuthenticated && (
+                  <>
+                    <button
+                      className="nav-icon-btn"
+                      title="Panier"
+                      onClick={() => setIsCartModalOpen(true)}
+                    >
+                      <i className="bi bi-cart"></i>
+                      {getCartCount() > 0 && (
+                        <span className="nav-icon-badge">{getCartCount()}</span>
+                      )}
+                    </button>
+                    <button
+                      className="nav-icon-btn"
+                      title="Favoris"
+                      onClick={() => setIsFavoritesModalOpen(true)}
+                    >
+                      <i className="bi bi-heart"></i>
+                    </button>
+                  </>
+                )}
                 {isAuthenticated && (
                   <Link to="/profile">
                     <button className="nav-icon-btn">
@@ -98,6 +129,16 @@ function Nav() {
               </div>
               {isAuthenticated ? (
                 <>
+                  {showProButton && (
+                    <button
+                      className="nav-btn-pro"
+                      onClick={() => setIsProModalOpen(true)}
+                      title="Devenir professionnel"
+                    >
+                      <i className="bi bi-briefcase"></i>
+                      DEVENIR PRO
+                    </button>
+                  )}
                   <div className="nav-user-info">
                     {user?.avatar && (
                       <img
@@ -148,6 +189,35 @@ function Nav() {
       ) : (
         <div className="nav-container">
           <MenuButton onClick={toggleModal} />
+          {isAuthenticated && (
+            <div className="nav-mobile-icons">
+              <button
+                className="nav-icon-btn"
+                title="Panier"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setIsCartModalOpen(true);
+                }}
+              >
+                <i className="bi bi-cart"></i>
+                {getCartCount() > 0 && (
+                  <span className="nav-icon-badge">{getCartCount()}</span>
+                )}
+              </button>
+              <button
+                className="nav-icon-btn"
+                title="Favoris"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setIsFavoritesModalOpen(true);
+                }}
+              >
+                <i className="bi bi-heart"></i>
+              </button>
+            </div>
+          )}
           {isModalOpen && (
             <div className="mobile-menu-overlay">
               <MenuBurger isModalOpen={isModalOpen} toggleModal={toggleModal} />
@@ -156,6 +226,22 @@ function Nav() {
         </div>
       )}
       <AuthModal isOpen={isAuthModalOpen} onClose={closeAuthModal} />
+      <ProRequestModal
+        isOpen={isProModalOpen}
+        onClose={() => setIsProModalOpen(false)}
+      />
+      {isAuthenticated && (
+        <>
+          <CartModal
+            isOpen={isCartModalOpen}
+            onClose={() => setIsCartModalOpen(false)}
+          />
+          <FavoritesModal
+            isOpen={isFavoritesModalOpen}
+            onClose={() => setIsFavoritesModalOpen(false)}
+          />
+        </>
+      )}
     </nav>
   );
 }

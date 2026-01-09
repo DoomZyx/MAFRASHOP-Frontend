@@ -131,6 +131,48 @@ export const authAPI = {
     });
     return response.json();
   },
+
+  requestPro: async (data: {
+    companyName: string;
+    siret: string;
+    address?: string;
+    city?: string;
+    zipCode?: string;
+  }): Promise<{ success: boolean; message: string }> => {
+    const response = await fetch(`${API_BASE_URL}/api/auth/pro/request`, {
+      method: "POST",
+      headers: getAuthHeaders(),
+      body: JSON.stringify(data),
+    });
+    return response.json();
+  },
+
+  testProRequest: async (data: {
+    companyName: string;
+    siret: string;
+    address?: string;
+    city?: string;
+    zipCode?: string;
+  }): Promise<{ success: boolean; message: string; data?: { user: User } }> => {
+    const response = await fetch(`${API_BASE_URL}/api/auth/pro/test-request`, {
+      method: "POST",
+      headers: getAuthHeaders(),
+      body: JSON.stringify(data),
+    });
+    return response.json();
+  },
+
+  validateProManually: async (data: {
+    userId: string;
+    approved: boolean;
+  }): Promise<{ success: boolean; message: string; data?: { user: User } }> => {
+    const response = await fetch(`${API_BASE_URL}/api/auth/pro/validate`, {
+      method: "POST",
+      headers: getAuthHeaders(),
+      body: JSON.stringify(data),
+    });
+    return response.json();
+  },
 };
 
 

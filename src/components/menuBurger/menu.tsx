@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import LoginButtonMobile from "../buttons/primary/login/mobile/login";
 import LogoutButtonMobile from "../buttons/primary/login/mobile/logout";
@@ -5,7 +6,11 @@ import "./menu.scss";
 import SearchProducts from "../shop/searchProducts/searchProducts";
 import { useProducts } from "../../hooks/useProducts";
 import AuthModal from "../auth/AuthModal";
+import ProRequestModal from "../auth/ProRequestModal";
+import CartModal from "../cart/CartModal";
+import FavoritesModal from "../favorites/FavoritesModal";
 import { useNav } from "../../hooks/useNav";
+import { useCart } from "../../hooks/useCart";
 
 interface MenuBurgerProps {
   isModalOpen: boolean;
@@ -14,6 +19,9 @@ interface MenuBurgerProps {
 
 function MenuBurger({ isModalOpen, toggleModal }: MenuBurgerProps) {
   const { products } = useProducts();
+  const [isProModalOpen, setIsProModalOpen] = useState(false);
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
   const {
     isAuthModalOpen,
     user,
@@ -22,13 +30,19 @@ function MenuBurger({ isModalOpen, toggleModal }: MenuBurgerProps) {
     closeAuthModal,
     handleLogout,
   } = useNav();
+  const { getCartCount } = useCart();
+
+  const showProButton =
+    isAuthenticated &&
+    user &&
+    !user.isPro &&
+    (user.proStatus === "none" || user.proStatus === "rejected");
 
   return (
     <nav>
       <div className="menu-burger">
         <div className="menu-burger-container">
           <div className="menu-header">
-            <img src="/public/logoMAFRA.webp" alt="Logo Mafrashop" />
             <button
               className="close-menu-button"
               onClick={toggleModal}
@@ -63,7 +77,7 @@ function MenuBurger({ isModalOpen, toggleModal }: MenuBurgerProps) {
                 <></>
               )}
             </div>
-            <ul className="links">
+            <ul className="links-burger">
               <li>
                 <Link to="/" onClick={toggleModal}>
                   ACCUEIL
@@ -75,17 +89,32 @@ function MenuBurger({ isModalOpen, toggleModal }: MenuBurgerProps) {
                 </Link>
               </li>
               <li>
-                <Link to="/sav" onClick={toggleModal}>
+                <Link to="/profile" onClick={toggleModal}>
                   MON COMPTE
                 </Link>
               </li>
             </ul>
             {isAuthenticated ? (
-              <div className="nav-btn-container">
-                <button className="nav-btn-logout" onClick={handleLogout}>
-                  SE DECONNECTER
-                </button>
-              </div>
+              <>
+                <div className="nav-btn-layout">
+                  {showProButton && (
+                    <div className="nav-btn-container">
+                      <button
+                        className="nav-btn-pro"
+                        onClick={() => setIsProModalOpen(true)}
+                      >
+                        <i className="bi bi-briefcase"></i>
+                        DEVENIR PRO
+                      </button>
+                    </div>
+                  )}
+                  <div className="nav-btn-container">
+                    <button className="nav-btn-logout" onClick={handleLogout}>
+                      SE DECONNECTER
+                    </button>
+                  </div>
+                </div>
+              </>
             ) : (
               <div className="nav-btn-container">
                 <button className="nav-btn-connect" onClick={openAuthModal}>
@@ -102,6 +131,10 @@ function MenuBurger({ isModalOpen, toggleModal }: MenuBurgerProps) {
         </div>
       </div>
       <AuthModal isOpen={isAuthModalOpen} onClose={closeAuthModal} />
+      <ProRequestModal
+        isOpen={isProModalOpen}
+        onClose={() => setIsProModalOpen(false)}
+      />
     </nav>
   );
 }

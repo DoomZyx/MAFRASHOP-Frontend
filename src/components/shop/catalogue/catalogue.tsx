@@ -1,12 +1,20 @@
 import { Link } from "react-router-dom";
 import { useProducts } from "../../../hooks/useProducts";
 import { useFilters } from "../../../hooks/useFilters";
+import { useCart } from "../../../hooks/useCart";
+import { useFavorites } from "../../../hooks/useFavorites";
+import { useAuth } from "../../../hooks/useAuth";
 import Filters from "../filters/filters";
+import ProductPrice from "../../shared/ProductPrice";
 import "./catalogue.scss";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 function Catalogue() {
   const { products, loading, error } = useProducts();
   const { toggleFilter, isFilterActive } = useFilters();
+  const { addToCart, isInCart } = useCart();
+  const { toggleFavorite, isFavorite } = useFavorites();
+  const { isAuthenticated } = useAuth();
 
   if (loading) {
     return (
@@ -29,29 +37,69 @@ function Catalogue() {
       <Filters onToggleFilter={toggleFilter} isFilterActive={isFilterActive} />
       <div className="catalogue-content">
         {products.map((product) => (
-          <Link
-            key={product._id}
-            to={`/product/${product._id}`}
-            className="product-card"
-          >
-            {product.URL_IMAGE && (
-              <img src={product.URL_IMAGE} alt={product.NOM} />
-            )}
-            {product.CATEGORY && (
-              <p className="product-category">{product.CATEGORY}</p>
-            )}
-            <h3>{product.NOM}</h3>
-            {product.FORMAT && (
-              <p className="product-format">{product.FORMAT}</p>
-            )}
-            {product.GARAGE !== null && (
-              <div className="price-item">
-                <span className="price-value">
-                  {product.GARAGE.toFixed(2)}€
-                </span>
+          <div key={product._id} className="product-card">
+            <Link to={`/product/${product._id}`} className="product-card-link">
+              {product.URL_IMAGE && (
+                <img src={product.URL_IMAGE} alt={product.NOM} />
+              )}
+              {product.CATEGORY && (
+                <p className="product-category">{product.CATEGORY}</p>
+              )}
+              <h3>{product.NOM}</h3>
+              {product.FORMAT && (
+                <p className="product-format">{product.FORMAT}</p>
+              )}
+              <ProductPrice product={product} className="product-price" />
+            </Link>
+            {isAuthenticated && (
+              <div className="product-actions">
+                <button
+                  className={`product-action-btn favorite-btn ${
+                    isFavorite(product._id) ? "active" : ""
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleFavorite(product._id);
+                  }}
+                  title={
+                    isFavorite(product._id)
+                      ? "Retirer des favoris"
+                      : "Ajouter aux favoris"
+                  }
+                >
+                  <i
+                    className={`bi ${
+                      isFavorite(product._id)
+                        ? "bi-heart-fill"
+                        : "bi-heart"
+                    }`}
+                  ></i>
+                </button>
+                <button
+                  className={`product-action-btn cart-btn ${
+                    isInCart(product._id) ? "active" : ""
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    addToCart(product._id);
+                  }}
+                  title={
+                    isInCart(product._id)
+                      ? "Déjà dans le panier"
+                      : "Ajouter au panier"
+                  }
+                >
+                  <i
+                    className={`bi ${
+                      isInCart(product._id) ? "bi-cart-check-fill" : "bi-cart"
+                    }`}
+                  ></i>
+                </button>
               </div>
             )}
-          </Link>
+          </div>
         ))}
       </div>
     </div>

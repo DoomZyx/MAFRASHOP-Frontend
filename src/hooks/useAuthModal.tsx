@@ -48,10 +48,21 @@ export function useAuthModal(onClose: () => void) {
     const code = urlParams.get("code");
 
     if (code) {
-      handleGoogleCallback(code);
+      const processCallback = async () => {
+        setIsLoading(true);
+        try {
+          await loginWithGoogle(code);
+          onClose();
+        } catch (err: any) {
+          setError(err.message || "Erreur lors de l'authentification Google");
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      processCallback();
       window.history.replaceState({}, document.title, window.location.pathname);
     }
-  }, []);
+  }, [loginWithGoogle, onClose]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -100,9 +111,6 @@ export function useAuthModal(onClose: () => void) {
     }
 
     const { clientId, redirectUri } = googleConfig;
-
-    console.log("Client ID:", clientId);
-    console.log("Redirect URI:", redirectUri);
 
     if (!clientId || !redirectUri) {
       setError("Configuration Google incomplète");
@@ -159,5 +167,6 @@ export function useAuthModal(onClose: () => void) {
     handleSubmit,
     handleGoogleLogin,
     switchMode,
+    handleGoogleCallback,
   };
 }

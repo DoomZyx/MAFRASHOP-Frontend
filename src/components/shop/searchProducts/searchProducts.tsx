@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useSearch } from "../../../hooks/useSearch";
 import { Product } from "../../../types/product";
+import ProductPrice from "../../shared/ProductPrice";
 import "./searchProducts.scss";
 
 interface SearchProductsProps {
@@ -67,11 +68,10 @@ function SearchProducts({ products }: SearchProductsProps) {
                                 ` - ${product.SUBCATEGORY}`}
                             </p>
                           )}
-                          <p className="search-result-price">
-                            {product.PUBLIC_HT !== null
-                              ? `${product.PUBLIC_HT.toFixed(2)}€ HT`
-                              : "Prix non disponible"}
-                          </p>
+                          <ProductPrice
+                            product={product}
+                            className="search-result-price"
+                          />
                         </div>
                       </Link>
                     ))}
