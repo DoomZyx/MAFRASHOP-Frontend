@@ -64,11 +64,11 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
     }
 
     try {
-      const wsUrl = `ws://localhost:8080/ws?token=${encodeURIComponent(token)}`;
+      const wsUrl = `ws://mafrashop-backend.onrender.com/ws?token=${encodeURIComponent(token)}`;
       const ws = new WebSocket(wsUrl);
 
       ws.onopen = () => {
-        console.log("✅ WebSocket connecté");
+        console.log("WebSocket connecté");
         reconnectAttempts.current = 0;
         setIsConnected(true);
       };
@@ -102,12 +102,12 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
       };
 
       ws.onerror = (error) => {
-        console.error("❌ Erreur WebSocket:", error);
+        console.error("Erreur WebSocket:", error);
         setIsConnected(false);
       };
 
       ws.onclose = () => {
-        console.log("🔌 WebSocket déconnecté");
+        console.log("WebSocket déconnecté");
         wsRef.current = null;
         setIsConnected(false);
 
