@@ -8,6 +8,7 @@ import Filters from "../filters/filters";
 import ProductPrice from "../../shared/ProductPrice";
 import "./catalogue.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import Loader from "../../loader/loader";
 
 function Catalogue() {
   const { products, loading, error } = useProducts();
@@ -18,8 +19,8 @@ function Catalogue() {
 
   if (loading) {
     return (
-      <div className="catalogue-container">
-        <p>Chargement des produits...</p>
+      <div className="loader-container">
+        <Loader />
       </div>
     );
   }
@@ -70,9 +71,7 @@ function Catalogue() {
                 >
                   <i
                     className={`bi ${
-                      isFavorite(product._id)
-                        ? "bi-heart-fill"
-                        : "bi-heart"
+                      isFavorite(product._id) ? "bi-heart-fill" : "bi-heart"
                     }`}
                   ></i>
                 </button>

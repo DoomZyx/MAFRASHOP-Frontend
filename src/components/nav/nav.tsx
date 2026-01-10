@@ -62,18 +62,6 @@ function Nav() {
               />
             </svg>
             <div className="nav-left-content">
-              <button className="menu-toggle" onClick={toggleModal}>
-                <i className="bi bi-list"></i>
-                <span>MENU</span>
-              </button>
-              {isModalOpen && (
-                <div className="mobile-menu-overlay">
-                  <MenuDesktop
-                    isModalOpen={isModalOpen}
-                    toggleModal={toggleModal}
-                  />
-                </div>
-              )}
               <ul className="nav-menu-links">
                 <li>
                   <Link to="/">ACCUEIL</Link>

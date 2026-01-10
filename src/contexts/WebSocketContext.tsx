@@ -1,4 +1,11 @@
-import { createContext, useContext, useEffect, useRef, useCallback, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useCallback,
+  useState,
+} from "react";
 import { useAuth } from "../hooks/useAuth";
 
 interface WebSocketMessage {
@@ -11,7 +18,9 @@ interface WebSocketContextType {
   isConnected: boolean;
 }
 
-const WebSocketContext = createContext<WebSocketContextType | undefined>(undefined);
+const WebSocketContext = createContext<WebSocketContextType | undefined>(
+  undefined
+);
 
 export function WebSocketProvider({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
@@ -21,24 +30,29 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
   const reconnectAttempts = useRef(0);
   const maxReconnectAttempts = 5;
   const [isConnected, setIsConnected] = useState(false);
-  
+
   // Store pour les callbacks par événement
-  const subscribersRef = useRef<Map<string, Set<(data: any) => void>>>(new Map());
+  const subscribersRef = useRef<Map<string, Set<(data: any) => void>>>(
+    new Map()
+  );
 
-  const subscribe = useCallback((event: string, callback: (data: any) => void) => {
-    if (!subscribersRef.current.has(event)) {
-      subscribersRef.current.set(event, new Set());
-    }
-    subscribersRef.current.get(event)!.add(callback);
-
-    // Retourner une fonction pour se désabonner
-    return () => {
-      const eventSubscribers = subscribersRef.current.get(event);
-      if (eventSubscribers) {
-        eventSubscribers.delete(callback);
+  const subscribe = useCallback(
+    (event: string, callback: (data: any) => void) => {
+      if (!subscribersRef.current.has(event)) {
+        subscribersRef.current.set(event, new Set());
       }
-    };
-  }, []);
+      subscribersRef.current.get(event)!.add(callback);
+
+      // Retourner une fonction pour se désabonner
+      return () => {
+        const eventSubscribers = subscribersRef.current.get(event);
+        if (eventSubscribers) {
+          eventSubscribers.delete(callback);
+        }
+      };
+    },
+    []
+  );
 
   const connect = useCallback(() => {
     if (!isAuthenticated || !token) {
@@ -62,7 +76,7 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
       ws.onmessage = (event) => {
         try {
           const message: WebSocketMessage = JSON.parse(event.data);
-          
+
           // Notifier tous les subscribers de cet événement
           const eventSubscribers = subscribersRef.current.get(message.event);
           if (eventSubscribers) {
@@ -70,7 +84,10 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
               try {
                 callback(message.data);
               } catch (error) {
-                console.error(`Erreur dans le callback pour ${message.event}:`, error);
+                console.error(
+                  `Erreur dans le callback pour ${message.event}:`,
+                  error
+                );
               }
             });
           }
@@ -95,12 +112,20 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
         setIsConnected(false);
 
         // Tentative de reconnexion
-        if (reconnectAttempts.current < maxReconnectAttempts && isAuthenticated) {
+        if (
+          reconnectAttempts.current < maxReconnectAttempts &&
+          isAuthenticated
+        ) {
           reconnectAttempts.current += 1;
-          const delay = Math.min(1000 * Math.pow(2, reconnectAttempts.current), 30000);
-          
+          const delay = Math.min(
+            1000 * Math.pow(2, reconnectAttempts.current),
+            30000
+          );
+
           reconnectTimeoutRef.current = setTimeout(() => {
-            console.log(`Tentative de reconnexion WebSocket (${reconnectAttempts.current}/${maxReconnectAttempts})...`);
+            console.log(
+              `Tentative de reconnexion WebSocket (${reconnectAttempts.current}/${maxReconnectAttempts})...`
+            );
             connect();
           }, delay);
         }
@@ -148,8 +173,9 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
 export function useWebSocketContext() {
   const context = useContext(WebSocketContext);
   if (context === undefined) {
-    throw new Error("useWebSocketContext doit être utilisé à l'intérieur d'un WebSocketProvider");
+    throw new Error(
+      "useWebSocketContext doit être utilisé à l'intérieur d'un WebSocketProvider"
+    );
   }
   return context;
 }
-

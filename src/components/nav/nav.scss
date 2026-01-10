@@ -206,28 +206,6 @@ nav {
         gap: 30px;
         padding-left: 30px;
 
-        .menu-toggle {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          background: none;
-          border: none;
-          color: white;
-          font-size: 1.2rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          cursor: pointer;
-          transition: color 0.3s ease;
-
-          &:hover {
-            color: #d32f2f;
-          }
-
-          i {
-            font-size: 1.5rem;
-          }
-        }
-
         .nav-menu-links {
           display: flex;
           list-style: none;

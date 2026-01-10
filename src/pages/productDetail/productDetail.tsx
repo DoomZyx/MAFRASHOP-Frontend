@@ -9,6 +9,7 @@ import "./productDetail.scss";
 import Footer from "../../components/footer/footer";
 import HeroBg from "../../components/shop/herobg/heroBg";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import Loader from "../../components/loader/loader";
 
 function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -21,9 +22,7 @@ function ProductDetail() {
     return (
       <>
         <Nav />
-        <div className="product-detail-container">
-          <p className="loading-message">Chargement du produit...</p>
-        </div>
+        <Loader />
       </>
     );
   }
