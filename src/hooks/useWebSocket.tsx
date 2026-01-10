@@ -29,11 +29,11 @@ export function useWebSocket(options: UseWebSocketOptions = {}) {
     }
 
     try {
-      const wsUrl = `ws://localhost:8080/ws?token=${encodeURIComponent(token)}`;
+      const wsUrl = `ws://mafrashop-backend.onrender.com/ws?token=${encodeURIComponent(token)}`;
       const ws = new WebSocket(wsUrl);
 
       ws.onopen = () => {
-        console.log("✅ WebSocket connecté");
+        console.log("WebSocket connecté");
         reconnectAttempts.current = 0;
       };
 
