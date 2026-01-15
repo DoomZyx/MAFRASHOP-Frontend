@@ -48,24 +48,24 @@ function SearchProducts({ products }: SearchProductsProps) {
                   <div className="search-results-list">
                     {searchResults.map((product) => (
                       <Link
-                        key={product._id}
-                        to={`/product/${product._id}`}
+                        key={product.id}
+                        to={`/product/${product.id}`}
                         className="search-result-item"
                         onClick={closeSearch}
                       >
-                        {product.URL_IMAGE && (
-                          <img src={product.URL_IMAGE} alt={product.NOM} />
+                        {product.url_image && (
+                          <img src={product.url_image} alt={product.nom} />
                         )}
                         <div className="search-result-info">
-                          <h4>{product.NOM}</h4>
+                          <h4>{product.nom}</h4>
                           <p className="search-result-ref">
-                            Ref: {product.REF}
+                            Ref: {product.ref}
                           </p>
-                          {product.CATEGORY && (
+                          {product.category && (
                             <p className="search-result-category">
-                              {product.CATEGORY}
-                              {product.SUBCATEGORY &&
-                                ` - ${product.SUBCATEGORY}`}
+                              {product.category}
+                              {product.subcategory &&
+                                ` - ${product.subcategory}`}
                             </p>
                           )}
                           <ProductPrice

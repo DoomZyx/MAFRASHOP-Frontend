@@ -18,10 +18,10 @@ function ProductPrice({ product, className = "" }: ProductPriceProps) {
   let priceSuffix = "";
 
   if (isPro) {
-    price = product.GARAGE || null;
+    price = product.garage || null;
     priceSuffix = "€ HT";
   } else {
-    const priceHT = product.PUBLIC_HT || null;
+    const priceHT = product.public_ht || null;
     if (priceHT !== null) {
       price = priceHT * TVA_RATE; // Prix TTC pour les particuliers
       priceSuffix = "€ TTC";

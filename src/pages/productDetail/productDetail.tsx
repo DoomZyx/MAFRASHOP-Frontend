@@ -45,24 +45,24 @@ function ProductDetail() {
       <div className="product-detail-container">
         <div className="product-detail-content">
           <div className="product-image-section">
-            {product.URL_IMAGE && (
-              <img src={product.URL_IMAGE} alt={product.NOM} />
+            {product.url_image && (
+              <img src={product.url_image} alt={product.nom} />
             )}
           </div>
 
           <div className="product-info-section">
-            <h1>{product.NOM}</h1>
+            <h1>{product.nom}</h1>
 
-            {product.FORMAT && (
+            {product.format && (
               <div className="product-format">
                 <span className="format-label">Format :</span>
-                <span>{product.FORMAT}</span>
+                <span>{product.format}</span>
               </div>
             )}
 
-            {product.DESCRIPTION && (
+            {product.description && (
               <div className="product-description">
-                <p>{product.DESCRIPTION}</p>
+                <p>{product.description}</p>
               </div>
             )}
 
@@ -72,44 +72,44 @@ function ProductDetail() {
               <div className="product-actions">
                 <button
                   className={`product-action-btn favorite-btn ${
-                    isFavorite(product._id) ? "active" : ""
+                    isFavorite(product.id) ? "active" : ""
                   }`}
-                  onClick={() => toggleFavorite(product._id)}
+                  onClick={() => toggleFavorite(product.id)}
                   title={
-                    isFavorite(product._id)
+                    isFavorite(product.id)
                       ? "Retirer des favoris"
                       : "Ajouter aux favoris"
                   }
                 >
                   <i
                     className={`bi ${
-                      isFavorite(product._id) ? "bi-heart-fill" : "bi-heart"
+                      isFavorite(product.id) ? "bi-heart-fill" : "bi-heart"
                     }`}
                   ></i>
                   <span>
-                    {isFavorite(product._id)
+                    {isFavorite(product.id)
                       ? "Retirer des favoris"
                       : "Ajouter aux favoris"}
                   </span>
                 </button>
                 <button
                   className={`product-action-btn cart-btn ${
-                    isInCart(product._id) ? "active" : ""
+                    isInCart(product.id) ? "active" : ""
                   }`}
-                  onClick={() => addToCart(product._id)}
+                  onClick={() => addToCart(product.id)}
                   title={
-                    isInCart(product._id)
+                    isInCart(product.id)
                       ? "Déjà dans le panier"
                       : "Ajouter au panier"
                   }
                 >
                   <i
                     className={`bi ${
-                      isInCart(product._id) ? "bi-cart-check-fill" : "bi-cart"
+                      isInCart(product.id) ? "bi-cart-check-fill" : "bi-cart"
                     }`}
                   ></i>
                   <span>
-                    {isInCart(product._id)
+                    {isInCart(product.id)
                       ? "Déjà dans le panier"
                       : "Ajouter au panier"}
                   </span>
