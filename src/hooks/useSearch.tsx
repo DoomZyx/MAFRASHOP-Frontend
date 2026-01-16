@@ -18,11 +18,11 @@ export const useSearch = (products: Product[]) => {
 
     return products.filter((product) => {
       const searchableFields = [
-        product.NOM,
-        product.REF,
-        product.CATEGORY,
-        product.SUBCATEGORY,
-        product.DESCRIPTION,
+        product.nom,
+        product.ref,
+        product.category,
+        product.subcategory,
+        product.description,
       ];
 
       return searchableFields.some((field) =>

@@ -80,7 +80,11 @@ function Nav() {
           </div>
 
           <div className="nav-center">
-            <img src="/images/logoMAFRA.webp" alt="MAFRA" className="nav-logo" />
+            <img
+              src="/images/logoMAFRA.webp"
+              alt="MAFRA"
+              className="nav-logo"
+            />
           </div>
 
           <div className="nav-right">
@@ -109,9 +113,15 @@ function Nav() {
                 )}
                 {isAuthenticated && (
                   <Link to="/profile">
-                    <button className="nav-icon-btn">
-                      <i className="bi bi-person"></i>
-                    </button>
+                    <div className="nav-user-info">
+                      {user?.avatar && (
+                        <img
+                          src={user.avatar}
+                          alt={`${user.firstName} ${user.lastName}`}
+                          className="nav-user-avatar"
+                        />
+                      )}
+                    </div>
                   </Link>
                 )}
               </div>
@@ -127,18 +137,6 @@ function Nav() {
                       DEVENIR PRO
                     </button>
                   )}
-                  <div className="nav-user-info">
-                    {user?.avatar && (
-                      <img
-                        src={user.avatar}
-                        alt={`${user.firstName} ${user.lastName}`}
-                        className="nav-user-avatar"
-                      />
-                    )}
-                    <span className="nav-user-name">
-                      {user?.firstName} {user?.lastName}
-                    </span>
-                  </div>
                   <button className="nav-btn-logout" onClick={handleLogout}>
                     DÉCONNEXION
                   </button>
