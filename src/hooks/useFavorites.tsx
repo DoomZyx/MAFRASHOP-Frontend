@@ -103,7 +103,7 @@ export function useFavorites() {
 
   const isFavorite = useCallback(
     (productId: string) => {
-      return favorites.some((fav) => fav.productId._id === productId);
+      return favorites.some((fav) => fav.productId.id === productId);
     },
     [favorites]
   );

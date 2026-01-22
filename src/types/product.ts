@@ -1,14 +1,16 @@
 // Type pour un produit basé sur le modèle backend
 export interface Product {
-  _id: string;
-  CATEGORY: string;
-  SUBCATEGORY: string | null;
-  NOM: string;
-  REF: string;
-  URL_IMAGE: string | null;
-  DESCRIPTION: string | null;
-  FORMAT: string | null;
-  NET_SOCOFRA: number | null;
-  PUBLIC_HT: number | null;
-  GARAGE: number | null;
+  id: string;
+  category: string;
+  subcategory: string | null;
+  nom: string;
+  ref: string;
+  url_image: string | null;
+  description: string | null;
+  format: string | null;
+  net_socofra: number | null;
+  public_ht: number | null;
+  garage: number | null;
+  created_at: Date;
+  updated_at: Date;
 }

@@ -38,17 +38,17 @@ function Catalogue() {
       <Filters onToggleFilter={toggleFilter} isFilterActive={isFilterActive} />
       <div className="catalogue-content">
         {products.map((product) => (
-          <div key={product._id} className="product-card">
-            <Link to={`/product/${product._id}`} className="product-card-link">
-              {product.URL_IMAGE && (
-                <img src={product.URL_IMAGE} alt={product.NOM} />
+          <div key={product.id} className="product-card">
+            <Link to={`/product/${product.id}`} className="product-card-link">
+              {product.url_image && (
+                <img src={product.url_image} alt={product.nom} />
               )}
-              {product.CATEGORY && (
-                <p className="product-category">{product.CATEGORY}</p>
+              {product.category && (
+                <p className="product-category">{product.category}</p>
               )}
-              <h3>{product.NOM}</h3>
-              {product.FORMAT && (
-                <p className="product-format">{product.FORMAT}</p>
+              <h3>{product.nom}</h3>
+              {product.format && (
+                <p className="product-format">{product.format}</p>
               )}
               <ProductPrice product={product} className="product-price" />
             </Link>
@@ -56,43 +56,43 @@ function Catalogue() {
               <div className="product-actions">
                 <button
                   className={`product-action-btn favorite-btn ${
-                    isFavorite(product._id) ? "active" : ""
+                    isFavorite(product.id) ? "active" : ""
                   }`}
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    toggleFavorite(product._id);
+                    toggleFavorite(product.id);
                   }}
                   title={
-                    isFavorite(product._id)
+                    isFavorite(product.id)
                       ? "Retirer des favoris"
                       : "Ajouter aux favoris"
                   }
                 >
                   <i
                     className={`bi ${
-                      isFavorite(product._id) ? "bi-heart-fill" : "bi-heart"
+                      isFavorite(product.id) ? "bi-heart-fill" : "bi-heart"
                     }`}
                   ></i>
                 </button>
                 <button
                   className={`product-action-btn cart-btn ${
-                    isInCart(product._id) ? "active" : ""
+                    isInCart(product.id) ? "active" : ""
                   }`}
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    addToCart(product._id);
+                    addToCart(product.id);
                   }}
                   title={
-                    isInCart(product._id)
+                    isInCart(product.id)
                       ? "Déjà dans le panier"
                       : "Ajouter au panier"
                   }
                 >
                   <i
                     className={`bi ${
-                      isInCart(product._id) ? "bi-cart-check-fill" : "bi-cart"
+                      isInCart(product.id) ? "bi-cart-check-fill" : "bi-cart"
                     }`}
                   ></i>
                 </button>

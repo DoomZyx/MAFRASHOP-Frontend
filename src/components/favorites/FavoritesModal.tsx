@@ -48,14 +48,14 @@ function FavoritesModal({ isOpen, onClose }: FavoritesModalProps) {
                 const product = item.productId;
 
                 return (
-                  <div key={product._id} className="favorites-item">
+                  <div key={product.id} className="favorites-item">
                     <Link
-                      to={`/product/${product._id}`}
+                      to={`/product/${product.id}`}
                       onClick={onClose}
                       className="favorites-item-image"
                     >
-                      {product.URL_IMAGE ? (
-                        <img src={product.URL_IMAGE} alt={product.NOM} />
+                      {product.url_image ? (
+                        <img src={product.url_image} alt={product.nom} />
                       ) : (
                         <div className="favorites-item-placeholder">
                           <i className="bi bi-image"></i>
@@ -65,18 +65,18 @@ function FavoritesModal({ isOpen, onClose }: FavoritesModalProps) {
 
                     <div className="favorites-item-info">
                       <Link
-                        to={`/product/${product._id}`}
+                        to={`/product/${product.id}`}
                         onClick={onClose}
                         className="favorites-item-name"
                       >
-                        {product.NOM}
+                        {product.nom}
                       </Link>
-                      {product.REF && (
-                        <p className="favorites-item-ref">Ref: {product.REF}</p>
+                      {product.ref && (
+                        <p className="favorites-item-ref">Ref: {product.ref}</p>
                       )}
-                      {product.CATEGORY && (
+                      {product.category && (
                         <p className="favorites-item-category">
-                          {product.CATEGORY}
+                          {product.category}
                         </p>
                       )}
 
@@ -87,20 +87,20 @@ function FavoritesModal({ isOpen, onClose }: FavoritesModalProps) {
                       <div className="favorites-item-actions">
                         <button
                           className={`favorites-add-cart-btn ${
-                            isInCart(product._id) ? "in-cart" : ""
+                            isInCart(product.id) ? "in-cart" : ""
                           }`}
-                          onClick={() => handleAddToCart(product._id)}
-                          disabled={isLoading || isInCart(product._id)}
+                          onClick={() => handleAddToCart(product.id)}
+                          disabled={isLoading || isInCart(product.id)}
                         >
                           <i
                             className={`bi ${
-                              isInCart(product._id)
+                              isInCart(product.id)
                                 ? "bi-cart-check-fill"
                                 : "bi-cart-plus"
                             }`}
                           ></i>
                           <span>
-                            {isInCart(product._id)
+                            {isInCart(product.id)
                               ? "Dans le panier"
                               : "Ajouter au panier"}
                           </span>
@@ -112,7 +112,7 @@ function FavoritesModal({ isOpen, onClose }: FavoritesModalProps) {
                             e.preventDefault();
                             e.stopPropagation();
                             const success = await removeFromFavorites(
-                              product._id
+                              product.id
                             );
                             if (!success) {
                               console.error(

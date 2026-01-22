@@ -41,9 +41,9 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
 
   const getItemPrice = (product: any) => {
     if (isPro) {
-      return product.GARAGE || product.PUBLIC_HT || 0;
+      return product.garage || product.public_ht || 0;
     } else {
-      const priceHT = product.PUBLIC_HT || 0;
+      const priceHT = product.public_ht || 0;
       return priceHT * TVA_RATE; // Prix TTC pour les particuliers
     }
   };
@@ -79,14 +79,14 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
                   const itemTotal = price * item.quantity;
 
                   return (
-                    <div key={product._id} className="cart-item">
+                    <div key={product.id} className="cart-item">
                       <Link
-                        to={`/product/${product._id}`}
+                        to={`/product/${product.id}`}
                         onClick={onClose}
                         className="cart-item-image"
                       >
-                        {product.URL_IMAGE ? (
-                          <img src={product.URL_IMAGE} alt={product.NOM} />
+                        {product.url_image ? (
+                          <img src={product.url_image} alt={product.nom} />
                         ) : (
                           <div className="cart-item-placeholder">
                             <i className="bi bi-image"></i>
@@ -96,14 +96,14 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
 
                       <div className="cart-item-info">
                         <Link
-                          to={`/product/${product._id}`}
+                          to={`/product/${product.id}`}
                           onClick={onClose}
                           className="cart-item-name"
                         >
-                          {product.NOM}
+                          {product.nom}
                         </Link>
-                        {product.REF && (
-                          <p className="cart-item-ref">Ref: {product.REF}</p>
+                        {product.ref && (
+                          <p className="cart-item-ref">Ref: {product.ref}</p>
                         )}
 
                         <div className="cart-item-price">
@@ -116,7 +116,7 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
                               className="quantity-btn"
                               onClick={() =>
                                 handleQuantityChange(
-                                  product._id,
+                                  product.id,
                                   item.quantity - 1
                                 )
                               }
@@ -131,7 +131,7 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
                               className="quantity-btn"
                               onClick={() =>
                                 handleQuantityChange(
-                                  product._id,
+                                  product.id,
                                   item.quantity + 1
                                 )
                               }
@@ -156,7 +156,7 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
                             onClick={async (e) => {
                               e.preventDefault();
                               e.stopPropagation();
-                              const success = await removeFromCart(product._id);
+                              const success = await removeFromCart(product.id);
                               if (!success) {
                                 console.error(
                                   "Erreur lors de la suppression du panier"

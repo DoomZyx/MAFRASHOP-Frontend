@@ -144,14 +144,14 @@ export function useCart() {
 
   const isInCart = useCallback(
     (productId: string) => {
-      return cart.some((item) => item.productId._id === productId);
+      return cart.some((item) => item.productId.id === productId);
     },
     [cart]
   );
 
   const getCartItemQuantity = useCallback(
     (productId: string) => {
-      const item = cart.find((item) => item.productId._id === productId);
+      const item = cart.find((item) => item.productId.id === productId);
       return item ? item.quantity : 0;
     },
     [cart]
@@ -164,9 +164,9 @@ export function useCart() {
     return cart.reduce((total, item) => {
       let price: number;
       if (isPro) {
-        price = item.productId.GARAGE || item.productId.PUBLIC_HT || 0;
+        price = item.productId.garage || item.productId.public_ht || 0;
       } else {
-        const priceHT = item.productId.PUBLIC_HT || 0;
+        const priceHT = item.productId.public_ht || 0;
         price = priceHT * TVA_RATE; // Prix TTC pour les particuliers
       }
       return total + price * item.quantity;
