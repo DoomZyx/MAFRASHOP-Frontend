@@ -1,8 +1,13 @@
 import { useState } from "react";
 
+export type CategoryType = "exterieur" | "interieur" | "accessoires" | "kit" | "interieur_exterieur";
+
 export interface FilterState {
   exterieur: string[];
   interieur: string[];
+  accessoires: string[];
+  kit: string[];
+  interieur_exterieur: string[];
 }
 
 /**
@@ -13,13 +18,16 @@ export const useFilters = () => {
   const [filters, setFilters] = useState<FilterState>({
     exterieur: [],
     interieur: [],
+    accessoires: [],
+    kit: [],
+    interieur_exterieur: [],
   });
 
   const openFilters = () => setIsOpen(true);
   const closeFilters = () => setIsOpen(false);
   const toggleFilters = () => setIsOpen(!isOpen);
 
-  const toggleFilter = (category: "exterieur" | "interieur", filter: string) => {
+  const toggleFilter = (category: CategoryType, filter: string) => {
     setFilters((prev) => {
       const categoryFilters = prev[category];
       const isActive = categoryFilters.includes(filter);
@@ -37,10 +45,13 @@ export const useFilters = () => {
     setFilters({
       exterieur: [],
       interieur: [],
+      accessoires: [],
+      kit: [],
+      interieur_exterieur: [],
     });
   };
 
-  const isFilterActive = (category: "exterieur" | "interieur", filter: string) => {
+  const isFilterActive = (category: CategoryType, filter: string) => {
     return filters[category].includes(filter);
   };
 

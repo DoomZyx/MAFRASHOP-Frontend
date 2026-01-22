@@ -67,7 +67,7 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
       const isHttps = window.location.protocol === "https:";
       const wsProtocol = isHttps ? "wss" : "ws";
 
-      const wsUrl = `${wsProtocol}://mafrashop-backend.onrender.com/ws?token=${encodeURIComponent(token)}`;
+      const wsUrl = `${wsProtocol}://localhost:8080/ws?token=${encodeURIComponent(token)}`;
       const ws = new WebSocket(wsUrl);
 
       ws.onopen = () => {

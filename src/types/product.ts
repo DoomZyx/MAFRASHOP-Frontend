@@ -11,6 +11,9 @@ export interface Product {
   net_socofra: number | null;
   public_ht: number | null;
   garage: number | null;
+  is_bestseller?: boolean;
+  is_promotion?: boolean;
+  promotion_percentage?: number | null;
   created_at: Date;
   updated_at: Date;
 }

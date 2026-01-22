@@ -39,9 +39,9 @@
 }
 
 .cart-modal-close {
-  position: sticky;
-  top: 15px;
-  right: 15px;
+  position: absolute;
+  top: 0;
+  right: 0;
   background: none;
   border: none;
   font-size: 1.5rem;
@@ -416,5 +416,11 @@
 
   .cart-actions {
     flex-direction: column;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cart-modal-close {
+    display: none;
   }
 }

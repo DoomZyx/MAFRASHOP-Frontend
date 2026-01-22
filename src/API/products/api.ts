@@ -44,3 +44,43 @@ export const getProductById = async (id: string): Promise<Product> => {
     throw error;
   }
 };
+
+/**
+ * Récupère tous les bestsellers depuis l'API
+ * @returns Promise<Product[]> - Liste des produits bestsellers
+ */
+export const getBestsellers = async (): Promise<Product[]> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/products/bestsellers/all`);
+
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP: ${response.status}`);
+    }
+
+    const data: Product[] = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des bestsellers:", error);
+    throw error;
+  }
+};
+
+/**
+ * Récupère toutes les promotions depuis l'API
+ * @returns Promise<Product[]> - Liste des produits en promotion
+ */
+export const getPromotions = async (): Promise<Product[]> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/products/promotions/all`);
+
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP: ${response.status}`);
+    }
+
+    const data: Product[] = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des promotions:", error);
+    throw error;
+  }
+};

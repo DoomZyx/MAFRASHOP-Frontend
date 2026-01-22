@@ -12,7 +12,9 @@ function Shop() {
     <>
       <Nav />
       <HeroBg />
-      <SearchProducts products={products} />
+      <div className="shop-search-container">
+        <SearchProducts products={products} />
+      </div>
       <Catalogue />
       <Footer />
     </>

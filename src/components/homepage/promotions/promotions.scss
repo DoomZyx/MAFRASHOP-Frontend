@@ -23,7 +23,8 @@
 
       .navigation-arrows {
         display: flex;
-        gap: 10px;
+        align-items: center;
+        gap: 15px;
 
         .arrow-btn {
           width: 40px;
@@ -39,22 +40,36 @@
           transition: all 0.3s ease;
           font-size: 1.2rem;
 
-          &:hover {
+          &:hover:not(:disabled) {
             background-color: #b71c1c;
             transform: scale(1.1);
           }
 
-          &:active {
+          &:active:not(:disabled) {
             transform: scale(0.95);
           }
+
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+        }
+
+        .carousel-indicator {
+          font-size: 0.9rem;
+          color: #666;
+          font-weight: 600;
+          min-width: 50px;
+          text-align: center;
         }
       }
     }
 
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 30px;
+      max-width: 100%;
 
       .placeholder-text {
         grid-column: 1 / -1;
@@ -89,8 +104,17 @@
       }
 
       .products-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-template-columns: 1fr;
         gap: 20px;
+      }
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .section-container {
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
       }
     }
   }

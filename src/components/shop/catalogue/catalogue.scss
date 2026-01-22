@@ -2,6 +2,7 @@
   position: relative;
   z-index: 1;
   padding: 20px;
+  padding-top: 100px;
   max-width: 390px;
   margin: 0 auto;
   border-radius: 32px;
@@ -165,6 +166,47 @@
     padding: 40px 20px;
   }
 
+  .filters-mobile-btn {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    background-color: #4a4a4a;
+    border: 2px solid #323232;
+    border-radius: 8px;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    i {
+      font-size: 1.1rem;
+    }
+
+    &:hover {
+      background-color: #5a5a5a;
+      border-color: #8a8a8a;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  .no-products-message {
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+    font-size: 1rem;
+  }
+
   p {
     text-align: center;
     font-size: 1.1rem;
@@ -177,6 +219,7 @@
   .catalogue-container {
     max-width: 1024px;
     padding: 30px;
+    padding-top: 100px;
 
     .catalogue-header {
       margin-bottom: 40px;
@@ -184,6 +227,11 @@
       img {
         max-width: 250px;
       }
+    }
+
+    .filters-mobile-btn {
+      max-width: 300px;
+      margin: 0 auto 20px auto;
     }
 
     .catalogue-content {
@@ -210,11 +258,16 @@
     display: flex;
     flex-direction: row;
     padding: clamp(1rem, 2vw, 2rem);
+    padding-top: clamp(1rem, 2vw, 2rem);
     max-height: 70vh;
     max-width: none;
     margin: clamp(3rem, 5vw, 5rem) clamp(5rem, 10vw, 15rem)
       clamp(5rem, 8vw, 10rem);
     overflow-y: hidden;
+
+    .filters-mobile-btn {
+      display: none;
+    }
 
     .catalogue-content {
       grid-template-columns: repeat(3, 1fr);

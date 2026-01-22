@@ -44,7 +44,7 @@
         font-size: 24px;
         cursor: pointer;
         color: #f1f1f1f1;
-        padding: 5px;
+        padding: 20px;
 
         &:hover {
           color: red;
@@ -122,45 +122,65 @@
     .nav-btn-layout {
       display: flex;
       flex-direction: row;
+      justify-content: center;
+      
       .nav-btn-container {
         display: flex;
         flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        padding: 1rem;
+        
+        .nav-btn-pro {
+          background-color: #ffa726;
+          font-weight: 500;
+          padding: 10px 15px;
+          border-radius: 5px;
+          font-size: 0.75rem;
+          color: white;
+          border: none;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+
+          i {
+            font-size: 0.85rem;
+          }
+          
+          &:hover {
+            background-color: #fb8c00;
+          }
+        }
+        
+        .nav-btn-logout {
+          background-color: #FF2121;
+          font-weight: 500;
+          padding: 10px 15px;
+          border-radius: 5px;
+          font-size: 0.75rem;
+          color: #e0e0e0;
+          border: none;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          
+          &:hover {
+            background-color: #d32f2f;
+          }
+        }
+      }
+    }
+    
+    .nav-btn-container {
+      display: flex;
+      flex-direction: row;
       align-items: center;
       justify-content: center;
       gap: 30px;
       padding: 1rem;
-      .nav-btn-pro {
-        background-color: #ffa726;
-        font-weight: 500;
-        padding: 10px 15px;
-        border-radius: 5px;
-        font-size: 0.75rem;
-        color: white;
-        border: none;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-
-        i {
-          font-size: 0.85rem;
-        }
-        
-        &:hover {
-          background-color: #fb8c00;
-        }
-      }
-    }
-      .nav-btn-logout {
-        background-color: #FF2121;
-        font-weight: 500;
-        padding: 10px 15px;
-        border-radius: 5px;
-        font-size: 0.75rem;
-        color: #e0e0e0;
-        border: none;
-      }
+      
       .nav-btn-connect {
         background-color: #FF2121;
         font-weight: 500;
@@ -169,6 +189,12 @@
         font-size: 0.75rem;
         color: #e0e0e0;
         border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        
+        &:hover {
+          background-color: #d32f2f;
+        }
       }
     }
 

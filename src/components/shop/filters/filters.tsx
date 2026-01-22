@@ -1,23 +1,37 @@
 import "./filters.scss";
+import { CategoryType } from "../../../hooks/useFilters";
 
 interface FiltersProps {
-  onToggleFilter: (category: "exterieur" | "interieur", filter: string) => void;
-  isFilterActive: (
-    category: "exterieur" | "interieur",
-    filter: string
-  ) => boolean;
+  onToggleFilter: (category: CategoryType, filter: string) => void;
+  isFilterActive: (category: CategoryType, filter: string) => boolean;
 }
 
 function Filters({ onToggleFilter, isFilterActive }: FiltersProps) {
   const exterieurFilters = [
-    "Lavage",
-    "Roue et pneu",
-    "Verre",
-    "Produits Extérieur",
-    "Polissage et Protection",
+    "Carrosserie",
+    "Détachants spécifiques",
+    "Jantes & Pneus",
+    "Nettoyants spécialisés",
   ];
 
-  const interieurFilters = ["Tissus et Tapis", "Peau", "Plastique", "Verre"];
+  const interieurFilters = [
+    "Plastiques & Tableaux de bord",
+    "Cuir",
+    "Tissus & Moquettes",
+    "Protection & Imperméabilisation",
+  ];
+
+  const accessoiresFilters = [
+    "Parfums d'ambiance",
+    "Chiffons & Accessoires",
+    "Lubrifiants & Entretien mécanique",
+    "Nettoyants mains",
+    "Nettoyants sols & Dégraissants",
+  ];
+
+  const interieurExterieurFilters = ["Vitres & Surfaces"];
+
+  const kitFilters = ["Kits cuir", "Kits polissage"];
 
   return (
     <aside className="filters-sidebar">
@@ -27,12 +41,27 @@ function Filters({ onToggleFilter, isFilterActive }: FiltersProps) {
           alt="Logo MAFRA"
           className="filters-logo"
         />
-        <button className="filters-btn">FILTRES</button>
       </div>
 
       <div className="filters-content">
         <div className="filter-section">
-          <h3>PRODUITS EXTÉRIEUR</h3>
+          <h3>ACCESSOIRES</h3>
+          <div className="filter-options">
+            {accessoiresFilters.map((filter) => (
+              <label key={filter} className="filter-option">
+                <input
+                  type="checkbox"
+                  checked={isFilterActive("accessoires", filter)}
+                  onChange={() => onToggleFilter("accessoires", filter)}
+                />
+                <span>{filter}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div className="filter-section">
+          <h3>EXTÉRIEUR</h3>
           <div className="filter-options">
             {exterieurFilters.map((filter) => (
               <label key={filter} className="filter-option">
@@ -48,7 +77,7 @@ function Filters({ onToggleFilter, isFilterActive }: FiltersProps) {
         </div>
 
         <div className="filter-section">
-          <h3>PRODUITS INTÉRIEUR</h3>
+          <h3>INTÉRIEUR</h3>
           <div className="filter-options">
             {interieurFilters.map((filter) => (
               <label key={filter} className="filter-option">
@@ -56,6 +85,40 @@ function Filters({ onToggleFilter, isFilterActive }: FiltersProps) {
                   type="checkbox"
                   checked={isFilterActive("interieur", filter)}
                   onChange={() => onToggleFilter("interieur", filter)}
+                />
+                <span>{filter}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div className="filter-section">
+          <h3>INTÉRIEUR / EXTÉRIEUR</h3>
+          <div className="filter-options">
+            {interieurExterieurFilters.map((filter) => (
+              <label key={filter} className="filter-option">
+                <input
+                  type="checkbox"
+                  checked={isFilterActive("interieur_exterieur", filter)}
+                  onChange={() =>
+                    onToggleFilter("interieur_exterieur", filter)
+                  }
+                />
+                <span>{filter}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div className="filter-section">
+          <h3>KIT</h3>
+          <div className="filter-options">
+            {kitFilters.map((filter) => (
+              <label key={filter} className="filter-option">
+                <input
+                  type="checkbox"
+                  checked={isFilterActive("kit", filter)}
+                  onChange={() => onToggleFilter("kit", filter)}
                 />
                 <span>{filter}</span>
               </label>

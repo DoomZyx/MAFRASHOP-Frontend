@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useProducts } from "../../../hooks/useProducts";
 import { useFilters } from "../../../hooks/useFilters";
@@ -5,6 +6,7 @@ import { useCart } from "../../../hooks/useCart";
 import { useFavorites } from "../../../hooks/useFavorites";
 import { useAuth } from "../../../hooks/useAuth";
 import Filters from "../filters/filters";
+import FiltersModal from "../filters/filtersModal";
 import ProductPrice from "../../shared/ProductPrice";
 import "./catalogue.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -12,10 +14,74 @@ import Loader from "../../loader/loader";
 
 function Catalogue() {
   const { products, loading, error } = useProducts();
-  const { toggleFilter, isFilterActive } = useFilters();
+  const {
+    filters,
+    toggleFilter,
+    isFilterActive,
+    isOpen: isFiltersModalOpen,
+    openFilters: openFiltersModal,
+    closeFilters: closeFiltersModal,
+    clearFilters,
+  } = useFilters();
   const { addToCart, isInCart } = useCart();
   const { toggleFavorite, isFavorite } = useFavorites();
   const { isAuthenticated } = useAuth();
+
+  // Mapping des catégories principales vers les valeurs en base de données
+  const categoryMapping: Record<string, string[]> = {
+    accessoires: ["ACCESSOIRES"],
+    exterieur: ["EXTERIEUR"],
+    interieur: ["INTERIEUR"],
+    interieur_exterieur: ["INTERIEUR / EXTERIEUR"],
+    kit: ["KIT"],
+  };
+
+  // Filtrer les produits selon les filtres sélectionnés
+  const filteredProducts = useMemo(() => {
+    // Si aucun filtre n'est sélectionné, afficher tous les produits
+    const hasActiveFilters =
+      filters.exterieur.length > 0 ||
+      filters.interieur.length > 0 ||
+      filters.accessoires.length > 0 ||
+      filters.kit.length > 0 ||
+      filters.interieur_exterieur.length > 0;
+
+    if (!hasActiveFilters) {
+      return products;
+    }
+
+    return products.filter((product) => {
+      // Vérifier chaque catégorie principale
+      for (const [filterCategory, dbCategories] of Object.entries(
+        categoryMapping
+      )) {
+        const selectedSubcategories = filters[
+          filterCategory as keyof typeof filters
+        ] as string[];
+
+        if (selectedSubcategories.length > 0) {
+          // Vérifier si le produit appartient à cette catégorie principale
+          const matchesCategory = dbCategories.some(
+            (dbCategory) =>
+              product.category?.toUpperCase() === dbCategory.toUpperCase()
+          );
+
+          if (matchesCategory) {
+            // Vérifier si la sous-catégorie du produit correspond à une des sous-catégories sélectionnées
+            const matchesSubcategory = selectedSubcategories.some(
+              (subcategory) =>
+                product.subcategory?.toUpperCase() === subcategory.toUpperCase()
+            );
+            if (matchesSubcategory) {
+              return true;
+            }
+          }
+        }
+      }
+
+      return false;
+    });
+  }, [products, filters]);
 
   if (loading) {
     return (
@@ -36,8 +102,24 @@ function Catalogue() {
   return (
     <div className="catalogue-container">
       <Filters onToggleFilter={toggleFilter} isFilterActive={isFilterActive} />
+      <button
+        className="filters-mobile-btn"
+        onClick={openFiltersModal}
+        aria-label="Ouvrir les filtres"
+      >
+        <i className="bi bi-funnel"></i>
+        <span>FILTRES</span>
+      </button>
+      <FiltersModal
+        isOpen={isFiltersModalOpen}
+        onClose={closeFiltersModal}
+        onToggleFilter={toggleFilter}
+        isFilterActive={isFilterActive}
+        onClearFilters={clearFilters}
+      />
       <div className="catalogue-content">
-        {products.map((product) => (
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
           <div key={product.id} className="product-card">
             <Link to={`/product/${product.id}`} className="product-card-link">
               {product.url_image && (
@@ -99,7 +181,12 @@ function Catalogue() {
               </div>
             )}
           </div>
-        ))}
+        ))
+        ) : (
+          <div className="no-products-message">
+            <p>Aucun produit ne correspond aux filtres sélectionnés.</p>
+          </div>
+        )}
       </div>
     </div>
   );

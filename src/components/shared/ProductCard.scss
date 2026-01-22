@@ -1,0 +1,114 @@
+.product-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .product-card-link {
+    text-decoration: none;
+    color: inherit;
+    flex: 1;
+  }
+
+  .product-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #666;
+  }
+
+  .product-action-btn {
+    flex: 1;
+    background-color: transparent;
+    border: 2px solid #666;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.85rem;
+
+    i {
+      font-size: 1.1rem;
+    }
+
+    &:hover {
+      border-color: #d32f2f;
+      background-color: rgba(211, 47, 47, 0.1);
+    }
+
+    &.active {
+      background-color: #d32f2f;
+      border-color: #d32f2f;
+
+      &:hover {
+        background-color: #b71c1c;
+      }
+    }
+  }
+
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    border-radius: 4px;
+  }
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: black;
+    margin: 0 0 10px 0;
+    min-height: 40px;
+  }
+
+  .product-category {
+    font-size: 0.85rem;
+    color: #666;
+    margin: 5px 0;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .product-format {
+    font-size: 0.85rem;
+    color: #888;
+    margin: 5px 0;
+  }
+
+  .product-price {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #666;
+
+    .price-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ff2121;
+    }
+
+    .price-label {
+      font-size: 0.8rem;
+      color: #999;
+    }
+  }
+}
+

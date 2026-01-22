@@ -205,6 +205,19 @@ nav {
         align-items: center;
         gap: 30px;
         padding-left: 30px;
+        .nav-user-info {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          .nav-user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+          }
+        }
 
         .nav-menu-links {
           display: flex;
@@ -212,7 +225,7 @@ nav {
           padding: 0;
           margin: 0;
           gap: 25px;
-
+          align-items: center;
           li {
             a {
               text-decoration: none;
@@ -396,31 +409,9 @@ nav {
             background-color: #d32f2f;
             color: white;
           }
-        }
-
-        .nav-user-info {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-
-          .nav-user-avatar {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid white;
-          }
-
-          .nav-user-name {
-            color: white;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-          }
+         }
         }
       }
     }
   }
  }
-}

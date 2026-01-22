@@ -31,12 +31,6 @@ function Nav() {
   } = useNav();
   const { getCartCount } = useCart();
 
-  // Afficher le bouton pro si l'utilisateur est connecté mais pas pro (ou demande rejetée)
-  const showProButton =
-    isAuthenticated &&
-    user &&
-    !user.isPro &&
-    (user.proStatus === "none" || user.proStatus === "rejected");
 
   return (
     <nav>
@@ -63,6 +57,19 @@ function Nav() {
             </svg>
             <div className="nav-left-content">
               <ul className="nav-menu-links">
+          {isAuthenticated && (
+            <Link to="/profile">
+              <div className="nav-user-info">
+                {user?.avatar && (
+                  <img
+                    src={user.avatar}
+                    alt={`${user.firstName} ${user.lastName}`}
+                    className="nav-user-avatar"
+                  />
+                )}
+              </div>
+            </Link>
+          )}
                 <li>
                   <Link to="/">ACCUEIL</Link>
                 </li>
@@ -111,23 +118,9 @@ function Nav() {
                     </button>
                   </>
                 )}
-                {isAuthenticated && (
-                  <Link to="/profile">
-                    <div className="nav-user-info">
-                      {user?.avatar && (
-                        <img
-                          src={user.avatar}
-                          alt={`${user.firstName} ${user.lastName}`}
-                          className="nav-user-avatar"
-                        />
-                      )}
-                    </div>
-                  </Link>
-                )}
               </div>
               {isAuthenticated ? (
                 <>
-                  {showProButton && (
                     <button
                       className="nav-btn-pro"
                       onClick={() => setIsProModalOpen(true)}
@@ -136,7 +129,6 @@ function Nav() {
                       <i className="bi bi-briefcase"></i>
                       DEVENIR PRO
                     </button>
-                  )}
                   <button className="nav-btn-logout" onClick={handleLogout}>
                     DÉCONNEXION
                   </button>
@@ -146,9 +138,14 @@ function Nav() {
                   <button className="nav-btn-connect" onClick={openAuthModal}>
                     SE CONNECTER
                   </button>
-                  <button className="nav-btn-register" onClick={openAuthModal}>
-                    S'INSCRIRE
-                  </button>
+                    <button
+                      className="nav-btn-pro"
+                      onClick={() => setIsProModalOpen(true)}
+                      title="Devenir professionnel"
+                    >
+                      <i className="bi bi-briefcase"></i>
+                      DEVENIR PRO
+                    </button>
                 </>
               )}
             </div>
