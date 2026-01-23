@@ -4,6 +4,7 @@ import { useProfile } from "../../hooks/useProfile";
 import "./profile.scss";
 import Nav from "../../components/nav/nav";
 import HeroBg from "../../components/shop/herobg/heroBg";
+import Avatar from "../../components/shared/Avatar";
 
 function Profile() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
@@ -32,14 +33,13 @@ function Profile() {
         <div className="profile-container">
 
           <div className="profile-header">
-            {user?.avatar && (
-              <div className="profile-avatar">
-                <img
-                  src={user.avatar}
-                  alt={`${user.firstName} ${user.lastName}`}
-                />
-              </div>
-            )}
+            <div className="profile-avatar">
+              <Avatar
+                src={user?.avatar}
+                alt={`${user?.firstName || ""} ${user?.lastName || ""}`}
+                size="large"
+              />
+            </div>
             <div className="profile-info">
               <h2>
                 {user?.firstName} {user?.lastName}

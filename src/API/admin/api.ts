@@ -68,3 +68,120 @@ export const triggerProductsUpdate = (type: "bestseller" | "promotion", productI
   );
 };
 
+/**
+ * Interface pour un utilisateur
+ */
+export interface AdminUser {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phone?: string;
+  address?: string;
+  city?: string;
+  zipCode?: string;
+  avatar?: string;
+  googleId?: string;
+  authProvider: "local" | "google";
+  isVerified: boolean;
+  role: "user" | "admin";
+  isPro?: boolean;
+  proStatus?: "none" | "pending" | "validated" | "rejected";
+  company?: {
+    name?: string;
+    siret?: string;
+    address?: string;
+    city?: string;
+    zipCode?: string;
+    phone?: string;
+    email?: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+}
+
+/**
+ * Récupérer tous les utilisateurs (admin seulement)
+ */
+export const getAllUsers = async (): Promise<{
+  success: boolean;
+  data: { users: AdminUser[] };
+}> => {
+  const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+  
+  const response = await fetch(`${API_BASE_URL}/api/admin/users`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Erreur lors de la récupération des utilisateurs");
+  }
+
+  return response.json();
+};
+
+/**
+ * Modifier le rôle d'un utilisateur (admin seulement)
+ */
+export const updateUserRole = async (
+  userId: string,
+  role: "user" | "admin"
+): Promise<{
+  success: boolean;
+  message: string;
+  data: { user: AdminUser };
+}> => {
+  const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+  
+  const response = await fetch(`${API_BASE_URL}/api/admin/users/${userId}/role`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ role }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || "Erreur lors de la mise à jour du rôle");
+  }
+
+  return response.json();
+};
+
+/**
+ * Créer un utilisateur (admin seulement)
+ */
+export const createAdminUser = async (data: {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  role?: "user" | "admin";
+}): Promise<{
+  success: boolean;
+  message: string;
+  data: { user: AdminUser };
+}> => {
+  const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+  
+  const response = await fetch(`${API_BASE_URL}/api/admin/users`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || "Erreur lors de la création de l'utilisateur");
+  }
+
+  return response.json();
+};

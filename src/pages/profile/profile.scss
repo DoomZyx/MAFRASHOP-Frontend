@@ -37,11 +37,8 @@
 }
 
 .profile-avatar {
-  img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
+  img,
+  div {
     border: 3px solid #d32f2f;
   }
 }
@@ -281,7 +278,8 @@
   }
 
   .profile-avatar {
-    img {
+    img,
+    div {
       width: 90px;
       height: 90px;
     }
@@ -396,7 +394,8 @@
   }
 
   .profile-avatar {
-    img {
+    img,
+    div {
       width: 100px;
       height: 100px;
     }

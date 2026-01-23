@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../API/config";
 import { useAuth } from "./useAuth";
+import { authAPI } from "../API/auth/api";
 
 interface AdminUser {
   id: string;
@@ -101,6 +102,23 @@ export const useAdminAuth = () => {
     }
   };
 
+  const loginWithGoogle = async (code: string) => {
+    try {
+      const response = await authAPI.adminGoogleCallback(code);
+      if (!response.success || !response.token) {
+        throw new Error(response.message || "Erreur lors de la connexion Google");
+      }
+      localStorage.setItem("adminToken", response.token);
+      if (response.user) {
+        setAdminUser(response.user);
+      }
+      return response;
+    } catch (error) {
+      console.error("Erreur connexion admin Google:", error);
+      throw error;
+    }
+  };
+
   const logout = () => {
     localStorage.removeItem("adminToken");
     setAdminUser(null);
@@ -113,6 +131,7 @@ export const useAdminAuth = () => {
     adminUser,
     loading,
     login,
+    loginWithGoogle,
     logout,
     isAuthenticated: !!adminUser,
   };

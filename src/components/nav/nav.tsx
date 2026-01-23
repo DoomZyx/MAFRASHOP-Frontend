@@ -14,6 +14,7 @@ import AuthModal from "../auth/AuthModal";
 import ProRequestModal from "../auth/ProRequestModal";
 import CartModal from "../cart/CartModal";
 import FavoritesModal from "../favorites/FavoritesModal";
+import Avatar from "../shared/Avatar";
 
 function Nav() {
   const { isModalOpen, toggleModal } = useModal();
@@ -60,13 +61,12 @@ function Nav() {
           {isAuthenticated && (
             <Link to="/profile">
               <div className="nav-user-info">
-                {user?.avatar && (
-                  <img
-                    src={user.avatar}
-                    alt={`${user.firstName} ${user.lastName}`}
-                    className="nav-user-avatar"
-                  />
-                )}
+                <Avatar
+                  src={user?.avatar}
+                  alt={`${user?.firstName || ""} ${user?.lastName || ""}`}
+                  size="small"
+                  className="nav-user-avatar"
+                />
               </div>
             </Link>
           )}

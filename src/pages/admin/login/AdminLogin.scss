@@ -135,6 +135,60 @@
   }
 }
 
+.admin-login-divider {
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  span {
+    padding: 0 1rem;
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+}
+
+.admin-login-google {
+  width: 100%;
+  background: white;
+  color: #27292a;
+  border: 2px solid #e0e0e0;
+  padding: 0.875rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+
+  &:hover:not(:disabled) {
+    border-color: #4285f4;
+    background: #f8f9fa;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  i {
+    font-size: 1.2rem;
+    color: #4285f4;
+  }
+}
+
 @media (max-width: 768px) {
   .admin-login-card {
     padding: 2rem;

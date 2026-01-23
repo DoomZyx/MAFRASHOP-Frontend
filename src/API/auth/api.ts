@@ -173,6 +173,20 @@ export const authAPI = {
     });
     return response.json();
   },
+
+  adminGoogleCallback: async (code: string): Promise<{
+    success: boolean;
+    message: string;
+    token?: string;
+    user?: { id: string; email: string; isAdmin: boolean };
+  }> => {
+    const response = await fetch(`${API_BASE_URL}/api/auth/admin/google/callback`, {
+      method: "POST",
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ code }),
+    });
+    return response.json();
+  },
 };
 
 

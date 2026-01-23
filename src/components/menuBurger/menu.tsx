@@ -11,6 +11,7 @@ import CartModal from "../cart/CartModal";
 import FavoritesModal from "../favorites/FavoritesModal";
 import { useNav } from "../../hooks/useNav";
 import { useCart } from "../../hooks/useCart";
+import Avatar from "../shared/Avatar";
 
 interface MenuBurgerProps {
   isModalOpen: boolean;
@@ -57,17 +58,12 @@ function MenuBurger({ isModalOpen, toggleModal }: MenuBurgerProps) {
               {isAuthenticated ? (
                 <>
                   <div className="nav-user-info">
-                    {user?.avatar ? (
-                      <img
-                        src={user.avatar}
-                        alt={`${user.firstName} ${user.lastName}`}
-                        className="nav-user-avatar"
-                      />
-                    ) : (
-                      <div className="avatar">
-                        <i className="bi bi-person"></i>
-                      </div>
-                    )}
+                    <Avatar
+                      src={user?.avatar}
+                      alt={`${user?.firstName || ""} ${user?.lastName || ""}`}
+                      size="medium"
+                      className="nav-user-avatar"
+                    />
                     <span className="nav-user-name">
                       {user?.firstName} {user?.lastName}
                     </span>
