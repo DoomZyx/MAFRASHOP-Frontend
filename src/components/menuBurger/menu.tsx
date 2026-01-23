@@ -89,6 +89,11 @@ function MenuBurger({ isModalOpen, toggleModal }: MenuBurgerProps) {
                   MON COMPTE
                 </Link>
               </li>
+              <li>
+                <Link to="/orders" onClick={toggleModal}>
+                  MES COMMANDES
+                </Link>
+              </li>
             </ul>
             {isAuthenticated ? (
               <>

@@ -74,7 +74,10 @@ function Nav() {
                   <Link to="/">ACCUEIL</Link>
                 </li>
                 <li>
-                  <Link to="/shop">Catalogue</Link>
+                  <Link to="/shop">CATALOGUE</Link>
+                </li>
+                <li>
+                <Link to="/orders">MES COMMANDES</Link>
                 </li>
                 <li>
                   <Link to="/contact">NOUS CONTACTER</Link>
