@@ -1,0 +1,45 @@
+.admin-users-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.admin-users-header {
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2rem;
+    color: #27292a;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: #666;
+    font-size: 1rem;
+  }
+}
+
+.admin-users-placeholder {
+  background: white;
+  border-radius: 12px;
+  padding: 4rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  i {
+    font-size: 4rem;
+    color: #d32f2f;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    color: #27292a;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: #666;
+    font-size: 1rem;
+  }
+}
+

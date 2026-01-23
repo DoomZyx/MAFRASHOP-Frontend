@@ -18,21 +18,36 @@ function Bestsellers() {
     currentIndex * MAX_VISIBLE + MAX_VISIBLE
   );
 
+  const fetchBestsellers = async () => {
+    try {
+      setLoading(true);
+      const data = await getBestsellers();
+      setProducts(data);
+      setError(null);
+    } catch (err) {
+      setError("Erreur lors du chargement des bestsellers");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchBestsellers = async () => {
-      try {
-        setLoading(true);
-        const data = await getBestsellers();
-        setProducts(data);
-      } catch (err) {
-        setError("Erreur lors du chargement des bestsellers");
-        console.error(err);
-      } finally {
-        setLoading(false);
+    fetchBestsellers();
+    
+    // Écouter les événements de mise à jour des produits
+    const handleProductsUpdated = (event: CustomEvent) => {
+      // Rafraîchir si c'est un bestseller ou si on ne connaît pas le type
+      if (!event.detail?.type || event.detail?.type === 'bestseller') {
+        fetchBestsellers();
       }
     };
 
-    fetchBestsellers();
+    window.addEventListener('productsUpdated', handleProductsUpdated as EventListener);
+
+    return () => {
+      window.removeEventListener('productsUpdated', handleProductsUpdated as EventListener);
+    };
   }, []);
 
   // Réinitialiser l'index si nécessaire

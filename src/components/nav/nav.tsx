@@ -77,10 +77,10 @@ function Nav() {
                   <Link to="/shop">Catalogue</Link>
                 </li>
                 <li>
-                  <Link to="/expertise">NOTRE EXPERTISE</Link>
+                  <Link to="/contact">NOUS CONTACTER</Link>
                 </li>
                 <li>
-                  <Link to="/contact">NOUS CONTACTER</Link>
+                  <Link to="/expertise">FAQ</Link>
                 </li>
               </ul>
             </div>

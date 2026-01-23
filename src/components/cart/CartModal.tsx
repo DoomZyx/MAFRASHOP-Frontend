@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import { useAuth } from "../../hooks/useAuth";
+import { useCheckout } from "../../hooks/useCheckout";
 import ProductPrice from "../shared/ProductPrice";
 import "./cartModal.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -22,11 +23,21 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
     getCartTotal,
   } = useCart();
   const { user } = useAuth();
+  const { handleCheckout, loading: checkoutLoading } = useCheckout();
   const isPro = user?.isPro || false;
 
   if (!isOpen) return null;
 
   const total = getCartTotal();
+
+  const handleCheckoutClick = async () => {
+    try {
+      await handleCheckout();
+      onClose();
+    } catch (error) {
+      console.error("Erreur lors du checkout:", error);
+    }
+  };
 
   const handleQuantityChange = async (
     productId: string,
@@ -188,17 +199,17 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
                   <button
                     className="cart-clear-btn"
                     onClick={clearCart}
-                    disabled={isLoading}
+                    disabled={isLoading || checkoutLoading}
                   >
                     VIDER LE PANIER
                   </button>
-                  <Link
-                    to="/checkout"
-                    onClick={onClose}
+                  <button
                     className="cart-checkout-btn"
+                    onClick={handleCheckoutClick}
+                    disabled={isLoading || checkoutLoading || cart.length === 0}
                   >
-                    COMMANDER
-                  </Link>
+                    {checkoutLoading ? "TRAITEMENT..." : "COMMANDER"}
+                  </button>
                 </div>
               </div>
             </>

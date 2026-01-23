@@ -18,21 +18,36 @@ function Promotions() {
     currentIndex * MAX_VISIBLE + MAX_VISIBLE
   );
 
+  const fetchPromotions = async () => {
+    try {
+      setLoading(true);
+      const data = await getPromotions();
+      setProducts(data);
+      setError(null);
+    } catch (err) {
+      setError("Erreur lors du chargement des promotions");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchPromotions = async () => {
-      try {
-        setLoading(true);
-        const data = await getPromotions();
-        setProducts(data);
-      } catch (err) {
-        setError("Erreur lors du chargement des promotions");
-        console.error(err);
-      } finally {
-        setLoading(false);
+    fetchPromotions();
+    
+    // Écouter les événements de mise à jour des produits
+    const handleProductsUpdated = (event: CustomEvent) => {
+      // Rafraîchir si c'est une promotion ou si on ne connaît pas le type
+      if (!event.detail?.type || event.detail?.type === 'promotion') {
+        fetchPromotions();
       }
     };
 
-    fetchPromotions();
+    window.addEventListener('productsUpdated', handleProductsUpdated as EventListener);
+
+    return () => {
+      window.removeEventListener('productsUpdated', handleProductsUpdated as EventListener);
+    };
   }, []);
 
   // Réinitialiser l'index si nécessaire
