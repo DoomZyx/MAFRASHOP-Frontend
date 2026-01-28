@@ -15,8 +15,18 @@ function AdminLayout() {
     },
     {
       path: "/admin/products",
-      label: "Promotions & Bestsellers",
+      label: "Gestion des produits",
       icon: "bi-tag",
+    },
+    {
+      path: "/admin/stock",
+      label: "Gestion des stocks",
+      icon: "bi-boxes",
+    },
+    {
+      path: "/admin/stats",
+      label: "Statistiques",
+      icon: "bi-graph-up",
     },
     {
       path: "/admin/orders",

@@ -109,6 +109,142 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
+
+    .products-header-actions {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+}
+
+.products-header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-create-product {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover {
+    background-color: #b71c1c;
+  }
+
+  i {
+    font-size: 1.1rem;
+  }
+}
+
+.products-search {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #f0f0f0;
+
+  .search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 600px;
+
+    i.bi-search {
+      position: absolute;
+      left: 15px;
+      color: #666;
+      font-size: 1.1rem;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 45px 12px 45px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: #d32f2f;
+      }
+
+      &::placeholder {
+        color: #999;
+      }
+    }
+
+    .search-clear-btn {
+      position: absolute;
+      right: 10px;
+      background: none;
+      border: none;
+      color: #666;
+      cursor: pointer;
+      padding: 5px 8px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background-color: #f5f5f5;
+        color: #d32f2f;
+      }
+
+      i {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+.no-products-found {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+
+  i {
+    font-size: 3rem;
+    color: #ccc;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #666;
+  }
+
+  .btn-clear-search {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #b71c1c;
+    }
   }
 }
 

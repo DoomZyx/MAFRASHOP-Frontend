@@ -65,10 +65,16 @@
 
     .product-prices {
       display: flex;
-      align-items: center;
-      gap: 0.75rem;
+      flex-direction: column;
+      gap: 0.5rem;
       margin-top: 0.75rem;
-      flex-wrap: wrap;
+
+      .price-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
 
       .price-normal {
         font-size: 1.1rem;
@@ -96,6 +102,24 @@
         font-size: 0.75rem;
         font-weight: 600;
         text-transform: uppercase;
+      }
+
+      .price-purchase {
+        padding-top: 0.5rem;
+        border-top: 1px solid #e0e0e0;
+        margin-top: 0.25rem;
+
+        .price-label {
+          font-size: 0.85rem;
+          color: #666;
+          font-weight: 500;
+        }
+
+        .price-purchase-value {
+          font-size: 0.95rem;
+          font-weight: 600;
+          color: #2196f3;
+        }
       }
     }
   }
@@ -221,6 +245,56 @@
           color: #d32f2f;
           font-weight: 600;
         }
+      }
+    }
+  }
+
+  .product-admin-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+
+    button {
+      flex: 1;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: none;
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      i {
+        font-size: 1rem;
+      }
+    }
+
+    .btn-edit {
+      background-color: #2196f3;
+      color: white;
+
+      &:hover:not(:disabled) {
+        background-color: #1976d2;
+      }
+    }
+
+    .btn-delete {
+      background-color: #f44336;
+      color: white;
+
+      &:hover:not(:disabled) {
+        background-color: #d32f2f;
       }
     }
   }

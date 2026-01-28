@@ -10,25 +10,25 @@ export const useProducts = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        setLoading(true);
-        const data = await getAllProducts();
-        setProducts(data);
-        setError(null);
-      } catch (err) {
-        setError("Erreur lors du chargement des produits");
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      const data = await getAllProducts();
+      setProducts(data);
+      setError(null);
+    } catch (err) {
+      setError("Erreur lors du chargement des produits");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchProducts();
   }, []);
 
-  return { products, loading, error };
+  return { products, loading, error, refreshProducts: fetchProducts };
 };
 
 /**

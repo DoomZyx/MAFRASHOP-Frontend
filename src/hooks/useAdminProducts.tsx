@@ -8,7 +8,7 @@ import {
 } from "../API/admin/api";
 
 export const useAdminProducts = () => {
-  const { products: initialProducts, loading } = useProducts();
+  const { products: initialProducts, loading, refreshProducts: refreshInitialProducts } = useProducts();
   const [products, setProducts] = useState<Product[]>([]);
   const [updating, setUpdating] = useState<Record<string, boolean>>({});
   const [promotionPercentages, setPromotionPercentages] = useState<
@@ -21,6 +21,14 @@ export const useAdminProducts = () => {
       setProducts(initialProducts);
     }
   }, [initialProducts]);
+
+  const refreshProducts = async () => {
+    if (refreshInitialProducts) {
+      await refreshInitialProducts();
+    } else {
+      window.location.reload();
+    }
+  };
 
   const handleToggleBestseller = async (product: Product) => {
     setUpdating((prev) => ({ ...prev, [`bestseller-${product.id}`]: true }));
@@ -203,6 +211,7 @@ export const useAdminProducts = () => {
     handleSavePromotion,
     calculateDiscountedPrice,
     formatPrice,
+    refreshProducts,
   };
 };
 

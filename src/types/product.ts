@@ -14,6 +14,12 @@ export interface Product {
   is_bestseller?: boolean;
   is_promotion?: boolean;
   promotion_percentage?: number | null;
+  stock?: "in_stock" | "out_of_stock";
+  stockQuantity?: number;
+  stockAlertThreshold?: number;
+  isLowStock?: boolean;
+  isOutOfStock?: boolean;
+  sku?: string | null;
   created_at: Date;
   updated_at: Date;
 }

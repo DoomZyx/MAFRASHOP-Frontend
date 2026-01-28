@@ -12,6 +12,9 @@ interface ProductAdminCardProps {
   onSavePromotion: (product: Product) => void;
   calculateDiscountedPrice: (product: Product) => number | null;
   formatPrice: (price: number | null) => string;
+  onEdit?: (product: Product) => void;
+  onDelete?: (productId: string) => void;
+  isDeleting?: boolean;
 }
 
 function ProductAdminCard({
@@ -24,6 +27,9 @@ function ProductAdminCard({
   onSavePromotion,
   calculateDiscountedPrice,
   formatPrice,
+  onEdit,
+  onDelete,
+  isDeleting = false,
 }: ProductAdminCardProps) {
   return (
     <div className="product-admin-card">
@@ -44,22 +50,32 @@ function ProductAdminCard({
           <p className="product-category">{product.category}</p>
         )}
         <div className="product-prices">
-          {product.is_promotion && product.promotion_percentage ? (
-            <>
-              <span className="price-original">
+          <div className="price-row">
+            {product.is_promotion && product.promotion_percentage ? (
+              <>
+                <span className="price-original">
+                  {formatPrice(product.public_ht)}
+                </span>
+                <span className="price-discounted">
+                  {formatPrice(calculateDiscountedPrice(product))}
+                </span>
+                <span className="price-discount-badge">
+                  -{product.promotion_percentage}%
+                </span>
+              </>
+            ) : (
+              <span className="price-normal">
                 {formatPrice(product.public_ht)}
               </span>
-              <span className="price-discounted">
-                {formatPrice(calculateDiscountedPrice(product))}
+            )}
+          </div>
+          {product.net_socofra && (
+            <div className="price-row price-purchase">
+              <span className="price-label">Prix d'achat:</span>
+              <span className="price-purchase-value">
+                {formatPrice(product.net_socofra)}
               </span>
-              <span className="price-discount-badge">
-                -{product.promotion_percentage}%
-              </span>
-            </>
-          ) : (
-            <span className="price-normal">
-              {formatPrice(product.public_ht)}
-            </span>
+            </div>
           )}
         </div>
       </div>
@@ -138,6 +154,38 @@ function ProductAdminCard({
             </div>
           )}
         </div>
+
+        {(onEdit || onDelete) && (
+          <div className="product-admin-actions">
+            {onEdit && (
+              <button
+                className="btn-edit"
+                onClick={() => onEdit(product)}
+                title="Modifier le produit"
+              >
+                <i className="bi bi-pencil"></i> Modifier
+              </button>
+            )}
+            {onDelete && (
+              <button
+                className="btn-delete"
+                onClick={() => onDelete(product.id)}
+                disabled={isDeleting}
+                title="Supprimer le produit"
+              >
+                {isDeleting ? (
+                  <>
+                    <i className="bi bi-hourglass-split"></i> Suppression...
+                  </>
+                ) : (
+                  <>
+                    <i className="bi bi-trash"></i> Supprimer
+                  </>
+                )}
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

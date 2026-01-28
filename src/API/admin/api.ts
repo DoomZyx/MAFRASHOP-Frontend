@@ -69,6 +69,117 @@ export const triggerProductsUpdate = (type: "bestseller" | "promotion", productI
 };
 
 /**
+ * CRUD Produits (admin seulement)
+ */
+export const adminProductsAPI = {
+  createProduct: async (productData: {
+    category?: string;
+    subcategory?: string;
+    nom: string;
+    ref: string;
+    url_image?: string;
+    description?: string;
+    format?: string;
+    net_socofra?: number;
+    public_ht?: number;
+    garage?: number;
+    stock?: "in_stock" | "out_of_stock";
+    sku?: string;
+    is_bestseller?: boolean;
+    is_promotion?: boolean;
+    promotion_percentage?: number;
+  }): Promise<{
+    success: boolean;
+    message: string;
+    data: { product: any };
+  }> => {
+    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+
+    const response = await fetch(`${API_BASE_URL}/api/admin/products`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(productData),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || "Erreur lors de la création du produit");
+    }
+
+    return response.json();
+  },
+
+  updateProduct: async (
+    productId: string,
+    productData: Partial<{
+      category: string;
+      subcategory: string;
+      nom: string;
+      ref: string;
+      url_image: string;
+      description: string;
+      format: string;
+      net_socofra: number;
+      public_ht: number;
+      garage: number;
+      stock: "in_stock" | "out_of_stock";
+      sku: string;
+      is_bestseller: boolean;
+      is_promotion: boolean;
+      promotion_percentage: number;
+    }>
+  ): Promise<{
+    success: boolean;
+    message: string;
+    data: { product: any };
+  }> => {
+    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+
+    const response = await fetch(`${API_BASE_URL}/api/admin/products/${productId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(productData),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || "Erreur lors de la mise à jour du produit");
+    }
+
+    return response.json();
+  },
+
+  deleteProduct: async (productId: string): Promise<{
+    success: boolean;
+    message: string;
+    data: { product: any };
+  }> => {
+    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+
+    const response = await fetch(`${API_BASE_URL}/api/admin/products/${productId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || "Erreur lors de la suppression du produit");
+    }
+
+    return response.json();
+  },
+};
+
+/**
  * Interface pour un utilisateur
  */
 export interface AdminUser {
