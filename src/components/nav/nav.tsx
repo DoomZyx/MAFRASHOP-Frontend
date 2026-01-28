@@ -6,7 +6,6 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import MenuButton from "../buttons/menu/menuButton";
 import useResponsive from "../../hooks/useResponsive";
 import MenuBurger from "../menuBurger/menu";
-import MenuDesktop from "../menuDesktop/menu";
 import useModal from "../../hooks/useModal";
 import { useNav } from "../../hooks/useNav";
 import { useCart } from "../../hooks/useCart";
@@ -124,6 +123,7 @@ function Nav() {
               </div>
               {isAuthenticated ? (
                 <>
+                  {!user?.isPro && (
                     <button
                       className="nav-btn-pro"
                       onClick={() => setIsProModalOpen(true)}
@@ -132,6 +132,7 @@ function Nav() {
                       <i className="bi bi-briefcase"></i>
                       DEVENIR PRO
                     </button>
+                  )}
                   <button className="nav-btn-logout" onClick={handleLogout}>
                     DÉCONNEXION
                   </button>
@@ -141,14 +142,14 @@ function Nav() {
                   <button className="nav-btn-connect" onClick={openAuthModal}>
                     SE CONNECTER
                   </button>
-                    <button
-                      className="nav-btn-pro"
-                      onClick={() => setIsProModalOpen(true)}
-                      title="Devenir professionnel"
-                    >
-                      <i className="bi bi-briefcase"></i>
-                      DEVENIR PRO
-                    </button>
+                  <button
+                    className="nav-btn-pro"
+                    onClick={() => setIsProModalOpen(true)}
+                    title="Devenir professionnel"
+                  >
+                    <i className="bi bi-briefcase"></i>
+                    DEVENIR PRO
+                  </button>
                 </>
               )}
             </div>
