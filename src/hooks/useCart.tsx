@@ -159,17 +159,14 @@ export function useCart() {
 
   const getCartTotal = useCallback(() => {
     const isPro = user?.isPro || false;
-    const TVA_RATE = 1.2; // TVA de 20% pour les particuliers
+    const TVA_RATE = 1.2; // TVA 20% : TTC pour tous à la validation du panier
 
     return cart.reduce((total, item) => {
-      let price: number;
-      if (isPro) {
-        price = item.productId.garage || item.productId.public_ht || 0;
-      } else {
-        const priceHT = item.productId.public_ht || 0;
-        price = priceHT * TVA_RATE; // Prix TTC pour les particuliers
-      }
-      return total + price * item.quantity;
+      const priceHT = isPro
+        ? (item.productId.garage || item.productId.public_ht || 0)
+        : (item.productId.public_ht || 0);
+      const priceTTC = priceHT * TVA_RATE;
+      return total + priceTTC * item.quantity;
     }, 0);
   }, [cart, user]);
 

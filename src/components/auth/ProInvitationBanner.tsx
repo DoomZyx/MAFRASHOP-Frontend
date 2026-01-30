@@ -3,14 +3,14 @@ import { useState } from "react";
 import ProRequestModal from "./ProRequestModal";
 
 interface ProInvitationBannerProps {
-  proStatus?: "none" | "pending" | "validated" | "rejected";
+  proStatus?: "none" | "pending" | "verified" | "rejected";
 }
 
 function ProInvitationBanner({ proStatus }: ProInvitationBannerProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Ne pas afficher si déjà validé, ou si la demande est en cours
-  if (proStatus === "validated" || proStatus === "pending") {
+  if (proStatus === "verified" || proStatus === "pending") {
     return null;
   }
 

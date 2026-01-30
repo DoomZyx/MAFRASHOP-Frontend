@@ -15,7 +15,10 @@ export interface User {
   isVerified: boolean;
   role: "user" | "admin";
   isPro?: boolean;
-  proStatus?: "none" | "pending" | "validated" | "rejected";
+  proStatus?: "none" | "pending" | "verified" | "rejected";
+  verificationMode?: "auto" | "manual";
+  decisionSource?: "auto" | "manual" | null;
+  lastVerificationError?: string | null;
   company?: {
     name?: string;
     siret?: string;
@@ -125,6 +128,23 @@ export const authAPI = {
     phone: string;
   }): Promise<{ success: boolean; message: string; data: { user: User } }> => {
     const response = await fetch(`${API_BASE_URL}/api/auth/profile`, {
+      method: "PUT",
+      headers: getAuthHeaders(),
+      body: JSON.stringify(data),
+    });
+    return response.json();
+  },
+
+  updateCompanyProfile: async (data: {
+    companyName: string;
+    siret: string;
+    address?: string;
+    city?: string;
+    zipCode?: string;
+    companyPhone?: string;
+    companyEmail?: string;
+  }): Promise<{ success: boolean; message: string; data?: { user: User } }> => {
+    const response = await fetch(`${API_BASE_URL}/api/auth/profile/company`, {
       method: "PUT",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { getAllUsers, updateUserRole, createAdminUser, AdminUser } from "../../../API/admin/api";
+import { useState, useEffect, Fragment } from "react";
+import { getAllUsers, validateProUser, retryProInsee, AdminUser } from "../../../API/admin/api";
 import Loader from "../../../components/loader/loader";
 import "./AdminUsers.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -10,18 +10,8 @@ function AdminUsers() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [roleFilter, setRoleFilter] = useState<"all" | "admin" | "user">("all");
-  const [updatingUserId, setUpdatingUserId] = useState<string | null>(null);
-  const [showCreateModal, setShowCreateModal] = useState(false);
-  const [creating, setCreating] = useState(false);
+  const [proActionUserId, setProActionUserId] = useState<string | null>(null);
   const [failedAvatars, setFailedAvatars] = useState<Set<string>>(new Set());
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    role: "admin" as "user" | "admin",
-  });
 
   useEffect(() => {
     loadUsers();
@@ -29,7 +19,7 @@ function AdminUsers() {
 
   useEffect(() => {
     filterUsers();
-  }, [users, searchTerm, roleFilter]);
+  }, [users, searchTerm]);
 
   const loadUsers = async () => {
     try {
@@ -37,12 +27,13 @@ function AdminUsers() {
       setError("");
       const response = await getAllUsers();
       if (response.success) {
-        setUsers(response.data.users);
+        const onlyUsers = (response.data.users as AdminUser[]).filter((u) => u.role === "user");
+        setUsers(onlyUsers);
       } else {
         setError("Erreur lors du chargement des utilisateurs");
       }
-    } catch (err: any) {
-      setError(err.message || "Erreur lors du chargement des utilisateurs");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Erreur lors du chargement des utilisateurs");
     } finally {
       setLoading(false);
     }
@@ -50,8 +41,6 @@ function AdminUsers() {
 
   const filterUsers = () => {
     let filtered = [...users];
-
-    // Filtre par recherche
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
       filtered = filtered.filter(
@@ -61,56 +50,33 @@ function AdminUsers() {
           user.lastName.toLowerCase().includes(term)
       );
     }
-
-    // Filtre par rôle
-    if (roleFilter !== "all") {
-      filtered = filtered.filter((user) => user.role === roleFilter);
-    }
-
     setFilteredUsers(filtered);
   };
 
-  const handleRoleChange = async (userId: string, newRole: "user" | "admin") => {
+  const handleValidatePro = async (userId: string, approved: boolean) => {
     try {
-      setUpdatingUserId(userId);
+      setProActionUserId(userId);
       setError("");
-      await updateUserRole(userId, newRole);
+      await validateProUser(userId, approved);
       await loadUsers();
-    } catch (err: any) {
-      setError(err.message || "Erreur lors de la mise à jour du rôle");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Erreur lors de la décision");
     } finally {
-      setUpdatingUserId(null);
+      setProActionUserId(null);
     }
   };
 
-  const handleCreateUser = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleRetryInsee = async (userId: string) => {
     try {
-      setCreating(true);
+      setProActionUserId(userId);
       setError("");
-      await createAdminUser(formData);
-      setShowCreateModal(false);
-      setFormData({
-        email: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        role: "admin",
-      });
+      await retryProInsee(userId);
       await loadUsers();
-    } catch (err: any) {
-      setError(err.message || "Erreur lors de la création de l'utilisateur");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Erreur lors de la reprise INSEE");
     } finally {
-      setCreating(false);
+      setProActionUserId(null);
     }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
   };
 
   const handleImageError = (userId: string) => {
@@ -118,10 +84,16 @@ function AdminUsers() {
   };
 
   const shouldShowAvatar = (user: AdminUser) => {
-    return user.avatar && 
-           user.avatar.trim() !== "" && 
-           !failedAvatars.has(user.id);
+    return (
+      user.avatar &&
+      user.avatar.trim() !== "" &&
+      !failedAvatars.has(user.id)
+    );
   };
+
+  const pendingProCount = users.filter(
+    (u) => u.proStatus === "pending" && u.decisionSource == null
+  ).length;
 
   if (loading) {
     return (
@@ -137,16 +109,9 @@ function AdminUsers() {
     <div className="admin-users-container">
       <div className="admin-users-header">
         <div>
-          <h1>Gestion des comptes</h1>
-          <p>Gérez les utilisateurs et les droits d'administration</p>
+          <h1>Gestion des utilisateurs</h1>
+          <p>Utilisateurs du site et demandes de compte professionnel</p>
         </div>
-        <button
-          className="admin-users-add-btn"
-          onClick={() => setShowCreateModal(true)}
-        >
-          <i className="bi bi-plus-circle"></i>
-          Ajouter un utilisateur
-        </button>
       </div>
 
       {error && <div className="admin-users-error">{error}</div>}
@@ -161,48 +126,21 @@ function AdminUsers() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-
-        <div className="admin-users-role-filter">
-          <label>
-            <i className="bi bi-funnel"></i> Filtrer par rôle :
-          </label>
-          <select
-            value={roleFilter}
-            onChange={(e) =>
-              setRoleFilter(e.target.value as "all" | "admin" | "user")
-            }
-          >
-            <option value="all">Tous</option>
-            <option value="admin">Administrateurs</option>
-            <option value="user">Utilisateurs</option>
-          </select>
-        </div>
       </div>
 
       <div className="admin-users-stats">
         <div className="admin-users-stat-card">
-          <i className="bi bi-people"></i>
-          <div>
-            <span className="stat-value">{users.length}</span>
-            <span className="stat-label">Total utilisateurs</span>
-          </div>
-        </div>
-        <div className="admin-users-stat-card">
-          <i className="bi bi-shield-check"></i>
-          <div>
-            <span className="stat-value">
-              {users.filter((u) => u.role === "admin").length}
-            </span>
-            <span className="stat-label">Administrateurs</span>
-          </div>
-        </div>
-        <div className="admin-users-stat-card">
           <i className="bi bi-person"></i>
           <div>
-            <span className="stat-value">
-              {users.filter((u) => u.role === "user").length}
-            </span>
+            <span className="stat-value">{users.length}</span>
             <span className="stat-label">Utilisateurs</span>
+          </div>
+        </div>
+        <div className="admin-users-stat-card">
+          <i className="bi bi-hourglass-split"></i>
+          <div>
+            <span className="stat-value">{pendingProCount}</span>
+            <span className="stat-label">En attente vérification pro</span>
           </div>
         </div>
       </div>
@@ -215,245 +153,250 @@ function AdminUsers() {
               <th>Email</th>
               <th>Authentification</th>
               <th>Statut Pro</th>
-              <th>Rôle</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {filteredUsers.length === 0 ? (
               <tr>
-                <td colSpan={6} className="admin-users-empty">
+                <td colSpan={5} className="admin-users-empty">
                   <i className="bi bi-inbox"></i>
                   <p>Aucun utilisateur trouvé</p>
                 </td>
               </tr>
             ) : (
               filteredUsers.map((user) => (
-                <tr key={user.id}>
-                  <td>
-                    <div className="admin-users-user-info">
-                      {shouldShowAvatar(user) ? (
-                        <img
-                          src={user.avatar}
-                          alt={`${user.firstName} ${user.lastName}`}
-                          className="admin-users-avatar"
-                          onError={() => handleImageError(user.id)}
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div className="admin-users-avatar-placeholder">
-                          <i className="bi bi-person-circle"></i>
+                <Fragment key={user.id}>
+                  <tr>
+                    <td>
+                      <div className="admin-users-user-info">
+                        {shouldShowAvatar(user) ? (
+                          <img
+                            src={user.avatar}
+                            alt={`${user.firstName} ${user.lastName}`}
+                            className="admin-users-avatar"
+                            onError={() => handleImageError(user.id)}
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="admin-users-avatar-placeholder">
+                            <i className="bi bi-person-circle"></i>
+                          </div>
+                        )}
+                        <div>
+                          <div className="admin-users-name">
+                            {user.firstName} {user.lastName}
+                          </div>
+                          {user.phone && (
+                            <div className="admin-users-phone">{user.phone}</div>
+                          )}
                         </div>
-                      )}
-                      <div>
-                        <div className="admin-users-name">
-                          {user.firstName} {user.lastName}
-                        </div>
-                        {user.phone && (
-                          <div className="admin-users-phone">{user.phone}</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="admin-users-email">
+                        {user.email}
+                        {user.isVerified && (
+                          <span className="admin-users-verified">
+                            <i className="bi bi-check-circle-fill"></i>
+                          </span>
                         )}
                       </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="admin-users-email">
-                      {user.email}
-                      {user.isVerified && (
-                        <span className="admin-users-verified">
-                          <i className="bi bi-check-circle-fill"></i>
-                        </span>
-                      )}
-                    </div>
-                  </td>
-                  <td>
-                    <span
-                      className={`admin-users-auth-badge ${
-                        user.authProvider === "google" ? "google" : "local"
-                      }`}
-                    >
-                      <i
-                        className={`bi ${
-                          user.authProvider === "google"
-                            ? "bi-google"
-                            : "bi-envelope"
+                    </td>
+                    <td>
+                      <span
+                        className={`admin-users-auth-badge ${
+                          user.authProvider === "google" ? "google" : "local"
                         }`}
-                      ></i>
-                      {user.authProvider === "google" ? "Google" : "Email"}
-                    </span>
-                  </td>
-                  <td>
-                    {user.isPro ? (
-                      <span className="admin-users-pro-badge validated">
-                        <i className="bi bi-check-circle"></i> Pro
+                      >
+                        <i
+                          className={`bi ${
+                            user.authProvider === "google"
+                              ? "bi-google"
+                              : "bi-envelope"
+                          }`}
+                        ></i>
+                        {user.authProvider === "google" ? "Google" : "Email"}
                       </span>
-                    ) : user.proStatus === "pending" ? (
-                      <span className="admin-users-pro-badge pending">
-                        <i className="bi bi-hourglass-split"></i> En attente
-                      </span>
-                    ) : (
-                      <span className="admin-users-pro-badge none">-</span>
-                    )}
-                  </td>
-                  <td>
-                    <select
-                      className={`admin-users-role-select ${
-                        user.role === "admin" ? "admin" : "user"
-                      }`}
-                      value={user.role}
-                      onChange={(e) =>
-                        handleRoleChange(
-                          user.id,
-                          e.target.value as "user" | "admin"
-                        )
-                      }
-                      disabled={updatingUserId === user.id}
-                    >
-                      <option value="user">Utilisateur</option>
-                      <option value="admin">Administrateur</option>
-                    </select>
-                    {updatingUserId === user.id && (
-                      <i className="bi bi-arrow-repeat admin-users-updating"></i>
-                    )}
-                  </td>
-                  <td>
-                    <div className="admin-users-actions">
-                      {user.role === "admin" && (
-                        <span className="admin-users-admin-badge">
-                          <i className="bi bi-shield-check"></i>
+                    </td>
+                    <td>
+                      {user.isPro ? (
+                        <span className="admin-users-pro-badge validated">
+                          <i className="bi bi-check-circle"></i> Pro
                         </span>
+                      ) : user.proStatus === "pending" ? (
+                        <span className="admin-users-pro-badge pending">
+                          <i className="bi bi-hourglass-split"></i>
+                          {user.verificationMode === "manual"
+                            ? "En attente (manuel)"
+                            : "En attente"}
+                        </span>
+                      ) : user.proStatus === "rejected" ? (
+                        <span className="admin-users-pro-badge rejected">
+                          Refusé
+                        </span>
+                      ) : (
+                        <span className="admin-users-pro-badge none">-</span>
                       )}
-                    </div>
-                  </td>
-                </tr>
+                    </td>
+                    <td>
+                      <div className="admin-users-actions">
+                        {user.proStatus === "pending" &&
+                          user.decisionSource == null && (
+                            <div className="admin-users-pro-actions">
+                              <button
+                                type="button"
+                                className="admin-users-pro-btn validate"
+                                onClick={() => handleValidatePro(user.id, true)}
+                                disabled={proActionUserId === user.id}
+                                title="Valider le compte pro"
+                              >
+                                <i className="bi bi-check-circle"></i> Valider pro
+                              </button>
+                              <button
+                                type="button"
+                                className="admin-users-pro-btn reject"
+                                onClick={() => handleValidatePro(user.id, false)}
+                                disabled={proActionUserId === user.id}
+                                title="Refuser le compte pro"
+                              >
+                                <i className="bi bi-x-circle"></i> Refuser
+                              </button>
+                              {user.verificationMode === "manual" && (
+                                <button
+                                  type="button"
+                                  className="admin-users-pro-btn retry"
+                                  onClick={() => handleRetryInsee(user.id)}
+                                  disabled={proActionUserId === user.id}
+                                  title="Retenter la vérification INSEE"
+                                >
+                                  <i className="bi bi-arrow-repeat"></i> Retenter
+                                  INSEE
+                                </button>
+                              )}
+                            </div>
+                          )}
+                      </div>
+                    </td>
+                  </tr>
+                  {user.proStatus === "pending" && user.company && (
+                    <tr key={`${user.id}-company`} className="admin-users-company-row">
+                      <td colSpan={5}>
+                        <div className="admin-users-company-block">
+                          <h4 className="admin-users-company-title">
+                            <i className="bi bi-building"></i> Données entreprise
+                            (vérification manuelle)
+                          </h4>
+                          <p className="admin-users-company-insee-link">
+                            Vérifier le SIRET sur le site INSEE :{" "}
+                            <a
+                              href="https://avis-situation-sirene.insee.fr/"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              Vérifier ici
+                            </a>
+                          </p>
+                          <div className="admin-users-company-grid">
+                            <div className="admin-users-company-item">
+                              <span className="admin-users-company-label">
+                                Nom de l'entreprise
+                              </span>
+                              <span className="admin-users-company-value">
+                                {user.company.name || "-"}
+                              </span>
+                            </div>
+                            <div className="admin-users-company-item">
+                              <span className="admin-users-company-label">
+                                SIRET
+                              </span>
+                              <span className="admin-users-company-value">
+                                {user.company.siret || "-"}
+                              </span>
+                            </div>
+                            <div className="admin-users-company-item">
+                              <span className="admin-users-company-label">
+                                Adresse
+                              </span>
+                              <span className="admin-users-company-value">
+                                {user.company.address || "-"}
+                              </span>
+                            </div>
+                            <div className="admin-users-company-item">
+                              <span className="admin-users-company-label">
+                                Ville
+                              </span>
+                              <span className="admin-users-company-value">
+                                {user.company.city || "-"}
+                              </span>
+                            </div>
+                            <div className="admin-users-company-item">
+                              <span className="admin-users-company-label">
+                                Code postal
+                              </span>
+                              <span className="admin-users-company-value">
+                                {user.company.zipCode || "-"}
+                              </span>
+                            </div>
+                            <div className="admin-users-company-item">
+                              <span className="admin-users-company-label">
+                                Téléphone entreprise
+                              </span>
+                              <span className="admin-users-company-value">
+                                {user.company.phone || "-"}
+                              </span>
+                            </div>
+                            <div className="admin-users-company-item">
+                              <span className="admin-users-company-label">
+                                Email entreprise
+                              </span>
+                              <span className="admin-users-company-value">
+                                {user.company.email || "-"}
+                              </span>
+                            </div>
+                          </div>
+                          {user.decisionSource == null && (
+                            <div className="admin-users-company-actions">
+                              <button
+                                type="button"
+                                className="admin-users-pro-btn validate"
+                                onClick={() => handleValidatePro(user.id, true)}
+                                disabled={proActionUserId === user.id}
+                              >
+                                <i className="bi bi-check-circle"></i> Valider le
+                                compte pro
+                              </button>
+                              <button
+                                type="button"
+                                className="admin-users-pro-btn reject"
+                                onClick={() => handleValidatePro(user.id, false)}
+                                disabled={proActionUserId === user.id}
+                              >
+                                <i className="bi bi-x-circle"></i> Refuser
+                              </button>
+                              {user.verificationMode === "manual" && (
+                                <button
+                                  type="button"
+                                  className="admin-users-pro-btn retry"
+                                  onClick={() => handleRetryInsee(user.id)}
+                                  disabled={proActionUserId === user.id}
+                                >
+                                  <i className="bi bi-arrow-repeat"></i> Retenter
+                                  INSEE
+                                </button>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </Fragment>
               ))
             )}
           </tbody>
         </table>
       </div>
-
-      {showCreateModal && (
-        <div className="admin-users-modal-overlay" onClick={() => setShowCreateModal(false)}>
-          <div className="admin-users-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="admin-users-modal-header">
-              <h2>Créer un nouvel utilisateur</h2>
-              <button
-                className="admin-users-modal-close"
-                onClick={() => setShowCreateModal(false)}
-              >
-                <i className="bi bi-x-lg"></i>
-              </button>
-            </div>
-
-            <form onSubmit={handleCreateUser} className="admin-users-modal-form">
-              <div className="admin-users-modal-field">
-                <label htmlFor="firstName">
-                  <i className="bi bi-person"></i> Prénom *
-                </label>
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleInputChange}
-                  required
-                  disabled={creating}
-                />
-              </div>
-
-              <div className="admin-users-modal-field">
-                <label htmlFor="lastName">
-                  <i className="bi bi-person"></i> Nom *
-                </label>
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleInputChange}
-                  required
-                  disabled={creating}
-                />
-              </div>
-
-              <div className="admin-users-modal-field">
-                <label htmlFor="email">
-                  <i className="bi bi-envelope"></i> Email *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  disabled={creating}
-                />
-              </div>
-
-              <div className="admin-users-modal-field">
-                <label htmlFor="password">
-                  <i className="bi bi-lock"></i> Mot de passe * (min. 6 caractères)
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  required
-                  minLength={6}
-                  disabled={creating}
-                />
-              </div>
-
-              <div className="admin-users-modal-field">
-                <label htmlFor="role">
-                  <i className="bi bi-shield-check"></i> Rôle *
-                </label>
-                <select
-                  id="role"
-                  name="role"
-                  value={formData.role}
-                  onChange={handleInputChange}
-                  required
-                  disabled={creating}
-                >
-                  <option value="user">Utilisateur</option>
-                  <option value="admin">Administrateur</option>
-                </select>
-              </div>
-
-              <div className="admin-users-modal-actions">
-                <button
-                  type="button"
-                  className="admin-users-modal-cancel"
-                  onClick={() => setShowCreateModal(false)}
-                  disabled={creating}
-                >
-                  Annuler
-                </button>
-                <button
-                  type="submit"
-                  className="admin-users-modal-submit"
-                  disabled={creating}
-                >
-                  {creating ? (
-                    <>
-                      <i className="bi bi-arrow-repeat admin-users-spinning"></i>
-                      Création...
-                    </>
-                  ) : (
-                    <>
-                      <i className="bi bi-check-circle"></i>
-                      Créer l'utilisateur
-                    </>
-                  )}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

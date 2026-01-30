@@ -67,14 +67,12 @@ function AdminOrders() {
     });
   };
 
-  const calculateTVA = (totalAmount: number, isPro: boolean) => {
-    if (isPro) return 0; // Pas de TVA pour les pros
-    return totalAmount * 0.2; // 20% TVA pour les particuliers
+  const calculateTVA = (totalAmountTTC: number) => {
+    return (totalAmountTTC / 1.2) * 0.2; // TVA 20% (totalAmount est TTC pour tous)
   };
 
-  const calculateHT = (totalAmount: number, isPro: boolean) => {
-    if (isPro) return totalAmount; // Déjà en HT pour les pros
-    return totalAmount / 1.2; // Convertir TTC en HT pour les particuliers
+  const calculateHT = (totalAmountTTC: number) => {
+    return totalAmountTTC / 1.2; // TTC -> HT pour tous
   };
 
   const getStatusBadgeClass = (status: string) => {
@@ -204,7 +202,7 @@ function AdminOrders() {
                   </span>
                   <div className="order-amount">
                     {formatCurrency(order.totalAmount, order.isPro)}
-                    <span className="amount-label">{order.isPro ? " HT" : " TTC"}</span>
+                    <span className="amount-label"> TTC</span>
                   </div>
                 </div>
               </div>
@@ -320,7 +318,7 @@ function AdminOrders() {
                           <p className="item-quantity">Quantité: {item.quantity}</p>
                         </div>
                         <div className="item-price">
-                          {formatCurrency(item.totalPrice, selectedOrder.isPro)}
+                          {formatCurrency(item.totalPrice * 1.2, selectedOrder.isPro)} TTC
                         </div>
                       </div>
                     ))
@@ -376,18 +374,16 @@ function AdminOrders() {
                   <div className="total-row">
                     <span>Total HT:</span>
                     <strong>
-                      {formatCurrency(calculateHT(selectedOrder.totalAmount, selectedOrder.isPro), true)}
+                      {formatCurrency(calculateHT(selectedOrder.totalAmount), true)}
                     </strong>
                   </div>
-                  {!selectedOrder.isPro && (
-                    <div className="total-row">
-                      <span>TVA (20%):</span>
-                      <strong>{formatCurrency(calculateTVA(selectedOrder.totalAmount, false), false)}</strong>
-                    </div>
-                  )}
+                  <div className="total-row">
+                    <span>TVA (20%):</span>
+                    <strong>{formatCurrency(calculateTVA(selectedOrder.totalAmount), false)}</strong>
+                  </div>
                   <div className="total-row total-final">
-                    <span>Total {selectedOrder.isPro ? "HT" : "TTC"}:</span>
-                    <strong>{formatCurrency(selectedOrder.totalAmount, selectedOrder.isPro)}</strong>
+                    <span>Total TTC:</span>
+                    <strong>{formatCurrency(selectedOrder.totalAmount, false)}</strong>
                   </div>
                 </div>
               </div>

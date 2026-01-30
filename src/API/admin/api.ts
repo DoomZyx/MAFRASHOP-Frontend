@@ -197,7 +197,12 @@ export interface AdminUser {
   isVerified: boolean;
   role: "user" | "admin";
   isPro?: boolean;
-  proStatus?: "none" | "pending" | "validated" | "rejected";
+  proStatus?: "none" | "pending" | "verified" | "rejected";
+  verificationMode?: "auto" | "manual";
+  decisionSource?: "auto" | "manual" | null;
+  decisionAt?: string | null;
+  reviewedByAdminId?: string | null;
+  lastVerificationError?: string | null;
   company?: {
     name?: string;
     siret?: string;
@@ -262,6 +267,56 @@ export const updateUserRole = async (
   }
 
   return response.json();
+};
+
+/**
+ * Valider ou refuser un compte pro (admin seulement)
+ */
+export const validateProUser = async (
+  userId: string,
+  approved: boolean
+): Promise<{
+  success: boolean;
+  message: string;
+  data?: { user: AdminUser };
+}> => {
+  const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+  const response = await fetch(`${API_BASE_URL}/api/auth/pro/validate`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ userId, approved }),
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Erreur lors de la décision");
+  }
+  return data;
+};
+
+/**
+ * Reprendre la vérification INSEE pour un compte en attente manuelle (admin seulement)
+ */
+export const retryProInsee = async (userId: string): Promise<{
+  success: boolean;
+  message: string;
+}> => {
+  const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+  const response = await fetch(`${API_BASE_URL}/api/auth/pro/retry-insee`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ userId }),
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Erreur lors de la reprise INSEE");
+  }
+  return data;
 };
 
 /**

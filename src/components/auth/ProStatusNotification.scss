@@ -1,0 +1,64 @@
+.pro-status-notification {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999999;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+
+  &--success {
+    background: #d1fae5;
+    color: #065f46;
+    border-bottom: 3px solid #059669;
+  }
+
+  &--error {
+    background: #fee2e2;
+    color: #991b1b;
+    border-bottom: 3px solid #dc2626;
+  }
+}
+
+.pro-status-notification-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  i:first-child {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  span {
+    flex: 1;
+    min-width: 200px;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+}
+
+.pro-status-notification-close {
+  background: transparent;
+  border: none;
+  padding: 0.35rem;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  i {
+    font-size: 1rem;
+  }
+}

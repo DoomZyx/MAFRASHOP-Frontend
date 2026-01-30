@@ -121,10 +121,16 @@ function AdminDashboard() {
             link="/admin/deliveries"
           />
           <ActionCard
-            icon="bi bi-people"
-            title="Gérer les comptes"
-            description="Gérer les utilisateurs et les droits admin"
+            icon="bi bi-person"
+            title="Gérer les utilisateurs"
+            description="Utilisateurs et demandes compte pro"
             link="/admin/users"
+          />
+          <ActionCard
+            icon="bi bi-shield-check"
+            title="Gérer les admins"
+            description="Administrateurs et accès back-office"
+            link="/admin/admins"
           />
         </div>
       </div>

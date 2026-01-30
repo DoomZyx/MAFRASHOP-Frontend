@@ -176,7 +176,7 @@ function Orders() {
                           <div className="orders-total-compact">
                             <span className="orders-total-amount">
                               {formatPrice(order.totalAmount, order.isPro)}
-                              {order.isPro ? " HT" : " TTC"}
+                              {" TTC"}
                             </span>
                           </div>
                           <div className={`orders-status ${getStatusClass(order.status)}`}>
@@ -238,8 +238,8 @@ function Orders() {
                                     </p>
                                   </div>
                                   <div className="orders-item-price">
-                                    {formatPrice(item.totalPrice, order.isPro)}
-                                    {order.isPro ? " HT" : " TTC"}
+                                    {formatPrice(item.totalPrice * 1.2, order.isPro)}
+                                    {" TTC"}
                                   </div>
                                 </div>
                               ))}

@@ -1,0 +1,189 @@
+.profile-form {
+  margin-bottom: 30px;
+}
+
+.profile-section {
+  margin-bottom: 25px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.profile-section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #27292a;
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.profile-error {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  text-align: center;
+  border-left: 4px solid #d32f2f;
+}
+
+.profile-success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  text-align: center;
+  border-left: 4px solid #4caf50;
+}
+
+.profile-form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+
+  label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #27292a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  input {
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: "Titillium Web", sans-serif;
+    transition: border-color 0.3s ease;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+      border-color: #d32f2f;
+    }
+
+    &:disabled {
+      background-color: #f5f5f5;
+      cursor: not-allowed;
+    }
+
+    &.profile-field-disabled {
+      background-color: #f5f5f5;
+      color: #999;
+    }
+
+    &::placeholder {
+      color: #999;
+      font-style: italic;
+    }
+  }
+
+  .profile-field-note {
+    font-size: 0.8rem;
+    color: #999;
+    font-style: italic;
+  }
+}
+
+.profile-submit {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  letter-spacing: 1px;
+  width: 100%;
+  margin-top: 20px;
+
+  &:hover:not(:disabled) {
+    background-color: #b71c1c;
+  }
+
+  &:disabled {
+    background-color: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+  }
+}
+
+@media (min-width: 768px) {
+  .profile-form {
+    margin-bottom: 35px;
+  }
+
+  .profile-section {
+    margin-bottom: 30px;
+  }
+
+  .profile-section-title {
+    font-size: 1.1rem;
+    margin: 0 0 20px 0;
+    padding-bottom: 10px;
+  }
+
+  .profile-error,
+  .profile-success {
+    font-size: 0.9rem;
+  }
+
+  .profile-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .profile-field {
+    label {
+      font-size: 0.9rem;
+    }
+
+    .profile-field-note {
+      font-size: 0.85rem;
+    }
+  }
+
+  .profile-submit {
+    padding: 14px 30px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .profile-form {
+    margin-bottom: 40px;
+  }
+
+  .profile-section {
+    margin-bottom: 30px;
+  }
+
+  .profile-section-title {
+    font-size: 1.2rem;
+  }
+
+  .profile-error,
+  .profile-success {
+    font-size: 0.9rem;
+  }
+}

@@ -2,7 +2,7 @@
   position: relative;
   z-index: 1;
   padding: 20px;
-  padding-top: 100px;
+  padding-top: clamp(6rem, 10vw, 14rem);
   max-width: 390px;
   margin: 0 auto;
   border-radius: 32px;
@@ -25,7 +25,7 @@
     width: 100%;
 
     .product-card {
-      background: #434343;
+      background: #434343a5;
       border-radius: 8px;
       border: 1px solid #878787;
       padding: 20px;
@@ -107,23 +107,9 @@
         min-height: 40px;
       }
 
-      .product-ref {
-        font-size: 0.85rem;
-        color: #666;
-        margin: 5px 0;
-      }
-
-      .product-description {
-        font-size: 0.9rem;
-        color: #444;
-        margin: 10px 0;
-        line-height: 1.4;
-        flex-grow: 1;
-      }
-
       .product-category {
         font-size: 0.85rem;
-        color: #666;
+        color: #fff;
         margin: 5px 0;
         text-transform: uppercase;
         font-weight: 500;
@@ -131,7 +117,7 @@
 
       .product-format {
         font-size: 0.85rem;
-        color: #888;
+        color: #fff;
         margin: 5px 0;
       }
 
@@ -259,10 +245,10 @@
     flex-direction: row;
     padding: clamp(1rem, 2vw, 2rem);
     padding-top: clamp(1rem, 2vw, 2rem);
-    max-height: 70vh;
+    max-height: 75vh;
     max-width: none;
-    margin: clamp(3rem, 5vw, 5rem) clamp(5rem, 10vw, 15rem)
-      clamp(5rem, 8vw, 10rem);
+    margin: clamp(2rem, 1vw, 2rem) clamp(3rem, 5vw, 8rem)
+      clamp(3rem, 6vw, 8rem);
     overflow-y: hidden;
 
     .filters-mobile-btn {
@@ -274,10 +260,10 @@
       width: 100%;
       column-gap: clamp(0.5rem, 1.5vw, 1.5rem);
       row-gap: clamp(1rem, 1.5vw, 1.5rem);
-      max-height: calc(70vh - 50px);
+      max-height: calc(80vh - 50px);
       overflow-y: auto;
       overflow-x: hidden;
-      padding: clamp(1rem, 2vw, 2rem) clamp(1.5rem, 3vw, 3rem)
+      padding: 0 clamp(1.5rem, 3vw, 3rem)
         clamp(1.5rem, 2vw, 2rem) clamp(0.5rem, 1vw, 1rem);
 
       // Custom scrollbar
@@ -305,14 +291,14 @@
         min-width: 0;
 
         img {
-          height: clamp(100px, 12vw, 180px);
+          height: clamp(80px, 10vw, 160px);
           margin-bottom: clamp(0.3rem, 0.5vw, 0.5rem);
         }
 
         h3 {
           font-size: clamp(0.75rem, 1vw, 1rem);
           line-height: 1.2;
-          margin: 0 0 clamp(0.2rem, 0.3vw, 0.3rem) 0;
+          margin: 20px 0 clamp(0.2rem, 0.3vw, 0.3rem) 0;
         }
 
         .product-category {

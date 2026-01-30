@@ -40,8 +40,13 @@ function AdminLayout() {
     },
     {
       path: "/admin/users",
-      label: "Gestion des comptes",
-      icon: "bi-people",
+      label: "Gestion des utilisateurs",
+      icon: "bi-person",
+    },
+    {
+      path: "/admin/admins",
+      label: "Gestion des admins",
+      icon: "bi-shield-check",
     },
   ];
 

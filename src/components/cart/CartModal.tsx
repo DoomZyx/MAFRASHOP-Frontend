@@ -11,7 +11,7 @@ interface CartModalProps {
   onClose: () => void;
 }
 
-const TVA_RATE = 1.2; // TVA de 20% pour les particuliers
+const TVA_RATE = 1.2; // TVA 20% : TTC pour tous à la validation du panier
 
 function CartModal({ isOpen, onClose }: CartModalProps) {
   const {
@@ -51,16 +51,14 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
   };
 
   const getItemPrice = (product: any) => {
-    if (isPro) {
-      return product.garage || product.public_ht || 0;
-    } else {
-      const priceHT = product.public_ht || 0;
-      return priceHT * TVA_RATE; // Prix TTC pour les particuliers
-    }
+    const priceHT = isPro
+      ? (product.garage || product.public_ht || 0)
+      : (product.public_ht || 0);
+    return priceHT * TVA_RATE;
   };
 
   const getPriceSuffix = () => {
-    return isPro ? "€ HT" : "€ TTC";
+    return "€ TTC";
   };
 
   return (
