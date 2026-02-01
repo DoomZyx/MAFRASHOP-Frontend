@@ -211,6 +211,10 @@ export interface AdminUser {
     zipCode?: string;
     phone?: string;
     email?: string;
+    country?: string;
+    vatNumber?: string;
+    vatStatus?: "none" | "pending_manual" | "validated" | "rejected";
+    vatValidationDate?: string | null;
   };
   createdAt: string;
   updatedAt: string;
@@ -292,6 +296,33 @@ export const validateProUser = async (
   const data = await response.json();
   if (!response.ok) {
     throw new Error(data.message || "Erreur lors de la décision");
+  }
+  return data;
+};
+
+/**
+ * Valider ou refuser un numéro de TVA intracommunautaire (admin seulement)
+ */
+export const validateVatUser = async (
+  userId: string,
+  approved: boolean
+): Promise<{
+  success: boolean;
+  message: string;
+  data?: { user: AdminUser };
+}> => {
+  const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+  const response = await fetch(`${API_BASE_URL}/api/auth/admin/validate-vat`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ userId, approved }),
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Erreur lors de la validation TVA");
   }
   return data;
 };

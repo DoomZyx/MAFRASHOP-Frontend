@@ -1,0 +1,125 @@
+.product-stock-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &.stock-low {
+    border-color: #ff9800;
+  }
+
+  &.stock-out {
+    border-color: #f44336;
+  }
+
+  .product-stock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+
+    h3 {
+      font-size: 1.1rem;
+      color: #27292a;
+      margin: 0;
+      flex: 1;
+    }
+
+    .stock-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      white-space: nowrap;
+
+      &.stock-badge-low {
+        background: #fff3e0;
+        color: #e65100;
+      }
+
+      &.stock-badge-out {
+        background: #ffebee;
+        color: #c62828;
+      }
+    }
+  }
+
+  .product-stock-info {
+    margin-bottom: 1rem;
+
+    p {
+      margin: 0.25rem 0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+  }
+
+  .product-stock-quantity {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: #f9f9f9;
+    border-radius: 6px;
+
+    .quantity-display {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+
+      .quantity-label {
+        font-weight: 600;
+        color: #666;
+      }
+
+      .quantity-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2e7d32;
+
+        &.low {
+          color: #ff9800;
+        }
+
+        &.out {
+          color: #f44336;
+        }
+      }
+    }
+
+    .alert-threshold {
+      font-size: 0.85rem;
+      color: #999;
+    }
+  }
+
+  .btn-update-stock {
+    width: 100%;
+    padding: 0.75rem;
+    background: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: #b71c1c;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+.admin-login-google {
+  background: white;
+  color: #27292a;
+  border: 2px solid #e0e0e0;
+  padding: 0.875rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+
+  &:hover:not(:disabled) {
+    border-color: #d32f2f;
+    background: #fafafa;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  i {
+    font-size: 1.2rem;
+    color: #ea4335;
+  }
+}

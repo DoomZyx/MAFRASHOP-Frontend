@@ -60,7 +60,7 @@ function ProRequestModal({ isOpen, onClose }: ProRequestModalProps) {
 
             <div className="pro-request-modal-field">
               <label htmlFor="siret">
-                Numéro SIRET <span className="required">*</span>
+                Numéro SIRET {!formData.hasVatNumber && <span className="required">*</span>}
               </label>
               <input
                 type="text"
@@ -68,13 +68,15 @@ function ProRequestModal({ isOpen, onClose }: ProRequestModalProps) {
                 name="siret"
                 value={formData.siret}
                 onChange={handleInputChange}
-                required
-                disabled={isLoading || !!success}
+                required={!formData.hasVatNumber}
+                disabled={isLoading || !!success || formData.hasVatNumber}
                 placeholder="14 chiffres"
                 maxLength={14}
               />
               <small className="pro-request-modal-hint">
-                Le SIRET doit contenir exactement 14 chiffres
+                {formData.hasVatNumber 
+                  ? "Non requis pour les professionnels UE avec TVA intracommunautaire"
+                  : "Le SIRET doit contenir exactement 14 chiffres"}
               </small>
             </div>
 
@@ -122,6 +124,95 @@ function ProRequestModal({ isOpen, onClose }: ProRequestModalProps) {
                 />
               </div>
             </div>
+
+            <div className="pro-request-modal-checkbox-field">
+              <label className="pro-request-modal-checkbox-label">
+                <input
+                  type="checkbox"
+                  name="hasVatNumber"
+                  checked={formData.hasVatNumber}
+                  onChange={handleInputChange}
+                  disabled={isLoading || !!success}
+                />
+                <span>
+                  Je suis un professionnel UE avec un numéro de TVA intracommunautaire
+                </span>
+              </label>
+              <small className="pro-request-modal-hint">
+                Cochez cette case si vous êtes établi dans l'UE (hors France) et disposez d'un numéro de TVA intracommunautaire. 
+                Le SIRET ne sera pas requis.
+              </small>
+            </div>
+
+            {formData.hasVatNumber && (
+              <>
+                <div className="pro-request-modal-divider">
+                  <span>TVA intracommunautaire</span>
+                </div>
+
+                <div className="pro-request-modal-row">
+              <div className="pro-request-modal-field">
+                <label htmlFor="companyCountry">Pays</label>
+                <select
+                  id="companyCountry"
+                  name="companyCountry"
+                  value={formData.companyCountry}
+                  onChange={handleInputChange}
+                  disabled={isLoading || !!success}
+                >
+                  <option value="FR">France</option>
+                  <option value="BE">Belgique</option>
+                  <option value="DE">Allemagne</option>
+                  <option value="IT">Italie</option>
+                  <option value="ES">Espagne</option>
+                  <option value="NL">Pays-Bas</option>
+                  <option value="PT">Portugal</option>
+                  <option value="LU">Luxembourg</option>
+                  <option value="IE">Irlande</option>
+                  <option value="AT">Autriche</option>
+                  <option value="SE">Suède</option>
+                  <option value="DK">Danemark</option>
+                  <option value="FI">Finlande</option>
+                  <option value="PL">Pologne</option>
+                  <option value="CZ">République tchèque</option>
+                  <option value="RO">Roumanie</option>
+                  <option value="BG">Bulgarie</option>
+                  <option value="HR">Croatie</option>
+                  <option value="CY">Chypre</option>
+                  <option value="EE">Estonie</option>
+                  <option value="GR">Grèce</option>
+                  <option value="HU">Hongrie</option>
+                  <option value="LT">Lituanie</option>
+                  <option value="LV">Lettonie</option>
+                  <option value="MT">Malte</option>
+                  <option value="SK">Slovaquie</option>
+                  <option value="SI">Slovénie</option>
+                </select>
+              </div>
+
+              <div className="pro-request-modal-field">
+                <label htmlFor="vatNumber">
+                  Numéro de TVA intracommunautaire <span className="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="vatNumber"
+                  name="vatNumber"
+                  value={formData.vatNumber}
+                  onChange={handleInputChange}
+                  required={formData.hasVatNumber}
+                  disabled={isLoading || !!success}
+                  placeholder="Ex: BE0123456789"
+                />
+              </div>
+            </div>
+
+            <small className="pro-request-modal-hint">
+              Après vérification automatique ou validation manuelle de votre numéro de TVA, 
+              vous bénéficierez de la TVA à 0% (autoliquidation).
+            </small>
+              </>
+            )}
 
             <button
               type="submit"

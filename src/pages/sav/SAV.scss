@@ -1,0 +1,498 @@
+@import "../../utils/mixins/queries/queries.scss";
+
+.sav-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sav-container {
+  flex: 1;
+  background: #f5f5f5;
+}
+
+.sav-hero {
+  background: linear-gradient(135deg, #27292a 0%, #3a3c3d 100%);
+  padding: 80px 20px;
+  text-align: center;
+  color: white;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .sav-hero-line {
+    width: 100px;
+    height: 4px;
+    background: #d32f2f;
+    margin: 0 auto 20px;
+  }
+
+  .sav-hero-subtitle {
+    font-size: 1.3rem;
+    color: #ddd;
+    margin: 0;
+  }
+}
+
+.sav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.sav-intro {
+  text-align: center;
+  margin-bottom: 60px;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #27292a;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
+
+.sav-services {
+  margin-bottom: 80px;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #27292a;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: #d32f2f;
+    }
+  }
+}
+
+.sav-services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.sav-service-card {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  i {
+    font-size: 3rem;
+    color: #d32f2f;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #27292a;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      font-size: 0.95rem;
+      color: #555;
+      padding: 8px 0;
+      padding-left: 25px;
+      position: relative;
+
+      &::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #2e7d32;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+.sav-process {
+  margin-bottom: 80px;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #27292a;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: #d32f2f;
+    }
+  }
+}
+
+.sav-contact-methods {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.sav-contact-card {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  i {
+    font-size: 3rem;
+    color: #d32f2f;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #27292a;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .sav-contact-link {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #d32f2f;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #b71c1c;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.sav-form-section {
+  margin-bottom: 80px;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #27292a;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 15px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: #d32f2f;
+    }
+  }
+
+  .sav-form-intro {
+    text-align: center;
+    font-size: 1.05rem;
+    color: #666;
+    margin-bottom: 40px;
+  }
+}
+
+.sav-form {
+  background: white;
+  padding: 50px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.sav-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.sav-form-group {
+  margin-bottom: 25px;
+
+  label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #27292a;
+    margin-bottom: 8px;
+
+    .required {
+      color: #d32f2f;
+    }
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #d32f2f;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+}
+
+.sav-form-submit {
+  width: 100%;
+  padding: 15px;
+  background: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #b71c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+  }
+}
+
+.sav-faq {
+  margin-bottom: 80px;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #27292a;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: #d32f2f;
+    }
+  }
+}
+
+.sav-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sav-faq-item {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #27292a;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    i {
+      color: #d32f2f;
+      font-size: 1.4rem;
+    }
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #666;
+    margin: 0;
+  }
+}
+
+.sav-cta {
+  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  padding: 60px;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto 30px;
+  }
+
+  .sav-cta-button {
+    display: inline-block;
+    padding: 15px 40px;
+    background: white;
+    color: #d32f2f;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 767px) {
+  .sav-hero {
+    padding: 60px 20px;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .sav-hero-subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  .sav-content {
+    padding: 40px 20px;
+  }
+
+  .sav-services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sav-contact-methods {
+    grid-template-columns: 1fr;
+  }
+
+  .sav-form {
+    padding: 30px 20px;
+  }
+
+  .sav-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .sav-cta {
+    padding: 40px 30px;
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .sav-services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sav-contact-methods {
+    grid-template-columns: 1fr;
+  }
+}

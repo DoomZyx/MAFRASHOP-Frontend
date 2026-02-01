@@ -27,6 +27,10 @@ export interface User {
     zipCode?: string;
     phone?: string;
     email?: string;
+    country?: string;
+    vatNumber?: string;
+    vatStatus?: "none" | "pending_manual" | "validated" | "rejected";
+    vatValidationDate?: string | null;
   };
 
   createdAt: string;
@@ -154,10 +158,12 @@ export const authAPI = {
 
   requestPro: async (data: {
     companyName: string;
-    siret: string;
+    siret?: string;
     address?: string;
     city?: string;
     zipCode?: string;
+    companyCountry?: string;
+    vatNumber?: string;
   }): Promise<{ success: boolean; message: string }> => {
     const response = await fetch(`${API_BASE_URL}/api/auth/pro/request`, {
       method: "POST",

@@ -1,0 +1,182 @@
+.admin-users-company-block {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #d32f2f;
+
+  .admin-users-company-title {
+    font-size: 1.1rem;
+    color: #27292a;
+    margin: 0 0 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    i {
+      color: #d32f2f;
+    }
+  }
+
+  .admin-users-company-insee-link {
+    margin-bottom: 1.5rem;
+    color: #666;
+
+    a {
+      color: #d32f2f;
+      font-weight: 600;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .admin-users-company-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    .admin-users-company-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      .admin-users-company-label {
+        font-size: 0.85rem;
+        color: #666;
+        font-weight: 600;
+      }
+
+      .admin-users-company-value {
+        font-size: 1rem;
+        color: #27292a;
+      }
+    }
+  }
+
+  .admin-users-vat-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+
+    &.validated {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    &.pending_manual {
+      background: #fff3e0;
+      color: #e65100;
+    }
+
+    &.rejected {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    &.none {
+      color: #999;
+    }
+  }
+
+  .admin-users-vat-actions {
+    background: #fff3e0;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+
+    .admin-users-vat-notice {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #e65100;
+      font-weight: 600;
+      margin-bottom: 1rem;
+
+      i {
+        font-size: 1.2rem;
+      }
+    }
+
+    .admin-users-vat-buttons {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+  }
+
+  .admin-users-company-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+    border-top: 2px solid #e0e0e0;
+  }
+
+  .admin-users-pro-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    &.validate {
+      background: #2e7d32;
+      color: white;
+
+      &:hover:not(:disabled) {
+        background: #1b5e20;
+      }
+    }
+
+    &.reject {
+      background: #c62828;
+      color: white;
+
+      &:hover:not(:disabled) {
+        background: #b71c1c;
+      }
+    }
+
+    &.retry {
+      background: #1565c0;
+      color: white;
+
+      &:hover:not(:disabled) {
+        background: #0d47a1;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-users-company-block {
+    .admin-users-company-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .admin-users-company-actions,
+    .admin-users-vat-buttons {
+      flex-direction: column;
+
+      .admin-users-pro-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  }
+}

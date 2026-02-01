@@ -159,6 +159,55 @@
   }
 }
 
+.pro-request-modal-checkbox-field {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 8px;
+
+  .pro-request-modal-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #27292a;
+
+    input[type="checkbox"] {
+      margin-top: 3px;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    span {
+      flex: 1;
+    }
+  }
+
+  .pro-request-modal-hint {
+    display: block;
+    margin-top: 8px;
+    margin-left: 30px;
+  }
+}
+
+.pro-request-modal-divider {
+  margin: 25px 0 15px 0;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+  text-align: center;
+
+  span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
 .pro-request-modal-submit {
   background-color: #d32f2f;
   color: white;

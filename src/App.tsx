@@ -22,11 +22,24 @@ import AdminAdmins from "./pages/admin/admins/AdminAdmins";
 import CheckoutSuccess from "./pages/checkout/CheckoutSuccess";
 import CheckoutCancel from "./pages/checkout/CheckoutCancel";
 import ProStatusNotification from "./components/auth/ProStatusNotification";
+import CookieBanner from "./components/cookies/CookieBanner";
+import UpdateNotification from "./components/shared/UpdateNotification";
+import About from "./pages/about/About";
+import Expertise from "./pages/expertise/Expertise";
+import SAV from "./pages/sav/SAV";
+import Shipping from "./pages/shipping/Shipping";
+import Returns from "./pages/returns/Returns";
+import CGV from "./pages/legalInfos/CGV/cgv";
+import Privacy from "./pages/legalInfos/Privacy/Privacy";
+import CookiesPage from "./pages/legalInfos/Cookies/Cookies";
+import Mentions from "./pages/legalInfos/Mentions/Mentions";
 
 function App() {
   return (
     <>
       <ProStatusNotification />
+      <CookieBanner />
+      <UpdateNotification />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/shop" element={<Shop />} />
@@ -35,6 +48,17 @@ function App() {
         <Route path="/orders" element={<Orders />} />
         <Route path="/checkout/success" element={<CheckoutSuccess />} />
         <Route path="/checkout/cancel" element={<CheckoutCancel />} />
+        
+        {/* Info pages */}
+        <Route path="/about" element={<About />} />
+        <Route path="/expertise" element={<Expertise />} />
+        <Route path="/sav" element={<SAV />} />
+        <Route path="/shipping" element={<Shipping />} />
+        <Route path="/returns" element={<Returns />} />
+        <Route path="/terms" element={<CGV />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/cookies" element={<CookiesPage />} />
+        <Route path="/mentions" element={<Mentions />} />
         
         {/* Admin routes */}
         <Route path="/admin/login" element={<AdminLogin />} />

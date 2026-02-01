@@ -1,0 +1,51 @@
+.orders-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #878787;
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  p {
+    color: #f3f3f3;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .orders-header {
+    margin-bottom: 35px;
+    padding-bottom: 25px;
+
+    h1 {
+      font-size: 1.8rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (min-width: 1025px) {
+  .orders-header {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+    }
+  }
+}

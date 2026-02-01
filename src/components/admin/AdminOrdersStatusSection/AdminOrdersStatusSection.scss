@@ -1,0 +1,97 @@
+.stats-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+
+  h2 {
+    font-size: 1.5rem;
+    color: #27292a;
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    i {
+      color: #d32f2f;
+    }
+  }
+
+  .orders-status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .status-card {
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: #d32f2f;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .status-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      h3 {
+        font-size: 1rem;
+        color: #27292a;
+        margin: 0;
+        text-transform: capitalize;
+      }
+
+      .status-badge {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        &.status-pending {
+          background: #fff3e0;
+          color: #e65100;
+        }
+
+        &.status-paid {
+          background: #e8f5e9;
+          color: #2e7d32;
+        }
+
+        &.status-cancelled {
+          background: #ffebee;
+          color: #c62828;
+        }
+
+        &.status-refunded {
+          background: #e3f2fd;
+          color: #1565c0;
+        }
+      }
+    }
+
+    .status-stats {
+      .status-count {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #27292a;
+        margin: 0 0 0.5rem 0;
+      }
+
+      .status-amount {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #d32f2f;
+        margin: 0;
+      }
+    }
+  }
+}

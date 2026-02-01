@@ -46,6 +46,7 @@ export interface Order {
   status: "pending" | "paid" | "failed" | "cancelled" | "refunded" | "shipped" | "preparing";
   totalAmount: number;
   expectedAmount: number | null;
+  deliveryFee?: number;
   isPro: boolean;
   shippingAddress: any;
   billingAddress: any;

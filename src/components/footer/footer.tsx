@@ -22,13 +22,7 @@ function Footer() {
                 <Link to="/about">Qui sommes-nous</Link>
               </li>
               <li>
-                <Link to="/contact">Nous contacter</Link>
-              </li>
-              <li>
                 <Link to="/expertise">Notre expertise</Link>
-              </li>
-              <li>
-                <Link to="/careers">Carrières</Link>
               </li>
             </ul>
           </div>
@@ -44,9 +38,6 @@ function Footer() {
               </li>
               <li>
                 <Link to="/returns">Retours & Remboursements</Link>
-              </li>
-              <li>
-                <Link to="/faq">Questions fréquentes</Link>
               </li>
             </ul>
           </div>

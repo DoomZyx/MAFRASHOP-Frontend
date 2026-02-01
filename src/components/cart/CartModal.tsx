@@ -20,6 +20,8 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
     updateQuantity,
     removeFromCart,
     clearCart,
+    getCartSubtotal,
+    getDeliveryFee,
     getCartTotal,
   } = useCart();
   const { user } = useAuth();
@@ -28,6 +30,8 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
 
   if (!isOpen) return null;
 
+  const subtotal = getCartSubtotal();
+  const deliveryFee = getDeliveryFee();
   const total = getCartTotal();
 
   const handleCheckoutClick = async () => {
@@ -185,6 +189,21 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
               </div>
 
               <div className="cart-footer">
+                <div className="cart-summary">
+                  <div className="cart-summary-row">
+                    <span className="cart-summary-label">Sous-total</span>
+                    <span className="cart-summary-value">
+                      {subtotal.toFixed(2)}
+                      {getPriceSuffix()}
+                    </span>
+                  </div>
+                  <div className="cart-summary-row">
+                    <span className="cart-summary-label">Frais de livraison</span>
+                    <span className="cart-summary-value">
+                      {deliveryFee === 0 ? "Offerts" : `${deliveryFee.toFixed(2)} €`}
+                    </span>
+                  </div>
+                </div>
                 <div className="cart-total">
                   <span className="cart-total-label">TOTAL</span>
                   <span className="cart-total-value">

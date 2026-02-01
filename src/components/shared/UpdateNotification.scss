@@ -1,0 +1,177 @@
+.update-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10000;
+  animation: slideUp 0.4s ease;
+
+  .update-notification-content {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: 400px;
+    border: 2px solid #e74c3c;
+
+    .update-notification-icon {
+      flex-shrink: 0;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: rotate 2s linear infinite;
+
+      i {
+        font-size: 1.5rem;
+        color: white;
+      }
+    }
+
+    .update-notification-text {
+      flex: 1;
+
+      h4 {
+        margin: 0 0 5px 0;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #2c3e50;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #666;
+        line-height: 1.4;
+      }
+    }
+
+    .update-notification-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+
+        &.update-btn {
+          background: linear-gradient(135deg, #e74c3c, #c0392b);
+          color: white;
+
+          &:hover {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+          }
+        }
+
+        &.dismiss-btn {
+          background: transparent;
+          color: #666;
+          border: 1px solid #dee2e6;
+
+          &:hover {
+            background: #f8f9fa;
+            border-color: #adb5bd;
+          }
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .update-notification {
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+
+    .update-notification-content {
+      padding: 15px;
+      max-width: 100%;
+
+      .update-notification-icon {
+        width: 40px;
+        height: 40px;
+
+        i {
+          font-size: 1.2rem;
+        }
+      }
+
+      .update-notification-text {
+        h4 {
+          font-size: 0.95rem;
+        }
+
+        p {
+          font-size: 0.85rem;
+        }
+      }
+
+      .update-notification-actions {
+        flex-direction: row;
+
+        button {
+          padding: 6px 12px;
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .update-notification {
+    .update-notification-content {
+      flex-direction: column;
+      text-align: center;
+
+      .update-notification-actions {
+        width: 100%;
+        flex-direction: column;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

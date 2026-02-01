@@ -1,0 +1,37 @@
+.admin-users-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+
+  .admin-users-stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    i {
+      font-size: 2.5rem;
+      color: #d32f2f;
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+
+      .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #27292a;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        color: #666;
+      }
+    }
+  }
+}

@@ -1,0 +1,191 @@
+.stats-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    h2 {
+      font-size: 1.5rem;
+      color: #27292a;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      i {
+        color: #d32f2f;
+      }
+    }
+  }
+
+  .btn-export {
+    padding: 10px 20px;
+    background: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &:hover:not(:disabled) {
+      background: #b71c1c;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  .revenue-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border-color: #d32f2f;
+    }
+
+    .stat-icon {
+      font-size: 3rem;
+      color: #d32f2f;
+    }
+
+    .stat-content {
+      flex: 1;
+
+      h3 {
+        font-size: 0.9rem;
+        margin: 0 0 0.5rem 0;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+      }
+
+      .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0 0 0.25rem 0;
+        color: #d32f2f;
+      }
+
+      .stat-label {
+        font-size: 0.85rem;
+        margin: 0;
+        color: #999;
+      }
+    }
+
+    &.revenue-card {
+      border-left: 4px solid #d32f2f;
+    }
+  }
+
+  .chart-container {
+    margin-top: 2rem;
+
+    h3 {
+      font-size: 1.1rem;
+      color: #27292a;
+      margin-bottom: 1rem;
+    }
+
+    .revenue-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 1rem;
+      height: 300px;
+      padding: 1rem;
+      background: #f9f9f9;
+      border-radius: 4px;
+      overflow-x: auto;
+
+      .chart-bar {
+        flex: 1;
+        min-width: 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        position: relative;
+
+        .bar-fill {
+          width: 100%;
+          background: #d32f2f;
+          border-radius: 4px 4px 0 0;
+          position: relative;
+          transition: all 0.3s ease;
+          min-height: 20px;
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+          padding-top: 5px;
+
+          &:hover {
+            background: #b71c1c;
+          }
+
+          .bar-value {
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+          }
+        }
+
+        .bar-label {
+          margin-top: 0.5rem;
+          font-size: 0.75rem;
+          color: #666;
+          text-align: center;
+          writing-mode: horizontal-tb;
+          transform: rotate(-45deg);
+          transform-origin: center;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .revenue-chart {
+    .chart-bar {
+      min-width: 60px;
+
+      .bar-label {
+        font-size: 0.65rem;
+      }
+    }
+  }
+}

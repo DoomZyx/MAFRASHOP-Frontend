@@ -1,0 +1,585 @@
+@import "../../utils/mixins/queries/queries.scss";
+
+.shipping-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.shipping-container {
+  flex: 1;
+  background: #f5f5f5;
+}
+
+.shipping-hero {
+  background: linear-gradient(135deg, #27292a 0%, #3a3c3d 100%);
+  padding: 80px 20px;
+  text-align: center;
+  color: white;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .shipping-hero-line {
+    width: 100px;
+    height: 4px;
+    background: #d32f2f;
+    margin: 0 auto 20px;
+  }
+
+  .shipping-hero-subtitle {
+    font-size: 1.3rem;
+    color: #ddd;
+    margin: 0;
+  }
+}
+
+.shipping-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.shipping-intro {
+  text-align: center;
+  margin-bottom: 60px;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #27292a;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
+
+.shipping-options {
+  margin-bottom: 80px;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #27292a;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: #d32f2f;
+    }
+  }
+}
+
+.shipping-options-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.shipping-option-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  &.featured {
+    border: 3px solid #d32f2f;
+    transform: scale(1.05);
+
+    &:hover {
+      transform: scale(1.05) translateY(-5px);
+    }
+  }
+
+  .shipping-option-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+
+    i {
+      font-size: 2.5rem;
+      color: white;
+    }
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #27292a;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .shipping-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #d32f2f;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .shipping-delivery-time {
+    font-size: 1rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+
+    li {
+      font-size: 0.95rem;
+      color: #555;
+      padding: 8px 0;
+      padding-left: 25px;
+      position: relative;
+
+      &::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #2e7d32;
+        font-weight: 700;
+      }
+    }
+  }
+
+  .shipping-free-badge,
+  .shipping-eco-badge {
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    i {
+      font-size: 1.2rem;
+    }
+  }
+
+  .shipping-popular-badge {
+    background: #d32f2f;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+.shipping-zones {
+  margin-bottom: 80px;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #27292a;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: #d32f2f;
+    }
+  }
+}
+
+.shipping-zones-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.shipping-zone-card {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  i {
+    font-size: 3.5rem;
+    color: #d32f2f;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #27292a;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 10px;
+  }
+
+  .shipping-zone-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #d32f2f;
+    margin-top: 20px;
+  }
+}
+
+.shipping-process {
+  margin-bottom: 80px;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #27292a;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: #d32f2f;
+    }
+  }
+}
+
+.shipping-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.shipping-step {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  .shipping-step-number {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #27292a;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #666;
+    margin: 0;
+  }
+}
+
+.shipping-info {
+  margin-bottom: 80px;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #27292a;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: #d32f2f;
+    }
+  }
+}
+
+.shipping-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.shipping-info-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  i {
+    font-size: 2.5rem;
+    color: #d32f2f;
+    margin-bottom: 15px;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #27292a;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #666;
+    margin: 0;
+  }
+}
+
+.shipping-faq {
+  margin-bottom: 80px;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #27292a;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: #d32f2f;
+    }
+  }
+}
+
+.shipping-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.shipping-faq-item {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #27292a;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    i {
+      color: #d32f2f;
+      font-size: 1.4rem;
+    }
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #666;
+    margin: 0;
+  }
+}
+
+.shipping-cta {
+  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  padding: 60px;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto 30px;
+  }
+
+  .shipping-cta-button {
+    display: inline-block;
+    padding: 15px 40px;
+    background: white;
+    color: #d32f2f;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 767px) {
+  .shipping-hero {
+    padding: 60px 20px;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .shipping-hero-subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  .shipping-content {
+    padding: 40px 20px;
+  }
+
+  .shipping-options-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shipping-option-card.featured {
+    transform: scale(1);
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+
+  .shipping-zones-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shipping-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .shipping-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shipping-cta {
+    padding: 40px 30px;
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .shipping-options-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shipping-zones-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shipping-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .shipping-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

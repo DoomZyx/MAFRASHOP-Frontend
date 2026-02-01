@@ -309,6 +309,27 @@
   margin-top: 20px;
 }
 
+.cart-summary {
+  margin-bottom: 12px;
+
+  .cart-summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    font-size: 0.95rem;
+  }
+
+  .cart-summary-label {
+    color: #666;
+  }
+
+  .cart-summary-value {
+    font-weight: 600;
+    color: #27292a;
+  }
+}
+
 .cart-total {
   display: flex;
   justify-content: space-between;

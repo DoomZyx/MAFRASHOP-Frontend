@@ -1,0 +1,115 @@
+.sav-form-section {
+  margin-bottom: 80px;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #27292a;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 15px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: #d32f2f;
+    }
+  }
+
+  .sav-form-intro {
+    text-align: center;
+    font-size: 1.05rem;
+    color: #666;
+    margin-bottom: 40px;
+  }
+}
+
+.sav-form {
+  background: white;
+  padding: 50px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.sav-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.sav-form-group {
+  margin-bottom: 25px;
+
+  label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #27292a;
+    margin-bottom: 8px;
+
+    .required {
+      color: #d32f2f;
+    }
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #d32f2f;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+}
+
+.sav-form-submit {
+  width: 100%;
+  padding: 15px;
+  background: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #b71c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+  }
+}
+
+@media (max-width: 767px) {
+  .sav-form {
+    padding: 30px 20px;
+  }
+
+  .sav-form-row {
+    grid-template-columns: 1fr;
+  }
+}

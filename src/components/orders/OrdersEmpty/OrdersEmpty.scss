@@ -1,0 +1,22 @@
+.orders-empty {
+  text-align: center;
+  padding: 60px 20px;
+
+  .orders-empty-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 10px 0;
+  }
+
+  p {
+    color: #999;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}

@@ -12,9 +12,49 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Scroll smooth pour toute la page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Personnalisation de la barre de défilement */
+/* Pour les navigateurs Webkit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #86868600;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #e74c3c 0%, #c0392b 100%);
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #c0392b 0%, #a93226 100%);
+  border-color: #e9ecef;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #a93226 0%, #922b21 100%);
+}
+
+/* Pour Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #e74c3c #86868600;
+}
+
 a {
   text-decoration: inherit;
 }
+
 body {
   margin: 0;
   min-width: 320px;

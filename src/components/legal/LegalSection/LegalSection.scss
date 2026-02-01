@@ -1,0 +1,45 @@
+.legal-section {
+  margin-bottom: 2rem;
+
+  p {
+    line-height: 1.8;
+    color: #27292a;
+    margin-bottom: 1rem;
+  }
+
+  &.legal-intro {
+    font-size: 1.05rem;
+    padding: 1.5rem;
+    background: #f9f9f9;
+    border-left: 4px solid #d32f2f;
+    border-radius: 4px;
+  }
+
+  &.legal-footer-section {
+    text-align: center;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin-top: 3rem;
+
+    p {
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    .legal-contact-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: #d32f2f;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: #b71c1c;
+      }
+    }
+  }
+}

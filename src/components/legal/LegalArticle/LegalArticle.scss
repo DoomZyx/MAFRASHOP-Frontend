@@ -1,0 +1,29 @@
+.legal-article {
+  margin-bottom: 2.5rem;
+
+  h2 {
+    font-size: 1.5rem;
+    color: #d32f2f;
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+    border-bottom: 2px solid #d32f2f;
+    padding-bottom: 0.5rem;
+  }
+
+  p {
+    line-height: 1.8;
+    color: #27292a;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    margin: 1rem 0;
+    padding-left: 2rem;
+
+    li {
+      line-height: 1.8;
+      color: #27292a;
+      margin-bottom: 0.5rem;
+    }
+  }
+}

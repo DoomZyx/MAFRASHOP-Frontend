@@ -1,0 +1,206 @@
+.admin-admins-user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .admin-admins-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .admin-admins-avatar-placeholder {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 2rem;
+  }
+
+  .admin-admins-name {
+    font-weight: 600;
+    color: #27292a;
+  }
+
+  .admin-admins-phone {
+    font-size: 0.85rem;
+    color: #666;
+  }
+}
+
+.admin-admins-email {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .admin-admins-verified {
+    color: #2e7d32;
+    font-size: 1.1rem;
+  }
+}
+
+.admin-admins-auth-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  &.google {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+
+  &.local {
+    background: #e3f2fd;
+    color: #1565c0;
+  }
+}
+
+.admin-admins-pro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  &.validated {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+
+  &.pending {
+    background: #fff3e0;
+    color: #e65100;
+  }
+
+  &.rejected {
+    background: #ffebee;
+    color: #c62828;
+  }
+
+  &.none {
+    color: #999;
+  }
+}
+
+.admin-admins-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+
+  .admin-admins-admin-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: #e3f2fd;
+    color: #1565c0;
+  }
+
+  .admin-admins-demote-btn {
+    padding: 0.5rem 1rem;
+    background: #ffebee;
+    color: #c62828;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+
+    &:hover:not(:disabled) {
+      background: #ffcdd2;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  .admin-admins-pro-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .admin-admins-pro-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    &.validate {
+      background: #e8f5e9;
+      color: #2e7d32;
+
+      &:hover:not(:disabled) {
+        background: #c8e6c9;
+      }
+    }
+
+    &.reject {
+      background: #ffebee;
+      color: #c62828;
+
+      &:hover:not(:disabled) {
+        background: #ffcdd2;
+      }
+    }
+
+    &.retry {
+      background: #e3f2fd;
+      color: #1565c0;
+
+      &:hover:not(:disabled) {
+        background: #bbdefb;
+      }
+    }
+  }
+
+  .admin-admins-updating {
+    color: #d32f2f;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.admin-admins-company-row {
+  background: #f9f9f9;
+}

@@ -1,0 +1,151 @@
+.admin-users-user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .admin-users-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .admin-users-avatar-placeholder {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 2rem;
+  }
+
+  .admin-users-name {
+    font-weight: 600;
+    color: #27292a;
+  }
+
+  .admin-users-phone {
+    font-size: 0.85rem;
+    color: #666;
+  }
+}
+
+.admin-users-email {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .admin-users-verified {
+    color: #2e7d32;
+    font-size: 1.1rem;
+  }
+}
+
+.admin-users-auth-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  &.google {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+
+  &.local {
+    background: #e3f2fd;
+    color: #1565c0;
+  }
+}
+
+.admin-users-pro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  &.validated {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+
+  &.pending {
+    background: #fff3e0;
+    color: #e65100;
+  }
+
+  &.rejected {
+    background: #ffebee;
+    color: #c62828;
+  }
+
+  &.none {
+    color: #999;
+  }
+}
+
+.admin-users-actions {
+  .admin-users-pro-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .admin-users-pro-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    &.validate {
+      background: #e8f5e9;
+      color: #2e7d32;
+
+      &:hover:not(:disabled) {
+        background: #c8e6c9;
+      }
+    }
+
+    &.reject {
+      background: #ffebee;
+      color: #c62828;
+
+      &:hover:not(:disabled) {
+        background: #ffcdd2;
+      }
+    }
+
+    &.retry {
+      background: #e3f2fd;
+      color: #1565c0;
+
+      &:hover:not(:disabled) {
+        background: #bbdefb;
+      }
+    }
+  }
+}
+
+.admin-users-company-row {
+  background: #f9f9f9;
+}

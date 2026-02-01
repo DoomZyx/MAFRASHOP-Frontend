@@ -1,0 +1,28 @@
+.product-detail-content {
+  background-color: #373737;
+  max-width: 1000px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-info-section-wrapper {
+  flex: 1;
+}
+
+@media (min-width: 769px) {
+  .product-detail-content {
+    padding: 30px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .product-detail-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 40px;
+  }
+}

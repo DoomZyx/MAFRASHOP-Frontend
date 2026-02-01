@@ -1,0 +1,19 @@
+.orders-card {
+  border: 1px solid #878787;
+  border-radius: 8px;
+  background: #434343;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+}
+
+@media (min-width: 1025px) {
+  .orders-card {
+    padding: 25px;
+  }
+}

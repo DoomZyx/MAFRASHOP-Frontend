@@ -157,10 +157,12 @@ export function useCart() {
     [cart]
   );
 
-  const getCartTotal = useCallback(() => {
-    const isPro = user?.isPro || false;
-    const TVA_RATE = 1.2; // TVA 20% : TTC pour tous à la validation du panier
+  const TVA_RATE = 1.2;
+  const FREE_SHIPPING_THRESHOLD = 80;
+  const DELIVERY_FEE = 6.5;
 
+  const getCartSubtotal = useCallback(() => {
+    const isPro = user?.isPro || false;
     return cart.reduce((total, item) => {
       const priceHT = isPro
         ? (item.productId.garage || item.productId.public_ht || 0)
@@ -169,6 +171,15 @@ export function useCart() {
       return total + priceTTC * item.quantity;
     }, 0);
   }, [cart, user]);
+
+  const getDeliveryFee = useCallback(() => {
+    const subtotal = getCartSubtotal();
+    return subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : DELIVERY_FEE;
+  }, [getCartSubtotal]);
+
+  const getCartTotal = useCallback(() => {
+    return getCartSubtotal() + getDeliveryFee();
+  }, [getCartSubtotal, getDeliveryFee]);
 
   const getCartCount = useCallback(() => {
     return cart.reduce((total, item) => total + item.quantity, 0);
@@ -184,6 +195,8 @@ export function useCart() {
     clearCart,
     isInCart,
     getCartItemQuantity,
+    getCartSubtotal,
+    getDeliveryFee,
     getCartTotal,
     getCartCount,
     refreshCart: loadCart,

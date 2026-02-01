@@ -1,0 +1,45 @@
+.orders-filters {
+  margin-bottom: 2rem;
+
+  .filter-buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 0.75rem 1.25rem;
+    border: 2px solid #e0e0e0;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: #d32f2f;
+      color: #d32f2f;
+    }
+
+    &.active {
+      background: #d32f2f;
+      color: white;
+      border-color: #d32f2f;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .orders-filters {
+    .filter-buttons {
+      justify-content: space-between;
+    }
+
+    .filter-btn {
+      flex: 1;
+      min-width: 0;
+      padding: 0.75rem 0.5rem;
+      font-size: 0.875rem;
+    }
+  }
+}

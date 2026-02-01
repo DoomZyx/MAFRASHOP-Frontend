@@ -1,0 +1,57 @@
+.products-search {
+  margin-bottom: 1.5rem;
+
+  .search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    i.bi-search {
+      position: absolute;
+      left: 1rem;
+      color: #999;
+      font-size: 1.1rem;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.875rem 3rem 0.875rem 3rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: #d32f2f;
+      }
+
+      &::placeholder {
+        color: #999;
+      }
+    }
+
+    .search-clear-btn {
+      position: absolute;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: #999;
+      cursor: pointer;
+      padding: 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #d32f2f;
+      }
+
+      i {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}

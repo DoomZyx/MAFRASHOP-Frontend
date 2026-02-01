@@ -78,12 +78,6 @@ function Nav() {
                 <li>
                 <Link to="/orders">MES COMMANDES</Link>
                 </li>
-                <li>
-                  <Link to="/contact">NOUS CONTACTER</Link>
-                </li>
-                <li>
-                  <Link to="/expertise">FAQ</Link>
-                </li>
               </ul>
             </div>
           </div>
@@ -141,14 +135,6 @@ function Nav() {
                 <>
                   <button className="nav-btn-connect" onClick={openAuthModal}>
                     SE CONNECTER
-                  </button>
-                  <button
-                    className="nav-btn-pro"
-                    onClick={() => setIsProModalOpen(true)}
-                    title="Devenir professionnel"
-                  >
-                    <i className="bi bi-briefcase"></i>
-                    DEVENIR PRO
                   </button>
                 </>
               )}

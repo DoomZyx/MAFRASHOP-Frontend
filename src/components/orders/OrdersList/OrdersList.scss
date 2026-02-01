@@ -1,0 +1,11 @@
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (min-width: 1025px) {
+  .orders-list {
+    gap: 25px;
+  }
+}
