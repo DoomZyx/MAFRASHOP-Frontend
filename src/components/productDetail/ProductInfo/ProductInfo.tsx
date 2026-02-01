@@ -12,12 +12,17 @@ interface Product {
 
 interface ProductInfoProps {
   product: Product;
+  isOutOfStock?: boolean;
 }
 
-const ProductInfo = ({ product }: ProductInfoProps) => {
+const ProductInfo = ({ product, isOutOfStock = false }: ProductInfoProps) => {
   return (
     <div className="product-info-section">
       <h1>{product.nom}</h1>
+
+      {isOutOfStock && (
+        <p className="product-stock-unavailable">Indisponible</p>
+      )}
 
       {product.format && (
         <div className="product-format">

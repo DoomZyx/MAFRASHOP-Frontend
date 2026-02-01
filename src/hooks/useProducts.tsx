@@ -10,9 +10,9 @@ export const useProducts = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (silent = false) => {
     try {
-      setLoading(true);
+      if (!silent) setLoading(true);
       const data = await getAllProducts();
       setProducts(data);
       setError(null);
@@ -28,6 +28,23 @@ export const useProducts = () => {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    const handleProductsUpdated = () => {
+      fetchProducts(true);
+    };
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        fetchProducts(true);
+      }
+    };
+    window.addEventListener("productsUpdated", handleProductsUpdated);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      window.removeEventListener("productsUpdated", handleProductsUpdated);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
   return { products, loading, error, refreshProducts: fetchProducts };
 };
 
@@ -39,24 +56,37 @@ export const useProduct = (id: string) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        setLoading(true);
-        const data = await getProductById(id);
-        setProduct(data);
-        setError(null);
-      } catch (err) {
-        setError("Erreur lors du chargement du produit");
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (id) {
-      fetchProduct();
+  const fetchProduct = async (silent = false) => {
+    if (!id) return;
+    try {
+      if (!silent) setLoading(true);
+      const data = await getProductById(id);
+      setProduct(data);
+      setError(null);
+    } catch (err) {
+      setError("Erreur lors du chargement du produit");
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  useEffect(() => {
+    if (id) fetchProduct();
+  }, [id]);
+
+  useEffect(() => {
+    if (!id) return;
+    const handleProductsUpdated = () => fetchProduct(true);
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") fetchProduct(true);
+    };
+    window.addEventListener("productsUpdated", handleProductsUpdated);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      window.removeEventListener("productsUpdated", handleProductsUpdated);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, [id]);
 
   return { product, loading, error };

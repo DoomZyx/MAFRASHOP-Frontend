@@ -90,5 +90,33 @@ export const adminOrdersAPI = {
 
     return response.json();
   },
+
+  /**
+   * Télécharger toutes les factures des commandes payées pour un mois/année (ZIP).
+   * Retourne { success, message, data?: { count: 0 } } si aucune facture.
+   */
+  downloadInvoicesZip: async (
+    month: number,
+    year: number
+  ): Promise<Blob | { success: true; message: string; data: { count: number } }> => {
+    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+
+    const params = new URLSearchParams({ month: String(month), year: String(year) });
+    const response = await fetch(`${API_BASE_URL}/api/admin/invoices/export?${params}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.message || "Erreur lors de l'export des factures");
+    }
+
+    const contentType = response.headers.get("Content-Type") || "";
+    if (contentType.includes("application/json")) {
+      return response.json();
+    }
+
+    return response.blob();
+  },
 };
 

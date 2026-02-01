@@ -23,6 +23,12 @@ function AdminOrders() {
     calculateHT,
     getStatusBadgeClass,
     getStatusLabel,
+    exportMonth,
+    setExportMonth,
+    exportYear,
+    setExportYear,
+    downloadingZip,
+    downloadInvoicesZip,
   } = useAdminOrders();
 
   if (loading) {
@@ -48,6 +54,47 @@ function AdminOrders() {
         onFilterChange={setStatusFilter}
         statusCounts={statusCounts}
       />
+
+      <div className="orders-invoice-export">
+        <h2 className="orders-invoice-export-title">Factures par mois / année</h2>
+        <div className="orders-invoice-export-controls">
+          <label>
+            Mois
+            <select
+              value={exportMonth}
+              onChange={(e) => setExportMonth(Number(e.target.value))}
+              disabled={downloadingZip}
+            >
+              {[
+                "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+                "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre",
+              ].map((label, i) => (
+                <option key={i} value={i + 1}>{label}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Année
+            <select
+              value={exportYear}
+              onChange={(e) => setExportYear(Number(e.target.value))}
+              disabled={downloadingZip}
+            >
+              {Array.from({ length: 11 }, (_, i) => new Date().getFullYear() - 5 + i).map((y) => (
+                <option key={y} value={y}>{y}</option>
+              ))}
+            </select>
+          </label>
+          <button
+            type="button"
+            className="orders-invoice-export-btn"
+            onClick={downloadInvoicesZip}
+            disabled={downloadingZip}
+          >
+            {downloadingZip ? "Téléchargement..." : "Télécharger les factures du mois"}
+          </button>
+        </div>
+      </div>
 
       <div className="orders-list">
         {orders.length === 0 ? (

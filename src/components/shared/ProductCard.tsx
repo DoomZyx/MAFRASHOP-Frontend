@@ -22,8 +22,16 @@ function ProductCard({
   isInCart,
   isAuthenticated = false,
 }: ProductCardProps) {
+  const isOutOfStock =
+    product.stock === "out_of_stock" || (product.stockQuantity ?? 0) <= 0;
+
   return (
-    <div className="product-card">
+    <div
+      className={`product-card ${isOutOfStock ? "product-card-unavailable" : ""}`}
+    >
+      {isOutOfStock && (
+        <span className="product-stock-badge">Indisponible</span>
+      )}
       <Link to={`/product/${product.id}`} className="product-card-link">
         {product.url_image && (
           <img src={product.url_image} alt={product.nom} />
@@ -64,14 +72,19 @@ function ProductCard({
             <button
               className={`product-action-btn cart-btn ${
                 isInCart?.(product.id) ? "active" : ""
-              }`}
+              } ${isOutOfStock ? "disabled" : ""}`}
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                onAddToCart(product.id);
+                if (!isOutOfStock) onAddToCart(product.id);
               }}
+              disabled={isOutOfStock}
               title={
-                isInCart?.(product.id) ? "Déjà dans le panier" : "Ajouter au panier"
+                isOutOfStock
+                  ? "Indisponible"
+                  : isInCart?.(product.id)
+                    ? "Déjà dans le panier"
+                    : "Ajouter au panier"
               }
             >
               <i

@@ -2,12 +2,17 @@ import { useState, useEffect } from "react";
 import { adminOrdersAPI } from "../API/admin/orders";
 import { Order } from "../API/orders/api";
 
+const now = new Date();
+
 export const useAdminOrders = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [updatingStatus, setUpdatingStatus] = useState<string | null>(null);
+  const [exportMonth, setExportMonth] = useState<number>(now.getMonth() + 1);
+  const [exportYear, setExportYear] = useState<number>(now.getFullYear());
+  const [downloadingZip, setDownloadingZip] = useState(false);
 
   useEffect(() => {
     loadOrders();
@@ -105,6 +110,27 @@ export const useAdminOrders = () => {
     return labels[status] || status;
   };
 
+  const downloadInvoicesZip = async () => {
+    setDownloadingZip(true);
+    try {
+      const result = await adminOrdersAPI.downloadInvoicesZip(exportMonth, exportYear);
+      if (result instanceof Blob) {
+        const url = URL.createObjectURL(result);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `factures-${exportYear}-${String(exportMonth).padStart(2, "0")}.zip`;
+        a.click();
+        URL.revokeObjectURL(url);
+      } else if (result.success && result.data?.count === 0) {
+        alert("Aucune facture pour cette période.");
+      }
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : "Erreur lors du téléchargement des factures");
+    } finally {
+      setDownloadingZip(false);
+    }
+  };
+
   const statusCounts = {
     all: orders.length,
     pending: orders.filter((o) => o.status === "pending").length,
@@ -132,5 +158,11 @@ export const useAdminOrders = () => {
     calculateHT,
     getStatusBadgeClass,
     getStatusLabel,
+    exportMonth,
+    setExportMonth,
+    exportYear,
+    setExportYear,
+    downloadingZip,
+    downloadInvoicesZip,
   };
 };

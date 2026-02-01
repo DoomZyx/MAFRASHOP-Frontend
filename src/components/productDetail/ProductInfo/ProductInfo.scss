@@ -6,6 +6,19 @@
     margin: 0 0 15px 0;
   }
 
+  .product-stock-unavailable {
+    display: inline-block;
+    background: #c62828;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
   .product-format {
     font-size: 0.95rem;
     color: #f1f1f1;

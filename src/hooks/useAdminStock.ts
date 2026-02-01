@@ -64,6 +64,9 @@ export const useAdminStock = () => {
       setShowStockModal(false);
       setStockForm({ quantity: "", movementType: "adjustment", reason: "" });
       setSelectedProduct(null);
+      window.dispatchEvent(
+        new CustomEvent("productsUpdated", { detail: { type: "stock" } })
+      );
     } catch (error: any) {
       alert(error.message || "Erreur lors de la mise à jour du stock");
     } finally {

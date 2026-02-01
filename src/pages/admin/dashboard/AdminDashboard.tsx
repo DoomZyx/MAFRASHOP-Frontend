@@ -31,7 +31,7 @@ function AdminDashboard() {
       link: "/admin/products",
     },
     {
-      title: "Commandes",
+      title: "Commandes (mois en cours)",
       value: stats.totalOrders,
       icon: "bi-cart-check",
       color: "#10b981",
@@ -84,7 +84,7 @@ function AdminDashboard() {
           link="/admin/products"
         />
         <StatCard
-          title="Commandes"
+          title="Commandes (mois en cours)"
           value={stats.totalOrders}
           icon="bi-cart-check"
           color="#10b981"

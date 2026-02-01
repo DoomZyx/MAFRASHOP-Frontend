@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getAllProducts } from "../API/products/api";
+import { adminStatsAPI } from "../API/admin/stats";
 import { Product } from "../types/product";
 
 interface DashboardStats {
@@ -26,13 +27,18 @@ export const useAdminDashboard = () => {
 
   const fetchStats = async () => {
     try {
-      const products: Product[] = await getAllProducts();
+      const [products, dashboardRes] = await Promise.all([
+        getAllProducts(),
+        adminStatsAPI.getDashboardStats(),
+      ]);
+      const productsList: Product[] = products;
+      const { ordersThisMonth, pendingDeliveries } = dashboardRes.data;
       setStats({
-        totalProducts: products.length,
-        bestsellers: products.filter((p) => p.is_bestseller).length,
-        promotions: products.filter((p) => p.is_promotion).length,
-        totalOrders: 0, // TODO: Implémenter quand les commandes seront disponibles
-        pendingDeliveries: 0, // TODO: Implémenter quand les livraisons seront disponibles
+        totalProducts: productsList.length,
+        bestsellers: productsList.filter((p) => p.is_bestseller).length,
+        promotions: productsList.filter((p) => p.is_promotion).length,
+        totalOrders: ordersThisMonth,
+        pendingDeliveries,
       });
     } catch (error) {
       console.error("Erreur lors du chargement des statistiques:", error);

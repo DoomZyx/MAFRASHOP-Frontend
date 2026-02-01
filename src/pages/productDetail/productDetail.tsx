@@ -39,6 +39,9 @@ function ProductDetail() {
     );
   }
 
+  const isOutOfStock =
+    product.stock === "out_of_stock" || (product.stockQuantity ?? 0) <= 0;
+
   return (
     <>
       <Nav />
@@ -49,6 +52,7 @@ function ProductDetail() {
           isAuthenticated={isAuthenticated}
           isFavorite={isFavorite(product.id)}
           isInCart={isInCart(product.id)}
+          isOutOfStock={isOutOfStock}
           onToggleFavorite={() => toggleFavorite(product.id)}
           onAddToCart={() => addToCart(product.id)}
         />

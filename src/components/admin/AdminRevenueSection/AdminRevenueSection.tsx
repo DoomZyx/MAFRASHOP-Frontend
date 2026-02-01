@@ -59,7 +59,7 @@ const AdminRevenueSection = ({
             <i className="bi bi-currency-euro"></i>
           </div>
           <div className="stat-content">
-            <h3>Total</h3>
+            <h3>Total HT</h3>
             <p className="stat-value">{formatCurrency(revenue.total)}</p>
             <p className="stat-label">{revenue.totalOrders} commandes</p>
           </div>
@@ -70,7 +70,7 @@ const AdminRevenueSection = ({
             <i className="bi bi-cart"></i>
           </div>
           <div className="stat-content">
-            <h3>Panier moyen</h3>
+            <h3>Panier moyen HT</h3>
             <p className="stat-value">{formatCurrency(revenue.avgOrderValue)}</p>
             <p className="stat-label">Par commande</p>
           </div>
@@ -79,7 +79,7 @@ const AdminRevenueSection = ({
 
       {revenueByPeriod.length > 0 && (
         <div className="chart-container">
-          <h3>Évolution du chiffre d'affaires (12 derniers mois)</h3>
+          <h3>Évolution du chiffre d'affaires HT (12 derniers mois)</h3>
           <div className="revenue-chart">
             {revenueByPeriod.map((item, index) => {
               const height = maxRevenue > 0 ? (item.revenue / maxRevenue) * 100 : 0;

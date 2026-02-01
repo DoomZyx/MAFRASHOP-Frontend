@@ -18,6 +18,7 @@ interface ProductDetailContentProps {
   isAuthenticated: boolean;
   isFavorite: boolean;
   isInCart: boolean;
+  isOutOfStock?: boolean;
   onToggleFavorite: () => void;
   onAddToCart: () => void;
 }
@@ -27,6 +28,7 @@ const ProductDetailContent = ({
   isAuthenticated,
   isFavorite,
   isInCart,
+  isOutOfStock = false,
   onToggleFavorite,
   onAddToCart,
 }: ProductDetailContentProps) => {
@@ -35,13 +37,14 @@ const ProductDetailContent = ({
       <ProductImage imageUrl={product.url_image} productName={product.nom} />
 
       <div className="product-info-section-wrapper">
-        <ProductInfo product={product} />
+        <ProductInfo product={product} isOutOfStock={isOutOfStock} />
 
         {isAuthenticated && (
           <ProductActions
             productId={product.id}
             isFavorite={isFavorite}
             isInCart={isInCart}
+            isOutOfStock={isOutOfStock}
             onToggleFavorite={onToggleFavorite}
             onAddToCart={onAddToCart}
           />

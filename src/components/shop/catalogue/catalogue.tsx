@@ -83,6 +83,9 @@ function Catalogue() {
     });
   }, [products, filters]);
 
+  const isOutOfStock = (product: { stock?: string; stockQuantity?: number }) =>
+    product.stock === "out_of_stock" || (product.stockQuantity ?? 0) <= 0;
+
   if (loading) {
     return (
       <div className="loader-container">
@@ -119,8 +122,16 @@ function Catalogue() {
       />
       <div className="catalogue-content">
         {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-          <div key={product.id} className="product-card">
+          filteredProducts.map((product) => {
+          const unavailable = isOutOfStock(product);
+          return (
+          <div
+            key={product.id}
+            className={`product-card ${unavailable ? "product-card-unavailable" : ""}`}
+          >
+            {unavailable && (
+              <span className="product-stock-badge">Indisponible</span>
+            )}
             <Link to={`/product/${product.id}`} className="product-card-link">
               {product.url_image && (
                 <img src={product.url_image} alt={product.nom} />
@@ -160,16 +171,19 @@ function Catalogue() {
                 <button
                   className={`product-action-btn cart-btn ${
                     isInCart(product.id) ? "active" : ""
-                  }`}
+                  } ${unavailable ? "disabled" : ""}`}
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    addToCart(product.id);
+                    if (!unavailable) addToCart(product.id);
                   }}
+                  disabled={unavailable}
                   title={
-                    isInCart(product.id)
-                      ? "Déjà dans le panier"
-                      : "Ajouter au panier"
+                    unavailable
+                      ? "Indisponible"
+                      : isInCart(product.id)
+                        ? "Déjà dans le panier"
+                        : "Ajouter au panier"
                   }
                 >
                   <i
@@ -181,7 +195,8 @@ function Catalogue() {
               </div>
             )}
           </div>
-        ))
+          );
+        })
         ) : (
           <div className="no-products-message">
             <p>Aucun produit ne correspond aux filtres sélectionnés.</p>
