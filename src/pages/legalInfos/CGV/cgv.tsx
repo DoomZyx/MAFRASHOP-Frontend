@@ -147,8 +147,7 @@ function CGV() {
 
                     <LegalArticle title="Article 9 - Livraison">
                         <p>
-                            MAFRA SHOP livre exclusivement dans un rayon de 50 kilomètres autour de 
-                            Talange (Lorraine, France).
+                            Les livraisons sont effectuées partout en France et les pays voisins.
                         </p>
                         <p>
                             La livraison est effectuée en main propre par un employé de MAFRA SHOP à 

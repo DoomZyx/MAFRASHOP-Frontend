@@ -1,0 +1,79 @@
+# Repo FRONTEND uniquement. develop -> préprod, main -> prod
+
+name: Deploy Frontend
+
+on:
+  push:
+    branches: [develop, main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Set env for preprod
+        if: github.ref == 'refs/heads/develop'
+        run: |
+          echo "VITE_API_URL=${{ secrets.PREPROD_VITE_API_URL }}" >> .env.build
+          echo "VITE_SUPABASE_URL=${{ secrets.PREPROD_VITE_SUPABASE_URL }}" >> .env.build
+          echo "VITE_SUPABASE_ANON_KEY=${{ secrets.PREPROD_VITE_SUPABASE_ANON_KEY }}" >> .env.build
+
+      - name: Set env for prod
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "VITE_API_URL=${{ secrets.PROD_VITE_API_URL }}" >> .env.build
+          echo "VITE_SUPABASE_URL=${{ secrets.PROD_VITE_SUPABASE_URL }}" >> .env.build
+          echo "VITE_SUPABASE_ANON_KEY=${{ secrets.PROD_VITE_SUPABASE_ANON_KEY }}" >> .env.build
+
+      - name: Build preprod
+        if: github.ref == 'refs/heads/develop'
+        run: |
+          mv .env.build .env.preprod 2>/dev/null || true
+          pnpm run build -- --mode preprod
+
+      - name: Build prod
+        if: github.ref == 'refs/heads/main'
+        run: |
+          mv .env.build .env.production 2>/dev/null || true
+          pnpm run build -- --mode production
+
+      - name: Deploy to preprod
+        if: github.ref == 'refs/heads/develop'
+        uses: easingthemes/ssh-deploy@v4
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          TARGET: /var/www/preprod/frontend
+          SOURCE: dist/
+          EXCLUDE: ""
+
+      - name: Deploy to prod
+        if: github.ref == 'refs/heads/main'
+        uses: easingthemes/ssh-deploy@v4
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          TARGET: /var/www/prod/frontend
+          SOURCE: dist/
+          EXCLUDE: ""

@@ -17,7 +17,7 @@ function About() {
             <div className="about-section-text">
               <h2>MAFRA SHOP</h2>
               <p>
-                MAFRA SHOP est un revendeur de produits d'entretien automobile de la 
+                MAFRA SHOP est un concessionnaire officiel français de la distribution de produits d'entretien automobile de la 
                 marque MA-FRA, fondée en 1965 en Italie.
               </p>
               <p>
@@ -41,7 +41,7 @@ function About() {
                 <div className="about-value-card">
                   <i className="bi bi-geo-alt"></i>
                   <h3>Zone de livraison</h3>
-                  <p>50km autour de Talange</p>
+                  <p>Partout en France</p>
                 </div>
                 <div className="about-value-card">
                   <i className="bi bi-truck"></i>

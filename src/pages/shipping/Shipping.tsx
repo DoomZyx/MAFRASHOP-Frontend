@@ -11,7 +11,7 @@ function Shipping() {
           <h1>Livraison</h1>
           <div className="shipping-hero-line"></div>
           <p className="shipping-hero-subtitle">
-            Livraison en main propre dans un rayon de 50km autour de Talange
+            Livraison en main propre partout en France
           </p>
         </div>
 
@@ -19,8 +19,8 @@ function Shipping() {
           <section className="shipping-intro">
             <h2>Zone de Livraison</h2>
             <p>
-              Nous livrons vos commandes en main propre dans un rayon de 50km autour de 
-              Talange (Lorraine). Délai de livraison : 72h.
+              Nous livrons vos commandes en main propre partout en France.
+              Délai de livraison : 72h.
             </p>
           </section>
 
@@ -35,9 +35,7 @@ function Shipping() {
                 <div className="shipping-price">6,50 €</div>
                 <p className="shipping-delivery-time">Délai : 72h</p>
                 <ul>
-                  <li>Livraison par notre livreur</li>
-                  <li>Zone : 50km autour de Talange</li>
-                  <li>Date de livraison communiquée</li>
+                  <li>Livraison par notre livreur</li>                  <li>Date de livraison communiquée</li>
                   <li>Remise en main propre</li>
                 </ul>
                 <div className="shipping-free-badge">
@@ -53,9 +51,8 @@ function Shipping() {
             <div className="shipping-zones-flex">
               <div className="shipping-zone-card">
                 <i className="bi bi-geo-alt-fill"></i>
-                <h3>Talange et Environs</h3>
                 <p>Livraison en main propre : 72h</p>
-                <p>Rayon de 50km autour de Talange (Lorraine)</p>
+                <p>Dans toute la France</p>
                 <div className="shipping-zone-price">6,50 € (gratuit dès 80€)</div>
               </div>
             </div>
@@ -110,7 +107,7 @@ function Shipping() {
                 <i className="bi bi-geo-alt"></i>
                 <h3>Zone</h3>
                 <p>
-                  Livraison uniquement dans un rayon de 50km autour de Talange (Lorraine).
+                  Livraison dans toute la France.
                 </p>
               </div>
 
@@ -142,7 +139,7 @@ function Shipping() {
                   Quelle est votre zone de livraison ?
                 </h3>
                 <p>
-                  Nous livrons dans un rayon de 50km autour de Talange en Lorraine.
+                  Nous livrons dans toute la France et les pays voisins.
                 </p>
               </div>
 
