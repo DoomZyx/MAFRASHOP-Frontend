@@ -97,10 +97,44 @@
   cursor: pointer;
   transition: all 0.3s ease;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background: #b71c1c;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+  }
+
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.sav-form-status {
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+
+  i {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  &--success {
+    background: #d1fae5;
+    color: #065f46;
+    border: 2px solid #059669;
+  }
+
+  &--error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 2px solid #dc2626;
   }
 }
 

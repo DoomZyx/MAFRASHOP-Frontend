@@ -115,9 +115,6 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
                         >
                           {product.nom}
                         </Link>
-                        {product.ref && (
-                          <p className="cart-item-ref">Ref: {product.ref}</p>
-                        )}
 
                         <div className="cart-item-price">
                           <ProductPrice product={product} />

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import "./ProStatusNotification.scss";
 
@@ -7,10 +7,19 @@ const STORAGE_KEY_PREFIX = "pro_status_seen_";
 function ProStatusNotification() {
   const { user, isAuthenticated } = useAuth();
   const [dismissed, setDismissed] = useState(false);
+  const previousStatusRef = useRef<string | null>(null);
 
   const storageKey = user?.id ? `${STORAGE_KEY_PREFIX}${user.id}` : null;
   const lastSeen = storageKey ? localStorage.getItem(storageKey) : null;
   const currentStatus = user?.proStatus;
+
+  // Réinitialiser dismissed uniquement si le statut a changé
+  useEffect(() => {
+    if (currentStatus && previousStatusRef.current !== currentStatus) {
+      previousStatusRef.current = currentStatus;
+      setDismissed(false);
+    }
+  }, [currentStatus]);
 
   const shouldShow =
     isAuthenticated &&
@@ -18,12 +27,6 @@ function ProStatusNotification() {
     (currentStatus === "verified" || currentStatus === "rejected") &&
     lastSeen !== currentStatus &&
     !dismissed;
-
-  useEffect(() => {
-    if (!shouldShow && storageKey && currentStatus) {
-      setDismissed(false);
-    }
-  }, [shouldShow, storageKey, currentStatus]);
 
   const handleDismiss = () => {
     if (storageKey && currentStatus) {

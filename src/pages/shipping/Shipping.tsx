@@ -32,15 +32,16 @@ function Shipping() {
                   <i className="bi bi-person-walking"></i>
                 </div>
                 <h3>Livraison en Main Propre</h3>
-                <div className="shipping-price">6,50 €</div>
+                <div className="shipping-price">7,50 €</div>
                 <p className="shipping-delivery-time">Délai : 72h</p>
                 <ul>
-                  <li>Livraison par notre livreur</li>                  <li>Date de livraison communiquée</li>
+                  <li>Livraison par notre livreur</li>                  
+                  <li>Date de livraison communiquée</li>
                   <li>Remise en main propre</li>
                 </ul>
                 <div className="shipping-free-badge">
                   <i className="bi bi-gift-fill"></i>
-                  Gratuite dès 80€ d'achat
+                  Gratuite dès 120€ d'achat
                 </div>
               </div>
             </div>
@@ -52,8 +53,8 @@ function Shipping() {
               <div className="shipping-zone-card">
                 <i className="bi bi-geo-alt-fill"></i>
                 <p>Livraison en main propre : 72h</p>
-                <p>Dans toute la France</p>
-                <div className="shipping-zone-price">6,50 € (gratuit dès 80€)</div>
+                <p>Dans un rayon de 20km autout de notre dépôt</p>
+                <div className="shipping-zone-price">7,50 € (gratuit dès 120€)</div>
               </div>
             </div>
           </section>
@@ -107,7 +108,7 @@ function Shipping() {
                 <i className="bi bi-geo-alt"></i>
                 <h3>Zone</h3>
                 <p>
-                  Livraison dans toute la France.
+                  Livraison dans un rayon de 20km autour de Mondelange.
                 </p>
               </div>
 
@@ -139,7 +140,7 @@ function Shipping() {
                   Quelle est votre zone de livraison ?
                 </h3>
                 <p>
-                  Nous livrons dans toute la France et les pays voisins.
+                  Nous livrons dans un rayon de 20km autout de notre dépôt.
                 </p>
               </div>
 
@@ -160,8 +161,8 @@ function Shipping() {
                   Quand la livraison est-elle gratuite ?
                 </h3>
                 <p>
-                  Les frais de livraison de 6,50€ sont offerts pour toute commande d'un 
-                  montant égal ou supérieur à 80€.
+                  Les frais de livraison de 7,50€ sont offerts pour toute commande d'un 
+                  montant égal ou supérieur à 120€.
                 </p>
               </div>
 

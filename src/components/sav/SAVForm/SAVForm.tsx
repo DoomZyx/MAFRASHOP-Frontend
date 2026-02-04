@@ -11,15 +11,36 @@ interface SAVFormProps {
   onChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => void;
+  isSubmitting?: boolean;
+  submitStatus?: {
+    type: "success" | "error" | null;
+    message: string;
+  };
 }
 
-const SAVForm = ({ formData, onSubmit, onChange }: SAVFormProps) => {
+const SAVForm = ({ formData, onSubmit, onChange, isSubmitting = false, submitStatus }: SAVFormProps) => {
   return (
     <section className="sav-form-section" id="formulaire">
       <h2>Formulaire de Contact</h2>
       <p className="sav-form-intro">
         Remplissez ce formulaire pour nous contacter. Nous vous répondrons sous 48h ouvrées.
       </p>
+      
+      {submitStatus?.type && (
+        <div
+          className={`sav-form-status ${
+            submitStatus.type === "success" ? "sav-form-status--success" : "sav-form-status--error"
+          }`}
+        >
+          <i
+            className={`bi ${
+              submitStatus.type === "success" ? "bi-check-circle-fill" : "bi-exclamation-triangle-fill"
+            }`}
+          ></i>
+          <span>{submitStatus.message}</span>
+        </div>
+      )}
+
       <form className="sav-form" onSubmit={onSubmit}>
         <div className="sav-form-row">
           <div className="sav-form-group">
@@ -90,8 +111,8 @@ const SAVForm = ({ formData, onSubmit, onChange }: SAVFormProps) => {
           ></textarea>
         </div>
 
-        <button type="submit" className="sav-form-submit">
-          Envoyer ma demande
+        <button type="submit" className="sav-form-submit" disabled={isSubmitting}>
+          {isSubmitting ? "Envoi en cours..." : "Envoyer ma demande"}
         </button>
       </form>
     </section>

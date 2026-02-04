@@ -5,7 +5,7 @@ import Footer from "../../components/footer/footer";
 import SAVForm from "../../components/sav/SAVForm/SAVForm";
 
 function SAV() {
-  const { formData, handleChange, handleSubmit } = useSAVForm();
+  const { formData, handleChange, handleSubmit, isSubmitting, submitStatus } = useSAVForm();
 
   return (
     <div className="sav-page">
@@ -97,14 +97,14 @@ function SAV() {
                 <i className="bi bi-clock"></i>
                 <h3>Horaires</h3>
                 <p>Du lundi au vendredi</p>
-                <p style="font-weight: 600; margin-top: 10px;">9h - 18h</p>
+                <p>9h - 18h</p>
               </div>
 
               <div className="sav-contact-card">
                 <i className="bi bi-envelope-fill"></i>
                 <h3>Par Email</h3>
                 <p>Contactez-nous par email</p>
-                <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
+                <p>
                   Adresse email à venir
                 </p>
               </div>
@@ -124,6 +124,8 @@ function SAV() {
             formData={formData}
             onSubmit={handleSubmit}
             onChange={handleChange}
+            isSubmitting={isSubmitting}
+            submitStatus={submitStatus}
           />
 
           <section className="sav-faq">

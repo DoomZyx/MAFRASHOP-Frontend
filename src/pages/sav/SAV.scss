@@ -173,6 +173,10 @@
       height: 3px;
       background: #d32f2f;
     }
+    p {
+      font-weight: 600; 
+      margin-top: 10px;
+    }
   }
 }
 
@@ -209,6 +213,7 @@
   }
 
   p {
+    margin-top: 10px;
     font-size: 0.95rem;
     color: #666;
     margin-bottom: 20px;

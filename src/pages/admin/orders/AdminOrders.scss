@@ -4,6 +4,18 @@
   margin: 0 auto;
   min-height: 100vh;
   background: #f5f5f5;
+
+  @media (max-width: 1024px) {
+    padding: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+  }
 }
 
 .admin-orders-header {
@@ -606,28 +618,149 @@
   color: #666;
 }
 
+@media (max-width: 1024px) {
+  .admin-orders-header {
+    h1 {
+      font-size: 1.75rem;
+    }
+  }
+
+  .orders-invoice-export {
+    padding: 1.25rem;
+
+    .orders-invoice-export-controls {
+      flex-direction: column;
+      align-items: stretch;
+
+      label {
+        width: 100%;
+      }
+
+      .orders-invoice-export-btn {
+        width: 100%;
+      }
+    }
+  }
+
+  .orders-filters {
+    padding: 1.25rem;
+
+    .filter-buttons {
+      .filter-btn {
+        flex: 1;
+        min-width: 120px;
+      }
+    }
+  }
+}
+
 @media (max-width: 768px) {
-  .admin-orders-container {
+  .admin-orders-header {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .orders-invoice-export {
     padding: 1rem;
+    margin-bottom: 1.5rem;
+
+    .orders-invoice-export-title {
+      font-size: 1rem;
+    }
+  }
+
+  .orders-filters {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+
+    .filter-buttons {
+      .filter-btn {
+        font-size: 0.85rem;
+        padding: 8px 16px;
+      }
+    }
   }
 
   .order-card {
+    padding: 1.25rem;
+
     .order-card-header {
       flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+
+      .order-info {
+        min-width: auto;
+        width: 100%;
+
+        h3 {
+          font-size: 1.1rem;
+        }
+      }
+
+      .order-status-section {
+        align-items: flex-start;
+        width: 100%;
+
+        .order-amount {
+          font-size: 1.1rem;
+        }
+      }
     }
 
     .order-actions {
       flex-direction: column;
       align-items: stretch;
+      gap: 0.75rem;
+
+      .btn-view-details {
+        width: 100%;
+        justify-content: center;
+      }
 
       .status-selector {
         flex-direction: column;
         align-items: stretch;
+        gap: 0.5rem;
+
+        label {
+          font-size: 0.85rem;
+        }
+
+        .status-select {
+          width: 100%;
+        }
       }
     }
   }
 
   .order-modal {
     max-height: 95vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-orders-header {
+    h1 {
+      font-size: 1.25rem;
+    }
+  }
+
+  .order-card {
+    padding: 1rem;
+
+    .order-card-header {
+      .order-info {
+        h3 {
+          font-size: 1rem;
+        }
+
+        .order-date,
+        .order-customer {
+          font-size: 0.85rem;
+        }
+      }
+    }
   }
 }

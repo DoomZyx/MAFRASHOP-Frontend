@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useAdminAuth } from "../../hooks/useAdminAuth";
 import "./AdminLayout.scss";
@@ -6,6 +7,12 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 function AdminLayout() {
   const { adminUser, logout } = useAdminAuth();
   const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Fermer le menu lors du changement de route
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   const menuItems = [
     {
@@ -50,13 +57,42 @@ function AdminLayout() {
     },
   ];
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <div className="admin-layout">
-      <aside className="admin-sidebar">
+      {/* Overlay pour fermer le menu sur mobile */}
+      {isMenuOpen && (
+        <div className="admin-sidebar-overlay" onClick={closeMenu}></div>
+      )}
+
+      {/* Bouton burger pour mobile/tablette */}
+      <button
+        className="admin-menu-burger"
+        onClick={toggleMenu}
+        aria-label="Ouvrir le menu"
+      >
+        <i className={`bi ${isMenuOpen ? "bi-x-lg" : "bi-list"}`}></i>
+      </button>
+
+      <aside className={`admin-sidebar ${isMenuOpen ? "admin-sidebar--open" : ""}`}>
         <div className="admin-sidebar-header">
           <h2>
             <i className="bi bi-shield-lock"></i> Admin
           </h2>
+          <button
+            className="admin-sidebar-close"
+            onClick={closeMenu}
+            aria-label="Fermer le menu"
+          >
+            <i className="bi bi-x-lg"></i>
+          </button>
         </div>
 
         <nav className="admin-nav">

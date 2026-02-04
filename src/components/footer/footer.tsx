@@ -88,7 +88,7 @@ function Footer() {
 
         <div className="footer-bottom">
           <p className="footer-copyright">
-            © 2025 MAFRA SHOP - Tous droits réservés
+            © 2026 MAFRA SHOP - Tous droits réservés
           </p>
         </div>
       </div>

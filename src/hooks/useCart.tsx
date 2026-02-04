@@ -159,7 +159,7 @@ export function useCart() {
 
   const TVA_RATE = 1.2;
   const FREE_SHIPPING_THRESHOLD = 80;
-  const DELIVERY_FEE = 6.5;
+  const DELIVERY_FEE = 7.5;
 
   const getCartSubtotal = useCallback(() => {
     const isPro = user?.isPro || false;

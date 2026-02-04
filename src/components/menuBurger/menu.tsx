@@ -73,28 +73,70 @@ function MenuBurger({ isModalOpen, toggleModal }: MenuBurgerProps) {
                 <></>
               )}
             </div>
-            <ul className="links-burger">
-              <li>
-                <Link to="/" onClick={toggleModal}>
-                  ACCUEIL
-                </Link>
-              </li>
-              <li>
-                <Link to="/shop" onClick={toggleModal}>
-                  CATALOGUE
-                </Link>
-              </li>
-              <li>
-                <Link to="/profile" onClick={toggleModal}>
-                  MON COMPTE
-                </Link>
-              </li>
-              <li>
-                <Link to="/orders" onClick={toggleModal}>
-                  MES COMMANDES
-                </Link>
-              </li>
-            </ul>
+            <div className="menu-nav-section">
+              <h3 className="menu-section-title">Navigation</h3>
+              <ul className="links-burger">
+                <li>
+                  <Link to="/" onClick={toggleModal} className="menu-link">
+                    <i className="bi bi-house-door"></i>
+                    <span>Accueil</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/shop" onClick={toggleModal} className="menu-link">
+                    <i className="bi bi-grid"></i>
+                    <span>Catalogue</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/profile" onClick={toggleModal} className="menu-link">
+                    <i className="bi bi-person"></i>
+                    <span>Mon compte</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/orders" onClick={toggleModal} className="menu-link">
+                    <i className="bi bi-bag"></i>
+                    <span>Mes commandes</span>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {isAuthenticated && (
+              <div className="menu-quick-actions">
+                <h3 className="menu-section-title">Actions rapides</h3>
+                <div className="quick-actions-grid">
+                  <button
+                    className="quick-action-btn"
+                    onClick={() => {
+                      setIsCartModalOpen(true);
+                      toggleModal();
+                    }}
+                  >
+                    <div className="quick-action-icon cart-icon">
+                      <i className="bi bi-cart"></i>
+                      {getCartCount() > 0 && (
+                        <span className="quick-action-badge">{getCartCount()}</span>
+                      )}
+                    </div>
+                    <span>Panier</span>
+                  </button>
+                  <button
+                    className="quick-action-btn"
+                    onClick={() => {
+                      setIsFavoritesModalOpen(true);
+                      toggleModal();
+                    }}
+                  >
+                    <div className="quick-action-icon favorites-icon">
+                      <i className="bi bi-heart"></i>
+                    </div>
+                    <span>Favoris</span>
+                  </button>
+                </div>
+              </div>
+            )}
             {isAuthenticated ? (
               <>
                 <div className="nav-btn-layout">
@@ -135,6 +177,14 @@ function MenuBurger({ isModalOpen, toggleModal }: MenuBurgerProps) {
       <ProRequestModal
         isOpen={isProModalOpen}
         onClose={() => setIsProModalOpen(false)}
+      />
+      <CartModal
+        isOpen={isCartModalOpen}
+        onClose={() => setIsCartModalOpen(false)}
+      />
+      <FavoritesModal
+        isOpen={isFavoritesModalOpen}
+        onClose={() => setIsFavoritesModalOpen(false)}
       />
     </nav>
   );

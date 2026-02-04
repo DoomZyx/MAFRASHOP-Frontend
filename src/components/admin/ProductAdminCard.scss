@@ -301,17 +301,132 @@
 }
 
 // Responsive
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .product-admin-card {
     grid-template-columns: 80px 1fr;
     gap: 1rem;
+    padding: 1.25rem;
+
+    .product-image {
+      width: 80px;
+      height: 80px;
+    }
 
     .product-actions {
       grid-column: 1 / -1;
       flex-direction: row;
-      justify-content: space-around;
+      flex-wrap: wrap;
+      justify-content: flex-start;
       padding-top: 1rem;
       border-top: 1px solid #e0e0e0;
+      min-width: auto;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .product-admin-card {
+    grid-template-columns: 70px 1fr;
+    gap: 0.875rem;
+    padding: 1rem;
+
+    .product-image {
+      width: 70px;
+      height: 70px;
+    }
+
+    .product-info {
+      h3 {
+        font-size: 1rem;
+      }
+
+      .product-ref,
+      .product-category {
+        font-size: 0.8rem;
+      }
+
+      .product-prices {
+        .price-normal {
+          font-size: 1rem;
+        }
+
+        .price-discounted {
+          font-size: 1.1rem;
+        }
+      }
+    }
+
+    .product-actions {
+      .toggle-switch {
+        .toggle-label {
+          font-size: 0.85rem;
+        }
+      }
+
+      .promotion-control {
+        .promotion-percentage-input {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .product-admin-card {
+    grid-template-columns: 60px 1fr;
+    gap: 0.75rem;
+    padding: 0.875rem;
+
+    .product-image {
+      width: 60px;
+      height: 60px;
+
+      .no-image i {
+        font-size: 1.5rem;
+      }
+    }
+
+    .product-info {
+      h3 {
+        font-size: 0.95rem;
+      }
+
+      .product-prices {
+        margin-top: 0.5rem;
+
+        .price-normal {
+          font-size: 0.95rem;
+        }
+
+        .price-discounted {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .product-actions {
+      gap: 0.75rem;
+
+      .toggle-switch {
+        input[type="checkbox"] {
+          width: 20px;
+          height: 20px;
+        }
+
+        .toggle-label {
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+    .product-admin-actions {
+      flex-direction: column;
+      gap: 0.5rem;
+
+      button {
+        width: 100%;
+      }
     }
   }
 }

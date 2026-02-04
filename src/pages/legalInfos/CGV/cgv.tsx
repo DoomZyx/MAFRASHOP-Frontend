@@ -77,11 +77,11 @@ function CGV() {
 
                     <LegalArticle title="Article 4 - Frais de Livraison">
                         <p>
-                            Les frais de livraison s'élèvent à 6,50 € par commande.
+                            Les frais de livraison s'élèvent à 7,50 € par commande.
                         </p>
                         <p>
                             Les frais de livraison sont offerts pour toute commande d'un montant égal 
-                            ou supérieur à 80 € (hors TVA pour les professionnels, TTC pour les particuliers).
+                            ou supérieur à 120 € (hors TVA pour les professionnels, TTC pour les particuliers).
                         </p>
                     </LegalArticle>
 

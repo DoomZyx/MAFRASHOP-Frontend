@@ -28,19 +28,19 @@ function Mentions() {
                     <LegalArticle title="1. Éditeur du Site">
                         <div className="mentions-info-box">
                             <p>
-                                <strong>Raison sociale :</strong> MAFRA SHOP
+                                <strong>Raison sociale :</strong> MAFRASHOP
                             </p>
                             <p>
                                 <strong>Forme juridique :</strong> [À compléter]
                             </p>
                             <p>
-                                <strong>Siège social :</strong> [À compléter]
+                                <strong>Siège social :</strong> 20 rue des ponts, 57300 Mondelange
                             </p>
                             <p>
                                 <strong>SIRET :</strong> [À compléter]
                             </p>
                             <p>
-                                <strong>Email :</strong> [À compléter]
+                                <strong>Email :</strong> contact@mafrashop.com
                             </p>
                             <p>
                                 <strong>Téléphone :</strong> [À compléter]
@@ -50,20 +50,20 @@ function Mentions() {
 
                     <LegalArticle title="2. Directeur de la Publication">
                         <p>
-                            Le directeur de la publication du site est : [À compléter]
+                            Le directeur de la publication du site est : Laigaisse Alain
                         </p>
                     </LegalArticle>
 
                     <LegalArticle title="3. Hébergement du Site">
                         <div className="mentions-info-box">
                             <p>
-                                <strong>Hébergeur :</strong> [À compléter]
+                                <strong>Hébergeur :</strong> OVH
                             </p>
                             <p>
-                                <strong>Adresse :</strong> [À compléter]
+                                <strong>Adresse :</strong> 2 RUE KELLERMANN 59100 ROUBAIX
                             </p>
                             <p>
-                                <strong>Téléphone :</strong> [À compléter]
+                                <strong>Téléphone :</strong> 09 72 10 10 07
                             </p>
                         </div>
                     </LegalArticle>
@@ -213,7 +213,7 @@ function Mentions() {
 
                     <LegalArticle title="12. Crédits">
                         <p>
-                            <strong>Conception et développement :</strong> [À compléter]
+                            <strong>Conception et développement :</strong> Cella Axel
                         </p>
                         <p>
                             <strong>Crédits photographiques :</strong> Les images de produits sont fournies 

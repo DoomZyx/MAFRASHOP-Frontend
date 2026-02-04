@@ -31,5 +31,39 @@
     font-size: 0.9rem;
     margin: 0;
   }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+
+    i {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+    }
+
+    p {
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.25rem;
+
+    i {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 0.8rem;
+    }
+  }
 }
 
