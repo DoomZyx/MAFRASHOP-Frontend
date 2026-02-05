@@ -84,3 +84,48 @@ export const getPromotions = async (): Promise<Product[]> => {
     throw error;
   }
 };
+
+/**
+ * Récupère toutes les catégories distinctes depuis l'API
+ * @returns Promise<string[]> - Liste des catégories uniques
+ */
+export const getCategories = async (): Promise<string[]> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/products/categories/all`);
+
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP: ${response.status}`);
+    }
+
+    const data: string[] = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des catégories:", error);
+    throw error;
+  }
+};
+
+/**
+ * Récupère toutes les sous-catégories distinctes depuis l'API
+ * @param category - Catégorie optionnelle pour filtrer les sous-catégories
+ * @returns Promise<string[]> - Liste des sous-catégories uniques
+ */
+export const getSubcategories = async (category?: string): Promise<string[]> => {
+  try {
+    const url = category
+      ? `${API_BASE_URL}/products/subcategories/all?category=${encodeURIComponent(category)}`
+      : `${API_BASE_URL}/products/subcategories/all`;
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP: ${response.status}`);
+    }
+
+    const data: string[] = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des sous-catégories:", error);
+    throw error;
+  }
+};

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Product } from "../../types/product";
 import { adminProductsAPI, uploadImage } from "../../API/admin/api";
+import { getCategories, getSubcategories } from "../../API/products/api";
 import "./ProductForm.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -37,6 +38,43 @@ function ProductForm({ product, onClose, onSuccess }: ProductFormProps) {
   const [uploadingImage, setUploadingImage] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [subcategories, setSubcategories] = useState<string[]>([]);
+  const [loadingCategories, setLoadingCategories] = useState(false);
+
+  useEffect(() => {
+    const loadCategories = async () => {
+      setLoadingCategories(true);
+      try {
+        const categoriesList = await getCategories();
+        setCategories(categoriesList);
+      } catch (err) {
+        console.error("Erreur lors du chargement des catégories:", err);
+      } finally {
+        setLoadingCategories(false);
+      }
+    };
+
+    loadCategories();
+  }, []);
+
+  useEffect(() => {
+    const loadSubcategories = async () => {
+      if (formData.category) {
+        try {
+          const subcategoriesList = await getSubcategories(formData.category);
+          setSubcategories(subcategoriesList);
+        } catch (err) {
+          console.error("Erreur lors du chargement des sous-catégories:", err);
+          setSubcategories([]);
+        }
+      } else {
+        setSubcategories([]);
+      }
+    };
+
+    loadSubcategories();
+  }, [formData.category]);
 
   useEffect(() => {
     if (product) {
@@ -70,15 +108,24 @@ function ProductForm({ product, onClose, onSuccess }: ProductFormProps) {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
 
-    setFormData((prev) => ({
-      ...prev,
-      [name]:
-        type === "checkbox"
-          ? checked
-          : type === "number"
-          ? value
-          : value,
-    }));
+    setFormData((prev) => {
+      const newData = {
+        ...prev,
+        [name]:
+          type === "checkbox"
+            ? checked
+            : type === "number"
+            ? value
+            : value,
+      };
+
+      // Si la catégorie change, réinitialiser la sous-catégorie
+      if (name === "category") {
+        newData.subcategory = "";
+      }
+
+      return newData;
+    });
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -263,24 +310,42 @@ function ProductForm({ product, onClose, onSuccess }: ProductFormProps) {
           <div className="form-row">
             <div className="form-group">
               <label>Catégorie</label>
-              <input
-                type="text"
+              <select
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                placeholder="Catégorie"
-              />
+                disabled={loadingCategories}
+              >
+                <option value="">Sélectionner une catégorie</option>
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+              {loadingCategories && (
+                <span className="loading-hint">Chargement des catégories...</span>
+              )}
             </div>
 
             <div className="form-group">
               <label>Sous-catégorie</label>
-              <input
-                type="text"
+              <select
                 name="subcategory"
                 value={formData.subcategory}
                 onChange={handleChange}
-                placeholder="Sous-catégorie"
-              />
+                disabled={!formData.category}
+              >
+                <option value="">Sélectionner une sous-catégorie</option>
+                {subcategories.map((subcat) => (
+                  <option key={subcat} value={subcat}>
+                    {subcat}
+                  </option>
+                ))}
+              </select>
+              {!formData.category && (
+                <span className="form-hint">Sélectionnez d'abord une catégorie</span>
+              )}
             </div>
           </div>
 

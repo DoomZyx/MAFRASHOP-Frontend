@@ -79,7 +79,7 @@ export const uploadImage = async (file: File): Promise<{
   const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
 
   const formData = new FormData();
-  formData.append("file", file);
+  formData.append("image", file);
 
   const response = await fetch(`${API_BASE_URL}/api/admin/upload/image`, {
     method: "POST",
