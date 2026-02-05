@@ -39,8 +39,10 @@ export function useAuthProvider(): AuthContextType {
     if (!response.success || !response.data) {
       throw new Error(response.message || "Erreur lors de la connexion");
     }
-    localStorage.setItem("authToken", response.data.token);
-    setToken(response.data.token);
+    // Nouveau format : accessToken + refreshToken
+    localStorage.setItem("authToken", response.data.accessToken);
+    localStorage.setItem("refreshToken", response.data.refreshToken);
+    setToken(response.data.accessToken);
     setUser(response.data.user);
   }, []);
 
@@ -55,8 +57,10 @@ export function useAuthProvider(): AuthContextType {
       if (!response.success || !response.data) {
         throw new Error(response.message || "Erreur lors de l'inscription");
       }
-      localStorage.setItem("authToken", response.data.token);
-      setToken(response.data.token);
+      // Nouveau format : accessToken + refreshToken
+      localStorage.setItem("authToken", response.data.accessToken);
+      localStorage.setItem("refreshToken", response.data.refreshToken);
+      setToken(response.data.accessToken);
       setUser(response.data.user);
     },
     []
@@ -67,8 +71,10 @@ export function useAuthProvider(): AuthContextType {
     if (!response.success || !response.data) {
       throw new Error(response.message || "Erreur lors de la connexion Google");
     }
-    localStorage.setItem("authToken", response.data.token);
-    setToken(response.data.token);
+    // Nouveau format : accessToken + refreshToken
+    localStorage.setItem("authToken", response.data.accessToken);
+    localStorage.setItem("refreshToken", response.data.refreshToken);
+    setToken(response.data.accessToken);
     setUser(response.data.user);
   }, []);
 
@@ -78,6 +84,7 @@ export function useAuthProvider(): AuthContextType {
     } catch (error) {
     } finally {
       localStorage.removeItem("authToken");
+      localStorage.removeItem("refreshToken");
       setToken(null);
       setUser(null);
     }

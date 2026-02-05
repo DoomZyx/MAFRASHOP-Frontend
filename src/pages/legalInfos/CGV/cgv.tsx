@@ -4,10 +4,18 @@ import Footer from "../../../components/footer/footer";
 import LegalPageHeader from "../../../components/legal/LegalPageHeader/LegalPageHeader";
 import LegalSection from "../../../components/legal/LegalSection/LegalSection";
 import LegalArticle from "../../../components/legal/LegalArticle/LegalArticle";
+import SEO from "../../../components/shared/SEO";
 
 function CGV() {
     return (
         <div className="cgv-page">
+            <SEO
+                title="Conditions Générales de Vente - CGV"
+                description="Consultez les conditions générales de vente de MAFRA SHOP. Informations sur les commandes, paiements, livraisons, retours et garanties."
+                keywords="CGV, conditions générales de vente, conditions de vente, politique de vente, termes et conditions"
+                url="/terms"
+                noindex={true}
+            />
             <Nav />
             <div className="cgv-container">
                 <LegalPageHeader 

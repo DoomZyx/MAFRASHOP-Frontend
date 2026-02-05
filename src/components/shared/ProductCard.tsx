@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Product } from "../../types/product";
 import ProductPrice from "./ProductPrice";
+import { getImageUrl } from "../../utils/imageUtils";
 import "./ProductCard.scss";
 
 interface ProductCardProps {
@@ -33,9 +34,12 @@ function ProductCard({
         <span className="product-stock-badge">Indisponible</span>
       )}
       <Link to={`/product/${product.id}`} className="product-card-link">
-        {product.url_image && (
-          <img src={product.url_image} alt={product.nom} />
-        )}
+        {(() => {
+          const imageUrl = getImageUrl(product.url_image);
+          return imageUrl ? (
+            <img src={imageUrl} alt={product.nom} />
+          ) : null;
+        })()}
         {product.category && (
           <p className="product-category">{product.category}</p>
         )}

@@ -1,10 +1,17 @@
 import "./Expertise.scss";
 import Nav from "../../components/nav/nav";
 import Footer from "../../components/footer/footer";
+import SEO from "../../components/shared/SEO";
 
 function Expertise() {
   return (
     <div className="expertise-page">
+      <SEO
+        title="Nos Produits - Gamme MA-FRA"
+        description="Découvrez plus de 100 produits d'entretien automobile MA-FRA : lavage, polissage, protection et accessoires. Gamme professionnelle disponible."
+        keywords="produits MA-FRA, gamme automobile, lavage auto, polissage, protection carrosserie, accessoires, gamme pro"
+        url="/expertise"
+      />
       <Nav />
       <div className="expertise-container">
         <div className="expertise-hero">

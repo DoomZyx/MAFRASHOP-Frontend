@@ -3,12 +3,19 @@ import "./SAV.scss";
 import Nav from "../../components/nav/nav";
 import Footer from "../../components/footer/footer";
 import SAVForm from "../../components/sav/SAVForm/SAVForm";
+import SEO from "../../components/shared/SEO";
 
 function SAV() {
   const { formData, handleChange, handleSubmit, isSubmitting, submitStatus } = useSAVForm();
 
   return (
     <div className="sav-page">
+      <SEO
+        title="Service Client - Contact et Support"
+        description="Contactez notre service client du lundi au vendredi de 9h à 18h pour toute question sur nos produits, vos commandes, la livraison ou les retours."
+        keywords="service client, contact, support, SAV, assistance, questions produits, suivi commande"
+        url="/sav"
+      />
       <Nav />
       <div className="sav-container">
         <div className="sav-hero">

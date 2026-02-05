@@ -4,10 +4,18 @@ import Footer from "../../../components/footer/footer";
 import LegalPageHeader from "../../../components/legal/LegalPageHeader/LegalPageHeader";
 import LegalSection from "../../../components/legal/LegalSection/LegalSection";
 import LegalArticle from "../../../components/legal/LegalArticle/LegalArticle";
+import SEO from "../../../components/shared/SEO";
 
 function Privacy() {
     return (
         <div className="privacy-page">
+            <SEO
+                title="Politique de Confidentialité - Protection des Données"
+                description="Découvrez comment MAFRA SHOP collecte, utilise et protège vos données personnelles conformément au RGPD et à la loi Informatique et Libertés."
+                keywords="politique de confidentialité, protection des données, RGPD, données personnelles, vie privée"
+                url="/privacy"
+                noindex={true}
+            />
             <Nav />
             <div className="privacy-container">
                 <LegalPageHeader 

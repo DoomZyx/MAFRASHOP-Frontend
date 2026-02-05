@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useSearch } from "../../../hooks/useSearch";
 import { Product } from "../../../types/product";
 import ProductPrice from "../../shared/ProductPrice";
+import { getImageUrl } from "../../../utils/imageUtils";
 import "./searchProducts.scss";
 
 interface SearchProductsProps {
@@ -53,9 +54,12 @@ function SearchProducts({ products }: SearchProductsProps) {
                         className="search-result-item"
                         onClick={closeSearch}
                       >
-                        {product.url_image && (
-                          <img src={product.url_image} alt={product.nom} />
-                        )}
+                        {(() => {
+                          const imageUrl = getImageUrl(product.url_image);
+                          return imageUrl ? (
+                            <img src={imageUrl} alt={product.nom} />
+                          ) : null;
+                        })()}
                         <div className="search-result-info">
                           <h4>{product.nom}</h4>
                           <p className="search-result-ref">

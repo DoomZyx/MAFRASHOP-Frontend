@@ -1,10 +1,17 @@
 import "./Returns.scss";
 import Nav from "../../components/nav/nav";
 import Footer from "../../components/footer/footer";
+import SEO from "../../components/shared/SEO";
 
 function Returns() {
   return (
     <div className="returns-page">
+      <SEO
+        title="Retours & Remboursements - Politique de Retour"
+        description="Droit de rétractation de 14 jours. Retour gratuit pour produits défectueux. Produits à retourner dans leur emballage d'origine scellé."
+        keywords="retour, remboursement, rétractation, politique retour, échange, garantie"
+        url="/returns"
+      />
       <Nav />
       <div className="returns-container">
         <div className="returns-hero">

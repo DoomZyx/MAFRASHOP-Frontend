@@ -64,10 +64,12 @@ export const useAdminAuth = () => {
         setAdminUser(user);
       } else {
         localStorage.removeItem("adminToken");
+      localStorage.removeItem("adminRefreshToken");
       }
     } catch (error) {
       console.error("Erreur vérification admin:", error);
       localStorage.removeItem("adminToken");
+      localStorage.removeItem("adminRefreshToken");
     } finally {
       setLoading(false);
     }
@@ -89,8 +91,10 @@ export const useAdminAuth = () => {
       }
 
       const data = await response.json();
-      if (data.success && data.token) {
-        localStorage.setItem("adminToken", data.token);
+      if (data.success && data.accessToken) {
+        // Nouveau format : accessToken + refreshToken
+        localStorage.setItem("adminToken", data.accessToken);
+        localStorage.setItem("adminRefreshToken", data.refreshToken);
         setAdminUser(data.user);
         return data;
       } else {
@@ -105,10 +109,12 @@ export const useAdminAuth = () => {
   const loginWithGoogle = async (code: string) => {
     try {
       const response = await authAPI.adminGoogleCallback(code);
-      if (!response.success || !response.token) {
+      if (!response.success || !response.accessToken) {
         throw new Error(response.message || "Erreur lors de la connexion Google");
       }
-      localStorage.setItem("adminToken", response.token);
+      // Nouveau format : accessToken + refreshToken
+      localStorage.setItem("adminToken", response.accessToken);
+      localStorage.setItem("adminRefreshToken", response.refreshToken || "");
       if (response.user) {
         setAdminUser(response.user);
       }
@@ -121,6 +127,7 @@ export const useAdminAuth = () => {
 
   const logout = () => {
     localStorage.removeItem("adminToken");
+    localStorage.removeItem("adminRefreshToken");
     setAdminUser(null);
     // Si l'utilisateur était connecté via Google/local, ne pas le déconnecter complètement
     // Juste rediriger vers la page admin login

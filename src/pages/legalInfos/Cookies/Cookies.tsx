@@ -5,6 +5,7 @@ import Footer from "../../../components/footer/footer";
 import LegalPageHeader from "../../../components/legal/LegalPageHeader/LegalPageHeader";
 import LegalSection from "../../../components/legal/LegalSection/LegalSection";
 import LegalArticle from "../../../components/legal/LegalArticle/LegalArticle";
+import SEO from "../../../components/shared/SEO";
 
 function CookiesPage() {
     const {
@@ -18,6 +19,13 @@ function CookiesPage() {
 
     return (
         <div className="cookies-page">
+            <SEO
+                title="Gestion des Cookies - Politique des Cookies"
+                description="Gérez vos préférences en matière de cookies sur MAFRA SHOP. Découvrez les types de cookies utilisés et comment les gérer."
+                keywords="cookies, politique des cookies, gestion des cookies, traceurs, consentement cookies"
+                url="/cookies"
+                noindex={true}
+            />
             <Nav />
             <div className="cookies-container">
                 <LegalPageHeader 

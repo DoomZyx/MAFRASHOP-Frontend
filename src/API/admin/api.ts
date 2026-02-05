@@ -69,6 +69,35 @@ export const triggerProductsUpdate = (type: "bestseller" | "promotion", productI
 };
 
 /**
+ * Upload d'image (admin seulement)
+ */
+export const uploadImage = async (file: File): Promise<{
+  success: boolean;
+  message: string;
+  data: { url: string };
+}> => {
+  const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await fetch(`${API_BASE_URL}/api/admin/upload/image`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || "Erreur lors de l'upload de l'image");
+  }
+
+  return response.json();
+};
+
+/**
  * CRUD Produits (admin seulement)
  */
 export const adminProductsAPI = {

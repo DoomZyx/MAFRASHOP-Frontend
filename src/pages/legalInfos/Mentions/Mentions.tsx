@@ -4,10 +4,18 @@ import Footer from "../../../components/footer/footer";
 import LegalPageHeader from "../../../components/legal/LegalPageHeader/LegalPageHeader";
 import LegalSection from "../../../components/legal/LegalSection/LegalSection";
 import LegalArticle from "../../../components/legal/LegalArticle/LegalArticle";
+import SEO from "../../../components/shared/SEO";
 
 function Mentions() {
     return (
         <div className="mentions-page">
+            <SEO
+                title="Mentions Légales - Informations Légales"
+                description="Consultez les mentions légales de MAFRA SHOP : éditeur, hébergeur, propriété intellectuelle et conditions d'utilisation du site."
+                keywords="mentions légales, informations légales, éditeur, hébergeur, propriété intellectuelle"
+                url="/mentions"
+                noindex={true}
+            />
             <Nav />
             <div className="mentions-container">
                 <LegalPageHeader 

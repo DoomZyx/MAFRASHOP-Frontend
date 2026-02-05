@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useFavorites } from "../../hooks/useFavorites";
 import { useCart } from "../../hooks/useCart";
 import ProductPrice from "../shared/ProductPrice";
+import { getImageUrl } from "../../utils/imageUtils";
 import "./favoritesModal.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -54,13 +55,16 @@ function FavoritesModal({ isOpen, onClose }: FavoritesModalProps) {
                       onClick={onClose}
                       className="favorites-item-image"
                     >
-                      {product.url_image ? (
-                        <img src={product.url_image} alt={product.nom} />
-                      ) : (
-                        <div className="favorites-item-placeholder">
-                          <i className="bi bi-image"></i>
-                        </div>
-                      )}
+                      {(() => {
+                        const imageUrl = getImageUrl(product.url_image);
+                        return imageUrl ? (
+                          <img src={imageUrl} alt={product.nom} />
+                        ) : (
+                          <div className="favorites-item-placeholder">
+                            <i className="bi bi-image"></i>
+                          </div>
+                        );
+                      })()}
                     </Link>
 
                     <div className="favorites-item-info">

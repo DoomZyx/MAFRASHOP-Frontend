@@ -1,10 +1,17 @@
 import "./About.scss";
 import Nav from "../../components/nav/nav";
 import Footer from "../../components/footer/footer";
+import SEO from "../../components/shared/SEO";
 
 function About() {
   return (
     <div className="about-page">
+      <SEO
+        title="À propos - Qui sommes-nous ?"
+        description="MAFRA SHOP est un concessionnaire officiel français de la distribution de produits d'entretien automobile de la marque MA-FRA, fondée en 1965 en Italie."
+        keywords="à propos, MAFRA SHOP, concessionnaire MA-FRA, produits entretien auto, histoire, valeurs"
+        url="/about"
+      />
       <Nav />
       <div className="about-container">
         <div className="about-hero">

@@ -1,10 +1,17 @@
 import "./Shipping.scss";
 import Nav from "../../components/nav/nav";
 import Footer from "../../components/footer/footer";
+import SEO from "../../components/shared/SEO";
 
 function Shipping() {
   return (
     <div className="shipping-page">
+      <SEO
+        title="Livraison - Informations et Tarifs"
+        description="Livraison en main propre partout en France sous 72h. Frais de livraison : 7,50€ (gratuit dès 120€ d'achat). Zone de livraison : 20km autour de notre dépôt."
+        keywords="livraison, frais de port, délai livraison, zone livraison, transport, expédition"
+        url="/shipping"
+      />
       <Nav />
       <div className="shipping-container">
         <div className="shipping-hero">

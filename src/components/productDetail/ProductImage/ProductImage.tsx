@@ -1,4 +1,5 @@
 import "./ProductImage.scss";
+import { getImageUrl } from "../../../utils/imageUtils";
 
 interface ProductImageProps {
   imageUrl?: string;
@@ -6,10 +7,12 @@ interface ProductImageProps {
 }
 
 const ProductImage = ({ imageUrl, productName }: ProductImageProps) => {
+  const normalizedUrl = getImageUrl(imageUrl);
+  
   return (
     <div className="product-image-section">
-      {imageUrl ? (
-        <img src={imageUrl} alt={productName} />
+      {normalizedUrl ? (
+        <img src={normalizedUrl} alt={productName} />
       ) : (
         <div className="product-image-placeholder">
           <i className="bi bi-image"></i>

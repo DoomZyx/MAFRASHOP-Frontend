@@ -8,6 +8,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import Filters from "../filters/filters";
 import FiltersModal from "../filters/filtersModal";
 import ProductPrice from "../../shared/ProductPrice";
+import { getImageUrl } from "../../../utils/imageUtils";
 import "./catalogue.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Loader from "../../loader/loader";
@@ -133,9 +134,12 @@ function Catalogue() {
               <span className="product-stock-badge">Indisponible</span>
             )}
             <Link to={`/product/${product.id}`} className="product-card-link">
-              {product.url_image && (
-                <img src={product.url_image} alt={product.nom} />
-              )}
+              {(() => {
+                const imageUrl = getImageUrl(product.url_image);
+                return imageUrl ? (
+                  <img src={imageUrl} alt={product.nom} />
+                ) : null;
+              })()}
               {product.category && (
                 <p className="product-category">{product.category}</p>
               )}

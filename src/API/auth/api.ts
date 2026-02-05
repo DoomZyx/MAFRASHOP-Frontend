@@ -42,7 +42,9 @@ export interface AuthResponse {
   message: string;
   data?: {
     user: User;
-    token: string;
+    accessToken: string;
+    refreshToken: string;
+    expiresIn: number;
   };
 }
 
@@ -119,6 +121,29 @@ export const authAPI = {
     const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
       method: "POST",
       headers: getAuthHeaders(),
+    });
+    return response.json();
+  },
+
+  refreshToken: async (): Promise<{
+    success: boolean;
+    message: string;
+    data?: {
+      accessToken: string;
+      refreshToken: string;
+      expiresIn: number;
+    };
+  }> => {
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (!refreshToken) {
+      throw new Error("Refresh token non disponible");
+    }
+    const response = await fetch(`${API_BASE_URL}/api/auth/refresh`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ refreshToken }),
     });
     return response.json();
   },
@@ -203,7 +228,9 @@ export const authAPI = {
   adminGoogleCallback: async (code: string): Promise<{
     success: boolean;
     message: string;
-    token?: string;
+    accessToken?: string;
+    refreshToken?: string;
+    expiresIn?: number;
     user?: { id: string; email: string; isAdmin: boolean };
   }> => {
     const response = await fetch(`${API_BASE_URL}/api/auth/admin/google/callback`, {

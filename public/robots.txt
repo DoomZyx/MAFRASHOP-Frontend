@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Pages admin et privées
+Disallow: /admin/
+Disallow: /profile
+Disallow: /orders
+Disallow: /checkout/
+
+# Sitemap
+Sitemap: https://www.mafrashop.fr/sitemap.xml
+

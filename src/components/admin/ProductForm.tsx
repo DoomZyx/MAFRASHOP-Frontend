@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Product } from "../../types/product";
-import { adminProductsAPI } from "../../API/admin/api";
+import { adminProductsAPI, uploadImage } from "../../API/admin/api";
 import "./ProductForm.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -34,6 +34,9 @@ function ProductForm({ product, onClose, onSuccess }: ProductFormProps) {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (product) {
@@ -55,6 +58,9 @@ function ProductForm({ product, onClose, onSuccess }: ProductFormProps) {
         is_promotion: product.is_promotion || false,
         promotion_percentage: product.promotion_percentage?.toString() || "",
       });
+      if (product.url_image) {
+        setImagePreview(product.url_image);
+      }
     }
   }, [product]);
 
@@ -73,6 +79,59 @@ function ProductForm({ product, onClose, onSuccess }: ProductFormProps) {
           ? value
           : value,
     }));
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Vérifier le type de fichier
+    const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+    if (!allowedTypes.includes(file.type)) {
+      setError("Type de fichier non autorisé. Formats acceptés: JPEG, PNG, WebP");
+      return;
+    }
+
+    // Vérifier la taille (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      setError("Le fichier est trop volumineux. Taille maximale: 5MB");
+      return;
+    }
+
+    setUploadingImage(true);
+    setError(null);
+
+    try {
+      // Aperçu local
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+
+      // Upload vers Supabase
+      const result = await uploadImage(file);
+      setFormData((prev) => ({
+        ...prev,
+        url_image: result.data.url,
+      }));
+    } catch (err: any) {
+      setError(err.message || "Erreur lors de l'upload de l'image");
+      setImagePreview(null);
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setFormData((prev) => ({
+      ...prev,
+      url_image: "",
+    }));
+    setImagePreview(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -226,14 +285,61 @@ function ProductForm({ product, onClose, onSuccess }: ProductFormProps) {
           </div>
 
           <div className="form-group">
-            <label>URL de l'image</label>
-            <input
-              type="url"
-              name="url_image"
-              value={formData.url_image}
-              onChange={handleChange}
-              placeholder="https://example.com/image.jpg"
-            />
+            <label>Image du produit</label>
+            <div className="image-upload-container">
+              {imagePreview && (
+                <div className="image-preview">
+                  <img src={imagePreview} alt="Aperçu" />
+                  <button
+                    type="button"
+                    className="remove-image-btn"
+                    onClick={handleRemoveImage}
+                    disabled={uploadingImage}
+                  >
+                    <i className="bi bi-x-lg"></i>
+                  </button>
+                </div>
+              )}
+              <div className="image-upload-input">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/jpeg,image/jpg,image/png,image/webp"
+                  onChange={handleFileChange}
+                  disabled={uploadingImage}
+                  style={{ display: "none" }}
+                  id="image-upload"
+                />
+                <label htmlFor="image-upload" className="upload-label">
+                  {uploadingImage ? (
+                    <>
+                      <i className="bi bi-hourglass-split"></i>
+                      Upload en cours...
+                    </>
+                  ) : (
+                    <>
+                      <i className="bi bi-cloud-upload"></i>
+                      {imagePreview ? "Changer l'image" : "Choisir une image"}
+                    </>
+                  )}
+                </label>
+                <span className="upload-hint">
+                  Formats acceptés: JPEG, PNG, WebP (max 5MB)
+                </span>
+              </div>
+              {formData.url_image && !imagePreview && (
+                <div className="image-url-fallback">
+                  <span>URL actuelle: </span>
+                  <a
+                    href={formData.url_image}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {formData.url_image}
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="form-group">

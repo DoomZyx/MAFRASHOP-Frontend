@@ -3,6 +3,7 @@ import { useCart } from "../../hooks/useCart";
 import { useAuth } from "../../hooks/useAuth";
 import { useCheckout } from "../../hooks/useCheckout";
 import ProductPrice from "../shared/ProductPrice";
+import { getImageUrl } from "../../utils/imageUtils";
 import "./cartModal.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -98,13 +99,16 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
                         onClick={onClose}
                         className="cart-item-image"
                       >
-                        {product.url_image ? (
-                          <img src={product.url_image} alt={product.nom} />
-                        ) : (
-                          <div className="cart-item-placeholder">
-                            <i className="bi bi-image"></i>
-                          </div>
-                        )}
+                        {(() => {
+                          const imageUrl = getImageUrl(product.url_image);
+                          return imageUrl ? (
+                            <img src={imageUrl} alt={product.nom} />
+                          ) : (
+                            <div className="cart-item-placeholder">
+                              <i className="bi bi-image"></i>
+                            </div>
+                          );
+                        })()}
                       </Link>
 
                       <div className="cart-item-info">
