@@ -26,6 +26,22 @@ const AdminOrderModal = ({
   onStatusChange,
   updatingStatus,
 }: AdminOrderModalProps) => {
+  const formatDateTime = (dateTimeString: string | null | undefined): string => {
+    if (!dateTimeString) return "Non définie";
+    try {
+      const date = new Date(dateTimeString);
+      return date.toLocaleString("fr-FR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    } catch {
+      return "Format invalide";
+    }
+  };
+
   return (
     <div className="order-modal-overlay" onClick={onClose}>
       <div className="order-modal" onClick={(e) => e.stopPropagation()}>
@@ -140,6 +156,12 @@ const AdminOrderModal = ({
                   <div>
                     <label>Date estimée:</label>
                     <p>{formatDate(order.delivery.estimatedDeliveryDate)}</p>
+                  </div>
+                )}
+                {order.delivery.scheduledDeliveryDateTime && (
+                  <div>
+                    <label>Date et heure de livraison programmée:</label>
+                    <p>{formatDateTime(order.delivery.scheduledDeliveryDateTime)}</p>
                   </div>
                 )}
               </div>

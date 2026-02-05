@@ -160,6 +160,77 @@
         }
       }
 
+      .delivery-datetime-form {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e0e0e0;
+
+        label {
+          display: block;
+          font-weight: 600;
+          color: #666;
+          margin-bottom: 0.75rem;
+          font-size: 0.9rem;
+        }
+
+        .datetime-input-group {
+          display: flex;
+          gap: 0.75rem;
+          align-items: center;
+
+          .datetime-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+
+            &:focus {
+              outline: none;
+              border-color: #d32f2f;
+            }
+
+            &:disabled {
+              opacity: 0.6;
+              cursor: not-allowed;
+            }
+          }
+
+          .btn-update-datetime {
+            padding: 0.75rem 1.5rem;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            white-space: nowrap;
+
+            &:hover:not(:disabled) {
+              background: #b71c1c;
+            }
+
+            &:disabled {
+              opacity: 0.6;
+              cursor: not-allowed;
+            }
+          }
+        }
+
+        .error-message {
+          margin-top: 0.5rem;
+          color: #c62828;
+          font-size: 0.85rem;
+        }
+      }
+
+      .text-muted {
+        color: #999;
+        font-style: italic;
+      }
+
       &.order-totals {
         background: #e8f5e9;
         border-left: 4px solid #2e7d32;

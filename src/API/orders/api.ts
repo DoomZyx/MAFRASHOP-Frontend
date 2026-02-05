@@ -33,6 +33,7 @@ export interface Delivery {
   carrier: string | null;
   estimatedDeliveryDate: string | null;
   actualDeliveryDate: string | null;
+  scheduledDeliveryDateTime: string | null;
   notes: string | null;
   createdAt: string;
   updatedAt: string;

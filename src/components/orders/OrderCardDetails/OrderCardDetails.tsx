@@ -15,6 +15,7 @@ interface Delivery {
   status: string;
   estimatedDeliveryDate: string | null;
   actualDeliveryDate: string | null;
+  scheduledDeliveryDateTime: string | null;
   trackingNumber: string | null;
   carrier: string | null;
 }

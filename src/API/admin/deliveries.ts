@@ -36,6 +36,7 @@ export interface AdminDelivery {
   carrier?: string | null;
   estimatedDeliveryDate?: string | null;
   actualDeliveryDate?: string | null;
+  scheduledDeliveryDateTime?: string | null;
   notes?: string | null;
   createdAt: string;
   updatedAt: string;
@@ -84,6 +85,29 @@ export const adminDeliveriesAPI = {
     if (!response.ok) {
       const err = await response.json();
       throw new Error(err.message || "Erreur lors de la mise à jour du statut");
+    }
+    return response.json();
+  },
+
+  updateScheduledDeliveryDateTime: async (
+    id: string,
+    scheduledDeliveryDateTime: string | null
+  ): Promise<{ success: boolean; message: string; data: { delivery: AdminDelivery } }> => {
+    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+    const response = await fetch(
+      `${API_BASE_URL}/api/admin/deliveries/${id}/scheduled-delivery-datetime`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ scheduledDeliveryDateTime }),
+      }
+    );
+    if (!response.ok) {
+      const err = await response.json();
+      throw new Error(err.message || "Erreur lors de la mise à jour de la date/heure de livraison");
     }
     return response.json();
   },

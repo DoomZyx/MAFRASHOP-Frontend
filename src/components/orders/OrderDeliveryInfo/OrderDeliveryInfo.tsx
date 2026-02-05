@@ -4,6 +4,7 @@ interface Delivery {
   status: string;
   estimatedDeliveryDate: string | null;
   actualDeliveryDate: string | null;
+  scheduledDeliveryDateTime: string | null;
   trackingNumber: string | null;
   carrier: string | null;
 }
@@ -60,6 +61,23 @@ const OrderDeliveryInfo = ({
           <div className="orders-delivery-status-row">
             <span className="orders-delivery-label">Transporteur:</span>
             <span className="orders-delivery-value">{delivery.carrier}</span>
+          </div>
+        )}
+        {delivery.scheduledDeliveryDateTime && (
+          <div className="orders-delivery-status-row">
+            <span className="orders-delivery-label">Date et heure de livraison programmée:</span>
+            <span className="orders-delivery-value">
+              {new Date(delivery.scheduledDeliveryDateTime).toLocaleString(
+                "fr-FR",
+                {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                }
+              )}
+            </span>
           </div>
         )}
         {delivery.actualDeliveryDate && (
