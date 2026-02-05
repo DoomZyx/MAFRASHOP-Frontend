@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import { useAuth } from "../hooks/useAuth";
+import { API_BASE_URL } from "../API/config";
 
 interface WebSocketMessage {
   event: string;
@@ -64,10 +65,11 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
     }
 
     try {
-      const isHttps = window.location.protocol === "https:";
-      const wsProtocol = isHttps ? "wss" : "ws";
-
-      const wsUrl = `${wsProtocol}://localhost:8080/ws?token=${encodeURIComponent(token)}`;
+      // Construire l'URL WebSocket à partir de l'URL de l'API
+      const apiUrl = API_BASE_URL || window.location.origin;
+      const url = new URL(apiUrl);
+      const wsProtocol = url.protocol === "https:" ? "wss" : "ws";
+      const wsUrl = `${wsProtocol}://${url.host}/ws?token=${encodeURIComponent(token)}`;
       const ws = new WebSocket(wsUrl);
 
       ws.onopen = () => {
