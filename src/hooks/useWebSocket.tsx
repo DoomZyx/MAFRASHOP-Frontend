@@ -29,7 +29,11 @@ export function useWebSocket(options: UseWebSocketOptions = {}) {
     }
 
     try {
-      const wsUrl = `ws://mafrashop-backend.onrender.com/ws?token=${encodeURIComponent(token)}`;
+      // Construire l'URL WebSocket à partir de l'URL de l'API
+      const apiUrl = import.meta.env.VITE_API_URL || window.location.origin;
+      const url = new URL(apiUrl);
+      const wsProtocol = url.protocol === "https:" ? "wss" : "ws";
+      const wsUrl = `${wsProtocol}://${url.host}/api/ws?token=${encodeURIComponent(token)}`;
       const ws = new WebSocket(wsUrl);
 
       ws.onopen = () => {
