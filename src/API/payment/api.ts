@@ -34,7 +34,7 @@ export const createCheckoutSession = async (
     throw new Error("Non authentifié");
   }
 
-  const response = await fetch(`${API_BASE_URL}/api/payment/create-checkout-session`, {
+  const response = await fetch(`${API_BASE_URL}/payment/create-checkout-session`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -62,7 +62,7 @@ export const getSessionStatus = async (
     throw new Error("Non authentifié");
   }
 
-  const response = await fetch(`${API_BASE_URL}/api/payment/session/${sessionId}`, {
+  const response = await fetch(`${API_BASE_URL}/payment/session/${sessionId}`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,

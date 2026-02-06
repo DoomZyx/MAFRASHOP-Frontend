@@ -46,7 +46,7 @@ export const adminOrdersAPI = {
   }> => {
     const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
 
-    const response = await fetch(`${API_BASE_URL}/api/admin/orders/${id}`, {
+    const response = await fetch(`${API_BASE_URL} /admin/orders/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -74,7 +74,7 @@ export const adminOrdersAPI = {
   }> => {
     const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
 
-    const response = await fetch(`${API_BASE_URL}/api/admin/orders/${orderId}/status`, {
+    const response = await fetch(`${API_BASE_URL} /admin/orders/${orderId}/status`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -102,7 +102,7 @@ export const adminOrdersAPI = {
     const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
 
     const params = new URLSearchParams({ month: String(month), year: String(year) });
-    const response = await fetch(`${API_BASE_URL}/api/admin/invoices/export?${params}`, {
+    const response = await fetch(`${API_BASE_URL} /admin/invoices/export?${params}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 

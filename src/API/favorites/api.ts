@@ -26,7 +26,7 @@ export const favoritesAPI = {
     success: boolean;
     data: { favorites: FavoriteItem[] };
   }> => {
-    const response = await fetch(`${API_BASE_URL}/api/favorites`, {
+    const response = await fetch(`${API_BASE_URL}/favorites`, {
       headers: getAuthHeaders(),
     });
     return response.json();
@@ -37,7 +37,7 @@ export const favoritesAPI = {
     message: string;
     data?: { favorites: FavoriteItem[] };
   }> => {
-    const response = await fetch(`${API_BASE_URL}/api/favorites`, {
+    const response = await fetch(`${API_BASE_URL}/favorites`, {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify({ productId }),
@@ -50,7 +50,7 @@ export const favoritesAPI = {
     message: string;
     data?: { favorites: FavoriteItem[] };
   }> => {
-    const response = await fetch(`${API_BASE_URL}/api/favorites/${productId}`, {
+    const response = await fetch(`${API_BASE_URL}/favorites/${productId}`, {
       method: "DELETE",
       headers: getAuthHeaders(undefined, false), // Pas de Content-Type pour DELETE sans body
     });

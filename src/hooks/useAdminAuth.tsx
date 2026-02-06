@@ -53,7 +53,7 @@ export const useAdminAuth = () => {
         return;
       }
 
-      const response = await fetch(`${API_BASE_URL}/api/auth/admin/me`, {
+      const response = await fetch(`${API_BASE_URL}/auth/admin/me`, {
         headers: {
           Authorization: `Bearer ${adminToken}`,
         },
@@ -77,7 +77,7 @@ export const useAdminAuth = () => {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/admin/login`, {
+      const response = await fetch(`${API_BASE_URL}/auth/admin/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
