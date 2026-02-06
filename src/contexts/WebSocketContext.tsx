@@ -69,7 +69,7 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
       const apiUrl = API_BASE_URL || window.location.origin;
       const url = new URL(apiUrl);
       const wsProtocol = url.protocol === "https:" ? "wss" : "ws";
-      const wsUrl = `${wsProtocol}://${url.host}/ws?token=${encodeURIComponent(token)}`;
+      const wsUrl = `${wsProtocol}://${url.host}/api/ws?token=${encodeURIComponent(token)}`;
       const ws = new WebSocket(wsUrl);
 
       ws.onopen = () => {
