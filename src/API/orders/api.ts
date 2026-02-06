@@ -66,7 +66,7 @@ export const ordersAPI = {
     success: boolean;
     data: { orders: Order[] };
   }> => {
-    const response = await fetch(`${API_BASE_URL}/orders`, {
+    const response = await fetch(`${API_BASE_URL}/api/orders`, {
       headers: getAuthHeaders(),
     });
     return response.json();
@@ -76,7 +76,7 @@ export const ordersAPI = {
     success: boolean;
     data: { order: Order };
   }> => {
-    const response = await fetch(`${API_BASE_URL}/orders/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/api/orders/${id}`, {
       headers: getAuthHeaders(),
     });
     return response.json();
@@ -91,7 +91,7 @@ export const ordersAPI = {
     }
 
     const response = await fetch(
-      `${API_BASE_URL}/invoices/${orderId}/download`,
+      `${API_BASE_URL}/api/invoices/${orderId}/download`,
       { headers }
     );
 

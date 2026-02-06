@@ -27,7 +27,7 @@ export const cartAPI = {
     success: boolean;
     data: { cart: CartItem[] };
   }> => {
-    const response = await fetch(`${API_BASE_URL}/cart`, {
+    const response = await fetch(`${API_BASE_URL}/api/cart`, {
       headers: getAuthHeaders(),
     });
     return response.json();
@@ -38,7 +38,7 @@ export const cartAPI = {
     message: string;
     data?: { cart: CartItem[] };
   }> => {
-    const response = await fetch(`${API_BASE_URL}/cart`, {
+    const response = await fetch(`${API_BASE_URL}/api/cart`, {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify({ productId, quantity }),
@@ -54,7 +54,7 @@ export const cartAPI = {
     message: string;
     data?: { cart: CartItem[] };
   }> => {
-    const response = await fetch(`${API_BASE_URL}/cart/${productId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/cart/${productId}`, {
       method: "PUT",
       headers: getAuthHeaders(),
       body: JSON.stringify({ quantity }),
@@ -67,7 +67,7 @@ export const cartAPI = {
     message: string;
     data?: { cart: CartItem[] };
   }> => {
-    const response = await fetch(`${API_BASE_URL}/cart/${productId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/cart/${productId}`, {
       method: "DELETE",
       headers: getAuthHeaders(undefined, false), // Pas de Content-Type pour DELETE sans body
     });
@@ -78,7 +78,7 @@ export const cartAPI = {
     success: boolean;
     message: string;
   }> => {
-    const response = await fetch(`${API_BASE_URL}/cart`, {
+    const response = await fetch(`${API_BASE_URL}/api/cart`, {
       method: "DELETE",
       headers: getAuthHeaders(undefined, false), // Pas de Content-Type pour DELETE sans body
     });

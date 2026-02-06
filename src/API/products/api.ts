@@ -7,7 +7,7 @@ import { Product } from "../../types/product";
  */
 export const getAllProducts = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/products`);
+    const response = await fetch(`${API_BASE_URL}/api/products`);
 
     if (!response.ok) {
       throw new Error(`Erreur HTTP: ${response.status}`);
@@ -28,7 +28,7 @@ export const getAllProducts = async (): Promise<Product[]> => {
  */
 export const getProductById = async (id: string): Promise<Product> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/products/${id}`);
+    const response = await fetch(`${API_BASE_URL}/api/products/${id}`);
 
     if (!response.ok) {
       if (response.status === 404) {
@@ -51,7 +51,7 @@ export const getProductById = async (id: string): Promise<Product> => {
  */
 export const getBestsellers = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/products/bestsellers/all`);
+    const response = await fetch(`${API_BASE_URL}/api/products/bestsellers/all`);
 
     if (!response.ok) {
       throw new Error(`Erreur HTTP: ${response.status}`);
@@ -71,7 +71,7 @@ export const getBestsellers = async (): Promise<Product[]> => {
  */
 export const getPromotions = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/products/promotions/all`);
+    const response = await fetch(`${API_BASE_URL}/api/products/promotions/all`);
 
     if (!response.ok) {
       throw new Error(`Erreur HTTP: ${response.status}`);
@@ -91,7 +91,7 @@ export const getPromotions = async (): Promise<Product[]> => {
  */
 export const getCategories = async (): Promise<string[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/products/categories/all`);
+    const response = await fetch(`${API_BASE_URL}/api/products/categories/all`);
 
     if (!response.ok) {
       throw new Error(`Erreur HTTP: ${response.status}`);
@@ -113,8 +113,8 @@ export const getCategories = async (): Promise<string[]> => {
 export const getSubcategories = async (category?: string): Promise<string[]> => {
   try {
     const url = category
-      ? `${API_BASE_URL}/products/subcategories/all?category=${encodeURIComponent(category)}`
-      : `${API_BASE_URL}/products/subcategories/all`;
+      ? `${API_BASE_URL}/api/products/subcategories/all?category=${encodeURIComponent(category)}`
+      : `${API_BASE_URL}/api/products/subcategories/all`;
 
     const response = await fetch(url);
 

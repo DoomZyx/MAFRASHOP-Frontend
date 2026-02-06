@@ -9,7 +9,7 @@ export const updateBestsellerStatus = async (
   isBestseller: boolean
 ): Promise<Product> => {
   const response = await fetch(
-    `${API_BASE_URL}/products/${productId}/bestseller`,
+    `${API_BASE_URL}/api/products/${productId}/bestseller`,
     {
       method: "PATCH",
       headers: {
@@ -37,7 +37,7 @@ export const updatePromotionStatus = async (
   promotionPercentage: number | null = null
 ): Promise<Product> => {
   const response = await fetch(
-    `${API_BASE_URL}/products/${productId}/promotion`,
+    `${API_BASE_URL}/api/products/${productId}/promotion`,
     {
       method: "PATCH",
       headers: {
@@ -81,7 +81,7 @@ export const uploadImage = async (file: File): Promise<{
   const formData = new FormData();
   formData.append("image", file);
 
-  const response = await fetch(`${API_BASE_URL}/admin/upload/image`, {
+  const response = await fetch(`${API_BASE_URL}/api/admin/upload/image`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -124,7 +124,7 @@ export const adminProductsAPI = {
   }> => {
     const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
 
-    const response = await fetch(`${API_BASE_URL}/admin/products`, {
+    const response = await fetch(`${API_BASE_URL}/api/admin/products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -167,7 +167,7 @@ export const adminProductsAPI = {
   }> => {
     const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
 
-    const response = await fetch(`${API_BASE_URL}/admin/products/${productId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/admin/products/${productId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -191,7 +191,7 @@ export const adminProductsAPI = {
   }> => {
     const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
 
-    const response = await fetch(`${API_BASE_URL}/admin/products/${productId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/admin/products/${productId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -258,7 +258,7 @@ export const getAllUsers = async (): Promise<{
 }> => {
   const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
   
-  const response = await fetch(`${API_BASE_URL}/admin/users`, {
+  const response = await fetch(`${API_BASE_URL}/api/admin/users`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -285,7 +285,7 @@ export const updateUserRole = async (
 }> => {
   const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
   
-  const response = await fetch(`${API_BASE_URL}/admin/users/${userId}/role`, {
+  const response = await fetch(`${API_BASE_URL}/api/admin/users/${userId}/role`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -314,7 +314,7 @@ export const validateProUser = async (
   data?: { user: AdminUser };
 }> => {
   const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-  const response = await fetch(`${API_BASE_URL}/auth/pro/validate`, {
+  const response = await fetch(`${API_BASE_URL}/api/auth/pro/validate`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -341,7 +341,7 @@ export const validateVatUser = async (
   data?: { user: AdminUser };
 }> => {
   const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-  const response = await fetch(`${API_BASE_URL}/auth/admin/validate-vat`, {
+  const response = await fetch(`${API_BASE_URL}/api/auth/admin/validate-vat`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -364,7 +364,7 @@ export const retryProInsee = async (userId: string): Promise<{
   message: string;
 }> => {
   const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-  const response = await fetch(`${API_BASE_URL}/auth/pro/retry-insee`, {
+  const response = await fetch(`${API_BASE_URL}/api/auth/pro/retry-insee`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -395,7 +395,7 @@ export const createAdminUser = async (data: {
 }> => {
   const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
   
-  const response = await fetch(`${API_BASE_URL}/admin/users`, {
+  const response = await fetch(`${API_BASE_URL}/api/admin/users`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

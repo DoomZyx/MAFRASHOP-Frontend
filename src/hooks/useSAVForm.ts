@@ -1,5 +1,5 @@
 import { useState } from "react";
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+import { API_BASE_URL } from "../API/config";
 
 interface SAVFormData {
   orderNumber: string;
@@ -40,7 +40,7 @@ export const useSAVForm = () => {
     setSubmitStatus({ type: null, message: "" });
 
     try {
-      const response = await fetch(`${API_BASE_URL}/contact`, {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

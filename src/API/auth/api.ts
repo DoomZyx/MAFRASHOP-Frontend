@@ -76,7 +76,7 @@ export const authAPI = {
     firstName: string;
     lastName: string;
   }): Promise<AuthResponse> => {
-    const response = await fetch(`${API_BASE_URL}/auth/register`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),
@@ -88,7 +88,7 @@ export const authAPI = {
     email: string;
     password: string;
   }): Promise<AuthResponse> => {
-    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),
@@ -97,7 +97,7 @@ export const authAPI = {
   },
 
   googleCallback: async (code: string): Promise<AuthResponse> => {
-    const response = await fetch(`${API_BASE_URL}/auth/google/callback`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/google/callback`, {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify({ code }),
@@ -106,19 +106,19 @@ export const authAPI = {
   },
 
   getGoogleConfig: async (): Promise<GoogleConfig> => {
-    const response = await fetch(`${API_BASE_URL}/auth/google/config`);
+    const response = await fetch(`${API_BASE_URL}/api/auth/google/config`);
     return response.json();
   },
 
   getMe: async (): Promise<{ success: boolean; data: { user: User } }> => {
-    const response = await fetch(`${API_BASE_URL}/auth/me`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/me`, {
       headers: getAuthHeaders(),
     });
     return response.json();
   },
 
   logout: async (): Promise<{ success: boolean; message: string }> => {
-    const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
       method: "POST",
       headers: getAuthHeaders(),
     });
@@ -138,7 +138,7 @@ export const authAPI = {
     if (!refreshToken) {
       throw new Error("Refresh token non disponible");
     }
-    const response = await fetch(`${API_BASE_URL}/auth/refresh`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/refresh`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -156,7 +156,7 @@ export const authAPI = {
     zipCode: string;
     phone: string;
   }): Promise<{ success: boolean; message: string; data: { user: User } }> => {
-    const response = await fetch(`${API_BASE_URL}/auth/profile`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/profile`, {
       method: "PUT",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),
@@ -173,7 +173,7 @@ export const authAPI = {
     companyPhone?: string;
     companyEmail?: string;
   }): Promise<{ success: boolean; message: string; data?: { user: User } }> => {
-    const response = await fetch(`${API_BASE_URL}/auth/profile/company`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/profile/company`, {
       method: "PUT",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),
@@ -190,7 +190,7 @@ export const authAPI = {
     companyCountry?: string;
     vatNumber?: string;
   }): Promise<{ success: boolean; message: string }> => {
-    const response = await fetch(`${API_BASE_URL}/auth/pro/request`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/pro/request`, {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),
@@ -205,7 +205,7 @@ export const authAPI = {
     city?: string;
     zipCode?: string;
   }): Promise<{ success: boolean; message: string; data?: { user: User } }> => {
-    const response = await fetch(`${API_BASE_URL}/auth/pro/test-request`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/pro/test-request`, {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),
@@ -217,7 +217,7 @@ export const authAPI = {
     userId: string;
     approved: boolean;
   }): Promise<{ success: boolean; message: string; data?: { user: User } }> => {
-    const response = await fetch(`${API_BASE_URL}/auth/pro/validate`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/pro/validate`, {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),
@@ -233,7 +233,7 @@ export const authAPI = {
     expiresIn?: number;
     user?: { id: string; email: string; isAdmin: boolean };
   }> => {
-    const response = await fetch(`${API_BASE_URL}/auth/admin/google/callback`, {
+    const response = await fetch(`${API_BASE_URL}/api/auth/admin/google/callback`, {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify({ code }),

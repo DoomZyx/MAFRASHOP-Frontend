@@ -18,7 +18,7 @@ export const adminStatsAPI = {
    */
   getDashboardStats: async (): Promise<DashboardStatsResponse> => {
     const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-    const response = await fetch(`${API_BASE_URL}/admin/stats/dashboard`, {
+    const response = await fetch(`${API_BASE_URL}/api/admin/stats/dashboard`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ export const adminStatsAPI = {
   getAllStats: async (period: string = "all"): Promise<StatsResponse> => {
     const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
 
-    const response = await fetch(`${API_BASE_URL}/admin/stats?period=${period}`, {
+    const response = await fetch(`${API_BASE_URL}/api/admin/stats?period=${period}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -58,7 +58,7 @@ export const adminStatsAPI = {
   exportStatsCSV: async (type: "orders" | "products" | "clients"): Promise<Blob> => {
     const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
 
-    const response = await fetch(`${API_BASE_URL}/admin/stats/export?type=${type}`, {
+    const response = await fetch(`${API_BASE_URL}/api/admin/stats/export?type=${type}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

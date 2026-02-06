@@ -56,7 +56,7 @@ export const adminDeliveriesAPI = {
     data: { deliveries: AdminDelivery[] };
   }> => {
     const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-    const response = await fetch(`${API_BASE_URL}/admin/deliveries`, {
+    const response = await fetch(`${API_BASE_URL}/api/admin/deliveries`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -74,7 +74,7 @@ export const adminDeliveriesAPI = {
     status: string
   ): Promise<{ success: boolean; message: string; data: { delivery: AdminDelivery } }> => {
     const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-    const response = await fetch(`${API_BASE_URL}/admin/deliveries/${id}/status`, {
+    const response = await fetch(`${API_BASE_URL}/api/admin/deliveries/${id}/status`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -95,7 +95,7 @@ export const adminDeliveriesAPI = {
   ): Promise<{ success: boolean; message: string; data: { delivery: AdminDelivery } }> => {
     const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
     const response = await fetch(
-      `${API_BASE_URL}/admin/deliveries/${id}/scheduled-delivery-datetime`,
+      `${API_BASE_URL}/api/admin/deliveries/${id}/scheduled-delivery-datetime`,
       {
         method: "PATCH",
         headers: {
