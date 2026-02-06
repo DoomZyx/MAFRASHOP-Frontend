@@ -1,20 +1,20 @@
 .product-image-section {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 
   img {
     width: 100%;
-    max-width: 200px;
+    max-width: 150px;
     height: auto;
     object-fit: contain;
     margin: 0 auto;
     display: block;
     border-radius: 8px;
-    padding: 20px;
+    padding: 15px;
   }
 
   .product-image-placeholder {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -23,7 +23,7 @@
     border-radius: 8px;
     
     i {
-      font-size: 4rem;
+      font-size: 3rem;
       color: #666;
     }
   }
@@ -31,8 +31,20 @@
 
 @media (min-width: 769px) {
   .product-image-section {
+    margin-bottom: 20px;
+
     img {
       max-width: 500px;
+      padding: 20px;
+    }
+
+    .product-image-placeholder {
+      width: 200px;
+      height: 200px;
+
+      i {
+        font-size: 4rem;
+      }
     }
   }
 }

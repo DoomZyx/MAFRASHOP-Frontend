@@ -1,5 +1,20 @@
+// Media queries spécifiques pour différentes tailles d'écran mobile
+@media (min-width: 350px) and (max-width: 380px) {
+  // iPhone SE et petits écrans
+  .category-cards-section {
+    margin-top: 5rem;
+  }
+}
+
+@media (min-width: 381px) and (max-width: 430px) {
+  // iPhone 14, S8+ et écrans moyens
+  .category-cards-section {
+    margin-top: 2rem;
+  }
+}
+
 .category-cards-section {
-  padding: 40px 10px 80px;
+  padding: 10px 10px 80px;
 
   .carousel-container {
     max-width: 95%;

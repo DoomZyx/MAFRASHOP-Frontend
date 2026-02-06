@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import LoginButtonMobile from "../buttons/primary/login/mobile/login";
-import LogoutButtonMobile from "../buttons/primary/login/mobile/logout";
 import "./menu.scss";
 import SearchProducts from "../shop/searchProducts/searchProducts";
 import { useProducts } from "../../hooks/useProducts";
@@ -61,7 +59,7 @@ function MenuBurger({ isModalOpen, toggleModal }: MenuBurgerProps) {
                     <Avatar
                       src={user?.avatar}
                       alt={`${user?.firstName || ""} ${user?.lastName || ""}`}
-                      size="medium"
+                      size="large"
                       className="nav-user-avatar"
                     />
                     <span className="nav-user-name">
@@ -72,6 +70,9 @@ function MenuBurger({ isModalOpen, toggleModal }: MenuBurgerProps) {
               ) : (
                 <></>
               )}
+            </div>
+            <div className="search-products-mobile">
+              <SearchProducts products={products} />
             </div>
             <div className="menu-nav-section">
               <h3 className="menu-section-title">Navigation</h3>
@@ -165,9 +166,6 @@ function MenuBurger({ isModalOpen, toggleModal }: MenuBurgerProps) {
                 </button>
               </div>
             )}
-            <div className="search-products-mobile">
-              <SearchProducts products={products} />
-            </div>
           </div>
 
           <div className="menu-line"></div>

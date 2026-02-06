@@ -310,15 +310,99 @@
   }
 
   .favorites-modal-content {
-    padding: 30px 20px;
+    padding: 20px 15px;
   }
 
   .favorites-modal-title {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    margin: 0 0 20px 0;
+  }
+
+  .favorites-empty {
+    padding: 40px 15px;
+
+    i {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .favorites-empty-link {
+      padding: 10px 20px;
+      font-size: 0.85rem;
+    }
   }
 
   .favorites-items {
     grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .favorites-item {
+    .favorites-item-image {
+      height: 150px;
+
+      img {
+        padding: 8px;
+      }
+
+      .favorites-item-placeholder i {
+        font-size: 1.5rem;
+      }
+    }
+
+    .favorites-item-info {
+      padding: 12px;
+      gap: 6px;
+
+      .favorites-item-name {
+        font-size: 0.85rem;
+        margin-bottom: 3px;
+      }
+
+      .favorites-item-ref {
+        font-size: 0.75rem;
+      }
+
+      .favorites-item-category {
+        font-size: 0.7rem;
+      }
+
+      .favorites-item-price {
+        margin: 8px 0;
+        font-size: 0.8rem;
+      }
+
+      .favorites-item-actions {
+        gap: 8px;
+        margin-top: auto;
+        padding-top: 12px;
+      }
+    }
+  }
+
+  .favorites-add-cart-btn {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    gap: 6px;
+
+    i {
+      font-size: 0.95rem;
+    }
+  }
+
+  .favorites-remove-btn {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    gap: 4px;
+
+    i {
+      font-size: 0.9rem;
+    }
   }
 }
 
