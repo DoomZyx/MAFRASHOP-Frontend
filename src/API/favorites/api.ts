@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../config";
+const API_BASE_URL = import.meta.env.VITE_API_URL || `${window.location.origin}/api`;
 import { Product } from "../../types/product";
 
 const getAuthHeaders = (token?: string, includeContentType: boolean = true) => {

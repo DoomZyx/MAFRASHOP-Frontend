@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { API_BASE_URL } from "../API/config";
+const API_BASE_URL = import.meta.env.VITE_API_URL || `${window.location.origin}/api`;
 
 interface WebSocketMessage {
   event: string;
