@@ -29,7 +29,7 @@ export const useAdminAuth = () => {
       // Si l'utilisateur est connecté via Google/local et a le rôle admin, utiliser ce token
       if (authUser && authUser.role === "admin" && authToken) {
         // Vérifier que le token est valide et que l'utilisateur est toujours admin
-        const response = await fetch(`${API_BASE_URL}/api/api/auth/admin/check`, {
+        const response = await fetch(`${API_BASE_URL}/api/auth/admin/check`, {
           headers: {
             Authorization: `Bearer ${authToken}`,
           },
