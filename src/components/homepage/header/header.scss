@@ -94,6 +94,8 @@
     background: none;
     z-index: 1000;
     position: relative;
+    box-sizing: border-box;
+    display: none;
 
     .main-logo {
       max-width: 200px;

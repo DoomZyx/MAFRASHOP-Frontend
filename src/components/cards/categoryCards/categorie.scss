@@ -1,5 +1,5 @@
 // Media queries spécifiques pour différentes tailles d'écran mobile
-@media (min-width: 350px) and (max-width: 380px) {
+@media (min-width: 300px) and (max-width: 380px) {
   // iPhone SE et petits écrans
   .category-cards-section {
     margin-top: 5rem;
@@ -133,7 +133,7 @@
           }
 
           .card-description {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             line-height: 1.8;
             font-weight: 300;
             margin: 0;
