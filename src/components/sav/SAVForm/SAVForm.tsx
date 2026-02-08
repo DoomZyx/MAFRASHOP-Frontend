@@ -58,7 +58,7 @@ const SAVForm = ({ formData, onSubmit, onChange, isSubmitting = false, submitSta
         <div className="sav-form-row">
           <div className="sav-form-group">
             <label htmlFor="orderNumber">
-              Numéro de commande <span className="required">*</span>
+              Numéro de commande <span className="optional">(optionnel)</span>
             </label>
             <input
               type="text"
@@ -67,7 +67,6 @@ const SAVForm = ({ formData, onSubmit, onChange, isSubmitting = false, submitSta
               value={formData.orderNumber}
               onChange={onChange}
               placeholder="Ex: CMD-12345"
-              required
             />
           </div>
 

@@ -8,7 +8,7 @@ function Shipping() {
     <div className="shipping-page">
       <SEO
         title="Livraison - Informations et Tarifs"
-        description="Livraison en main propre partout en France sous 72h. Frais de livraison : 7,50€ (gratuit dès 120€ d'achat). Zone de livraison : 20km autour de notre dépôt."
+        description="Livraison en main propre sous 72h. Zone de livraison : 20km autour de notre dépôt."
         keywords="livraison, frais de port, délai livraison, zone livraison, transport, expédition"
         url="/shipping"
       />
@@ -26,7 +26,7 @@ function Shipping() {
           <section className="shipping-intro">
             <h2>Zone de Livraison</h2>
             <p>
-              Nous livrons vos commandes en main propre partout en France.
+              Nous livrons vos commandes en main propre dans un rayon de 20km <br />
               Délai de livraison : 72h.
             </p>
           </section>
@@ -46,10 +46,6 @@ function Shipping() {
                   <li>Date de livraison communiquée</li>
                   <li>Remise en main propre</li>
                 </ul>
-                <div className="shipping-free-badge">
-                  <i className="bi bi-gift-fill"></i>
-                  Gratuite dès 120€ d'achat
-                </div>
               </div>
             </div>
           </section>
@@ -61,7 +57,6 @@ function Shipping() {
                 <i className="bi bi-geo-alt-fill"></i>
                 <p>Livraison en main propre : 72h</p>
                 <p>Dans un rayon de 20km autout de notre dépôt</p>
-                <div className="shipping-zone-price">7,50 € (gratuit dès 120€)</div>
               </div>
             </div>
           </section>
@@ -115,7 +110,7 @@ function Shipping() {
                 <i className="bi bi-geo-alt"></i>
                 <h3>Zone</h3>
                 <p>
-                  Livraison dans un rayon de 20km autour de Mondelange.
+                  Livraison dans un rayon de 20km autour de notre dépôt.
                 </p>
               </div>
 
@@ -149,6 +144,7 @@ function Shipping() {
                 <p>
                   Nous livrons dans un rayon de 20km autout de notre dépôt.
                 </p>
+                <p>Notre dépot est situés au 20 rue des ponts à Mondelange</p>
               </div>
 
               <div className="shipping-faq-item">
@@ -159,17 +155,6 @@ function Shipping() {
                 <p>
                   Le délai de livraison est de 72h après validation de votre commande. 
                   Vous recevrez la date de livraison prévue.
-                </p>
-              </div>
-
-              <div className="shipping-faq-item">
-                <h3>
-                  <i className="bi bi-question-circle-fill"></i>
-                  Quand la livraison est-elle gratuite ?
-                </h3>
-                <p>
-                  Les frais de livraison de 7,50€ sont offerts pour toute commande d'un 
-                  montant égal ou supérieur à 120€.
                 </p>
               </div>
 

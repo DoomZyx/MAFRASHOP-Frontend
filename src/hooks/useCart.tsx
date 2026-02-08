@@ -164,7 +164,6 @@ export function useCart() {
   );
 
   const TVA_RATE = 1.2;
-  const FREE_SHIPPING_THRESHOLD = 80;
   const DELIVERY_FEE = 7.5;
 
   const getCartSubtotal = useCallback(() => {
@@ -179,9 +178,8 @@ export function useCart() {
   }, [cart, user]);
 
   const getDeliveryFee = useCallback(() => {
-    const subtotal = getCartSubtotal();
-    return subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : DELIVERY_FEE;
-  }, [getCartSubtotal]);
+    return DELIVERY_FEE;
+  }, []);
 
   const getCartTotal = useCallback(() => {
     return getCartSubtotal() + getDeliveryFee();

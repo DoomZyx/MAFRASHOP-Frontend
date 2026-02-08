@@ -48,12 +48,12 @@ function About() {
                 <div className="about-value-card">
                   <i className="bi bi-geo-alt"></i>
                   <h3>Zone de livraison</h3>
-                  <p>Partout en France</p>
+                  <p>20km autout de notre dépôt</p>
                 </div>
                 <div className="about-value-card">
                   <i className="bi bi-truck"></i>
                   <h3>Livraison</h3>
-                  <p>72h - 6,50€ (gratuite dès 80€)</p>
+                  <p>72h - 7,50€</p>
                 </div>
                 <div className="about-value-card">
                   <i className="bi bi-arrow-return-left"></i>
