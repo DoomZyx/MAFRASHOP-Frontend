@@ -4,7 +4,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://mymafrashop.com/api/:path*"
+      "destination": "https://54.37.231.243/api/:path*"
     }
   ]
 }
