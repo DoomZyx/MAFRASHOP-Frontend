@@ -112,7 +112,7 @@ function SAV() {
                 <h3>Par Email</h3>
                 <p>Contactez-nous par email</p>
                 <p>
-                  contact.mymafrashop.com
+                  contact.mymafrashop@gmail.com
                 </p>
               </div>
 

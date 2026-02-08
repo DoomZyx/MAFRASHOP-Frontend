@@ -63,7 +63,7 @@ function Footer() {
           <div className="footer-column">
             <h3 className="footer-title">CONTACTEZ NOUS</h3>
             <p className="footer-contact-info">
-              Email: contact@mymafrashop.com
+              Email: contact.mymafrashop@gmail.com
               <br />
               Tél: +33 6 08 49 94 32
             </p>
