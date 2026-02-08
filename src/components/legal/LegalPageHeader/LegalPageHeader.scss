@@ -29,7 +29,11 @@
 
 @media (max-width: 768px) {
   .legal-hero {
-    padding: 2rem 1rem;
+    padding: calc((2rem + 30px) * 1.2) 1rem 2rem 1rem;
+    border-radius: 0;
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
 
     h1 {
       font-size: 1.75rem;

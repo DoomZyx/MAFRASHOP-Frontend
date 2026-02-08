@@ -576,7 +576,7 @@
 // Responsive
 @media (max-width: 767px) {
   .returns-hero {
-    padding: 60px 20px;
+    padding: calc((60px + 30px) * 1.2) 20px 60px 20px;
 
     h1 {
       font-size: 2rem;

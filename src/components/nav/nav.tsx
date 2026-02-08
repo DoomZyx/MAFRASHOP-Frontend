@@ -193,7 +193,12 @@ function Nav() {
           )}
           {isModalOpen && (
             <div className="mobile-menu-overlay">
-              <MenuBurger isModalOpen={isModalOpen} toggleModal={toggleModal} />
+              <MenuBurger 
+                isModalOpen={isModalOpen} 
+                toggleModal={toggleModal}
+                onOpenCart={() => setIsCartModalOpen(true)}
+                onOpenFavorites={() => setIsFavoritesModalOpen(true)}
+              />
             </div>
           )}
         </div>

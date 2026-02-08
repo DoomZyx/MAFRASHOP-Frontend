@@ -16,9 +16,10 @@ interface SAVFormProps {
     type: "success" | "error" | null;
     message: string;
   };
+  onStatusClose?: () => void;
 }
 
-const SAVForm = ({ formData, onSubmit, onChange, isSubmitting = false, submitStatus }: SAVFormProps) => {
+const SAVForm = ({ formData, onSubmit, onChange, isSubmitting = false, submitStatus, onStatusClose }: SAVFormProps) => {
   return (
     <section className="sav-form-section" id="formulaire">
       <h2>Formulaire de Contact</h2>
@@ -37,7 +38,19 @@ const SAVForm = ({ formData, onSubmit, onChange, isSubmitting = false, submitSta
               submitStatus.type === "success" ? "bi-check-circle-fill" : "bi-exclamation-triangle-fill"
             }`}
           ></i>
-          <span>{submitStatus.message}</span>
+          <div className="sav-form-status-content">
+            <span className="sav-form-status-title">
+              {submitStatus.type === "success" ? "Message envoyé !" : "Erreur"}
+            </span>
+            <span className="sav-form-status-message">{submitStatus.message}</span>
+          </div>
+          <button
+            className="sav-form-status-close"
+            onClick={onStatusClose}
+            aria-label="Fermer"
+          >
+            <i className="bi bi-x-lg"></i>
+          </button>
         </div>
       )}
 

@@ -1,4 +1,5 @@
 import { Product } from "../../types/product";
+import { ProMinimumQuantityRule } from "../../API/admin/proMinimumQuantities";
 import "./ProductAdminCard.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -6,10 +7,15 @@ interface ProductAdminCardProps {
   product: Product;
   updating: Record<string, boolean>;
   promotionPercentages: Record<string, number | null>;
+  minimumQuantityRule: ProMinimumQuantityRule | null;
+  minimumQuantity: number | null | undefined;
   onToggleBestseller: (product: Product) => void;
   onTogglePromotion: (product: Product, percentage: number | null) => void;
   onPercentageChange: (productId: string, value: string) => void;
   onSavePromotion: (product: Product) => void;
+  onMinimumQuantityChange: (productId: string, value: string) => void;
+  onSaveMinimumQuantity: (product: Product) => void;
+  onDeleteMinimumQuantity: (product: Product) => void;
   calculateDiscountedPrice: (product: Product) => number | null;
   formatPrice: (price: number | null) => string;
   onEdit?: (product: Product) => void;
@@ -21,10 +27,15 @@ function ProductAdminCard({
   product,
   updating,
   promotionPercentages,
+  minimumQuantityRule,
+  minimumQuantity,
   onToggleBestseller,
   onTogglePromotion,
   onPercentageChange,
   onSavePromotion,
+  onMinimumQuantityChange,
+  onSaveMinimumQuantity,
+  onDeleteMinimumQuantity,
   calculateDiscountedPrice,
   formatPrice,
   onEdit,
@@ -132,6 +143,12 @@ function ProductAdminCard({
                     onChange={(e) =>
                       onPercentageChange(product.id, e.target.value)
                     }
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && !updating[`promotion-${product.id}`]) {
+                        e.preventDefault();
+                        onSavePromotion(product);
+                      }
+                    }}
                     placeholder="0"
                     disabled={updating[`promotion-${product.id}`] || false}
                   />
@@ -152,6 +169,56 @@ function ProductAdminCard({
                 </span>
               )}
             </div>
+          )}
+        </div>
+
+        <div className="minimum-quantity-control">
+          <label className="minimum-quantity-label">
+            <i className="bi bi-box-seam"></i>
+            Quantité minimale (Pro):
+          </label>
+          <div className="minimum-quantity-input-group">
+            <input
+              type="number"
+              min="1"
+              value={
+                minimumQuantity !== undefined && minimumQuantity !== null
+                  ? minimumQuantity
+                  : minimumQuantityRule?.minimumQuantity ?? ""
+              }
+              onChange={(e) => onMinimumQuantityChange(product.id, e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !updating[`minqty-${product.id}`]) {
+                  e.preventDefault();
+                  onSaveMinimumQuantity(product);
+                }
+              }}
+              placeholder="Ex: 2, 4..."
+              disabled={updating[`minqty-${product.id}`] || false}
+            />
+            <button
+              className="save-minimum-quantity-btn"
+              onClick={() => onSaveMinimumQuantity(product)}
+              disabled={updating[`minqty-${product.id}`] || false}
+              title="Sauvegarder la quantité minimale"
+            >
+              <i className="bi bi-check-lg"></i>
+            </button>
+            {minimumQuantityRule && (
+              <button
+                className="delete-minimum-quantity-btn"
+                onClick={() => onDeleteMinimumQuantity(product)}
+                disabled={updating[`minqty-${product.id}`] || false}
+                title="Supprimer la règle"
+              >
+                <i className="bi bi-trash"></i>
+              </button>
+            )}
+          </div>
+          {minimumQuantityRule && (
+            <span className="current-minimum-quantity">
+              Actuel: {minimumQuantityRule.minimumQuantity} unité(s)
+            </span>
           )}
         </div>
 

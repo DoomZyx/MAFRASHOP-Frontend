@@ -61,25 +61,11 @@ function Footer() {
           </div>
 
           <div className="footer-column">
-            <h3 className="footer-title">SUIVEZ-NOUS</h3>
-            <div className="footer-social">
-              <a href="#" className="social-link" aria-label="Facebook">
-                <i className="bi bi-facebook"></i>
-              </a>
-              <a href="#" className="social-link" aria-label="Instagram">
-                <i className="bi bi-instagram"></i>
-              </a>
-              <a href="#" className="social-link" aria-label="LinkedIn">
-                <i className="bi bi-linkedin"></i>
-              </a>
-              <a href="#" className="social-link" aria-label="YouTube">
-                <i className="bi bi-youtube"></i>
-              </a>
-            </div>
+            <h3 className="footer-title">CONTACTEZ NOUS</h3>
             <p className="footer-contact-info">
-              Email: contact@mafrashop.com
+              Email: contact@mymafrashop.com
               <br />
-              Tél: +33 1 23 45 67 89
+              Tél: +33 6 08 49 94 32
             </p>
           </div>
         </div>

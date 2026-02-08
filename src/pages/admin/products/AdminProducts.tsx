@@ -15,10 +15,15 @@ function AdminProducts() {
     loading,
     updating,
     promotionPercentages,
+    minimumQuantityRules,
+    minimumQuantities,
     handleToggleBestseller,
     handleTogglePromotion,
     handlePercentageChange,
     handleSavePromotion,
+    handleMinimumQuantityChange,
+    handleSaveMinimumQuantity,
+    handleDeleteMinimumQuantity,
     calculateDiscountedPrice,
     formatPrice,
     refreshProducts,
@@ -92,10 +97,15 @@ function AdminProducts() {
               product={product}
               updating={updating}
               promotionPercentages={promotionPercentages}
+              minimumQuantityRule={minimumQuantityRules[product.id] || null}
+              minimumQuantity={minimumQuantities[product.id]}
               onToggleBestseller={handleToggleBestseller}
               onTogglePromotion={handleTogglePromotion}
               onPercentageChange={handlePercentageChange}
               onSavePromotion={handleSavePromotion}
+              onMinimumQuantityChange={handleMinimumQuantityChange}
+              onSaveMinimumQuantity={handleSaveMinimumQuantity}
+              onDeleteMinimumQuantity={handleDeleteMinimumQuantity}
               calculateDiscountedPrice={calculateDiscountedPrice}
               formatPrice={formatPrice}
               onEdit={handleEditProduct}

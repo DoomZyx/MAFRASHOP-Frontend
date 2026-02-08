@@ -55,6 +55,11 @@ function AdminLayout() {
       label: "Gestion des admins",
       icon: "bi-shield-check",
     },
+    {
+      path: "/admin/contact",
+      label: "Répondre aux clients",
+      icon: "bi-envelope-paper",
+    },
   ];
 
   const toggleMenu = () => {

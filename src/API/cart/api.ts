@@ -22,10 +22,21 @@ export interface CartItem {
   addedAt: string;
 }
 
+export interface PerfumeValidation {
+  isValid: boolean;
+  totalCount: number;
+  missing: number;
+  message: string | null;
+  minimumRequired: number;
+}
+
 export const cartAPI = {
   getCart: async (): Promise<{
     success: boolean;
-    data: { cart: CartItem[] };
+    data: { 
+      cart: CartItem[];
+      perfumeValidation?: PerfumeValidation;
+    };
   }> => {
     const response = await fetch(`${API_BASE_URL}/api/cart`, {
       headers: getAuthHeaders(),

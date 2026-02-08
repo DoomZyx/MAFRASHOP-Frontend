@@ -2,6 +2,7 @@ import Header from "../../components/homepage/header/header";
 import Nav from "../../components/nav/nav";
 import CategoryCards from "../../components/cards/categoryCards/categorie";
 import ExpertiseInfo from "../../components/cards/expertiseInfo/expertiseInfo";
+import ProInfo from "../../components/homepage/proInfo/proInfo";
 import Bestsellers from "../../components/homepage/bestsellers/bestsellers";
 import Promotions from "../../components/homepage/promotions/promotions";
 import Newsletter from "../../components/homepage/newsletter/newsletter";
@@ -21,6 +22,7 @@ function Homepage() {
       <Header />
       <CategoryCards />
       <ExpertiseInfo />
+      <ProInfo />
       <Bestsellers />
       <Promotions />
       <Newsletter />

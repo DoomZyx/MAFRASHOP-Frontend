@@ -79,11 +79,16 @@ export const useSAVForm = () => {
     }
   };
 
+  const handleStatusClose = () => {
+    setSubmitStatus({ type: null, message: "" });
+  };
+
   return {
     formData,
     handleChange,
     handleSubmit,
     isSubmitting,
     submitStatus,
+    handleStatusClose,
   };
 };

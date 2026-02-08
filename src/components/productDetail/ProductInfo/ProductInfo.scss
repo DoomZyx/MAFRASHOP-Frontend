@@ -1,9 +1,9 @@
 .product-info-section {
   h1 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: #ffffff;
-    margin: 0 0 12px 0;
+    margin: 0 0 10px 0;
     line-height: 1.3;
   }
 
@@ -11,19 +11,19 @@
     display: inline-block;
     background: #c62828;
     color: white;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    padding: 5px 10px;
+    padding: 4px 8px;
     border-radius: 4px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
 
   .product-format {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: #f1f1f1;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 
     .category-label,
     .format-label {
@@ -33,9 +33,9 @@
   }
 
   .product-description {
-    margin: 15px 0;
+    margin: 12px 0;
     p {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #f1f1f1;
       line-height: 1.5;
     }
@@ -44,27 +44,27 @@
   .product-price {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    margin: 15px 0;
-    padding: 12px;
+    gap: 3px;
+    margin: 12px 0;
+    padding: 10px;
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 4px;
 
     .price-label {
       font-weight: 600;
       color: #888;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
     }
 
     .price-value {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: #ffffff;
     }
 
     .price-original {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: #999;
       text-decoration: line-through;
     }
@@ -74,59 +74,59 @@
 @media (min-width: 769px) {
   .product-info-section {
     h1 {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
 
     .product-stock-unavailable {
-      font-size: 0.85rem;
-      padding: 6px 12px;
-      margin-bottom: 12px;
-    }
-
-    .product-format {
-      font-size: 0.95rem;
+      font-size: 0.75rem;
+      padding: 5px 10px;
       margin-bottom: 10px;
     }
 
+    .product-format {
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+    }
+
     .product-ref {
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
 
     .product-description {
-      margin: 20px 0;
+      margin: 15px 0;
       
       h2 {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
       }
 
       p {
-        font-size: 1.05rem;
+        font-size: 0.9rem;
       }
     }
 
     .product-price {
-      margin: 20px 0;
-      padding: 15px;
+      margin: 15px 0;
+      padding: 12px;
 
       .price-label {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
       }
 
       .price-value {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
       }
 
       .price-original {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
       }
     }
 
     .product-pricing {
       .price-item {
-        font-size: 1.1rem;
+        font-size: 0.95rem;
 
         .price-value {
-          font-size: 1.4rem;
+          font-size: 1.2rem;
         }
       }
     }
@@ -138,7 +138,7 @@
     flex: 1;
 
     h1 {
-      font-size: 2.2rem;
+      font-size: 1.6rem;
     }
   }
 }

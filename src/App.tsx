@@ -19,6 +19,7 @@ import AdminOrders from "./pages/admin/orders/AdminOrders";
 import AdminDeliveries from "./pages/admin/deliveries/AdminDeliveries";
 import AdminUsers from "./pages/admin/users/AdminUsers";
 import AdminAdmins from "./pages/admin/admins/AdminAdmins";
+import AdminContact from "./pages/admin/contact/AdminContact";
 import CheckoutSuccess from "./pages/checkout/CheckoutSuccess";
 import CheckoutCancel from "./pages/checkout/CheckoutCancel";
 import ProStatusNotification from "./components/auth/ProStatusNotification";
@@ -78,6 +79,7 @@ function App() {
           <Route path="deliveries" element={<AdminDeliveries />} />
           <Route path="users" element={<AdminUsers />} />
           <Route path="admins" element={<AdminAdmins />} />
+          <Route path="contact" element={<AdminContact />} />
         </Route>
       </Routes>
       <ScrollToTop />

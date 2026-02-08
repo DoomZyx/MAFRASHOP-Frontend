@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
-import { cartAPI, CartItem } from "../API/cart/api";
+import { cartAPI, CartItem, PerfumeValidation } from "../API/cart/api";
 import { useAuth } from "./useAuth";
 import { useWebSocketContext } from "../contexts/WebSocketContext";
 
 export function useCart() {
   const { isAuthenticated, user } = useAuth();
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [perfumeValidation, setPerfumeValidation] = useState<PerfumeValidation | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>("");
 
@@ -21,6 +22,11 @@ export function useCart() {
       const response = await cartAPI.getCart();
       if (response.success) {
         setCart(response.data.cart);
+        if (response.data.perfumeValidation) {
+          setPerfumeValidation(response.data.perfumeValidation);
+        } else {
+          setPerfumeValidation(null);
+        }
       } else {
         setError("Erreur lors du chargement du panier");
       }
@@ -187,6 +193,7 @@ export function useCart() {
 
   return {
     cart,
+    perfumeValidation,
     isLoading,
     error,
     addToCart,

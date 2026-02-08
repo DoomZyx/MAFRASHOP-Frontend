@@ -17,6 +17,7 @@ const TVA_RATE = 1.2; // TVA 20% : TTC pour tous à la validation du panier
 function CartModal({ isOpen, onClose }: CartModalProps) {
   const {
     cart,
+    perfumeValidation,
     isLoading,
     updateQuantity,
     removeFromCart,
@@ -37,10 +38,35 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
 
   const handleCheckoutClick = async () => {
     try {
+      // Vérifier d'abord la validation des parfums avant de tenter le checkout
+      if (perfumeValidation && !perfumeValidation.isValid) {
+        alert(
+          perfumeValidation.message || 
+          `Vous devez commander au minimum ${perfumeValidation.minimumRequired} produits parfum. Vous en avez actuellement ${perfumeValidation.totalCount}.`
+        );
+        return;
+      }
+      
       await handleCheckout();
       onClose();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Erreur lors du checkout:", error);
+      
+      // Gérer spécifiquement les erreurs de validation des parfums
+      if (error?.data?.perfumeValidation || error?.message?.includes("parfum")) {
+        const errorData = error.data || error.response?.data;
+        if (errorData?.perfumeValidation) {
+          const { totalCount, missing, minimumRequired } = errorData.perfumeValidation;
+          alert(
+            errorData.message || 
+            `Vous devez commander au minimum ${minimumRequired} produits parfum. Vous en avez actuellement ${totalCount}.`
+          );
+        } else {
+          alert(error.message || "Erreur lors du checkout");
+        }
+      } else {
+        alert(error.message || "Erreur lors du checkout");
+      }
     }
   };
 
@@ -189,6 +215,16 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
                 })}
               </div>
 
+              {perfumeValidation && !perfumeValidation.isValid && (
+                <div className="cart-perfume-warning">
+                  <i className="bi bi-exclamation-triangle"></i>
+                  <p>{perfumeValidation.message}</p>
+                  <span className="perfume-count">
+                    Produits parfum: {perfumeValidation.totalCount} / {perfumeValidation.minimumRequired}
+                  </span>
+                </div>
+              )}
+
               <div className="cart-footer">
                 <div className="cart-summary">
                   <div className="cart-summary-row">
@@ -224,7 +260,17 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
                   <button
                     className="cart-checkout-btn"
                     onClick={handleCheckoutClick}
-                    disabled={isLoading || checkoutLoading || cart.length === 0}
+                    disabled={
+                      isLoading || 
+                      checkoutLoading || 
+                      cart.length === 0 || 
+                      (perfumeValidation && !perfumeValidation.isValid)
+                    }
+                    title={
+                      perfumeValidation && !perfumeValidation.isValid
+                        ? perfumeValidation.message || "Vous devez commander au minimum 6 parfums différents"
+                        : undefined
+                    }
                   >
                     {checkoutLoading ? "TRAITEMENT..." : "COMMANDER"}
                   </button>

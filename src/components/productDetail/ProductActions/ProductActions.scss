@@ -1,8 +1,8 @@
 .product-actions {
   display: flex;
-  gap: 10px;
-  margin-top: 20px;
-  padding-top: 15px;
+  gap: 8px;
+  margin-top: 15px;
+  padding-top: 12px;
   border-top: 1px solid #555;
 }
 
@@ -11,20 +11,20 @@
   background-color: transparent;
   border: 2px solid #666;
   color: #fff;
-  padding: 10px 16px;
+  padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  font-size: 0.8rem;
+  gap: 5px;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
 
   i {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   &:hover {
@@ -51,18 +51,18 @@
 
 @media (min-width: 769px) {
   .product-actions {
-    gap: 15px;
-    margin-top: 30px;
-    padding-top: 20px;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 15px;
   }
 
   .product-action-btn {
-    padding: 12px 20px;
-    gap: 8px;
-    font-size: 0.95rem;
+    padding: 10px 16px;
+    gap: 6px;
+    font-size: 0.85rem;
 
     i {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
   }
 }

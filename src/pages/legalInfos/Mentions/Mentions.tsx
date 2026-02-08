@@ -36,22 +36,22 @@ function Mentions() {
                     <LegalArticle title="1. Éditeur du Site">
                         <div className="mentions-info-box">
                             <p>
-                                <strong>Raison sociale :</strong> MAFRASHOP
+                                <strong>Raison sociale :</strong> SO CO FRA
                             </p>
                             <p>
-                                <strong>Forme juridique :</strong> [À compléter]
+                                <strong>Forme juridique :</strong> SARL
                             </p>
                             <p>
-                                <strong>Siège social :</strong> 20 rue des ponts, 57300 Mondelange
+                                <strong>Siège social :</strong> 5 rue de la République, 57240 Knutange
                             </p>
                             <p>
-                                <strong>SIRET :</strong> [À compléter]
+                                <strong>SIRET :</strong> 44496772300024
                             </p>
                             <p>
-                                <strong>Email :</strong> contact@mafrashop.com
+                                <strong>Email :</strong> contact@mymafrashop.com
                             </p>
                             <p>
-                                <strong>Téléphone :</strong> [À compléter]
+                                <strong>Téléphone :</strong> 06 08 49 94 32
                             </p>
                         </div>
                     </LegalArticle>

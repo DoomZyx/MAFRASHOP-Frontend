@@ -6,6 +6,10 @@ import {
   updatePromotionStatus,
   triggerProductsUpdate,
 } from "../API/admin/api";
+import {
+  proMinimumQuantitiesAPI,
+  ProMinimumQuantityRule,
+} from "../API/admin/proMinimumQuantities";
 
 export const useAdminProducts = () => {
   const { products: initialProducts, loading, refreshProducts: refreshInitialProducts } = useProducts();
@@ -14,6 +18,29 @@ export const useAdminProducts = () => {
   const [promotionPercentages, setPromotionPercentages] = useState<
     Record<string, number | null>
   >({});
+  const [minimumQuantityRules, setMinimumQuantityRules] = useState<
+    Record<string, ProMinimumQuantityRule | null>
+  >({});
+  const [minimumQuantities, setMinimumQuantities] = useState<
+    Record<string, number | null>
+  >({});
+
+  // Charger les règles de quantité minimale au démarrage
+  useEffect(() => {
+    const loadMinimumQuantityRules = async () => {
+      try {
+        const response = await proMinimumQuantitiesAPI.getAll();
+        const rulesMap: Record<string, ProMinimumQuantityRule | null> = {};
+        response.data.rules.forEach((rule) => {
+          rulesMap[rule.productId] = rule;
+        });
+        setMinimumQuantityRules(rulesMap);
+      } catch (error) {
+        console.error("Erreur lors du chargement des règles de quantité minimale:", error);
+      }
+    };
+    loadMinimumQuantityRules();
+  }, []);
 
   // Synchroniser les produits initiaux avec l'état local
   useEffect(() => {
@@ -200,15 +227,133 @@ export const useAdminProducts = () => {
     return `${price.toFixed(2)} €`;
   };
 
+  const handleMinimumQuantityChange = (productId: string, value: string) => {
+    const numValue = value === "" ? null : parseInt(value);
+    if (numValue !== null && (isNaN(numValue) || numValue <= 0)) {
+      return;
+    }
+    setMinimumQuantities((prev) => ({
+      ...prev,
+      [productId]: numValue,
+    }));
+  };
+
+  const handleSaveMinimumQuantity = async (product: Product) => {
+    setUpdating((prev) => ({ ...prev, [`minqty-${product.id}`]: true }));
+
+    try {
+      const quantityValue = minimumQuantities[product.id];
+      let quantity = null;
+
+      if (
+        quantityValue !== undefined &&
+        quantityValue !== null &&
+        !isNaN(quantityValue) &&
+        quantityValue > 0
+      ) {
+        quantity = quantityValue;
+      } else {
+        const existingRule = minimumQuantityRules[product.id];
+        if (existingRule) {
+          quantity = existingRule.minimumQuantity;
+        }
+      }
+
+      if (quantity === null || quantity <= 0) {
+        alert("Veuillez saisir une quantité minimale valide (supérieure à 0)");
+        setUpdating((prev) => ({
+          ...prev,
+          [`minqty-${product.id}`]: false,
+        }));
+        return;
+      }
+
+      const existingRule = minimumQuantityRules[product.id];
+      let updatedRule: ProMinimumQuantityRule;
+
+      if (existingRule) {
+        updatedRule = (
+          await proMinimumQuantitiesAPI.update(
+            existingRule.id,
+            product.id,
+            quantity
+          )
+        ).data.rule;
+      } else {
+        updatedRule = (
+          await proMinimumQuantitiesAPI.create(product.id, quantity)
+        ).data.rule;
+      }
+
+      setMinimumQuantityRules((prev) => ({
+        ...prev,
+        [product.id]: updatedRule,
+      }));
+
+      setMinimumQuantities((prev) => ({
+        ...prev,
+        [product.id]: null,
+      }));
+    } catch (error: any) {
+      console.error("Erreur:", error);
+      alert(error.message || "Erreur lors de la sauvegarde de la quantité minimale");
+    } finally {
+      setUpdating((prev) => ({
+        ...prev,
+        [`minqty-${product.id}`]: false,
+      }));
+    }
+  };
+
+  const handleDeleteMinimumQuantity = async (product: Product) => {
+    const existingRule = minimumQuantityRules[product.id];
+    if (!existingRule) {
+      return;
+    }
+
+    if (!confirm(`Supprimer la règle de quantité minimale pour "${product.nom}" ?`)) {
+      return;
+    }
+
+    setUpdating((prev) => ({ ...prev, [`minqty-${product.id}`]: true }));
+
+    try {
+      await proMinimumQuantitiesAPI.delete(existingRule.id);
+      setMinimumQuantityRules((prev) => {
+        const newRules = { ...prev };
+        delete newRules[product.id];
+        return newRules;
+      });
+      setMinimumQuantities((prev) => {
+        const newQuantities = { ...prev };
+        delete newQuantities[product.id];
+        return newQuantities;
+      });
+    } catch (error: any) {
+      console.error("Erreur:", error);
+      alert(error.message || "Erreur lors de la suppression de la règle");
+    } finally {
+      setUpdating((prev) => ({
+        ...prev,
+        [`minqty-${product.id}`]: false,
+      }));
+    }
+  };
+
   return {
     products,
     loading,
     updating,
     promotionPercentages,
+    minimumQuantityRules,
+    minimumQuantities,
     handleToggleBestseller,
     handleTogglePromotion,
     handlePercentageChange,
     handleSavePromotion,
+    handleMinimumQuantityChange,
+    handleSaveMinimumQuantity,
+    handleDeleteMinimumQuantity,
     calculateDiscountedPrice,
     formatPrice,
     refreshProducts,

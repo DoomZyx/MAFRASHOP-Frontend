@@ -5,8 +5,6 @@ import SearchProducts from "../shop/searchProducts/searchProducts";
 import { useProducts } from "../../hooks/useProducts";
 import AuthModal from "../auth/AuthModal";
 import ProRequestModal from "../auth/ProRequestModal";
-import CartModal from "../cart/CartModal";
-import FavoritesModal from "../favorites/FavoritesModal";
 import { useNav } from "../../hooks/useNav";
 import { useCart } from "../../hooks/useCart";
 import Avatar from "../shared/Avatar";
@@ -14,13 +12,13 @@ import Avatar from "../shared/Avatar";
 interface MenuBurgerProps {
   isModalOpen: boolean;
   toggleModal: () => void;
+  onOpenCart?: () => void;
+  onOpenFavorites?: () => void;
 }
 
-function MenuBurger({ isModalOpen, toggleModal }: MenuBurgerProps) {
+function MenuBurger({ toggleModal, onOpenCart, onOpenFavorites }: MenuBurgerProps) {
   const { products } = useProducts();
   const [isProModalOpen, setIsProModalOpen] = useState(false);
-  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
-  const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
   const {
     isAuthModalOpen,
     user,
@@ -110,9 +108,15 @@ function MenuBurger({ isModalOpen, toggleModal }: MenuBurgerProps) {
                 <div className="quick-actions-grid">
                   <button
                     className="quick-action-btn"
-                    onClick={() => {
-                      setIsCartModalOpen(true);
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
                       toggleModal();
+                      if (onOpenCart) {
+                        setTimeout(() => {
+                          onOpenCart();
+                        }, 300);
+                      }
                     }}
                   >
                     <div className="quick-action-icon cart-icon">
@@ -125,9 +129,15 @@ function MenuBurger({ isModalOpen, toggleModal }: MenuBurgerProps) {
                   </button>
                   <button
                     className="quick-action-btn"
-                    onClick={() => {
-                      setIsFavoritesModalOpen(true);
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
                       toggleModal();
+                      if (onOpenFavorites) {
+                        setTimeout(() => {
+                          onOpenFavorites();
+                        }, 300);
+                      }
                     }}
                   >
                     <div className="quick-action-icon favorites-icon">
@@ -175,14 +185,6 @@ function MenuBurger({ isModalOpen, toggleModal }: MenuBurgerProps) {
       <ProRequestModal
         isOpen={isProModalOpen}
         onClose={() => setIsProModalOpen(false)}
-      />
-      <CartModal
-        isOpen={isCartModalOpen}
-        onClose={() => setIsCartModalOpen(false)}
-      />
-      <FavoritesModal
-        isOpen={isFavoritesModalOpen}
-        onClose={() => setIsFavoritesModalOpen(false)}
       />
     </nav>
   );

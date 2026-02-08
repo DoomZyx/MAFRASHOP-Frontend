@@ -47,7 +47,10 @@ export const createCheckoutSession = async (
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(error.message || "Erreur lors de la création de la session");
+    const errorWithData = new Error(error.message || "Erreur lors de la création de la session");
+    (errorWithData as any).data = error;
+    (errorWithData as any).response = { data: error };
+    throw errorWithData;
   }
 
   return response.json();

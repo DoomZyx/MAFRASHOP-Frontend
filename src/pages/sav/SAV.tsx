@@ -6,7 +6,7 @@ import SAVForm from "../../components/sav/SAVForm/SAVForm";
 import SEO from "../../components/shared/SEO";
 
 function SAV() {
-  const { formData, handleChange, handleSubmit, isSubmitting, submitStatus } = useSAVForm();
+  const { formData, handleChange, handleSubmit, isSubmitting, submitStatus, handleStatusClose } = useSAVForm();
 
   return (
     <div className="sav-page">
@@ -112,7 +112,7 @@ function SAV() {
                 <h3>Par Email</h3>
                 <p>Contactez-nous par email</p>
                 <p>
-                  Adresse email à venir
+                  contact.mymafrashop.com
                 </p>
               </div>
 
@@ -133,6 +133,7 @@ function SAV() {
             onChange={handleChange}
             isSubmitting={isSubmitting}
             submitStatus={submitStatus}
+            onStatusClose={handleStatusClose}
           />
 
           <section className="sav-faq">
@@ -154,9 +155,7 @@ function SAV() {
                   Comment suivre ma commande ?
                 </h3>
                 <p>
-                  Vous recevez un email avec le numéro de suivi dès l'expédition de votre 
-                  commande. Vous pouvez également consulter l'état de votre commande dans 
-                  votre compte client.
+                  Vous pouvez suivre votre commande en consultant la page mes commandes, cliquez sur la commande effectué, la carte va s'agrandir et vous verrez le statut de livraison et la date et l'heure à laquelle le livreur a indiqué
                 </p>
               </div>
 

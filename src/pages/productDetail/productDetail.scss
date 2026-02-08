@@ -4,18 +4,18 @@
   align-items: center;
   position: relative;
   z-index: 1;
-  padding: 60px 15px 30px;
+  padding: 40px 15px 20px;
   min-height: 100vh;
 }
 
 @media (min-width: 769px) {
   .product-detail-container {
-    padding: 100px 40px 60px;
+    padding: 60px 30px 40px;
   }
 }
 
 @media (min-width: 1025px) {
   .product-detail-container {
-    padding: 250px 60px 80px;
+    padding: 80px 40px 50px;
   }
 }
