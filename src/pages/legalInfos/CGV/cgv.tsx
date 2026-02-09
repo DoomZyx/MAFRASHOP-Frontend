@@ -14,7 +14,6 @@ function CGV() {
                 description="Consultez les conditions générales de vente de MAFRA SHOP. Informations sur les commandes, paiements, livraisons, retours et garanties."
                 keywords="CGV, conditions générales de vente, conditions de vente, politique de vente, termes et conditions"
                 url="/terms"
-                noindex={true}
             />
             <Nav />
             <div className="cgv-container">

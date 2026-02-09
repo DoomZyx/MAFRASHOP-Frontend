@@ -14,7 +14,6 @@ function Privacy() {
                 description="Découvrez comment MAFRA SHOP collecte, utilise et protège vos données personnelles conformément au RGPD et à la loi Informatique et Libertés."
                 keywords="politique de confidentialité, protection des données, RGPD, données personnelles, vie privée"
                 url="/privacy"
-                noindex={true}
             />
             <Nav />
             <div className="privacy-container">

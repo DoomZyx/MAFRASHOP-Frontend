@@ -24,7 +24,6 @@ function CookiesPage() {
                 description="Gérez vos préférences en matière de cookies sur MAFRA SHOP. Découvrez les types de cookies utilisés et comment les gérer."
                 keywords="cookies, politique des cookies, gestion des cookies, traceurs, consentement cookies"
                 url="/cookies"
-                noindex={true}
             />
             <Nav />
             <div className="cookies-container">
