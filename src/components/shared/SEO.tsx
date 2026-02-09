@@ -29,6 +29,21 @@ const SEO = ({
   const fullImageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
   const fullUrl = finalUrl.startsWith("http") ? finalUrl : `${siteUrl}${finalUrl}`;
 
+  // Mise à jour immédiate de la balise robots pour éviter les problèmes de timing
+  if (typeof window !== "undefined") {
+    const robotsContent = [
+      noindex ? "noindex" : "index",
+      nofollow ? "nofollow" : "follow",
+    ].join(", ");
+    let robotsMeta = document.querySelector('meta[name="robots"]') as HTMLMetaElement;
+    if (!robotsMeta) {
+      robotsMeta = document.createElement("meta");
+      robotsMeta.setAttribute("name", "robots");
+      document.head.appendChild(robotsMeta);
+    }
+    robotsMeta.setAttribute("content", robotsContent);
+  }
+
   useEffect(() => {
     // Title
     document.title = fullTitle;
@@ -66,7 +81,7 @@ const SEO = ({
     updateMetaTag("twitter:description", description);
     updateMetaTag("twitter:image", fullImageUrl);
 
-    // Robots
+    // Robots - S'assurer que la balise est toujours correcte
     const robotsContent = [
       noindex ? "noindex" : "index",
       nofollow ? "nofollow" : "follow",
