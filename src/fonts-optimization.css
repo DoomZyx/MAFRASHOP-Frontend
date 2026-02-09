@@ -1,0 +1,12 @@
+/* Optimisation des polices Bootstrap Icons avec font-display: swap */
+/* Cette règle surcharge la règle @font-face de Bootstrap Icons pour améliorer les performances */
+/* Le chemin sera résolu par Vite lors de la compilation */
+@font-face {
+  font-family: "bootstrap-icons";
+  src: url("bootstrap-icons/font/fonts/bootstrap-icons.woff2") format("woff2"),
+       url("bootstrap-icons/font/fonts/bootstrap-icons.woff") format("woff");
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
+
