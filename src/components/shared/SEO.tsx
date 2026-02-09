@@ -29,8 +29,9 @@ const SEO = ({
   const fullImageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
   const fullUrl = finalUrl.startsWith("http") ? finalUrl : `${siteUrl}${finalUrl}`;
 
-  // Mise à jour immédiate de la balise robots pour éviter les problèmes de timing
-  if (typeof window !== "undefined") {
+  // Mise à jour de la balise robots uniquement si noindex ou nofollow est explicitement activé
+  // Sinon, on laisse la balise par défaut dans index.html (index, follow)
+  if (typeof window !== "undefined" && (noindex || nofollow)) {
     const robotsContent = [
       noindex ? "noindex" : "index",
       nofollow ? "nofollow" : "follow",
@@ -81,12 +82,15 @@ const SEO = ({
     updateMetaTag("twitter:description", description);
     updateMetaTag("twitter:image", fullImageUrl);
 
-    // Robots - S'assurer que la balise est toujours correcte
-    const robotsContent = [
-      noindex ? "noindex" : "index",
-      nofollow ? "nofollow" : "follow",
-    ].join(", ");
-    updateMetaTag("robots", robotsContent);
+    // Robots - Modifier uniquement si noindex ou nofollow est activé
+    // Sinon, laisser la balise par défaut (index, follow) de index.html
+    if (noindex || nofollow) {
+      const robotsContent = [
+        noindex ? "noindex" : "index",
+        nofollow ? "nofollow" : "follow",
+      ].join(", ");
+      updateMetaTag("robots", robotsContent);
+    }
 
     // Canonical URL
     let canonical = document.querySelector("link[rel='canonical']") as HTMLLinkElement;
