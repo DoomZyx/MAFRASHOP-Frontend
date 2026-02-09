@@ -165,35 +165,6 @@ function Nav() {
       ) : (
         <div className="nav-container">
           <MenuButton onClick={toggleModal} />
-          {isAuthenticated && (
-            <div className="nav-mobile-icons">
-              <button
-                className="nav-icon-btn"
-                title="Panier"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setIsCartModalOpen(true);
-                }}
-              >
-                <i className="bi bi-cart"></i>
-                {getCartCount() > 0 && (
-                  <span className="nav-icon-badge">{getCartCount()}</span>
-                )}
-              </button>
-              <button
-                className="nav-icon-btn"
-                title="Favoris"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setIsFavoritesModalOpen(true);
-                }}
-              >
-                <i className="bi bi-heart"></i>
-              </button>
-            </div>
-          )}
           {isModalOpen && (
             <div className="mobile-menu-overlay">
               <MenuBurger 
