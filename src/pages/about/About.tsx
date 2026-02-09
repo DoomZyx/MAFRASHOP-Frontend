@@ -33,7 +33,13 @@ function About() {
               </p>
             </div>
             <div className="about-section-image">
-              <img src="/images/logoMAFRA.webp" alt="MAFRA SHOP" />
+              <img 
+                src="/images/logoMAFRA.webp" 
+                alt="MAFRA SHOP"
+                width="143"
+                height="50"
+                loading="lazy"
+              />
             </div>
           </section>
 

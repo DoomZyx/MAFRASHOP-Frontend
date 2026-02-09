@@ -12,7 +12,11 @@ const ProductImage = ({ imageUrl, productName }: ProductImageProps) => {
   return (
     <div className="product-image-section">
       {normalizedUrl ? (
-        <img src={normalizedUrl} alt={productName} />
+        <img 
+          src={normalizedUrl} 
+          alt={productName}
+          loading="eager"
+        />
       ) : (
         <div className="product-image-placeholder">
           <i className="bi bi-image"></i>

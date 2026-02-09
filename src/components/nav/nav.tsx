@@ -87,6 +87,9 @@ function Nav() {
               src="/images/logoMAFRA.webp"
               alt="MAFRA"
               className="nav-logo"
+              width="143"
+              height="50"
+              loading="eager"
             />
           </div>
 

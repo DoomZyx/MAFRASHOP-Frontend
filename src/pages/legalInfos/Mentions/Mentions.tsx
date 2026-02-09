@@ -14,7 +14,7 @@ function Mentions() {
                 description="Consultez les mentions légales de MAFRA SHOP : éditeur, hébergeur, propriété intellectuelle et conditions d'utilisation du site."
                 keywords="mentions légales, informations légales, éditeur, hébergeur, propriété intellectuelle"
                 url="/mentions"
-                noindex={true}
+                noindex={false}
             />
             <Nav />
             <div className="mentions-container">

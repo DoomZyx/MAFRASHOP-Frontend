@@ -21,6 +21,9 @@ function Header() {
             src="/images/logoMAFRA.webp"
             alt="Logo Mafra Shop"
             className="main-logo"
+            width="143"
+            height="50"
+            loading="eager"
           />
         </div>
       </header>

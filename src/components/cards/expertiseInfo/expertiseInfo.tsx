@@ -6,7 +6,13 @@ function ExpertiseInfo() {
       <div className="expertise-cards-wrapper">
         <div className="expertise-info-card">
           <div className="card-image-wrapper">
-            <img src="/images/expertise2.webp" alt="Gamme professionnelle" />
+            <img 
+              src="/images/expertise2.webp" 
+              alt="Gamme professionnelle" 
+              width="675"
+              height="413"
+              loading="lazy"
+            />
             <div className="card-overlay">
               <h2 className="card-title">
                 UNE GAMME PENSÉE PAR LES PROFESSIONNELLES
@@ -35,7 +41,13 @@ function ExpertiseInfo() {
 
         <div className="expertise-info-card">
           <div className="card-image-wrapper">
-            <img src="/images/expertisebg.webp" alt="Notre expertise" />
+            <img 
+              src="/images/expertisebg.webp" 
+              alt="Notre expertise" 
+              width="675"
+              height="450"
+              loading="lazy"
+            />
             <div className="card-overlay">
               <h2 className="card-title">NOTRE EXPERTISE</h2>
             </div>

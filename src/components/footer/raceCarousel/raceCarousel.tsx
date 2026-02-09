@@ -47,6 +47,9 @@ function RaceCarousel() {
                     src={race.image}
                     alt={race.title}
                     className="race-background"
+                    width="400"
+                    height="267"
+                    loading="lazy"
                   />
                   <div className="race-overlay"></div>
                   <div className="race-dates">

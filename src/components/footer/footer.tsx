@@ -11,6 +11,9 @@ function Footer() {
             src="/images/fanatecLogo.webp"
             alt="Logo FANATEC"
             className="footer-logo"
+            width="200"
+            height="137"
+            loading="lazy"
           />
         </div>
 

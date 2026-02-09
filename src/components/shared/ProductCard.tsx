@@ -37,7 +37,13 @@ function ProductCard({
         {(() => {
           const imageUrl = getImageUrl(product.url_image);
           return imageUrl ? (
-            <img src={imageUrl} alt={product.nom} />
+            <img 
+              src={imageUrl} 
+              alt={product.nom}
+              width="198"
+              height="200"
+              loading="lazy"
+            />
           ) : null;
         })()}
         {product.category && (
