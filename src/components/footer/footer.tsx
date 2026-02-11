@@ -68,7 +68,7 @@ function Footer() {
             <p className="footer-contact-info">
               Email: contact.mymafrashop@gmail.com
               <br />
-              Tél: +33 6 08 49 94 32
+              Tél: 06 71 33 59 83
             </p>
           </div>
         </div>
