@@ -76,7 +76,7 @@ function Nav() {
                   <Link to="/shop">CATALOGUE</Link>
                 </li>
                 <li>
-                <Link to="/orders">MES COMMANDES</Link>
+                  <Link to="/guide">GUIDE ET CONSEILS</Link>
                 </li>
               </ul>
             </div>
@@ -98,6 +98,13 @@ function Nav() {
               <div className="nav-icons">
                 {isAuthenticated && (
                   <>
+                    <Link
+                      to="/orders"
+                      className="nav-icon-btn"
+                      title="Mes commandes"
+                    >
+                      <i className="bi bi-bag"></i>
+                    </Link>
                     <button
                       className="nav-icon-btn"
                       title="Panier"

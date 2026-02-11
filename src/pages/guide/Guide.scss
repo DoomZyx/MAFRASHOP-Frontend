@@ -1,0 +1,24 @@
+@import "../../utils/mixins/queries/queries.scss";
+
+.guide-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.guide-container {
+  flex: 1;
+  background: #f5f5f5;
+}
+
+.guide-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+@media (max-width: 767px) {
+  .guide-content {
+    padding: 40px 20px;
+  }
+}

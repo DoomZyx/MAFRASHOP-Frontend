@@ -27,6 +27,7 @@ import CookieBanner from "./components/cookies/CookieBanner";
 import UpdateNotification from "./components/shared/UpdateNotification";
 import About from "./pages/about/About";
 import Expertise from "./pages/expertise/Expertise";
+import Guide from "./pages/guide/Guide";
 import SAV from "./pages/sav/SAV";
 import Shipping from "./pages/shipping/Shipping";
 import Returns from "./pages/returns/Returns";
@@ -53,6 +54,7 @@ function App() {
         {/* Info pages */}
         <Route path="/about" element={<About />} />
         <Route path="/expertise" element={<Expertise />} />
+        <Route path="/guide" element={<Guide />} />
         <Route path="/sav" element={<SAV />} />
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/returns" element={<Returns />} />

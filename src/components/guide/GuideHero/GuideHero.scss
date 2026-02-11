@@ -1,0 +1,42 @@
+.guide-hero {
+  background: linear-gradient(135deg, #27292a 0%, #3a3c3d 100%);
+  padding: 80px 20px;
+  text-align: center;
+  color: white;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .guide-hero-line {
+    width: 100px;
+    height: 4px;
+    background: #d32f2f;
+    margin: 0 auto 20px;
+  }
+
+  .guide-hero-subtitle {
+    font-size: 1.3rem;
+    color: #ddd;
+    margin: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .guide-hero {
+    padding: calc((60px + 30px) * 1.2) 20px 60px 20px;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .guide-hero-subtitle {
+      font-size: 1rem;
+    }
+  }
+}
+

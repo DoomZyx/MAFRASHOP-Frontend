@@ -88,6 +88,12 @@ function MenuBurger({ toggleModal, onOpenCart, onOpenFavorites }: MenuBurgerProp
                   </Link>
                 </li>
                 <li>
+                  <Link to="/guide" onClick={toggleModal} className="menu-link">
+                    <i className="bi bi-book"></i>
+                    <span>Guide et conseils</span>
+                  </Link>
+                </li>
+                <li>
                   <Link to="/profile" onClick={toggleModal} className="menu-link">
                     <i className="bi bi-person"></i>
                     <span>Mon compte</span>
