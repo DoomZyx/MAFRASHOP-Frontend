@@ -45,6 +45,7 @@ function Guide() {
         "Élimination des rayures",
         "Finitions et lustrage",
       ],
+      themeId: "polissage-renovation",
     },
     {
       icon: "bi bi-shield-check",
@@ -57,6 +58,7 @@ function Guide() {
         "Traitements hydrophobes",
         "Entretien régulier",
       ],
+      themeId: "protection-carrosserie",
     },
     {
       icon: "bi bi-car-front-fill",
@@ -69,6 +71,7 @@ function Guide() {
         "Nettoyage des tissus",
         "Désodorisation",
       ],
+      themeId: "entretien-habitacle",
     },
     {
       icon: "bi bi-tools",
@@ -81,6 +84,7 @@ function Guide() {
         "Composition et efficacité",
         "Accessoires recommandés",
       ],
+      themeId: "choix-produits",
     },
     {
       icon: "bi bi-calendar-check",
@@ -93,6 +97,7 @@ function Guide() {
         "Protection hivernale",
         "Maintenance préventive",
       ],
+      themeId: "programme-entretien",
     },
   ];
 
