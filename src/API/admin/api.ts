@@ -194,7 +194,6 @@ export const adminProductsAPI = {
     const response = await fetch(`${API_BASE_URL}/api/admin/products/${productId}`, {
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
