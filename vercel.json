@@ -5,6 +5,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://54.37.231.243/api/:path*"
+    },
+    {
+      "source": "/((?!.*\\.).*)$",
+      "destination": "/index.html"
     }
   ]
 }
