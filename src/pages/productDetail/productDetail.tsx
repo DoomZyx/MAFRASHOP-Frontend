@@ -14,8 +14,8 @@ import "./productDetail.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 function ProductDetail() {
-  const { id } = useParams<{ id: string }>();
-  const { product, loading, error } = useProduct(id || "");
+  const { slug } = useParams<{ slug: string }>();
+  const { product, loading, error } = useProduct(slug || "");
   const { addToCart, isInCart } = useCart();
   const { toggleFavorite, isFavorite } = useFavorites();
   const { isAuthenticated } = useAuth();
@@ -43,19 +43,19 @@ function ProductDetail() {
   const isOutOfStock =
     product.stock === "out_of_stock" || (product.stockQuantity ?? 0) <= 0;
 
-  const productTitle = product ? `${product.name} - Mafrashop` : "Produit - Mafrashop";
-  const productDescription = product
-    ? `${product.name} - ${product.description || "Produit d'entretien automobile MA-FRA"}`
+  const productTitle = product?.nom ? `${product.nom} - Mafrashop` : "Produit - Mafrashop";
+  const productDescription = product?.nom
+    ? `${product.nom} - ${product.description || "Produit d'entretien automobile MA-FRA"}`
     : "Découvrez ce produit d'entretien automobile de la gamme MA-FRA";
-  const productImage = product?.image || "/images/logoMAFRA.webp";
-  const productUrl = `/product/${id}`;
+  const productImage = product?.url_image || "/images/logoMAFRA.webp";
+  const productUrl = `/product/${product?.slug || slug}`;
 
   return (
     <>
       <SEO
         title={productTitle}
         description={productDescription}
-        keywords={`${product?.name}, MA-FRA, entretien automobile, ${product?.category || "produit auto"}`}
+        keywords={`${product?.nom}, MA-FRA, entretien automobile, ${product?.category || "produit auto"}`}
         image={productImage}
         url={productUrl}
         type="product"

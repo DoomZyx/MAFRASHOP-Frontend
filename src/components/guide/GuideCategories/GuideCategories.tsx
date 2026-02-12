@@ -6,6 +6,7 @@ interface Category {
   title: string;
   description: string;
   items: string[];
+  themeId?: string;
 }
 
 interface GuideCategoriesProps {
@@ -25,6 +26,7 @@ function GuideCategories({ title, categories }: GuideCategoriesProps) {
             title={category.title}
             description={category.description}
             items={category.items}
+            themeId={category.themeId}
           />
         ))}
       </div>

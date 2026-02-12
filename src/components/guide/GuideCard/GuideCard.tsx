@@ -1,15 +1,17 @@
 import "./GuideCard.scss";
+import { Link } from "react-router-dom";
 
 interface GuideCardProps {
   icon: string;
   title: string;
   description: string;
   items: string[];
+  themeId?: string;
 }
 
-function GuideCard({ icon, title, description, items }: GuideCardProps) {
-  return (
-    <div className="guide-card">
+function GuideCard({ icon, title, description, items, themeId }: GuideCardProps) {
+  const cardContent = (
+    <>
       <div className="guide-card-icon">
         <i className={icon}></i>
       </div>
@@ -20,8 +22,18 @@ function GuideCard({ icon, title, description, items }: GuideCardProps) {
           <li key={index}>{item}</li>
         ))}
       </ul>
-    </div>
+    </>
   );
+
+  if (themeId) {
+    return (
+      <Link to={`/guide/${themeId}`} className="guide-card guide-card-link">
+        {cardContent}
+      </Link>
+    );
+  }
+
+  return <div className="guide-card">{cardContent}</div>;
 }
 
 export default GuideCard;

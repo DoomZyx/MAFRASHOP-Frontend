@@ -1,0 +1,50 @@
+.guide-recommended-products {
+  margin-top: 40px;
+  padding: 30px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #27292a;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    i {
+      color: #ffa726;
+      font-size: 1.3rem;
+    }
+  }
+}
+
+.guide-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 767px) {
+  .guide-recommended-products {
+    padding: 20px;
+
+    h3 {
+      font-size: 1.3rem;
+    }
+  }
+
+  .guide-products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .guide-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+

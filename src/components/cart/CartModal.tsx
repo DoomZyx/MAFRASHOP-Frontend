@@ -121,7 +121,7 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
                   return (
                     <div key={product.id} className="cart-item">
                       <Link
-                        to={`/product/${product.id}`}
+                        to={`/product/${product.slug || product.id}`}
                         onClick={onClose}
                         className="cart-item-image"
                       >
@@ -139,7 +139,7 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
 
                       <div className="cart-item-info">
                         <Link
-                          to={`/product/${product.id}`}
+                          to={`/product/${product.slug || product.id}`}
                           onClick={onClose}
                           className="cart-item-name"
                         >

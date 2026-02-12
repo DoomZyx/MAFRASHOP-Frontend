@@ -51,7 +51,7 @@ function FavoritesModal({ isOpen, onClose }: FavoritesModalProps) {
                 return (
                   <div key={product.id} className="favorites-item">
                     <Link
-                      to={`/product/${product.id}`}
+                      to={`/product/${product.slug || product.id}`}
                       onClick={onClose}
                       className="favorites-item-image"
                     >
@@ -69,7 +69,7 @@ function FavoritesModal({ isOpen, onClose }: FavoritesModalProps) {
 
                     <div className="favorites-item-info">
                       <Link
-                        to={`/product/${product.id}`}
+                        to={`/product/${product.slug || product.id}`}
                         onClick={onClose}
                         className="favorites-item-name"
                       >

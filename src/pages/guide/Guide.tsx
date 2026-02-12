@@ -32,6 +32,7 @@ function Guide() {
         "Séchage sans rayures",
         "Nettoyage des jantes et vitres",
       ],
+      themeId: "lavage-automobile",
     },
     {
       icon: "bi bi-stars",

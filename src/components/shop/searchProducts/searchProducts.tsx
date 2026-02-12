@@ -50,7 +50,7 @@ function SearchProducts({ products }: SearchProductsProps) {
                     {searchResults.map((product) => (
                       <Link
                         key={product.id}
-                        to={`/product/${product.id}`}
+                        to={`/product/${product.slug || product.id}`}
                         className="search-result-item"
                         onClick={closeSearch}
                       >

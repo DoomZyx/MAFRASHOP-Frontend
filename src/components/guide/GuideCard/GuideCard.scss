@@ -10,6 +10,13 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   }
 
+  &.guide-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    cursor: pointer;
+  }
+
   .guide-card-icon {
     width: 70px;
     height: 70px;
