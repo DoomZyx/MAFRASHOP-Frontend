@@ -48,7 +48,7 @@ function ProductDetail() {
     ? `${product.nom} - ${product.description || "Produit d'entretien automobile MA-FRA"}`
     : "Découvrez ce produit d'entretien automobile de la gamme MA-FRA";
   const productImage = product?.url_image || "/images/logoMAFRA.webp";
-  const productUrl = `/product/${product?.slug || slug}`;
+  const productUrl = `/${product?.slug || slug}`;
 
   return (
     <>

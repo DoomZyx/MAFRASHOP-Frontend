@@ -46,7 +46,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/product/:slug" element={<ProductDetail />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/checkout/success" element={<CheckoutSuccess />} />
@@ -85,6 +84,9 @@ function App() {
           <Route path="admins" element={<AdminAdmins />} />
           <Route path="contact" element={<AdminContact />} />
         </Route>
+        
+        {/* Route produit en dernier pour éviter les conflits avec les autres routes */}
+        <Route path="/:slug" element={<ProductDetail />} />
       </Routes>
       <ScrollToTop />
     </>

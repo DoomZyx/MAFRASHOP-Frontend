@@ -133,7 +133,7 @@ function Catalogue() {
             {unavailable && (
               <span className="product-stock-badge">Indisponible</span>
             )}
-            <Link to={`/product/${product.slug || product.id}`} className="product-card-link">
+            <Link to={`/${product.slug || product.id}`} className="product-card-link">
               {(() => {
                 const imageUrl = getImageUrl(product.url_image);
                 return imageUrl ? (
