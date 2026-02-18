@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import { useAuth } from "../../hooks/useAuth";
@@ -29,6 +30,11 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
   const { user } = useAuth();
   const { handleCheckout, loading: checkoutLoading } = useCheckout();
   const isPro = user?.isPro || false;
+  const [perfumeWarningDismissed, setPerfumeWarningDismissed] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) setPerfumeWarningDismissed(false);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -38,25 +44,25 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
 
   const handleCheckoutClick = async () => {
     try {
-      // Vérifier d'abord la validation des parfums avant de tenter le checkout
-      if (perfumeValidation && !perfumeValidation.isValid) {
+      // Validation parfums (minimum 6) : uniquement pour les pros
+      if (isPro && perfumeValidation && !perfumeValidation.isValid) {
         alert(
-          perfumeValidation.message || 
+          perfumeValidation.message ||
           `Vous devez commander au minimum ${perfumeValidation.minimumRequired} produits parfum. Vous en avez actuellement ${perfumeValidation.totalCount}.`
         );
         return;
       }
-      
+
       await handleCheckout();
       onClose();
     } catch (error: any) {
       console.error("Erreur lors du checkout:", error);
       
-      // Gérer spécifiquement les erreurs de validation des parfums
-      if (error?.data?.perfumeValidation || error?.message?.includes("parfum")) {
+      // Erreur validation parfums (backend ne renvoie que pour les pros, garde défensive)
+      if (isPro && (error?.data?.perfumeValidation || error?.message?.includes("parfum"))) {
         const errorData = error.data || error.response?.data;
         if (errorData?.perfumeValidation) {
-          const { totalCount, missing, minimumRequired } = errorData.perfumeValidation;
+          const { totalCount, minimumRequired } = errorData.perfumeValidation;
           alert(
             errorData.message || 
             `Vous devez commander au minimum ${minimumRequired} produits parfum. Vous en avez actuellement ${totalCount}.`
@@ -215,8 +221,17 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
                 })}
               </div>
 
-              {perfumeValidation && !perfumeValidation.isValid && (
+              {isPro && perfumeValidation && !perfumeValidation.isValid && !perfumeWarningDismissed && (
                 <div className="cart-perfume-warning">
+                  <button
+                    type="button"
+                    className="cart-perfume-warning-close"
+                    onClick={() => setPerfumeWarningDismissed(true)}
+                    title="Fermer"
+                    aria-label="Fermer"
+                  >
+                    <i className="bi bi-x-lg"></i>
+                  </button>
                   <i className="bi bi-exclamation-triangle"></i>
                   <p>{perfumeValidation.message}</p>
                   <span className="perfume-count">
@@ -237,7 +252,7 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
                   <div className="cart-summary-row">
                     <span className="cart-summary-label">Frais de livraison</span>
                     <span className="cart-summary-value">
-                      {deliveryFee === 0 ? "Offerts" : `${deliveryFee.toFixed(2)} €`}
+                      {Number(deliveryFee) === 0 ? "Offerts" : `${Number(deliveryFee).toFixed(2)} €`}
                     </span>
                   </div>
                 </div>
@@ -261,14 +276,14 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
                     className="cart-checkout-btn"
                     onClick={handleCheckoutClick}
                     disabled={
-                      isLoading || 
-                      checkoutLoading || 
-                      cart.length === 0 || 
-                      (perfumeValidation && !perfumeValidation.isValid)
+                      isLoading ||
+                      checkoutLoading ||
+                      cart.length === 0 ||
+                      Boolean(isPro && perfumeValidation && !perfumeValidation.isValid)
                     }
                     title={
-                      perfumeValidation && !perfumeValidation.isValid
-                        ? perfumeValidation.message || "Vous devez commander au minimum 6 parfums différents"
+                      isPro && perfumeValidation && !perfumeValidation.isValid
+                        ? (perfumeValidation.message ?? "Vous devez commander au minimum 6 parfums différents")
                         : undefined
                     }
                   >
