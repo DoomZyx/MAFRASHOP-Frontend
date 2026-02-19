@@ -22,8 +22,6 @@ export interface SessionStatusResponse {
       status: string;
       totalAmount: number;
     } | null;
-    processing?: boolean;
-    message?: string;
   };
 }
 
@@ -58,12 +56,11 @@ export const getSessionStatus = async (
     ...API_CREDENTIALS,
   });
 
-  if (!response.ok && response.status !== 202) {
-    const error = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const error = await response.json();
     throw new Error(error.message || "Erreur lors de la récupération de la session");
   }
 
-  const data = await response.json();
-  return data;
+  return response.json();
 };
 
