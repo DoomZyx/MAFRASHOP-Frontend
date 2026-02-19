@@ -1,17 +1,6 @@
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL, API_CREDENTIALS } from "../config";
 
-const getAuthHeaders = () => {
-  const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-  };
-
-  const authToken = localStorage.getItem("authToken");
-  if (authToken) {
-    headers["Authorization"] = `Bearer ${authToken}`;
-  }
-
-  return headers;
-};
+const getHeaders = () => ({ "Content-Type": "application/json" });
 
 export interface ContactResponseRequest {
   clientEmail: string;
@@ -30,9 +19,9 @@ export const sendResponseToClient = async (
 ): Promise<ContactResponseResponse> => {
   const response = await fetch(`${API_BASE_URL}/api/contact/response`, {
     method: "POST",
-    headers: getAuthHeaders(),
-    credentials: "include",
+    headers: getHeaders(),
     body: JSON.stringify(data),
+    ...API_CREDENTIALS,
   });
 
   const result = await response.json();

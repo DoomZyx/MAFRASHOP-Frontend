@@ -113,7 +113,6 @@ function AuthModal({ isOpen, onClose }: AuthModalProps) {
           <button
             className="auth-modal-google"
             onClick={handleGoogleLogin}
-            disabled={isLoading || !googleConfig}
           >
             <i className="bi bi-google"></i>
             <span>CONTINUER AVEC GOOGLE</span>

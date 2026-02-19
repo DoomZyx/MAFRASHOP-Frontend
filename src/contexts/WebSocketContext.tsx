@@ -25,7 +25,6 @@ const WebSocketContext = createContext<WebSocketContextType | undefined>(
 
 export function WebSocketProvider({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth();
-  const token = localStorage.getItem("authToken");
   const wsRef = useRef<WebSocket | null>(null);
   const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const reconnectAttempts = useRef(0);
@@ -56,20 +55,14 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
   );
 
   const connect = useCallback(() => {
-    if (!isAuthenticated || !token) {
-      return;
-    }
-
-    if (wsRef.current?.readyState === WebSocket.OPEN) {
-      return;
-    }
+    if (!isAuthenticated) return;
+    if (wsRef.current?.readyState === WebSocket.OPEN) return;
 
     try {
-      // Construire l'URL WebSocket à partir de l'URL de l'API
       const apiUrl = API_BASE_URL || window.location.origin;
       const url = new URL(apiUrl);
       const wsProtocol = url.protocol === "https:" ? "wss" : "ws";
-      const wsUrl = `${wsProtocol}://${url.host}/api/ws?token=${encodeURIComponent(token)}`;
+      const wsUrl = `${wsProtocol}://${url.host}/api/ws`;
       const ws = new WebSocket(wsUrl);
 
       ws.onopen = () => {
@@ -141,7 +134,7 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
       console.error("Erreur lors de la connexion WebSocket:", error);
       setIsConnected(false);
     }
-  }, [isAuthenticated, token]);
+  }, [isAuthenticated]);
 
   const disconnect = useCallback(() => {
     if (reconnectTimeoutRef.current) {
@@ -157,7 +150,7 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated && token) {
+    if (isAuthenticated) {
       connect();
     } else {
       disconnect();
@@ -166,7 +159,7 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
     return () => {
       disconnect();
     };
-  }, [isAuthenticated, token, connect, disconnect]);
+  }, [isAuthenticated, connect, disconnect]);
 
   return (
     <WebSocketContext.Provider value={{ subscribe, isConnected }}>

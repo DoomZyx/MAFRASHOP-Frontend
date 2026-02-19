@@ -42,9 +42,6 @@ export interface AuthResponse {
   message: string;
   data?: {
     user: User;
-    accessToken: string;
-    refreshToken: string;
-    expiresIn: number;
   };
 }
 
@@ -56,17 +53,12 @@ export interface GoogleConfig {
   };
 }
 
-const getAuthHeaders = (token?: string) => {
-  const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-  };
+const getAuthHeaders = () => ({
+  "Content-Type": "application/json",
+});
 
-  const authToken = token || localStorage.getItem("authToken");
-  if (authToken) {
-    headers["Authorization"] = `Bearer ${authToken}`;
-  }
-
-  return headers;
+const authFetchOptions: RequestInit = {
+  credentials: "include",
 };
 
 export const authAPI = {
@@ -80,6 +72,7 @@ export const authAPI = {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),
+      ...authFetchOptions,
     });
     return response.json();
   },
@@ -92,6 +85,7 @@ export const authAPI = {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),
+      ...authFetchOptions,
     });
     return response.json();
   },
@@ -101,18 +95,20 @@ export const authAPI = {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify({ code }),
+      ...authFetchOptions,
     });
     return response.json();
   },
 
   getGoogleConfig: async (): Promise<GoogleConfig> => {
-    const response = await fetch(`${API_BASE_URL}/api/auth/google/config`);
+    const response = await fetch(`${API_BASE_URL}/api/auth/google/config`, authFetchOptions);
     return response.json();
   },
 
   getMe: async (): Promise<{ success: boolean; data: { user: User } }> => {
     const response = await fetch(`${API_BASE_URL}/api/auth/me`, {
       headers: getAuthHeaders(),
+      ...authFetchOptions,
     });
     return response.json();
   },
@@ -121,29 +117,17 @@ export const authAPI = {
     const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
       method: "POST",
       headers: getAuthHeaders(),
+      ...authFetchOptions,
     });
     return response.json();
   },
 
-  refreshToken: async (): Promise<{
-    success: boolean;
-    message: string;
-    data?: {
-      accessToken: string;
-      refreshToken: string;
-      expiresIn: number;
-    };
-  }> => {
-    const refreshToken = localStorage.getItem("refreshToken");
-    if (!refreshToken) {
-      throw new Error("Refresh token non disponible");
-    }
+  refreshToken: async (): Promise<{ success: boolean; message: string }> => {
     const response = await fetch(`${API_BASE_URL}/api/auth/refresh`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ refreshToken }),
+      headers: getAuthHeaders(),
+      body: JSON.stringify({}),
+      ...authFetchOptions,
     });
     return response.json();
   },
@@ -160,6 +144,7 @@ export const authAPI = {
       method: "PUT",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),
+      ...authFetchOptions,
     });
     return response.json();
   },
@@ -177,6 +162,7 @@ export const authAPI = {
       method: "PUT",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),
+      ...authFetchOptions,
     });
     return response.json();
   },
@@ -194,6 +180,7 @@ export const authAPI = {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),
+      ...authFetchOptions,
     });
     return response.json();
   },
@@ -209,6 +196,7 @@ export const authAPI = {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),
+      ...authFetchOptions,
     });
     return response.json();
   },
@@ -221,6 +209,7 @@ export const authAPI = {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify(data),
+      ...authFetchOptions,
     });
     return response.json();
   },
@@ -228,15 +217,13 @@ export const authAPI = {
   adminGoogleCallback: async (code: string): Promise<{
     success: boolean;
     message: string;
-    accessToken?: string;
-    refreshToken?: string;
-    expiresIn?: number;
     user?: { id: string; email: string; isAdmin: boolean };
   }> => {
     const response = await fetch(`${API_BASE_URL}/api/auth/admin/google/callback`, {
       method: "POST",
       headers: getAuthHeaders(),
       body: JSON.stringify({ code }),
+      ...authFetchOptions,
     });
     return response.json();
   },

@@ -127,9 +127,9 @@ export const adminStockAPI = {
    * Récupérer l'historique des mouvements de stock
    */
   getStockHistory: async (
-    productId?: string,
-    limit: number = 100,
-    offset: number = 0
+    limit: number,
+    offset: number,
+    productId?: string
   ): Promise<StockHistoryResponse> => {
     const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
 
@@ -137,7 +137,6 @@ export const adminStockAPI = {
       limit: limit.toString(),
       offset: offset.toString(),
     });
-
     if (productId) {
       params.append("productId", productId);
     }

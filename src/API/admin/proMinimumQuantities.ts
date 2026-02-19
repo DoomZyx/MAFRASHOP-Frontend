@@ -1,17 +1,6 @@
 import { API_BASE_URL } from "../config";
 
-const getAuthHeaders = () => {
-  const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-  };
-
-  const authToken = localStorage.getItem("authToken");
-  if (authToken) {
-    headers["Authorization"] = `Bearer ${authToken}`;
-  }
-
-  return headers;
-};
+const getHeaders = () => ({ "Content-Type": "application/json" });
 
 export interface ProMinimumQuantityRule {
   id: string;
@@ -31,8 +20,13 @@ export const proMinimumQuantitiesAPI = {
     success: boolean;
     data: { rules: ProMinimumQuantityRule[] };
   }> => {
+    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+
     const response = await fetch(`${API_BASE_URL}/api/admin/pro-minimum-quantities`, {
-      headers: getAuthHeaders(),
+      headers: {
+        ...getHeaders(),
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     if (!response.ok) {
@@ -69,9 +63,14 @@ export const proMinimumQuantitiesAPI = {
     message: string;
     data: { rule: ProMinimumQuantityRule };
   }> => {
+    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+
     const response = await fetch(`${API_BASE_URL}/api/admin/pro-minimum-quantities`, {
       method: "POST",
-      headers: getAuthHeaders(),
+      headers: {
+        ...getHeaders(),
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({ productId, minimumQuantity }),
     });
 
@@ -95,11 +94,16 @@ export const proMinimumQuantitiesAPI = {
     message: string;
     data: { rule: ProMinimumQuantityRule };
   }> => {
+    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+
     const response = await fetch(
       `${API_BASE_URL}/api/admin/pro-minimum-quantities/${ruleId}`,
       {
         method: "PUT",
-        headers: getAuthHeaders(),
+        headers: {
+          ...getHeaders(),
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ productId, minimumQuantity }),
       }
     );
@@ -119,11 +123,16 @@ export const proMinimumQuantitiesAPI = {
     success: boolean;
     message: string;
   }> => {
+    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+
     const response = await fetch(
       `${API_BASE_URL}/api/admin/pro-minimum-quantities/${ruleId}`,
       {
         method: "DELETE",
-        headers: getAuthHeaders(),
+        headers: {
+          ...getHeaders(),
+          Authorization: `Bearer ${token}`,
+        },
       }
     );
 

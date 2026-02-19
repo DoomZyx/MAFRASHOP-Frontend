@@ -15,13 +15,24 @@ export const useCheckoutSuccess = (sessionId: string | null) => {
   }, [sessionId]);
 
   const verifySession = async () => {
-    try {
-      const response = await checkSessionStatus(sessionId!);
-      setSessionStatus(response.data);
-      setVerifying(false);
-    } catch (error) {
-      setVerifying(false);
-    }
+    const maxRetries = 5;
+    const delayMs = 2000;
+
+    const attempt = async (retryCount: number): Promise<void> => {
+      try {
+        const response = await checkSessionStatus(sessionId!);
+        if (response.data?.processing && retryCount < maxRetries) {
+          setTimeout(() => attempt(retryCount + 1), delayMs);
+          return;
+        }
+        setSessionStatus(response.data);
+        setVerifying(false);
+      } catch {
+        setVerifying(false);
+      }
+    };
+
+    attempt(0);
   };
 
   return {

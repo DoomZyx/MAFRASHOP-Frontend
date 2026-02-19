@@ -1,17 +1,6 @@
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL, API_CREDENTIALS } from "../config";
 
-const getAuthHeaders = () => {
-  const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-  };
-
-  const authToken = localStorage.getItem("authToken");
-  if (authToken) {
-    headers["Authorization"] = `Bearer ${authToken}`;
-  }
-
-  return headers;
-};
+const getHeaders = () => ({ "Content-Type": "application/json" });
 
 export interface OrderItem {
   id: string;
@@ -67,7 +56,8 @@ export const ordersAPI = {
     data: { orders: Order[] };
   }> => {
     const response = await fetch(`${API_BASE_URL}/api/orders`, {
-      headers: getAuthHeaders(),
+      headers: getHeaders(),
+      ...API_CREDENTIALS,
     });
     return response.json();
   },
@@ -77,22 +67,16 @@ export const ordersAPI = {
     data: { order: Order };
   }> => {
     const response = await fetch(`${API_BASE_URL}/api/orders/${id}`, {
-      headers: getAuthHeaders(),
+      headers: getHeaders(),
+      ...API_CREDENTIALS,
     });
     return response.json();
   },
 
   downloadInvoice: async (orderId: string): Promise<Blob> => {
-    const authToken = localStorage.getItem("authToken");
-    const headers: Record<string, string> = {};
-    
-    if (authToken) {
-      headers["Authorization"] = `Bearer ${authToken}`;
-    }
-
     const response = await fetch(
       `${API_BASE_URL}/api/invoices/${orderId}/download`,
-      { headers }
+      { ...API_CREDENTIALS }
     );
 
     if (!response.ok) {
