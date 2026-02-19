@@ -17,7 +17,9 @@ const SEO = ({
   keywords = "entretien automobile, produits d'entretien automobile, accessoires auto, professionnel auto, Fournisseur produit nettoyage auto professionnel",
   image = "/images/logoMAFRA.webp",
   url,
-  type = "website",  
+  type = "website",
+  noindex,
+  nofollow,
 }: SEOProps) => {
   const baseTitle = "Mafra";
   const fullTitle = title.includes(baseTitle) ? title : `${title} | ${baseTitle}`;
