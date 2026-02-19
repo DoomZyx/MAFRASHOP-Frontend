@@ -194,6 +194,7 @@ export const adminProductsAPI = {
     const response = await fetch(`${API_BASE_URL}/api/admin/products/${productId}`, {
       method: "DELETE",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -283,7 +284,7 @@ export const updateUserRole = async (
   data: { user: AdminUser };
 }> => {
   const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-  
+
   const response = await fetch(`${API_BASE_URL}/api/admin/users/${userId}/role`, {
     method: "PATCH",
     headers: {
@@ -340,6 +341,7 @@ export const validateVatUser = async (
   data?: { user: AdminUser };
 }> => {
   const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+
   const response = await fetch(`${API_BASE_URL}/api/auth/admin/validate-vat`, {
     method: "POST",
     headers: {
@@ -393,7 +395,7 @@ export const createAdminUser = async (data: {
   data: { user: AdminUser };
 }> => {
   const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-  
+
   const response = await fetch(`${API_BASE_URL}/api/admin/users`, {
     method: "POST",
     headers: {

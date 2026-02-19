@@ -2,37 +2,17 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAdminAuth } from "./useAdminAuth";
 import { useAuth } from "./useAuth";
-import { authAPI } from "../API/auth/api";
+import { GOOGLE_CLIENT_ID, GOOGLE_REDIRECT_URI } from "../API/config";
 
 export const useAdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [googleConfig, setGoogleConfig] = useState<{
-    clientId: string;
-    redirectUri: string;
-  } | null>(null);
-  
+
   const { login, loginWithGoogle, isAuthenticated, loading: adminLoading } = useAdminAuth();
   const { user: authUser } = useAuth();
   const navigate = useNavigate();
-
-  // Charger la configuration Google
-  useEffect(() => {
-    const loadGoogleConfig = async () => {
-      try {
-        const response = await authAPI.getGoogleConfig();
-        if (response.success) {
-          setGoogleConfig(response.data);
-        }
-      } catch (error) {
-        console.error("Erreur lors du chargement de la config Google:", error);
-      }
-    };
-
-    loadGoogleConfig();
-  }, []);
 
   // Traiter le callback Google
   useEffect(() => {
@@ -98,22 +78,15 @@ export const useAdminLogin = () => {
   };
 
   const handleGoogleLogin = () => {
-    if (!googleConfig) {
-      setError("Configuration Google non disponible");
-      return;
-    }
-
-    const { clientId, redirectUri } = googleConfig;
-
-    if (!clientId || !redirectUri) {
-      setError("Configuration Google incomplète");
+    if (!GOOGLE_CLIENT_ID || !GOOGLE_REDIRECT_URI) {
+      setError("Configuration Google non disponible (variables d'environnement manquantes)");
       return;
     }
 
     const scope = "email profile";
     const state = "admin";
-    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(
-      redirectUri
+    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${encodeURIComponent(
+      GOOGLE_REDIRECT_URI
     )}&response_type=code&scope=${encodeURIComponent(
       scope
     )}&access_type=offline&prompt=consent&state=${encodeURIComponent(state)}`;

@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL, API_CREDENTIALS } from "../config";
 
 export interface CheckoutSessionResponse {
   success: boolean;
@@ -28,21 +28,13 @@ export interface SessionStatusResponse {
 export const createCheckoutSession = async (
   shippingAddress?: any
 ): Promise<CheckoutSessionResponse> => {
-  const token = localStorage.getItem("authToken");
-
-  if (!token) {
-    throw new Error("Non authentifié");
-  }
-
   const response = await fetch(`${API_BASE_URL}/api/payment/create-checkout-session`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       shippingAddress: shippingAddress || null,
     }),
+    ...API_CREDENTIALS,
   });
 
   if (!response.ok) {
@@ -59,17 +51,9 @@ export const createCheckoutSession = async (
 export const getSessionStatus = async (
   sessionId: string
 ): Promise<SessionStatusResponse> => {
-  const token = localStorage.getItem("authToken");
-
-  if (!token) {
-    throw new Error("Non authentifié");
-  }
-
   const response = await fetch(`${API_BASE_URL}/api/payment/session/${sessionId}`, {
     method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    ...API_CREDENTIALS,
   });
 
   if (!response.ok) {

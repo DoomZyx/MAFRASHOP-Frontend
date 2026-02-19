@@ -4,34 +4,25 @@ import { AuthContextType } from "../contexts/AuthContext";
 
 export function useAuthProvider(): AuthContextType {
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const loadUser = useCallback(async (authToken: string) => {
+  const loadUser = useCallback(async () => {
     try {
       const response = await authAPI.getMe();
       if (response.success && response.data) {
         setUser(response.data.user);
       } else {
-        localStorage.removeItem("authToken");
-        setToken(null);
+        setUser(null);
       }
-    } catch (error) {
-      localStorage.removeItem("authToken");
-      setToken(null);
+    } catch {
+      setUser(null);
     } finally {
       setIsLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("authToken");
-    if (storedToken) {
-      setToken(storedToken);
-      loadUser(storedToken);
-    } else {
-      setIsLoading(false);
-    }
+    loadUser();
   }, [loadUser]);
 
   const login = useCallback(async (email: string, password: string) => {
@@ -39,10 +30,6 @@ export function useAuthProvider(): AuthContextType {
     if (!response.success || !response.data) {
       throw new Error(response.message || "Erreur lors de la connexion");
     }
-    // Nouveau format : accessToken + refreshToken
-    localStorage.setItem("authToken", response.data.accessToken);
-    localStorage.setItem("refreshToken", response.data.refreshToken);
-    setToken(response.data.accessToken);
     setUser(response.data.user);
   }, []);
 
@@ -57,10 +44,6 @@ export function useAuthProvider(): AuthContextType {
       if (!response.success || !response.data) {
         throw new Error(response.message || "Erreur lors de l'inscription");
       }
-      // Nouveau format : accessToken + refreshToken
-      localStorage.setItem("authToken", response.data.accessToken);
-      localStorage.setItem("refreshToken", response.data.refreshToken);
-      setToken(response.data.accessToken);
       setUser(response.data.user);
     },
     []
@@ -71,36 +54,28 @@ export function useAuthProvider(): AuthContextType {
     if (!response.success || !response.data) {
       throw new Error(response.message || "Erreur lors de la connexion Google");
     }
-    // Nouveau format : accessToken + refreshToken
-    localStorage.setItem("authToken", response.data.accessToken);
-    localStorage.setItem("refreshToken", response.data.refreshToken);
-    setToken(response.data.accessToken);
     setUser(response.data.user);
   }, []);
 
   const logout = useCallback(async () => {
     try {
       await authAPI.logout();
-    } catch (error) {
+    } catch {
+      // ignore
     } finally {
-      localStorage.removeItem("authToken");
-      localStorage.removeItem("refreshToken");
-      setToken(null);
       setUser(null);
     }
   }, []);
 
   const refreshUser = useCallback(async () => {
-    if (token) {
-      await loadUser(token);
-    }
-  }, [token, loadUser]);
+    await loadUser();
+  }, [loadUser]);
 
-  const isAuthenticated = !!user && !!token;
+  const isAuthenticated = !!user;
 
   return {
     user,
-    token,
+    token: null,
     isLoading,
     isAuthenticated,
     login,

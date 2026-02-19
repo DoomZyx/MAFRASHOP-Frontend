@@ -18,6 +18,7 @@ export const adminStatsAPI = {
    */
   getDashboardStats: async (): Promise<DashboardStatsResponse> => {
     const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
+
     const response = await fetch(`${API_BASE_URL}/api/admin/stats/dashboard`, {
       headers: {
         "Content-Type": "application/json",
@@ -60,6 +61,7 @@ export const adminStatsAPI = {
 
     const response = await fetch(`${API_BASE_URL}/api/admin/stats/export?type=${type}`, {
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });

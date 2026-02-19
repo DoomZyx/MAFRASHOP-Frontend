@@ -1,18 +1,9 @@
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL, API_CREDENTIALS } from "../config";
 import { Product } from "../../types/product";
 
-const getAuthHeaders = (token?: string, includeContentType: boolean = true) => {
+const getHeaders = (includeContentType = true) => {
   const headers: Record<string, string> = {};
-
-  if (includeContentType) {
-    headers["Content-Type"] = "application/json";
-  }
-
-  const authToken = token || localStorage.getItem("authToken");
-  if (authToken) {
-    headers["Authorization"] = `Bearer ${authToken}`;
-  }
-
+  if (includeContentType) headers["Content-Type"] = "application/json";
   return headers;
 };
 
@@ -27,7 +18,8 @@ export const favoritesAPI = {
     data: { favorites: FavoriteItem[] };
   }> => {
     const response = await fetch(`${API_BASE_URL}/api/favorites`, {
-      headers: getAuthHeaders(),
+      headers: getHeaders(),
+      ...API_CREDENTIALS,
     });
     return response.json();
   },
@@ -39,8 +31,9 @@ export const favoritesAPI = {
   }> => {
     const response = await fetch(`${API_BASE_URL}/api/favorites`, {
       method: "POST",
-      headers: getAuthHeaders(),
+      headers: getHeaders(),
       body: JSON.stringify({ productId }),
+      ...API_CREDENTIALS,
     });
     return response.json();
   },
@@ -52,7 +45,8 @@ export const favoritesAPI = {
   }> => {
     const response = await fetch(`${API_BASE_URL}/api/favorites/${productId}`, {
       method: "DELETE",
-      headers: getAuthHeaders(undefined, false), // Pas de Content-Type pour DELETE sans body
+      headers: getHeaders(false),
+      ...API_CREDENTIALS,
     });
     return response.json();
   },

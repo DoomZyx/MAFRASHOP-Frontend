@@ -1,6 +1,6 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { useAuth } from "./useAuth";
-import { authAPI } from "../API/auth/api";
+import { GOOGLE_CLIENT_ID, GOOGLE_REDIRECT_URI } from "../API/config";
 
 interface FormData {
   email: string;
@@ -19,29 +19,10 @@ export function useAuthModal(onClose: () => void) {
   });
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
-  const [googleConfig, setGoogleConfig] = useState<{
-    clientId: string;
-    redirectUri: string;
-  } | null>(null);
 
   const { login, register, loginWithGoogle } = useAuth();
 
-  useEffect(() => {
-    const loadGoogleConfig = async () => {
-      try {
-        const response = await authAPI.getGoogleConfig();
-        if (response.success) {
-          setGoogleConfig(response.data);
-        } else {
-          console.error("Config non réussie:", response);
-        }
-      } catch (error) {
-        console.error("Erreur lors du chargement de la config Google:", error);
-      }
-    };
-
-    loadGoogleConfig();
-  }, []);
+  const googleConfig = !!(GOOGLE_CLIENT_ID && GOOGLE_REDIRECT_URI);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -103,34 +84,18 @@ export function useAuthModal(onClose: () => void) {
   };
 
   const handleGoogleLogin = () => {
-    console.log("handleGoogleLogin - googleConfig:", googleConfig);
-
-    if (!googleConfig) {
-      setError("Configuration Google non disponible");
-      return;
-    }
-
-    const { clientId, redirectUri } = googleConfig;
-
-    if (!clientId || !redirectUri) {
-      setError("Configuration Google incomplète");
-      console.error(
-        "Config incomplète - clientId:",
-        clientId,
-        "redirectUri:",
-        redirectUri
-      );
+    if (!GOOGLE_CLIENT_ID || !GOOGLE_REDIRECT_URI) {
+      setError("Configuration Google non disponible (variables d'environnement manquantes)");
       return;
     }
 
     const scope = "email profile";
-    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(
-      redirectUri
+    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${encodeURIComponent(
+      GOOGLE_REDIRECT_URI
     )}&response_type=code&scope=${encodeURIComponent(
       scope
     )}&access_type=offline&prompt=consent`;
 
-    console.log("Auth URL:", authUrl);
     window.location.href = authUrl;
   };
 

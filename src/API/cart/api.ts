@@ -1,18 +1,9 @@
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL, API_CREDENTIALS } from "../config";
 import { Product } from "../../types/product";
 
-const getAuthHeaders = (token?: string, includeContentType: boolean = true) => {
+const getHeaders = (includeContentType = true) => {
   const headers: Record<string, string> = {};
-
-  if (includeContentType) {
-    headers["Content-Type"] = "application/json";
-  }
-
-  const authToken = token || localStorage.getItem("authToken");
-  if (authToken) {
-    headers["Authorization"] = `Bearer ${authToken}`;
-  }
-
+  if (includeContentType) headers["Content-Type"] = "application/json";
   return headers;
 };
 
@@ -33,13 +24,14 @@ export interface PerfumeValidation {
 export const cartAPI = {
   getCart: async (): Promise<{
     success: boolean;
-    data: { 
+    data: {
       cart: CartItem[];
       perfumeValidation?: PerfumeValidation;
     };
   }> => {
     const response = await fetch(`${API_BASE_URL}/api/cart`, {
-      headers: getAuthHeaders(),
+      headers: getHeaders(),
+      ...API_CREDENTIALS,
     });
     return response.json();
   },
@@ -51,8 +43,9 @@ export const cartAPI = {
   }> => {
     const response = await fetch(`${API_BASE_URL}/api/cart`, {
       method: "POST",
-      headers: getAuthHeaders(),
+      headers: getHeaders(),
       body: JSON.stringify({ productId, quantity }),
+      ...API_CREDENTIALS,
     });
     return response.json();
   },
@@ -67,8 +60,9 @@ export const cartAPI = {
   }> => {
     const response = await fetch(`${API_BASE_URL}/api/cart/${productId}`, {
       method: "PUT",
-      headers: getAuthHeaders(),
+      headers: getHeaders(),
       body: JSON.stringify({ quantity }),
+      ...API_CREDENTIALS,
     });
     return response.json();
   },
@@ -80,7 +74,8 @@ export const cartAPI = {
   }> => {
     const response = await fetch(`${API_BASE_URL}/api/cart/${productId}`, {
       method: "DELETE",
-      headers: getAuthHeaders(undefined, false), // Pas de Content-Type pour DELETE sans body
+      headers: getHeaders(false),
+      ...API_CREDENTIALS,
     });
     return response.json();
   },
@@ -91,7 +86,8 @@ export const cartAPI = {
   }> => {
     const response = await fetch(`${API_BASE_URL}/api/cart`, {
       method: "DELETE",
-      headers: getAuthHeaders(undefined, false), // Pas de Content-Type pour DELETE sans body
+      headers: getHeaders(false),
+      ...API_CREDENTIALS,
     });
     return response.json();
   },
