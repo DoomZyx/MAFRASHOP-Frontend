@@ -43,7 +43,7 @@ function ProductDetail() {
   const isOutOfStock =
     product.stock === "out_of_stock" || (product.stockQuantity ?? 0) <= 0;
 
-  const productTitle = product?.nom ? `${product.nom} - Mafrashop` : "Produit - Mafrashop";
+  const productTitle = product?.nom ? `${product.nom} - MAFRA` : "Produit - MAFRA";
   const productDescription = product?.nom
     ? `${product.nom} - ${product.description || "Produit d'entretien automobile MA-FRA"}`
     : "Découvrez ce produit d'entretien automobile de la gamme MA-FRA";

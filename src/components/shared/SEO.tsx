@@ -12,7 +12,7 @@ interface SEOProps {
 }
 
 const SEO = ({
-  title = "Mafra - Votre spécialiste en pièces d'entretien automobile",
+  title = "MAFRA - Votre spécialiste en pièces d'entretien automobile",
   description = "Découvrez notre large gamme de produits d'entretien auto mobile pour professionnels et particuliers.",
   keywords = "entretien automobile, produits d'entretien automobile, accessoires auto, professionnel auto, Fournisseur produit nettoyage auto professionnel",
   image = "/images/logoMAFRA.webp",
@@ -21,7 +21,7 @@ const SEO = ({
   noindex,
   nofollow,
 }: SEOProps) => {
-  const baseTitle = "Mafra";
+  const baseTitle = "MAFRA";
   const fullTitle = title.includes(baseTitle) ? title : `${title} | ${baseTitle}`;
   const siteUrl = typeof window !== "undefined" ? window.location.origin : "";
   const currentUrl = typeof window !== "undefined" ? window.location.pathname : "";

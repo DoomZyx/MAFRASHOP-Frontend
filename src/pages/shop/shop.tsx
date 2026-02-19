@@ -12,7 +12,7 @@ function Shop() {
   return (
     <>
       <SEO
-        title="Mafrashop - Votre spécialiste en pièces auto et équipements"
+        title="MAFRA - Votre spécialiste en pièces auto et équipements"
         description="Parcourez notre catalogue complet de produits d'entretien automobile MA-FRA. Plus de 100 produits pour le lavage, polissage et protection de votre véhicule."
         keywords="catalogue auto, produits entretien, lavage auto, polissage, protection carrosserie, MA-FRA, boutique en ligne"
         url="/shop"

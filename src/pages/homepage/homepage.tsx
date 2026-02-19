@@ -13,7 +13,7 @@ function Homepage() {
   return (
     <>
       <SEO
-        title="Mafrashop - Votre spécialiste en pièces auto et équipements"
+        title="MAFRA - Votre spécialiste en pièces auto et équipements"
         description="Découvrez notre large gamme de pièces détachées automobiles, équipements et accessoires pour professionnels et particuliers. Livraison rapide et expertise technique."
         keywords="pièces auto, pièces détachées, équipements auto, accessoires automobile, professionnel auto, MA-FRA, entretien automobile"
         url="/"
