@@ -12,16 +12,14 @@ interface SEOProps {
 }
 
 const SEO = ({
-  title = "Mafrashop - Votre spécialiste en pièces auto et équipements",
-  description = "Découvrez notre large gamme de pièces détachées automobiles, équipements et accessoires pour professionnels et particuliers. Livraison rapide et expertise technique.",
-  keywords = "pièces auto, pièces détachées, équipements auto, accessoires automobile, professionnel auto",
+  title = "Mafra - Votre spécialiste en pièces d'entretien automobile",
+  description = "Découvrez notre large gamme de produits d'entretien auto mobile pour professionnels et particuliers.",
+  keywords = "entretien automobile, produits d'entretien automobile, accessoires auto, professionnel auto, Fournisseur produit nettoyage auto professionnel",
   image = "/images/logoMAFRA.webp",
   url,
-  type = "website",
-  noindex = false,
-  nofollow = false,
+  type = "website",  
 }: SEOProps) => {
-  const baseTitle = "Mafrashop";
+  const baseTitle = "Mafra";
   const fullTitle = title.includes(baseTitle) ? title : `${title} | ${baseTitle}`;
   const siteUrl = typeof window !== "undefined" ? window.location.origin : "";
   const currentUrl = typeof window !== "undefined" ? window.location.pathname : "";
