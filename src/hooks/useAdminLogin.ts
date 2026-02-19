@@ -14,6 +14,11 @@ export const useAdminLogin = () => {
   const { user: authUser } = useAuth();
   const navigate = useNavigate();
 
+  const googleConfig =
+    GOOGLE_CLIENT_ID && GOOGLE_REDIRECT_URI
+      ? { clientId: GOOGLE_CLIENT_ID, redirectUri: GOOGLE_REDIRECT_URI }
+      : null;
+
   // Traiter le callback Google
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
