@@ -134,8 +134,15 @@ export default defineConfig({
     }),
   ],
   server: {
-    host: '0.0.0.0', 
+    host: '0.0.0.0',
     port: 5173,
+    // Proxy /api vers le backend pour que les cookies httpOnly soient envoyés (même origine en dev)
+    proxy: {
+      '/api': {
+        target: process.env.VITE_DEV_PROXY_TARGET || 'http://localhost:3000',
+        changeOrigin: true,
+      },
+    },
   },
   build: {
     // Optimisations de build

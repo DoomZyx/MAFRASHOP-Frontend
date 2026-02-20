@@ -1,9 +1,13 @@
 // Configuration de l'API
 // Variables lues depuis le .env à la racine du frontend (dossier contenant vite.config.ts).
 // Vite n'expose que les variables préfixées par VITE_. Redémarrer le serveur dev après modification du .env.
-
-// URL de base du backend (ex: https://preprod.mymafrashop.com ou http://localhost:8080)
-export const API_BASE_URL = import.meta.env.VITE_API_URL || (typeof window !== "undefined" ? window.location.origin : "");
+//
+// En dev : toujours même origine (proxy Vite) pour que les cookies httpOnly soient envoyés.
+// En prod : VITE_API_URL (ex. https://api.mymafrashop.com). Côté Vite, le proxy cible VITE_DEV_PROXY_TARGET ou localhost:3000.
+export const API_BASE_URL =
+  import.meta.env.DEV && typeof window !== "undefined"
+    ? window.location.origin
+    : (import.meta.env.VITE_API_URL || (typeof window !== "undefined" ? window.location.origin : ""));
 
 /** Options par défaut pour les requêtes API (envoi des cookies httpOnly) */
 export const API_CREDENTIALS: RequestInit = { credentials: "include" };
