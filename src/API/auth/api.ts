@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL, API_CREDENTIALS } from "../config";
 
 export interface User {
   id: string;
@@ -107,8 +107,9 @@ export const authAPI = {
 
   getMe: async (): Promise<{ success: boolean; data: { user: User } }> => {
     const response = await fetch(`${API_BASE_URL}/api/auth/me`, {
+      method: "GET",
       headers: getAuthHeaders(),
-      ...authFetchOptions,
+      ...API_CREDENTIALS,
     });
     return response.json();
   },

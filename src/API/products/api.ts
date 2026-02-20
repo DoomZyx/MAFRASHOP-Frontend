@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL, API_CREDENTIALS } from "../config";
 import { Product } from "../../types/product";
 
 /**
@@ -7,7 +7,7 @@ import { Product } from "../../types/product";
  */
 export const getAllProducts = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/products`);
+    const response = await fetch(`${API_BASE_URL}/api/products`, { ...API_CREDENTIALS });
 
     if (!response.ok) {
       throw new Error(`Erreur HTTP: ${response.status}`);
@@ -28,7 +28,7 @@ export const getAllProducts = async (): Promise<Product[]> => {
  */
 export const getProductById = async (id: string): Promise<Product> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/products/${id}`);
+    const response = await fetch(`${API_BASE_URL}/api/products/${id}`, { ...API_CREDENTIALS });
 
     if (!response.ok) {
       if (response.status === 404) {
@@ -51,7 +51,7 @@ export const getProductById = async (id: string): Promise<Product> => {
  */
 export const getBestsellers = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/products/bestsellers/all`);
+    const response = await fetch(`${API_BASE_URL}/api/products/bestsellers/all`, { ...API_CREDENTIALS });
 
     if (!response.ok) {
       throw new Error(`Erreur HTTP: ${response.status}`);
@@ -71,7 +71,7 @@ export const getBestsellers = async (): Promise<Product[]> => {
  */
 export const getPromotions = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/products/promotions/all`);
+    const response = await fetch(`${API_BASE_URL}/api/products/promotions/all`, { ...API_CREDENTIALS });
 
     if (!response.ok) {
       throw new Error(`Erreur HTTP: ${response.status}`);
@@ -91,7 +91,7 @@ export const getPromotions = async (): Promise<Product[]> => {
  */
 export const getCategories = async (): Promise<string[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/products/categories/all`);
+    const response = await fetch(`${API_BASE_URL}/api/products/categories/all`, { ...API_CREDENTIALS });
 
     if (!response.ok) {
       throw new Error(`Erreur HTTP: ${response.status}`);
@@ -116,7 +116,7 @@ export const getSubcategories = async (category?: string): Promise<string[]> => 
       ? `${API_BASE_URL}/api/products/subcategories/all?category=${encodeURIComponent(category)}`
       : `${API_BASE_URL}/api/products/subcategories/all`;
 
-    const response = await fetch(url);
+    const response = await fetch(url, { ...API_CREDENTIALS });
 
     if (!response.ok) {
       throw new Error(`Erreur HTTP: ${response.status}`);
