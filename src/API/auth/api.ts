@@ -117,6 +117,7 @@ export const authAPI = {
     const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
       method: "POST",
       headers: getAuthHeaders(),
+      body: JSON.stringify({}),
       ...authFetchOptions,
     });
     return response.json();
