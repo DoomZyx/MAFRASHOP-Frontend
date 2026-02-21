@@ -6,41 +6,41 @@ function UpdateNotification() {
   const [registration, setRegistration] = useState<ServiceWorkerRegistration | null>(null);
 
   useEffect(() => {
-    // Écouter les événements de mise à jour du Service Worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.ready.then((reg) => {
-        setRegistration(reg);
-        
-        // Vérifier s'il y a une mise à jour en attente
-        if (reg.waiting) {
-          setShowUpdate(true);
+    if (!('serviceWorker' in navigator)) return;
+
+    // Listener controllerchange enregistré au montage : quand le nouveau SW prend le contrôle, on recharge
+    const onControllerChange = () => {
+      window.location.reload();
+    };
+    navigator.serviceWorker.addEventListener('controllerchange', onControllerChange);
+
+    navigator.serviceWorker.ready.then((reg) => {
+      setRegistration(reg);
+
+      if (reg.waiting) {
+        setShowUpdate(true);
+      }
+
+      reg.addEventListener('updatefound', () => {
+        const newWorker = reg.installing;
+        if (newWorker) {
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              setShowUpdate(true);
+            }
+          });
         }
-        
-        // Écouter les nouvelles mises à jour
-        reg.addEventListener('updatefound', () => {
-          const newWorker = reg.installing;
-          
-          if (newWorker) {
-            newWorker.addEventListener('statechange', () => {
-              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                setShowUpdate(true);
-              }
-            });
-          }
-        });
       });
-    }
+    });
+
+    return () => {
+      navigator.serviceWorker.removeEventListener('controllerchange', onControllerChange);
+    };
   }, []);
 
   const handleUpdate = () => {
     if (registration?.waiting) {
-      // Envoyer un message au Service Worker pour qu'il s'active
       registration.waiting.postMessage({ type: 'SKIP_WAITING' });
-      
-      // Recharger la page après activation
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
-        window.location.reload();
-      });
     }
   };
 
@@ -60,7 +60,7 @@ function UpdateNotification() {
         </div>
         <div className="update-notification-text">
           <h4>Mise à jour disponible</h4>
-          <p>Une nouvelle version de MAFRA SHOP est disponible.</p>
+          <p>Une nouvelle version de MAFRA est disponible.</p>
         </div>
         <div className="update-notification-actions">
           <button onClick={handleUpdate} className="update-btn">
