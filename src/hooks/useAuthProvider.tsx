@@ -22,6 +22,12 @@ export function useAuthProvider(): AuthContextType {
   }, []);
 
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("code")) {
+      // Retour OAuth : ne pas appeler getMe() avant que le callback ait posé le cookie
+      setIsLoading(false);
+      return;
+    }
     loadUser();
   }, [loadUser]);
 
