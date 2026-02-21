@@ -10,6 +10,7 @@ export const useAdminProductsPage = (
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [deletingProductId, setDeletingProductId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [listFilter, setListFilter] = useState<"all" | "bestsellers" | "promotions">("all");
 
   const handleCreateProduct = () => {
     setEditingProduct(null);
@@ -55,12 +56,20 @@ export const useAdminProductsPage = (
   };
 
   const filteredProducts = useMemo(() => {
+    let result = products;
+
+    if (listFilter === "bestsellers") {
+      result = result.filter((p) => p.is_bestseller);
+    } else if (listFilter === "promotions") {
+      result = result.filter((p) => p.is_promotion);
+    }
+
     if (!searchQuery.trim()) {
-      return products;
+      return result;
     }
 
     const query = searchQuery.toLowerCase().trim();
-    return products.filter((product) => {
+    return result.filter((product) => {
       const searchableFields = [
         product.nom,
         product.ref,
@@ -74,7 +83,7 @@ export const useAdminProductsPage = (
 
       return searchableFields.some((field) => field.includes(query));
     });
-  }, [products, searchQuery]);
+  }, [products, searchQuery, listFilter]);
 
   return {
     showForm,
@@ -82,6 +91,8 @@ export const useAdminProductsPage = (
     deletingProductId,
     searchQuery,
     setSearchQuery,
+    listFilter,
+    setListFilter,
     filteredProducts,
     handleCreateProduct,
     handleEditProduct,
