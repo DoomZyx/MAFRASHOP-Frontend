@@ -19,7 +19,7 @@ function Header() {
         <div className="logo-section">
           <img
             src="/images/logoMAFRA.webp"
-            alt="Logo Mafra Shop"
+            alt="Logo MAFRA"
             className="main-logo"
             width="143"
             height="50"

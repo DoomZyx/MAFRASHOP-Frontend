@@ -11,10 +11,10 @@ function Mentions() {
         <div className="mentions-page">
             <SEO
                 title="Mentions Légales - Informations Légales"
-                description="Consultez les mentions légales de MAFRA SHOP : éditeur, hébergeur, propriété intellectuelle et conditions d'utilisation du site."
+                description="Consultez les mentions légales de MAFRA : éditeur, hébergeur, propriété intellectuelle et conditions d'utilisation du site."
                 keywords="mentions légales, informations légales, éditeur, hébergeur, propriété intellectuelle"
                 url="/mentions"
-                noindex={false}
+                noindex={false} 
             />
             <Nav />
             <div className="mentions-container">
@@ -78,18 +78,18 @@ function Mentions() {
 
                     <LegalArticle title="4. Objet du Site">
                         <p>
-                            Le site MAFRA SHOP a pour objet la vente en ligne de produits d'entretien 
+                            Le site MAFRA a pour objet la vente en ligne de produits d'entretien 
                             automobile de la marque MA-FRA.
                         </p>
                         <p>
-                            MAFRA SHOP est un revendeur agréé de produits MA-FRA et propose plus de 100 
+                            MAFRA est un revendeur agréé de produits MA-FRA et propose plus de 100 
                             références destinées aux particuliers et aux professionnels.
                         </p>
                     </LegalArticle>
 
                     <LegalArticle title="5. Conditions d'Utilisation">
                         <p>
-                            L'utilisation du site MAFRA SHOP implique l'acceptation pleine et entière des 
+                            L'utilisation du site MAFRA implique l'acceptation pleine et entière des 
                             conditions générales d'utilisation décrites ci-après. Ces conditions d'utilisation 
                             sont susceptibles d'être modifiées ou complétées à tout moment.
                         </p>
@@ -103,11 +103,11 @@ function Mentions() {
                         <p>
                             La structure générale, les textes, images animées ou non, savoir-faire, dessins, 
                             graphismes et tout autre élément composant le site sont la propriété exclusive 
-                            de MAFRA SHOP ou de ses partenaires.
+                            de MAFRA ou de ses partenaires.
                         </p>
                         <p>
                             Toute représentation totale ou partielle de ce site par quelque procédé que ce 
-                            soit, sans l'autorisation expresse de MAFRA SHOP est interdite et constituerait 
+                            soit, sans l'autorisation expresse de MAFRA est interdite et constituerait 
                             une contrefaçon sanctionnée par les articles L.335-2 et suivants du Code de la 
                             propriété intellectuelle.
                         </p>
@@ -116,7 +116,7 @@ function Mentions() {
                         <p>
                             Les marques et logos figurant sur le site sont des marques déposées. Toute 
                             reproduction totale ou partielle de ces marques ou de ces logos effectuée à 
-                            partir des éléments du site sans l'autorisation expresse de MAFRA SHOP ou de 
+                            partir des éléments du site sans l'autorisation expresse de MAFRA ou de 
                             leurs propriétaires respectifs est donc prohibée.
                         </p>
                         <p>
@@ -125,19 +125,19 @@ function Mentions() {
 
                         <h3>6.3. Liens hypertextes</h3>
                         <p>
-                            Le site peut contenir des liens hypertextes vers d'autres sites. MAFRA SHOP 
+                            Le site peut contenir des liens hypertextes vers d'autres sites. MAFRA 
                             n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à 
                             leur contenu.
                         </p>
                         <p>
-                            La création de liens hypertextes vers le site MAFRA SHOP nécessite l'autorisation 
-                            préalable de MAFRA SHOP.
+                            La création de liens hypertextes vers le site MAFRA nécessite l'autorisation 
+                            préalable de MAFRA.
                         </p>
                     </LegalArticle>
 
                     <LegalArticle title="7. Protection des Données Personnelles">
                         <p>
-                            MAFRA SHOP s'engage à respecter la confidentialité des données personnelles 
+                            MAFRA s'engage à respecter la confidentialité des données personnelles 
                             communiquées par les utilisateurs du site.
                         </p>
                         <p>
@@ -166,26 +166,26 @@ function Mentions() {
                     <LegalArticle title="9. Responsabilité">
                         <h3>9.1. Contenu du site</h3>
                         <p>
-                            MAFRA SHOP s'efforce d'assurer l'exactitude et la mise à jour des informations 
+                            MAFRA s'efforce d'assurer l'exactitude et la mise à jour des informations 
                             diffusées sur ce site, dont elle se réserve le droit de corriger, à tout moment 
                             et sans préavis, le contenu.
                         </p>
                         <p>
-                            Toutefois, MAFRA SHOP ne peut garantir l'exactitude, la précision ou l'exhaustivité 
+                            Toutefois, MAFRA ne peut garantir l'exactitude, la précision ou l'exhaustivité 
                             des informations mises à disposition sur ce site.
                         </p>
 
                         <h3>9.2. Disponibilité du site</h3>
                         <p>
-                            MAFRA SHOP met tout en œuvre pour assurer la disponibilité du site 24h/24 et 7j/7. 
-                            Néanmoins, MAFRA SHOP ne saurait être tenue responsable en cas d'interruption du 
+                            MAFRA met tout en œuvre pour assurer la disponibilité du site 24h/24 et 7j/7. 
+                            Néanmoins, MAFRA ne saurait être tenue responsable en cas d'interruption du 
                             service, qu'elle soit volontaire (maintenance, mise à jour) ou involontaire 
                             (panne technique, force majeure).
                         </p>
 
                         <h3>9.3. Virus informatiques</h3>
                         <p>
-                            MAFRA SHOP ne peut être tenue responsable des dommages directs ou indirects causés 
+                            MAFRA ne peut être tenue responsable des dommages directs ou indirects causés 
                             au matériel de l'utilisateur lors de l'accès au site, et résultant soit de 
                             l'utilisation d'un matériel ne répondant pas aux spécifications, soit de 
                             l'apparition d'un bug ou d'une incompatibilité.
@@ -225,7 +225,7 @@ function Mentions() {
                         </p>
                         <p>
                             <strong>Crédits photographiques :</strong> Les images de produits sont fournies 
-                            par MA-FRA S.p.A. ou sont la propriété de MAFRA SHOP.
+                            par MA-FRA S.p.A. ou sont la propriété de MAFRA.
                         </p>
                     </LegalArticle>
 

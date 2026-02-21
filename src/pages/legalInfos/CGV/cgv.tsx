@@ -11,7 +11,7 @@ function CGV() {
         <div className="cgv-page">
             <SEO
                 title="Conditions Générales de Vente - CGV"
-                description="Consultez les conditions générales de vente de MAFRA SHOP. Informations sur les commandes, paiements, livraisons, retours et garanties."
+                description="Consultez les conditions générales de vente de MAFRA. Informations sur les commandes, paiements, livraisons, retours et garanties."
                 keywords="CGV, conditions générales de vente, conditions de vente, politique de vente, termes et conditions"
                 url="/terms"
             />
@@ -27,7 +27,7 @@ function CGV() {
                         <p>
                             Les présentes Conditions Générales de Vente (CGV) régissent les ventes 
                             de produits d'entretien automobile de la marque MA-FRA effectuées par 
-                            MAFRA SHOP sur son site internet.
+                            MAFRA sur son site internet.
                         </p>
                         <p>
                             Toute commande implique l'acceptation sans réserve des présentes CGV.
@@ -37,14 +37,14 @@ function CGV() {
                     <LegalArticle title="Article 1 - Objet">
                         <p>
                             Les présentes conditions générales de vente régissent les ventes de 
-                            produits d'entretien automobile de la marque MA-FRA par MAFRA SHOP, 
+                            produits d'entretien automobile de la marque MA-FRA par MAFRA, 
                             revendeur agréé, sur son site internet.
                         </p>
                     </LegalArticle>
 
                     <LegalArticle title="Article 2 - Produits">
                         <p>
-                            MAFRA SHOP propose à la vente plus de 100 produits d'entretien automobile 
+                            MAFRA propose à la vente plus de 100 produits d'entretien automobile 
                             de la marque MA-FRA, répartis dans les catégories suivantes :
                         </p>
                         <ul>
@@ -77,7 +77,7 @@ function CGV() {
                             en vigueur au moment de la validation de la commande.
                         </p>
                         <p>
-                            Les produits restent la propriété de MAFRA SHOP jusqu'au paiement complet 
+                            Les produits restent la propriété de MAFRA jusqu'au paiement complet 
                             du prix.
                         </p>
                     </LegalArticle>
@@ -94,7 +94,7 @@ function CGV() {
 
                     <LegalArticle title="Article 5 - Commandes">
                         <p>
-                            Les commandes sont passées exclusivement via le site internet de MAFRA SHOP.
+                            Les commandes sont passées exclusivement via le site internet de MAFRA.
                         </p>
                         <p>
                             Pour passer commande, le client doit créer un compte utilisateur et renseigner 
@@ -106,7 +106,7 @@ function CGV() {
                             de l'Union Européenne) lors de la création de leur compte professionnel.
                         </p>
                         <p>
-                            MAFRA SHOP se réserve le droit de refuser ou d'annuler toute commande en cas 
+                            MAFRA se réserve le droit de refuser ou d'annuler toute commande en cas 
                             de litige avec le client, de problème d'approvisionnement, ou si les 
                             informations fournies sont incomplètes ou erronées.
                         </p>
@@ -137,7 +137,7 @@ function CGV() {
                         </p>
                         <p>
                             Les données de paiement sont cryptées et ne sont jamais conservées par 
-                            MAFRA SHOP.
+                            MAFRA.
                         </p>
                     </LegalArticle>
 
@@ -147,7 +147,7 @@ function CGV() {
                         </p>
                         <p>
                             En cas d'indisponibilité d'un produit après validation de la commande, 
-                            MAFRA SHOP s'engage                             à en informer le client dans les meilleurs délais et 
+                            MAFRA s'engage à en informer le client dans les meilleurs délais et 
                             à procéder au remboursement du produit indisponible.
                         </p>
                     </LegalArticle>
@@ -157,7 +157,7 @@ function CGV() {
                             Les livraisons sont effectuées partout en France et les pays voisins.
                         </p>
                         <p>
-                            La livraison est effectuée en main propre par un employé de MAFRA SHOP à 
+                            La livraison est effectuée en main propre par un employé de MAFRA à 
                             l'adresse indiquée lors de la commande.
                         </p>
                         <p>
@@ -166,7 +166,7 @@ function CGV() {
                         </p>
                         <p>
                             La date de livraison est communiquée au client par email. Aucun numéro de 
-                            suivi n'est fourni, la livraison étant effectuée directement par MAFRA SHOP.
+                            suivi n'est fourni, la livraison étant effectuée directement par MAFRA.
                         </p>
                         <p>
                             En cas d'absence du client lors de la livraison, un second passage sera 
@@ -188,7 +188,7 @@ function CGV() {
                         </p>
                         <p>
                             Pour exercer ce droit, le client doit contacter le service client de 
-                            MAFRA SHOP par email en indiquant son numéro de commande et sa volonté de 
+                            MAFRA par email en indiquant son numéro de commande et sa volonté de 
                             se rétracter.
                         </p>
                         <p>
@@ -221,18 +221,18 @@ function CGV() {
                             des photos du défaut ou de la non-conformité.
                         </p>
                         <p>
-                            Après vérification, MAFRA SHOP procédera au remplacement du produit ou au 
+                            Après vérification, MAFRA procédera au remplacement du produit ou au 
                             remboursement, selon la disponibilité du produit.
                         </p>
                         <p>
-                            Les frais de retour et de réexpédition sont pris en charge par MAFRA SHOP 
+                            Les frais de retour et de réexpédition sont pris en charge par MAFRA 
                             en cas de produit défectueux ou non conforme.
                         </p>
                     </LegalArticle>
 
                     <LegalArticle title="Article 12 - Garanties Légales">
                         <p>
-                            Tous les produits vendus par MAFRA SHOP bénéficient de la garantie légale 
+                            Tous les produits vendus par MAFRA bénéficient de la garantie légale 
                             de conformité (articles L217-4 et suivants du Code de la consommation) et 
                             de la garantie contre les vices cachés (articles 1641 et suivants du Code civil).
                         </p>
@@ -260,7 +260,7 @@ function CGV() {
 
                     <LegalArticle title="Article 14 - Service Client">
                         <p>
-                            Le service client de MAFRA SHOP est disponible du lundi au vendredi de 9h 
+                            Le service client de MAFRA est disponible du lundi au vendredi de 9h 
                             à 18h par email.
                         </p>
                         <p>

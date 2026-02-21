@@ -11,7 +11,7 @@ function Privacy() {
         <div className="privacy-page">
             <SEO
                 title="Politique de Confidentialité - Protection des Données"
-                description="Découvrez comment MAFRA SHOP collecte, utilise et protège vos données personnelles conformément au RGPD et à la loi Informatique et Libertés."
+                description="Découvrez comment MAFRA collecte, utilise et protège vos données personnelles conformément au RGPD et à la loi Informatique et Libertés."
                 keywords="politique de confidentialité, protection des données, RGPD, données personnelles, vie privée"
                 url="/privacy"
             />
@@ -25,7 +25,7 @@ function Privacy() {
                 <div className="privacy-content">
                     <LegalSection className="legal-intro">
                         <p>
-                            MAFRA SHOP s'engage à protéger la vie privée et les données personnelles 
+                            MAFRA s'engage à protéger la vie privée et les données personnelles 
                             de ses utilisateurs. La présente politique de confidentialité décrit comment 
                             nous collectons, utilisons, stockons et protégeons vos données personnelles 
                             conformément au Règlement Général sur la Protection des Données (RGPD) et 
@@ -35,7 +35,7 @@ function Privacy() {
 
                     <LegalArticle title="1. Responsable du Traitement">
                         <p>
-                            Le responsable du traitement des données personnelles est MAFRA SHOP.
+                            Le responsable du traitement des données personnelles est MAFRA.
                         </p>
                         <p>
                             Pour toute question relative à la protection de vos données personnelles, 
@@ -74,7 +74,7 @@ function Privacy() {
 
                         <h3>2.4. Données de paiement</h3>
                         <ul>
-                            <li>Informations de paiement (traitées par Stripe, non stockées par MAFRA SHOP)</li>
+                            <li>Informations de paiement (traitées par Stripe, non stockées par MAFRA)</li>
                             <li>Historique des transactions</li>
                         </ul>
 
@@ -159,7 +159,7 @@ function Privacy() {
                         </p>
                         <ul>
                             <li>
-                                <strong>Personnel autorisé de MAFRA SHOP :</strong> Employés en charge 
+                                <strong>Personnel autorisé de MAFRA :</strong> Employés en charge 
                                 de la gestion des commandes, du service client et de la livraison
                             </li>
                             <li>
@@ -215,7 +215,7 @@ function Privacy() {
 
                     <LegalArticle title="6. Sécurité des Données">
                         <p>
-                            MAFRA SHOP met en œuvre toutes les mesures techniques et organisationnelles 
+                            MAFRA met en œuvre toutes les mesures techniques et organisationnelles 
                             appropriées pour protéger vos données personnelles contre :
                         </p>
                         <ul>
@@ -339,7 +339,7 @@ function Privacy() {
                     </LegalArticle>
 
                     <LegalArticle title="11. Modifications de la Politique de Confidentialité">                       <p>
-                            MAFRA SHOP se réserve le droit de modifier la présente politique de confidentialité 
+                            MAFRA se réserve le droit de modifier la présente politique de confidentialité 
                             à tout moment. Toute modification sera publiée sur cette page avec une nouvelle 
                             date de mise à jour.
                         </p>

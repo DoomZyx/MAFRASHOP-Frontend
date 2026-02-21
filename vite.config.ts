@@ -14,8 +14,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['images/**/*', 'fonts/**/*'],
       manifest: {
-        name: 'MAFRA SHOP',
-        short_name: 'MAFRA SHOP',
+        name: 'MAFRA',  
+        short_name: 'MAFRA',
         description: 'Boutique en ligne de produits d\'entretien automobile MA-FRA',
         theme_color: '#e74c3c',
         background_color: '#ffffff',

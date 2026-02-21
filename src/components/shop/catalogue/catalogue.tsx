@@ -97,7 +97,7 @@ function Catalogue() {
 
   if (error) {
     return (
-      <div className="catalogue-container">
+      <div className="catalogue-container catalogue-container--error">
         <p className="error-message">{error}</p>
       </div>
     );

@@ -8,8 +8,8 @@ function About() {
     <div className="about-page">
       <SEO
         title="À propos - Qui sommes-nous ?"
-        description="MAFRA SHOP est un concessionnaire officiel français de la distribution de produits d'entretien automobile de la marque MA-FRA, fondée en 1965 en Italie."
-        keywords="à propos, MAFRA SHOP, concessionnaire MA-FRA, produits entretien auto, histoire, valeurs"
+        description="MAFRA est un concessionnaire officiel français de la distribution de produits d'entretien automobile de la marque MA-FRA, fondée en 1965 en Italie."
+        keywords="à propos, MAFRA, concessionnaire MA-FRA, produits entretien auto, histoire, valeurs"
         url="/about"
       />
       <Nav />
@@ -22,9 +22,9 @@ function About() {
         <div className="about-content">
           <section className="about-section">
             <div className="about-section-text">
-              <h2>MAFRA SHOP</h2>
+              <h2>MAFRA</h2>
               <p>
-                MAFRA SHOP est un concessionnaire officiel français de la distribution de produits d'entretien automobile de la 
+                MAFRA est un concessionnaire officiel français de la distribution de produits d'entretien automobile de la 
                 marque MA-FRA, fondée en 1965 en Italie.
               </p>
               <p>
@@ -35,7 +35,7 @@ function About() {
             <div className="about-section-image">
               <img 
                 src="/images/logoMAFRA.webp" 
-                alt="MAFRA SHOP"
+                alt="MAFRA"
                 width="143"
                 height="50"
                 loading="lazy"
