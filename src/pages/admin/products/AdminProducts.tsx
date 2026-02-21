@@ -35,6 +35,8 @@ function AdminProducts() {
     deletingProductId,
     searchQuery,
     setSearchQuery,
+    listFilter,
+    setListFilter,
     filteredProducts,
     handleCreateProduct,
     handleEditProduct,
@@ -53,7 +55,11 @@ function AdminProducts() {
 
   return (
     <div className="admin-products-container">
-      <AdminProductsStats products={products} />
+      <AdminProductsStats
+        products={products}
+        listFilter={listFilter}
+        onFilterChange={setListFilter}
+      />
 
       <div className="admin-products">
         <AdminProductsHeader
