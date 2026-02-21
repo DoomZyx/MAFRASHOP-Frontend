@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL, API_CREDENTIALS } from "../config";
 
 export interface AdminDeliveryOrder {
   id: string;
@@ -55,13 +55,9 @@ export const adminDeliveriesAPI = {
     success: boolean;
     data: { deliveries: AdminDelivery[] };
   }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(`${API_BASE_URL}/api/admin/deliveries`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { "Content-Type": "application/json" },
+      ...API_CREDENTIALS,
     });
     if (!response.ok) {
       const err = await response.json();
@@ -74,15 +70,11 @@ export const adminDeliveriesAPI = {
     id: string,
     status: string
   ): Promise<{ success: boolean; message: string; data: { delivery: AdminDelivery } }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(`${API_BASE_URL}/api/admin/deliveries/${id}/status`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
+      ...API_CREDENTIALS,
     });
     if (!response.ok) {
       const err = await response.json();
@@ -95,17 +87,13 @@ export const adminDeliveriesAPI = {
     id: string,
     scheduledDeliveryDateTime: string | null
   ): Promise<{ success: boolean; message: string; data: { delivery: AdminDelivery } }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(
       `${API_BASE_URL}/api/admin/deliveries/${id}/scheduled-delivery-datetime`,
       {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ scheduledDeliveryDateTime }),
+        ...API_CREDENTIALS,
       }
     );
     if (!response.ok) {

@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL, API_CREDENTIALS } from "../config";
 import { Order } from "../orders/api";
 
 /**
@@ -12,8 +12,6 @@ export const adminOrdersAPI = {
     success: boolean;
     data: { orders: Order[] };
   }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const params = new URLSearchParams();
     if (status && status !== "all") {
       params.append("status", status);
@@ -22,10 +20,8 @@ export const adminOrdersAPI = {
     const response = await fetch(
       `${API_BASE_URL}/api/admin/orders${params.toString() ? `?${params.toString()}` : ""}`,
       {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { "Content-Type": "application/json" },
+        ...API_CREDENTIALS,
       }
     );
 
@@ -44,13 +40,9 @@ export const adminOrdersAPI = {
     success: boolean;
     data: { order: Order };
   }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(`${API_BASE_URL}/api/admin/orders/${id}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { "Content-Type": "application/json" },
+      ...API_CREDENTIALS,
     });
 
     if (!response.ok) {
@@ -72,15 +64,11 @@ export const adminOrdersAPI = {
     message: string;
     data: { order: Order };
   }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(`${API_BASE_URL}/api/admin/orders/${orderId}/status`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
+      ...API_CREDENTIALS,
     });
 
     if (!response.ok) {
@@ -99,10 +87,9 @@ export const adminOrdersAPI = {
     month: number,
     year: number
   ): Promise<Blob | { success: true; message: string; data: { count: number } }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
     const params = new URLSearchParams({ month: String(month), year: String(year) });
     const response = await fetch(`${API_BASE_URL}/api/admin/invoices/export?${params}`, {
-      headers: { Authorization: `Bearer ${token}` },
+      ...API_CREDENTIALS,
     });
 
     if (!response.ok) {

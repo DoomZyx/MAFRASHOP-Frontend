@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL, API_CREDENTIALS } from "../config";
 import { StockProduct, StockMovement, StockHistoryResponse } from "../../types/stock";
 
 /**
@@ -12,13 +12,9 @@ export const adminStockAPI = {
     success: boolean;
     data: { products: StockProduct[] };
   }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(`${API_BASE_URL}/api/admin/stock/products`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { "Content-Type": "application/json" },
+      ...API_CREDENTIALS,
     });
 
     if (!response.ok) {
@@ -36,13 +32,9 @@ export const adminStockAPI = {
     success: boolean;
     data: { products: StockProduct[] };
   }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(`${API_BASE_URL}/api/admin/stock/products/low`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { "Content-Type": "application/json" },
+      ...API_CREDENTIALS,
     });
 
     if (!response.ok) {
@@ -71,15 +63,11 @@ export const adminStockAPI = {
       movement: StockMovement;
     };
   }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(`${API_BASE_URL}/api/admin/stock/products/${productId}`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
+      ...API_CREDENTIALS,
     });
 
     if (!response.ok) {
@@ -101,17 +89,13 @@ export const adminStockAPI = {
     message: string;
     data: { product: StockProduct };
   }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(
       `${API_BASE_URL}/api/admin/stock/products/${productId}/alert-threshold`,
       {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ stockAlertThreshold }),
+        ...API_CREDENTIALS,
       }
     );
 
@@ -131,8 +115,6 @@ export const adminStockAPI = {
     offset: number,
     productId?: string
   ): Promise<StockHistoryResponse> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const params = new URLSearchParams({
       limit: limit.toString(),
       offset: offset.toString(),
@@ -144,10 +126,8 @@ export const adminStockAPI = {
     const response = await fetch(
       `${API_BASE_URL}/api/admin/stock/history?${params.toString()}`,
       {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { "Content-Type": "application/json" },
+        ...API_CREDENTIALS,
       }
     );
 

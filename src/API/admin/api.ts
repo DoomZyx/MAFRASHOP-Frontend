@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL, API_CREDENTIALS } from "../config";
 import { Product } from "../../types/product";
 
 /**
@@ -12,12 +12,11 @@ export const updateBestsellerStatus = async (
     `${API_BASE_URL}/api/products/${productId}/bestseller`,
     {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         is_bestseller: isBestseller,
       }),
+      ...API_CREDENTIALS,
     }
   );
 
@@ -40,13 +39,12 @@ export const updatePromotionStatus = async (
     `${API_BASE_URL}/api/products/${productId}/promotion`,
     {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         is_promotion: isPromotion,
         promotion_percentage: promotionPercentage,
       }),
+      ...API_CREDENTIALS,
     }
   );
 
@@ -76,17 +74,13 @@ export const uploadImage = async (file: File): Promise<{
   message: string;
   data: { url: string };
 }> => {
-  const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
   const formData = new FormData();
   formData.append("image", file);
 
   const response = await fetch(`${API_BASE_URL}/api/admin/upload/image`, {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
     body: formData,
+    ...API_CREDENTIALS,
   });
 
   if (!response.ok) {
@@ -122,15 +116,11 @@ export const adminProductsAPI = {
     message: string;
     data: { product: any };
   }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(`${API_BASE_URL}/api/admin/products`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(productData),
+      ...API_CREDENTIALS,
     });
 
     if (!response.ok) {
@@ -165,15 +155,11 @@ export const adminProductsAPI = {
     message: string;
     data: { product: any };
   }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(`${API_BASE_URL}/api/admin/products/${productId}`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(productData),
+      ...API_CREDENTIALS,
     });
 
     if (!response.ok) {
@@ -189,14 +175,10 @@ export const adminProductsAPI = {
     message: string;
     data: { product: any };
   }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(`${API_BASE_URL}/api/admin/products/${productId}`, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { "Content-Type": "application/json" },
+      ...API_CREDENTIALS,
     });
 
     if (!response.ok) {
@@ -256,13 +238,9 @@ export const getAllUsers = async (): Promise<{
   success: boolean;
   data: { users: AdminUser[] };
 }> => {
-  const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-  
   const response = await fetch(`${API_BASE_URL}/api/admin/users`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    headers: { "Content-Type": "application/json" },
+    ...API_CREDENTIALS,
   });
 
   if (!response.ok) {
@@ -283,15 +261,11 @@ export const updateUserRole = async (
   message: string;
   data: { user: AdminUser };
 }> => {
-  const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
   const response = await fetch(`${API_BASE_URL}/api/admin/users/${userId}/role`, {
     method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ role }),
+    ...API_CREDENTIALS,
   });
 
   if (!response.ok) {
@@ -313,14 +287,11 @@ export const validateProUser = async (
   message: string;
   data?: { user: AdminUser };
 }> => {
-  const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
   const response = await fetch(`${API_BASE_URL}/api/auth/pro/validate`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ userId, approved }),
+    ...API_CREDENTIALS,
   });
   const data = await response.json();
   if (!response.ok) {
@@ -340,15 +311,11 @@ export const validateVatUser = async (
   message: string;
   data?: { user: AdminUser };
 }> => {
-  const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
   const response = await fetch(`${API_BASE_URL}/api/auth/admin/validate-vat`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ userId, approved }),
+    ...API_CREDENTIALS,
   });
   const data = await response.json();
   if (!response.ok) {
@@ -364,14 +331,11 @@ export const retryProInsee = async (userId: string): Promise<{
   success: boolean;
   message: string;
 }> => {
-  const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
   const response = await fetch(`${API_BASE_URL}/api/auth/pro/retry-insee`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ userId }),
+    ...API_CREDENTIALS,
   });
   const data = await response.json();
   if (!response.ok) {
@@ -394,15 +358,11 @@ export const createAdminUser = async (data: {
   message: string;
   data: { user: AdminUser };
 }> => {
-  const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
   const response = await fetch(`${API_BASE_URL}/api/admin/users`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
+    ...API_CREDENTIALS,
   });
 
   if (!response.ok) {

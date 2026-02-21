@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL, API_CREDENTIALS } from "../config";
 
 const getHeaders = () => ({ "Content-Type": "application/json" });
 
@@ -20,13 +20,9 @@ export const proMinimumQuantitiesAPI = {
     success: boolean;
     data: { rules: ProMinimumQuantityRule[] };
   }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(`${API_BASE_URL}/api/admin/pro-minimum-quantities`, {
-      headers: {
-        ...getHeaders(),
-        Authorization: `Bearer ${token}`,
-      },
+      headers: getHeaders(),
+      ...API_CREDENTIALS,
     });
 
     if (!response.ok) {
@@ -63,15 +59,11 @@ export const proMinimumQuantitiesAPI = {
     message: string;
     data: { rule: ProMinimumQuantityRule };
   }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(`${API_BASE_URL}/api/admin/pro-minimum-quantities`, {
       method: "POST",
-      headers: {
-        ...getHeaders(),
-        Authorization: `Bearer ${token}`,
-      },
+      headers: getHeaders(),
       body: JSON.stringify({ productId, minimumQuantity }),
+      ...API_CREDENTIALS,
     });
 
     if (!response.ok) {
@@ -94,17 +86,13 @@ export const proMinimumQuantitiesAPI = {
     message: string;
     data: { rule: ProMinimumQuantityRule };
   }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(
       `${API_BASE_URL}/api/admin/pro-minimum-quantities/${ruleId}`,
       {
         method: "PUT",
-        headers: {
-          ...getHeaders(),
-          Authorization: `Bearer ${token}`,
-        },
+        headers: getHeaders(),
         body: JSON.stringify({ productId, minimumQuantity }),
+        ...API_CREDENTIALS,
       }
     );
 
@@ -123,16 +111,12 @@ export const proMinimumQuantitiesAPI = {
     success: boolean;
     message: string;
   }> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(
       `${API_BASE_URL}/api/admin/pro-minimum-quantities/${ruleId}`,
       {
         method: "DELETE",
-        headers: {
-          ...getHeaders(),
-          Authorization: `Bearer ${token}`,
-        },
+        headers: getHeaders(),
+        ...API_CREDENTIALS,
       }
     );
 

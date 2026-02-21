@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL, API_CREDENTIALS } from "../config";
 import { StatsResponse } from "../../types/stats";
 
 export interface DashboardStatsResponse {
@@ -17,13 +17,9 @@ export const adminStatsAPI = {
    * Stats dashboard : commandes du mois en cours, livraisons en attente (non livrées)
    */
   getDashboardStats: async (): Promise<DashboardStatsResponse> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(`${API_BASE_URL}/api/admin/stats/dashboard`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { "Content-Type": "application/json" },
+      ...API_CREDENTIALS,
     });
     if (!response.ok) {
       const error = await response.json();
@@ -36,13 +32,9 @@ export const adminStatsAPI = {
    * Récupérer toutes les statistiques
    */
   getAllStats: async (period: string = "all"): Promise<StatsResponse> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(`${API_BASE_URL}/api/admin/stats?period=${period}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { "Content-Type": "application/json" },
+      ...API_CREDENTIALS,
     });
 
     if (!response.ok) {
@@ -57,13 +49,9 @@ export const adminStatsAPI = {
    * Exporter les statistiques en CSV
    */
   exportStatsCSV: async (type: "orders" | "products" | "clients"): Promise<Blob> => {
-    const token = localStorage.getItem("adminToken") || localStorage.getItem("authToken");
-
     const response = await fetch(`${API_BASE_URL}/api/admin/stats/export?type=${type}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { "Content-Type": "application/json" },
+      ...API_CREDENTIALS,
     });
 
     if (!response.ok) {
