@@ -21,7 +21,7 @@ function CookiesPage() {
         <div className="cookies-page">
             <SEO
                 title="Gestion des Cookies - Politique des Cookies"
-                description="Gérez vos préférences en matière de cookies sur MAFRA SHOP. Découvrez les types de cookies utilisés et comment les gérer."
+                description="Gérez vos préférences en matière de cookies sur MAFRA. Découvrez les types de cookies utilisés et comment les gérer."
                 keywords="cookies, politique des cookies, gestion des cookies, traceurs, consentement cookies"
                 url="/cookies"
             />
@@ -179,7 +179,7 @@ function CookiesPage() {
                                     </p>
                                     <p className="cookie-note">
                                         <i className="bi bi-info-circle"></i>
-                                        Actuellement, MAFRA SHOP n'utilise pas de cookies marketing. Cette 
+                                        Actuellement, MAFRA n'utilise pas de cookies marketing. Cette 
                                         catégorie est prévue pour une utilisation future éventuelle.
                                     </p>
                                 </div>

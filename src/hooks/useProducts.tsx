@@ -17,7 +17,7 @@ export const useProducts = () => {
       setProducts(data);
       setError(null);
     } catch (err) {
-      setError("Erreur lors du chargement des produits");
+      setError("Les produits ne sont pas disponibles pour le moment. Nous travaillons à résoudre ce problème.\n Merci de réessayer dans quelques instants");
       console.error(err);
     } finally {
       setLoading(false);
@@ -64,7 +64,7 @@ export const useProduct = (id: string) => {
       setProduct(data);
       setError(null);
     } catch (err) {
-      setError("Erreur lors du chargement du produit");
+      setError("Les produits ne sont pas disponibles pour le moment.\n Nous travaillons à résoudre ce problème.\n Merci de réessayer dans quelques instants");
       console.error(err);
     } finally {
       setLoading(false);

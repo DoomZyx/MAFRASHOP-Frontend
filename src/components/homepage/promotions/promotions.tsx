@@ -25,7 +25,7 @@ function Promotions() {
       setProducts(data);
       setError(null);
     } catch (err) {
-      setError("Erreur lors du chargement des promotions");
+      setError("Les promotions ne sont pas disponibles pour le moment. Nous travaillons à résoudre ce problème.\n Merci de réessayer dans quelques instants");
       console.error(err);
     } finally {
       setLoading(false);

@@ -25,7 +25,7 @@ function Bestsellers() {
       setProducts(data);
       setError(null);
     } catch (err) {
-      setError("Erreur lors du chargement des bestsellers");
+      setError("Les bestsellers ne sont pas disponibles pour le moment. Nous travaillons à résoudre ce problème.\n Merci de réessayer dans quelques instants");
       console.error(err);
     } finally {
       setLoading(false);
