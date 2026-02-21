@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { useAuth } from "./useAuth";
 import { GOOGLE_CLIENT_ID, GOOGLE_REDIRECT_URI } from "../API/config";
 
@@ -24,26 +24,7 @@ export function useAuthModal(onClose: () => void) {
 
   const googleConfig = !!(GOOGLE_CLIENT_ID && GOOGLE_REDIRECT_URI);
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get("code");
-
-    if (code) {
-      const processCallback = async () => {
-        setIsLoading(true);
-        try {
-          await loginWithGoogle(code);
-          onClose();
-        } catch (err: any) {
-          setError(err.message || "Erreur lors de l'authentification Google");
-        } finally {
-          setIsLoading(false);
-        }
-      };
-      processCallback();
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-  }, [loginWithGoogle, onClose]);
+  // Le retour OAuth (?code=) est traité dans AuthProvider pour éviter une race avec loadUser
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

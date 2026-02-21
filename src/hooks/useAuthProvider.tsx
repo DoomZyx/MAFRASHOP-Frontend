@@ -23,11 +23,26 @@ export function useAuthProvider(): AuthContextType {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has("code")) {
-      // Retour OAuth : ne pas appeler getMe() avant que le callback ait posé le cookie
-      setIsLoading(false);
+    const code = urlParams.get("code");
+
+    if (code) {
+      // Retour OAuth : traiter le callback ici (toujours monté), poser le cookie puis mettre à jour l'état
+      (async () => {
+        try {
+          const response = await authAPI.googleCallback(code);
+          if (response.success && response.data) {
+            setUser(response.data.user);
+          }
+        } catch {
+          setUser(null);
+        } finally {
+          setIsLoading(false);
+          window.history.replaceState({}, document.title, window.location.pathname);
+        }
+      })();
       return;
     }
+
     loadUser();
   }, [loadUser]);
 
