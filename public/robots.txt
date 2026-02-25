@@ -8,5 +8,5 @@ Disallow: /orders
 Disallow: /checkout/
 
 # Sitemap
-Sitemap: https://mymafrashop.com/sitemap.xml
+Sitemap: https://mafraest.com/sitemap.xml
 
