@@ -13,9 +13,9 @@ function Homepage() {
   return (
     <>
       <SEO
-        title="MAFRA - Votre spécialiste en pièces auto et équipements"
-        description="Découvrez notre large gamme de pièces détachées automobiles, équipements et accessoires pour professionnels et particuliers. Livraison rapide et expertise technique."
-        keywords="pièces auto, pièces détachées, équipements auto, accessoires automobile, professionnel auto, MA-FRA, entretien automobile"
+        title="MAFRA - Votre spécialiste en produits d'entretien automobile"
+        description="Découvrez notre large gamme de produits d'entretien automobile, équipements et accessoires pour professionnels et particuliers. Livraison rapide et expertise technique."
+        keywords="produits d'entretien automobile, accessoires automobile, professionnel auto, MA-FRA, entretien automobile, mafra boutique , fournisseur produit nettoyage auto professionnel, produits d'entretien auto, accessoires auto, livraison rapide, expertise techniquekk"
         url="/"
       />
       <Nav />

@@ -13,7 +13,7 @@ interface SEOProps {
 
 const SEO = ({
   title = "MAFRA - Votre spécialiste en pièces d'entretien automobile",
-  description = "Découvrez notre large gamme de produits d'entretien auto mobile pour professionnels et particuliers.",
+  description = "Découvrez notre large gamme de produits d'entretien auto  pour professionnels et particuliers.",
   keywords = "entretien automobile, produits d'entretien automobile, accessoires auto, professionnel auto, Fournisseur produit nettoyage auto professionnel",
   image = "/images/logoMAFRA.webp",
   url,
@@ -22,12 +22,17 @@ const SEO = ({
   nofollow,
 }: SEOProps) => {
   const baseTitle = "MAFRA";
-  const fullTitle = title.includes(baseTitle) ? title : `${title} | ${baseTitle}`;
+  const fullTitle = title.includes(baseTitle)
+    ? title
+    : `${title} | ${baseTitle}`;
   const siteUrl = typeof window !== "undefined" ? window.location.origin : "";
-  const currentUrl = typeof window !== "undefined" ? window.location.pathname : "";
+  const currentUrl =
+    typeof window !== "undefined" ? window.location.pathname : "";
   const finalUrl = url || currentUrl;
   const fullImageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
-  const fullUrl = finalUrl.startsWith("http") ? finalUrl : `${siteUrl}${finalUrl}`;
+  const fullUrl = finalUrl.startsWith("http")
+    ? finalUrl
+    : `${siteUrl}${finalUrl}`;
 
   // Mise à jour de la balise robots uniquement si noindex ou nofollow est explicitement activé
   // Sinon, on laisse la balise par défaut dans index.html (index, follow)
@@ -36,7 +41,9 @@ const SEO = ({
       noindex ? "noindex" : "index",
       nofollow ? "nofollow" : "follow",
     ].join(", ");
-    let robotsMeta = document.querySelector('meta[name="robots"]') as HTMLMetaElement;
+    let robotsMeta = document.querySelector(
+      'meta[name="robots"]',
+    ) as HTMLMetaElement;
     if (!robotsMeta) {
       robotsMeta = document.createElement("meta");
       robotsMeta.setAttribute("name", "robots");
@@ -50,8 +57,14 @@ const SEO = ({
     document.title = fullTitle;
 
     // Meta tags
-    const updateMetaTag = (name: string, content: string, attribute: string = "name") => {
-      let element = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement;
+    const updateMetaTag = (
+      name: string,
+      content: string,
+      attribute: string = "name",
+    ) => {
+      let element = document.querySelector(
+        `meta[${attribute}="${name}"]`,
+      ) as HTMLMetaElement;
       if (!element) {
         element = document.createElement("meta");
         element.setAttribute(attribute, name);
@@ -93,14 +106,25 @@ const SEO = ({
     }
 
     // Canonical URL
-    let canonical = document.querySelector("link[rel='canonical']") as HTMLLinkElement;
+    let canonical = document.querySelector(
+      "link[rel='canonical']",
+    ) as HTMLLinkElement;
     if (!canonical) {
       canonical = document.createElement("link");
       canonical.setAttribute("rel", "canonical");
       document.head.appendChild(canonical);
     }
     canonical.setAttribute("href", fullUrl);
-  }, [fullTitle, description, keywords, fullImageUrl, fullUrl, type, noindex, nofollow]);
+  }, [
+    fullTitle,
+    description,
+    keywords,
+    fullImageUrl,
+    fullUrl,
+    type,
+    noindex,
+    nofollow,
+  ]);
 
   return null;
 };
