@@ -413,6 +413,11 @@ function ProductForm({ product, onClose, onSuccess }: ProductFormProps) {
               name="description"
               value={formData.description}
               onChange={handleChange}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.stopPropagation();
+                }
+              }}
               rows={4}
               placeholder="Description du produit"
             />
