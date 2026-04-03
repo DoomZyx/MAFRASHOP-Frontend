@@ -21,18 +21,25 @@ export interface SessionStatusResponse {
       id: string;
       status: string;
       totalAmount: number;
+      fulfillmentType?: "shipping" | "pickup";
     } | null;
   };
 }
 
-export const createCheckoutSession = async (
-  shippingAddress?: any
-): Promise<CheckoutSessionResponse> => {
+export type CheckoutFulfillmentType = "shipping" | "pickup";
+
+export const createCheckoutSession = async (options?: {
+  shippingAddress?: any;
+  fulfillmentType?: CheckoutFulfillmentType;
+}): Promise<CheckoutSessionResponse> => {
+  const fulfillmentType =
+    options?.fulfillmentType === "pickup" ? "pickup" : "shipping";
   const response = await fetch(`${API_BASE_URL}/api/payment/create-checkout-session`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      shippingAddress: shippingAddress || null,
+      shippingAddress: options?.shippingAddress ?? null,
+      fulfillmentType,
     }),
     ...API_CREDENTIALS,
   });

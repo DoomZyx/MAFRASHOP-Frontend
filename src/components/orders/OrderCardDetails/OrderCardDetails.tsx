@@ -1,3 +1,4 @@
+import { PICKUP_STORE_ADDRESS } from "../../../constants/pickupStore";
 import OrderItems from "../OrderItems/OrderItems";
 import OrderDeliveryInfo from "../OrderDeliveryInfo/OrderDeliveryInfo";
 import "./OrderCardDetails.scss";
@@ -18,12 +19,14 @@ interface Delivery {
   scheduledDeliveryDateTime: string | null;
   trackingNumber: string | null;
   carrier: string | null;
+  notes?: string | null;
 }
 
 interface OrderCardDetailsProps {
   items?: OrderItem[];
   delivery?: Delivery | null;
   isPro: boolean;
+  fulfillmentType?: "shipping" | "pickup";
   formatPrice: (price: number) => string;
   getDeliveryStatusLabel: (status: string) => string;
   getDeliveryStatusClass: (status: string) => string;
@@ -33,6 +36,7 @@ const OrderCardDetails = ({
   items,
   delivery,
   isPro,
+  fulfillmentType,
   formatPrice,
   getDeliveryStatusLabel,
   getDeliveryStatusClass,
@@ -41,6 +45,13 @@ const OrderCardDetails = ({
     <div className="orders-card-details">
       {items && items.length > 0 && (
         <OrderItems items={items} isPro={isPro} formatPrice={formatPrice} />
+      )}
+
+      {fulfillmentType === "pickup" && (
+        <div className="orders-pickup-block">
+          <h4 className="orders-pickup-title">Adresse de retrait</h4>
+          <p className="orders-pickup-line">{PICKUP_STORE_ADDRESS}</p>
+        </div>
       )}
 
       {delivery && (

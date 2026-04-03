@@ -7,6 +7,7 @@ interface Delivery {
   scheduledDeliveryDateTime: string | null;
   trackingNumber: string | null;
   carrier: string | null;
+  notes?: string | null;
 }
 
 interface OrderDeliveryInfoProps {
@@ -34,6 +35,12 @@ const OrderDeliveryInfo = ({
             {getDeliveryStatusLabel(delivery.status)}
           </span>
         </div>
+        {delivery.notes && (
+          <div className="orders-delivery-status-row">
+            <span className="orders-delivery-label">Infos:</span>
+            <span className="orders-delivery-value">{delivery.notes}</span>
+          </div>
+        )}
         {delivery.estimatedDeliveryDate && (
           <div className="orders-delivery-status-row">
             <span className="orders-delivery-label">Date estimée:</span>

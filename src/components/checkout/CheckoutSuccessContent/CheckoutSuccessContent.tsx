@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { PICKUP_STORE_ADDRESS } from "../../../constants/pickupStore";
 import "./CheckoutSuccessContent.scss";
 
 interface CheckoutSuccessContentProps {
@@ -29,6 +30,12 @@ const CheckoutSuccessContent = ({ sessionStatus }: CheckoutSuccessContentProps) 
             <strong>Montant total:</strong>{" "}
             {sessionStatus.order.totalAmount.toFixed(2)} €
           </p>
+          {sessionStatus.order.fulfillmentType === "pickup" && (
+            <p className="pickup-notice">
+              <strong>Click &amp; collect :</strong> retrait au {PICKUP_STORE_ADDRESS}. Vous recevrez un e-mail
+              lorsque la commande sera prête.
+            </p>
+          )}
         </div>
       )}
       <div className="success-actions">

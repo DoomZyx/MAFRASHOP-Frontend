@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { adminDeliveriesAPI, AdminDelivery } from "../API/admin/deliveries";
+import { PICKUP_STORE_ADDRESS } from "../constants/pickupStore";
 
 export const useAdminDeliveries = () => {
   const [deliveries, setDeliveries] = useState<AdminDelivery[]>([]);
@@ -85,6 +86,21 @@ export const useAdminDeliveries = () => {
   };
 
   const formatAddress = (d: AdminDelivery) => {
+    if (d.order?.fulfillmentType === "pickup") {
+      const a = d.deliveryAddress ?? d.order?.shippingAddress;
+      const ref = a
+        ? [
+            a.name,
+            a.line1,
+            a.postal_code && a.city ? `${a.postal_code} ${a.city}` : a.city,
+          ]
+            .filter(Boolean)
+            .join(", ")
+        : "";
+      return ref
+        ? `Retrait : ${PICKUP_STORE_ADDRESS} — réf. client : ${ref}`
+        : `Retrait : ${PICKUP_STORE_ADDRESS}`;
+    }
     const a = d.deliveryAddress ?? d.order?.shippingAddress;
     if (!a) return "Adresse non renseignée";
     const parts = [

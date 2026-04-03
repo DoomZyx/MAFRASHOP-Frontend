@@ -5,6 +5,21 @@
   animation: slideDown 0.3s ease;
 }
 
+.orders-pickup-block {
+  margin-bottom: 16px;
+}
+
+.orders-pickup-title {
+  margin: 0 0 6px 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.orders-pickup-line {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
 @keyframes slideDown {
   from {
     opacity: 0;

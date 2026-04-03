@@ -38,6 +38,7 @@ export interface Order {
   expectedAmount: number | null;
   deliveryFee?: number;
   isPro: boolean;
+  fulfillmentType?: "shipping" | "pickup";
   shippingAddress: any;
   billingAddress: any;
   createdAt: string;

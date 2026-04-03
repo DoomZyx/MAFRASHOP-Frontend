@@ -16,6 +16,7 @@ interface Delivery {
   actualDeliveryDate: string | null;
   trackingNumber: string | null;
   carrier: string | null;
+  notes?: string | null;
 }
 
 interface Order {
@@ -24,6 +25,7 @@ interface Order {
   totalAmount: number;
   status: string;
   isPro: boolean;
+  fulfillmentType?: "shipping" | "pickup";
   items?: OrderItem[];
   delivery?: Delivery | null;
 }

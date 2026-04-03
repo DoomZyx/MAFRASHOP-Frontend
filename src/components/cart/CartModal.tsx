@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { PICKUP_STORE_ADDRESS } from "../../constants/pickupStore";
 import { useCart } from "../../hooks/useCart";
 import { useAuth } from "../../hooks/useAuth";
 import { useCheckout } from "../../hooks/useCheckout";
@@ -31,6 +32,7 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
   const { handleCheckout, loading: checkoutLoading } = useCheckout();
   const isPro = user?.isPro || false;
   const [perfumeWarningDismissed, setPerfumeWarningDismissed] = useState(false);
+  const [fulfillmentType, setFulfillmentType] = useState<"shipping" | "pickup">("shipping");
 
   useEffect(() => {
     if (isOpen) setPerfumeWarningDismissed(false);
@@ -40,7 +42,8 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
 
   const subtotal = getCartSubtotal();
   const deliveryFee = getDeliveryFee();
-  const total = getCartTotal();
+  const deliveryFeeEffective = fulfillmentType === "pickup" ? 0 : deliveryFee;
+  const total = subtotal + deliveryFeeEffective;
 
   const handleCheckoutClick = async () => {
     try {
@@ -53,7 +56,7 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
         return;
       }
 
-      await handleCheckout();
+      await handleCheckout({ fulfillmentType });
       onClose();
     } catch (error: any) {
       console.error("Erreur lors du checkout:", error);
@@ -241,6 +244,34 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
               )}
 
               <div className="cart-footer">
+                <div className="cart-fulfillment" role="group" aria-label="Mode de réception">
+                  <span className="cart-summary-label">Réception</span>
+                  <div className="cart-fulfillment-options">
+                    <label className="cart-fulfillment-option">
+                      <input
+                        type="radio"
+                        name="fulfillment"
+                        checked={fulfillmentType === "shipping"}
+                        onChange={() => setFulfillmentType("shipping")}
+                      />
+                      <span>Livraison</span>
+                    </label>
+                    <label className="cart-fulfillment-option">
+                      <input
+                        type="radio"
+                        name="fulfillment"
+                        checked={fulfillmentType === "pickup"}
+                        onChange={() => setFulfillmentType("pickup")}
+                      />
+                      <span>Click &amp; collect</span>
+                    </label>
+                  </div>
+                  {fulfillmentType === "pickup" && (
+                    <p className="cart-pickup-address">
+                      Retrait : <strong>{PICKUP_STORE_ADDRESS}</strong>
+                    </p>
+                  )}
+                </div>
                 <div className="cart-summary">
                   <div className="cart-summary-row">
                     <span className="cart-summary-label">Sous-total</span>
@@ -252,7 +283,11 @@ function CartModal({ isOpen, onClose }: CartModalProps) {
                   <div className="cart-summary-row">
                     <span className="cart-summary-label">Frais de livraison</span>
                     <span className="cart-summary-value">
-                      {Number(deliveryFee) === 0 ? "Offerts" : `${Number(deliveryFee).toFixed(2)} €`}
+                      {fulfillmentType === "pickup"
+                        ? "Gratuit (retrait magasin)"
+                        : Number(deliveryFee) === 0
+                          ? "Offerts"
+                          : `${Number(deliveryFee).toFixed(2)} €`}
                     </span>
                   </div>
                 </div>

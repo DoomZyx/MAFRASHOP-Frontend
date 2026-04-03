@@ -1,16 +1,23 @@
 import { useState } from "react";
-import { createCheckoutSession, getSessionStatus } from "../API/payment/api";
+import {
+  createCheckoutSession,
+  getSessionStatus,
+  type CheckoutFulfillmentType,
+} from "../API/payment/api";
 
 export const useCheckout = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleCheckout = async (shippingAddress?: any) => {
+  const handleCheckout = async (options?: {
+    shippingAddress?: any;
+    fulfillmentType?: CheckoutFulfillmentType;
+  }) => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await createCheckoutSession(shippingAddress);
+      const response = await createCheckoutSession(options);
       
       if (response.success && response.data.url) {
         // Rediriger vers Stripe Checkout

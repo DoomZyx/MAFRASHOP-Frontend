@@ -140,13 +140,16 @@ const AdminDeliveryCard = ({
           </span>
         </div>
         <p className="admin-delivery-card-date">
-          Prévu le {formatDate(delivery.estimatedDeliveryDate)}
+          {order?.fulfillmentType === "pickup"
+            ? `Prêt pour retrait (indicatif) : ${formatDate(delivery.estimatedDeliveryDate)}`
+            : `Prévu le ${formatDate(delivery.estimatedDeliveryDate)}`}
         </p>
       </div>
 
       <div className="admin-delivery-card-address-block">
         <h4 className="admin-delivery-card-address-title">
-          <i className="bi bi-geo-alt"></i> Adresse de livraison
+          <i className="bi bi-geo-alt"></i>{" "}
+          {order?.fulfillmentType === "pickup" ? "Retrait / référence client" : "Adresse de livraison"}
         </h4>
         <p className="admin-delivery-card-address">{formatAddress(delivery)}</p>
       </div>

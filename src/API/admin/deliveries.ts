@@ -5,6 +5,7 @@ export interface AdminDeliveryOrder {
   userId: string;
   status: string;
   totalAmount: number;
+  fulfillmentType?: "shipping" | "pickup";
   shippingAddress?: {
     name?: string;
     line1?: string;
