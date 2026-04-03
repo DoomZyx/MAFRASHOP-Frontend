@@ -4,7 +4,8 @@ import { adminDeliveriesAPI, AdminDelivery } from "../API/admin/deliveries";
 export const useAdminDeliveries = () => {
   const [deliveries, setDeliveries] = useState<AdminDelivery[]>([]);
   const [loading, setLoading] = useState(true);
-  const [statusFilter, setStatusFilter] = useState<string>("today");
+  // Défaut "pending" : les ETA sont à J+3 (72h), l’onglet « Aujourd’hui » resterait vide pour les nouvelles commandes
+  const [statusFilter, setStatusFilter] = useState<string>("pending");
   const [updatingId, setUpdatingId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -27,7 +28,11 @@ export const useAdminDeliveries = () => {
 
   const filteredDeliveries = deliveries.filter((d) => {
     if (statusFilter === "today") {
-      return d.estimatedDeliveryDate === todayStr() && d.status !== "delivered" && d.status !== "failed";
+      const day = todayStr();
+      const createdDay = d.createdAt ? d.createdAt.slice(0, 10) : "";
+      const dueToday =
+        d.estimatedDeliveryDate === day || createdDay === day;
+      return dueToday && d.status !== "delivered" && d.status !== "failed";
     }
     if (statusFilter === "all") return true;
     return d.status === statusFilter;
@@ -92,9 +97,12 @@ export const useAdminDeliveries = () => {
     return parts.join(", ") || "Adresse non renseignée";
   };
 
-  const countToday = deliveries.filter(
-    (d) => d.estimatedDeliveryDate === todayStr() && d.status !== "delivered" && d.status !== "failed"
-  ).length;
+  const countToday = deliveries.filter((d) => {
+    const day = todayStr();
+    const createdDay = d.createdAt ? d.createdAt.slice(0, 10) : "";
+    const dueToday = d.estimatedDeliveryDate === day || createdDay === day;
+    return dueToday && d.status !== "delivered" && d.status !== "failed";
+  }).length;
   const countPending = deliveries.filter((d) => d.status === "pending").length;
   const countInTransit = deliveries.filter((d) => d.status === "in_transit").length;
   const countDelivered = deliveries.filter((d) => d.status === "delivered").length;

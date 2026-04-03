@@ -7,15 +7,18 @@ interface CheckoutSuccessContentProps {
 
 const CheckoutSuccessContent = ({ sessionStatus }: CheckoutSuccessContentProps) => {
   const navigate = useNavigate();
+  const isProcessing = Boolean(sessionStatus?.processing && !sessionStatus?.order);
 
   return (
     <div className="checkout-success-content">
       <div className="success-icon">
         <i className="bi bi-check-circle-fill"></i>
       </div>
-      <h1>Commande confirmée !</h1>
+      <h1>{isProcessing ? "Paiement valide, commande en cours..." : "Commande confirmée !"}</h1>
       <p className="success-message">
-        Merci pour votre achat. Votre commande a été traitée avec succès.
+        {isProcessing
+          ? "Votre paiement est validé. Nous finalisons votre commande, cela peut prendre quelques secondes."
+          : "Merci pour votre achat. Votre commande a été traitée avec succès."}
       </p>
       {sessionStatus?.order && (
         <div className="order-details">
