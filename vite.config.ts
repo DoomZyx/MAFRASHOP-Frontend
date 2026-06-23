@@ -11,40 +11,43 @@ export default defineConfig({
       },
     }),
     VitePWA({
-      registerType: 'autoUpdate',
-      includeAssets: ['images/**/*', 'fonts/**/*'],
+      registerType: "autoUpdate",
+      includeAssets: ["images/**/*", "fonts/**/*"],
       manifest: {
-        name: 'MAFRA',  
-        short_name: 'MAFRA',
-        description: 'Boutique en ligne de produits d\'entretien automobile MA-FRA',
-        theme_color: '#e74c3c',
-        background_color: '#ffffff',
-        display: 'standalone',
+        name: "MAFRA",
+        short_name: "MAFRA",
+        description:
+          "Boutique en ligne de produits d'entretien automobile MA-FRA",
+        theme_color: "#e74c3c",
+        background_color: "#ffffff",
+        display: "standalone",
         icons: [
           {
-            src: '/images/logoMAFRA.webp',
-            sizes: '192x192',
-            type: 'image/webp'
+            src: "/images/logoMAFRA.webp",
+            sizes: "192x192",
+            type: "image/webp",
           },
           {
-            src: '/images/logoMAFRA.webp',
-            sizes: '512x512',
-            type: 'image/webp'
-          }
-        ]
+            src: "/images/logoMAFRA.webp",
+            sizes: "512x512",
+            type: "image/webp",
+          },
+        ],
       },
       workbox: {
         // Cache des ressources essentielles
-        globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,webp,svg,woff,woff2}'],
-        
+        globPatterns: [
+          "**/*.{js,css,html,ico,png,jpg,jpeg,webp,svg,woff,woff2}",
+        ],
+
         // Stratégies de cache
         runtimeCaching: [
           // Cache des images avec stratégie Cache First
           {
             urlPattern: /^https:\/\/.*\.(png|jpg|jpeg|webp|svg|gif)$/i,
-            handler: 'CacheFirst',
+            handler: "CacheFirst",
             options: {
-              cacheName: 'images-cache',
+              cacheName: "images-cache",
               expiration: {
                 maxEntries: 100,
                 maxAgeSeconds: 30 * 24 * 60 * 60, // 30 jours
@@ -57,9 +60,9 @@ export default defineConfig({
           // Cache des polices avec stratégie Cache First
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-            handler: 'CacheFirst',
+            handler: "CacheFirst",
             options: {
-              cacheName: 'google-fonts-cache',
+              cacheName: "google-fonts-cache",
               expiration: {
                 maxEntries: 10,
                 maxAgeSeconds: 365 * 24 * 60 * 60, // 1 an
@@ -71,9 +74,9 @@ export default defineConfig({
           },
           {
             urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
-            handler: 'CacheFirst',
+            handler: "CacheFirst",
             options: {
-              cacheName: 'gstatic-fonts-cache',
+              cacheName: "gstatic-fonts-cache",
               expiration: {
                 maxEntries: 10,
                 maxAgeSeconds: 365 * 24 * 60 * 60, // 1 an
@@ -86,9 +89,9 @@ export default defineConfig({
           // Cache des fichiers CSS et JS avec stratégie Stale While Revalidate
           {
             urlPattern: /\.(?:js|css)$/i,
-            handler: 'StaleWhileRevalidate',
+            handler: "StaleWhileRevalidate",
             options: {
-              cacheName: 'static-resources',
+              cacheName: "static-resources",
               expiration: {
                 maxEntries: 60,
                 maxAgeSeconds: 7 * 24 * 60 * 60, // 7 jours
@@ -98,9 +101,9 @@ export default defineConfig({
           // Cache des API calls avec stratégie Network First
           {
             urlPattern: /^https?:\/\/.*\/api\/.*/i,
-            handler: 'NetworkFirst',
+            handler: "NetworkFirst",
             options: {
-              cacheName: 'api-cache',
+              cacheName: "api-cache",
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 5 * 60, // 5 minutes
@@ -111,9 +114,9 @@ export default defineConfig({
           // Cache des pages HTML avec stratégie Network First
           {
             urlPattern: /\.html$/i,
-            handler: 'NetworkFirst',
+            handler: "NetworkFirst",
             options: {
-              cacheName: 'html-cache',
+              cacheName: "html-cache",
               expiration: {
                 maxEntries: 20,
                 maxAgeSeconds: 24 * 60 * 60, // 24 heures
@@ -121,10 +124,10 @@ export default defineConfig({
             },
           },
         ],
-        
+
         // Taille maximale du cache
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MB
-        
+
         // Nettoyage automatique
         cleanupOutdatedCaches: true,
       },
@@ -134,12 +137,12 @@ export default defineConfig({
     }),
   ],
   server: {
-    host: '0.0.0.0',
+    host: "0.0.0.0",
     port: 5173,
     // Proxy /api vers le backend pour que les cookies httpOnly soient envoyés (même origine en dev)
     proxy: {
-      '/api': {
-        target: process.env.VITE_DEV_PROXY_TARGET || 'http://localhost:3000',
+      "/api": {
+        target: process.env.VITE_DEV_PROXY_TARGET || "http://localhost:3000",
         changeOrigin: true,
       },
     },
@@ -149,14 +152,14 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          "react-vendor": ["react", "react-dom", "react-router-dom"],
         },
       },
     },
     // Code splitting
     chunkSizeWarningLimit: 1000,
     // Minification
-    minify: 'terser',
+    minify: "terser",
     terserOptions: {
       compress: {
         drop_console: true, // Supprime les console.log en production

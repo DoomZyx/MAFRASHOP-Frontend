@@ -19,3 +19,5 @@ export const GOOGLE_CLIENT_ID = typeof rawGoogleClientId === "string" ? rawGoogl
 export const GOOGLE_REDIRECT_URI =
   (typeof rawGoogleRedirectUri === "string" ? rawGoogleRedirectUri.trim() : "") ||
   (typeof window !== "undefined" ? window.location.origin : "");
+
+export const VITE_GOOGLE_REDIRECT_URI = import.meta.env.VITE_GOOGLE_REDIRECT_URI;

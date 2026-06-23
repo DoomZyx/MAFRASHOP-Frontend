@@ -101,7 +101,10 @@ export const authAPI = {
   },
 
   getGoogleConfig: async (): Promise<GoogleConfig> => {
-    const response = await fetch(`${API_BASE_URL}/api/auth/google/config`, authFetchOptions);
+    const response = await fetch(
+      `${API_BASE_URL}/api/auth/google/config`,
+      authFetchOptions,
+    );
     return response.json();
   },
 
@@ -216,20 +219,22 @@ export const authAPI = {
     return response.json();
   },
 
-  adminGoogleCallback: async (code: string): Promise<{
+  adminGoogleCallback: async (
+    code: string,
+  ): Promise<{
     success: boolean;
     message: string;
     user?: { id: string; email: string; isAdmin: boolean };
   }> => {
-    const response = await fetch(`${API_BASE_URL}/api/auth/admin/google/callback`, {
-      method: "POST",
-      headers: getAuthHeaders(),
-      body: JSON.stringify({ code }),
-      ...authFetchOptions,
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/api/auth/admin/google/callback`,
+      {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ code }),
+        ...authFetchOptions,
+      },
+    );
     return response.json();
   },
 };
-
-
-
