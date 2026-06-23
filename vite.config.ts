@@ -142,7 +142,7 @@ export default defineConfig({
     // Proxy /api vers le backend pour que les cookies httpOnly soient envoyés (même origine en dev)
     proxy: {
       "/api": {
-        target: process.env.VITE_DEV_PROXY_TARGET || "http://localhost:3000",
+        target: process.env.VITE_DEV_PROXY_TARGET || "http://localhost:3001",
         changeOrigin: true,
       },
     },
