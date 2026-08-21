@@ -17,10 +17,7 @@ interface ProductCardProps {
 function ProductCard({
   product,
   showActions = false,
-  onToggleFavorite,
-  onAddToCart,
   isFavorite,
-  isInCart,
   isAuthenticated = false,
 }: ProductCardProps) {
   const isOutOfStock =
@@ -74,32 +71,6 @@ function ProductCard({
               <i
                 className={`bi ${
                   isFavorite?.(product.id) ? "bi-heart-fill" : "bi-heart"
-                }`}
-              ></i>
-            </button>
-          )}
-          {onAddToCart && (
-            <button
-              className={`product-action-btn cart-btn ${
-                isInCart?.(product.id) ? "active" : ""
-              } ${isOutOfStock ? "disabled" : ""}`}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                if (!isOutOfStock) onAddToCart(product.id);
-              }}
-              disabled={isOutOfStock}
-              title={
-                isOutOfStock
-                  ? "Indisponible"
-                  : isInCart?.(product.id)
-                    ? "Déjà dans le panier"
-                    : "Ajouter au panier"
-              }
-            >
-              <i
-                className={`bi ${
-                  isInCart?.(product.id) ? "bi-cart-check-fill" : "bi-cart"
                 }`}
               ></i>
             </button>

@@ -10,11 +10,10 @@ import { useNav } from "../../hooks/useNav";import Avatar from "../shared/Avatar
 interface MenuBurgerProps {
   isModalOpen: boolean;
   toggleModal: () => void;
-  onOpenCart?: () => void;
   onOpenFavorites?: () => void;
 }
 
-function MenuBurger({ toggleModal, onOpenCart, onOpenFavorites }: MenuBurgerProps) {
+function MenuBurger({ toggleModal, onOpenFavorites }: MenuBurgerProps) {
   const { products } = useProducts();
   const [isProModalOpen, setIsProModalOpen] = useState(false);
   const {
