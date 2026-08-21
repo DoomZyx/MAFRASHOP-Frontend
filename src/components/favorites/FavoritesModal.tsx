@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useFavorites } from "../../hooks/useFavorites";
-import { useCart } from "../../hooks/useCart";
 import ProductPrice from "../shared/ProductPrice";
 import { getImageUrl } from "../../utils/imageUtils";
 import "./favoritesModal.scss";
@@ -13,13 +12,9 @@ interface FavoritesModalProps {
 
 function FavoritesModal({ isOpen, onClose }: FavoritesModalProps) {
   const { favorites, isLoading, removeFromFavorites } = useFavorites();
-  const { addToCart, isInCart } = useCart();
 
   if (!isOpen) return null;
 
-  const handleAddToCart = async (productId: string) => {
-    await addToCart(productId);
-  };
 
   return (
     <div className="favorites-modal-overlay" onClick={onClose}>
@@ -89,26 +84,6 @@ function FavoritesModal({ isOpen, onClose }: FavoritesModalProps) {
                       </div>
 
                       <div className="favorites-item-actions">
-                        <button
-                          className={`favorites-add-cart-btn ${
-                            isInCart(product.id) ? "in-cart" : ""
-                          }`}
-                          onClick={() => handleAddToCart(product.id)}
-                          disabled={isLoading || isInCart(product.id)}
-                        >
-                          <i
-                            className={`bi ${
-                              isInCart(product.id)
-                                ? "bi-cart-check-fill"
-                                : "bi-cart-plus"
-                            }`}
-                          ></i>
-                          <span>
-                            {isInCart(product.id)
-                              ? "Dans le panier"
-                              : "Ajouter au panier"}
-                          </span>
-                        </button>
 
                         <button
                           className="favorites-remove-btn"

@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useProduct } from "../../hooks/useProducts";
-import { useCart } from "../../hooks/useCart";
 import { useFavorites } from "../../hooks/useFavorites";
 import { useAuth } from "../../hooks/useAuth";
 import Nav from "../../components/nav/nav";
@@ -15,9 +14,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 function ProductDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const { product, loading, error } = useProduct(slug || "");
-  const { addToCart, isInCart } = useCart();
-  const { toggleFavorite, isFavorite } = useFavorites();
+  const { product, loading, error } = useProduct(slug || "");  const { toggleFavorite, isFavorite } = useFavorites();
   const { isAuthenticated } = useAuth();
 
   if (loading) {
@@ -67,11 +64,8 @@ function ProductDetail() {
           product={product}
           isAuthenticated={isAuthenticated}
           isFavorite={isFavorite(product.id)}
-          isInCart={isInCart(product.id)}
           isOutOfStock={isOutOfStock}
-          onToggleFavorite={() => toggleFavorite(product.id)}
-          onAddToCart={() => addToCart(product.id)}
-        />
+          onToggleFavorite={() => toggleFavorite(product.id)}        />
       </div>
       <Footer />
     </>

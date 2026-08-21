@@ -1,7 +1,6 @@
 import "./GuideRecommendedProducts.scss";
 import { useProducts } from "../../../hooks/useProducts";
 import ProductCard from "../../shared/ProductCard";
-import { useCart } from "../../../hooks/useCart";
 import { useFavorites } from "../../../hooks/useFavorites";
 import { useNav } from "../../../hooks/useNav";
 import { RecommendedProduct } from "../../../data/guideThemesData";
@@ -13,9 +12,7 @@ interface GuideRecommendedProductsProps {
 function GuideRecommendedProducts({
   recommendedProducts = [],
 }: GuideRecommendedProductsProps) {
-  const { products } = useProducts();
-  const { addToCart, isInCart } = useCart();
-  const { toggleFavorite, isFavorite } = useFavorites();
+  const { products } = useProducts();  const { toggleFavorite, isFavorite } = useFavorites();
   const { isAuthenticated } = useNav();
 
   // Normaliser le texte (enlever accents, caractères spéciaux)
@@ -59,10 +56,8 @@ function GuideRecommendedProducts({
             key={product.id}
             product={product}
             showActions={isAuthenticated}
-            onAddToCart={addToCart}
             onToggleFavorite={toggleFavorite}
             isFavorite={isFavorite}
-            isInCart={isInCart}
             isAuthenticated={isAuthenticated}
           />
         ))}

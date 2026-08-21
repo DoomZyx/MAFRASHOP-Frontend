@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { getAllProducts } from "../API/products/api";
-import { adminStatsAPI } from "../API/admin/stats";
 import { Product } from "../types/product";
 
 interface DashboardStats {

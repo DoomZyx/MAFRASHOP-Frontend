@@ -8,17 +8,14 @@ import useResponsive from "../../hooks/useResponsive";
 import MenuBurger from "../menuBurger/menu";
 import useModal from "../../hooks/useModal";
 import { useNav } from "../../hooks/useNav";
-import { useCart } from "../../hooks/useCart";
 import AuthModal from "../auth/AuthModal";
 import ProRequestModal from "../auth/ProRequestModal";
-import CartModal from "../cart/CartModal";
 import FavoritesModal from "../favorites/FavoritesModal";
 import Avatar from "../shared/Avatar";
 
 function Nav() {
   const { isModalOpen, toggleModal } = useModal();
   const [isProModalOpen, setIsProModalOpen] = useState(false);
-  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
   const deviceType = useResponsive();
   const {
@@ -29,8 +26,6 @@ function Nav() {
     closeAuthModal,
     handleLogout,
   } = useNav();
-  const { getCartCount } = useCart();
-
 
   return (
     <nav>
@@ -57,18 +52,18 @@ function Nav() {
             </svg>
             <div className="nav-left-content">
               <ul className="nav-menu-links">
-          {isAuthenticated && (
-            <Link to="/profile">
-              <div className="nav-user-info">
-                <Avatar
-                  src={user?.avatar}
-                  alt={`${user?.firstName || ""} ${user?.lastName || ""}`}
-                  size="small"
-                  className="nav-user-avatar"
-                />
-              </div>
-            </Link>
-          )}
+                {isAuthenticated && (
+                  <Link to="/profile">
+                    <div className="nav-user-info">
+                      <Avatar
+                        src={user?.avatar}
+                        alt={`${user?.firstName || ""} ${user?.lastName || ""}`}
+                        size="small"
+                        className="nav-user-avatar"
+                      />
+                    </div>
+                  </Link>
+                )}
                 <li>
                   <Link to="/">ACCUEIL</Link>
                 </li>
@@ -98,23 +93,6 @@ function Nav() {
               <div className="nav-icons">
                 {isAuthenticated && (
                   <>
-                    <Link
-                      to="/orders"
-                      className="nav-icon-btn"
-                      title="Mes commandes"
-                    >
-                      <i className="bi bi-bag"></i>
-                    </Link>
-                    <button
-                      className="nav-icon-btn"
-                      title="Panier"
-                      onClick={() => setIsCartModalOpen(true)}
-                    >
-                      <i className="bi bi-cart"></i>
-                      {getCartCount() > 0 && (
-                        <span className="nav-icon-badge">{getCartCount()}</span>
-                      )}
-                    </button>
                     <button
                       className="nav-icon-btn"
                       title="Favoris"
@@ -174,10 +152,9 @@ function Nav() {
           <MenuButton onClick={toggleModal} />
           {isModalOpen && (
             <div className="mobile-menu-overlay">
-              <MenuBurger 
-                isModalOpen={isModalOpen} 
+              <MenuBurger
+                isModalOpen={isModalOpen}
                 toggleModal={toggleModal}
-                onOpenCart={() => setIsCartModalOpen(true)}
                 onOpenFavorites={() => setIsFavoritesModalOpen(true)}
               />
             </div>
@@ -191,10 +168,6 @@ function Nav() {
       />
       {isAuthenticated && (
         <>
-          <CartModal
-            isOpen={isCartModalOpen}
-            onClose={() => setIsCartModalOpen(false)}
-          />
           <FavoritesModal
             isOpen={isFavoritesModalOpen}
             onClose={() => setIsFavoritesModalOpen(false)}

@@ -2,7 +2,6 @@ import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useProducts } from "../../../hooks/useProducts";
 import { useFilters } from "../../../hooks/useFilters";
-import { useCart } from "../../../hooks/useCart";
 import { useFavorites } from "../../../hooks/useFavorites";
 import { useAuth } from "../../../hooks/useAuth";
 import Filters from "../filters/filters";
@@ -24,7 +23,6 @@ function Catalogue() {
     closeFilters: closeFiltersModal,
     clearFilters,
   } = useFilters();
-  const { addToCart, isInCart } = useCart();
   const { toggleFavorite, isFavorite } = useFavorites();
   const { isAuthenticated } = useAuth();
 
@@ -126,79 +124,58 @@ function Catalogue() {
           filteredProducts.map((product) => {
           const unavailable = isOutOfStock(product);
           return (
-          <div
-            key={product.id}
-            className={`product-card ${unavailable ? "product-card-unavailable" : ""}`}
-          >
-            {unavailable && (
-              <span className="product-stock-badge">Indisponible</span>
-            )}
-            <Link to={`/${product.slug || product.id}`} className="product-card-link">
-              {(() => {
-                const imageUrl = getImageUrl(product.url_image);
-                return imageUrl ? (
-                  <img src={imageUrl} alt={product.nom} />
-                ) : null;
-              })()}
-              {product.category && (
-                <p className="product-category">{product.category}</p>
+            <div
+              key={product.id}
+              className={`product-card ${unavailable ? "product-card-unavailable" : ""}`}
+            >
+              {unavailable && (
+                <span className="product-stock-badge">Indisponible</span>
               )}
-              <h3>{product.nom}</h3>
-              {product.format && (
-                <p className="product-format">{product.format}</p>
+              <Link
+                to={`/${product.slug || product.id}`}
+                className="product-card-link"
+              >
+                {(() => {
+                  const imageUrl = getImageUrl(product.url_image);
+                  return imageUrl ? (
+                    <img src={imageUrl} alt={product.nom} />
+                  ) : null;
+                })()}
+                {product.category && (
+                  <p className="product-category">{product.category}</p>
+                )}
+                <h3>{product.nom}</h3>
+                {product.format && (
+                  <p className="product-format">{product.format}</p>
+                )}
+                <ProductPrice product={product} className="product-price" />
+              </Link>
+              {isAuthenticated && (
+                <div className="product-actions">
+                  <button
+                    className={`product-action-btn favorite-btn ${
+                      isFavorite(product.id) ? "active" : ""
+                    }`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      toggleFavorite(product.id);
+                    }}
+                    title={
+                      isFavorite(product.id)
+                        ? "Retirer des favoris"
+                        : "Ajouter aux favoris"
+                    }
+                  >
+                    <i
+                      className={`bi ${
+                        isFavorite(product.id) ? "bi-heart-fill" : "bi-heart"
+                      }`}
+                    ></i>
+                  </button>
+                </div>
               )}
-              <ProductPrice product={product} className="product-price" />
-            </Link>
-            {isAuthenticated && (
-              <div className="product-actions">
-                <button
-                  className={`product-action-btn favorite-btn ${
-                    isFavorite(product.id) ? "active" : ""
-                  }`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    toggleFavorite(product.id);
-                  }}
-                  title={
-                    isFavorite(product.id)
-                      ? "Retirer des favoris"
-                      : "Ajouter aux favoris"
-                  }
-                >
-                  <i
-                    className={`bi ${
-                      isFavorite(product.id) ? "bi-heart-fill" : "bi-heart"
-                    }`}
-                  ></i>
-                </button>
-                <button
-                  className={`product-action-btn cart-btn ${
-                    isInCart(product.id) ? "active" : ""
-                  } ${unavailable ? "disabled" : ""}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (!unavailable) addToCart(product.id);
-                  }}
-                  disabled={unavailable}
-                  title={
-                    unavailable
-                      ? "Indisponible"
-                      : isInCart(product.id)
-                        ? "Déjà dans le panier"
-                        : "Ajouter au panier"
-                  }
-                >
-                  <i
-                    className={`bi ${
-                      isInCart(product.id) ? "bi-cart-check-fill" : "bi-cart"
-                    }`}
-                  ></i>
-                </button>
-              </div>
-            )}
-          </div>
+            </div>
           );
         })
         ) : (

@@ -5,9 +5,7 @@ import SearchProducts from "../shop/searchProducts/searchProducts";
 import { useProducts } from "../../hooks/useProducts";
 import AuthModal from "../auth/AuthModal";
 import ProRequestModal from "../auth/ProRequestModal";
-import { useNav } from "../../hooks/useNav";
-import { useCart } from "../../hooks/useCart";
-import Avatar from "../shared/Avatar";
+import { useNav } from "../../hooks/useNav";import Avatar from "../shared/Avatar";
 
 interface MenuBurgerProps {
   isModalOpen: boolean;
@@ -27,8 +25,6 @@ function MenuBurger({ toggleModal, onOpenCart, onOpenFavorites }: MenuBurgerProp
     closeAuthModal,
     handleLogout,
   } = useNav();
-  const { getCartCount } = useCart();
-
   const showProButton =
     isAuthenticated &&
     user &&
@@ -100,10 +96,6 @@ function MenuBurger({ toggleModal, onOpenCart, onOpenFavorites }: MenuBurgerProp
                   </Link>
                 </li>
                 <li>
-                  <Link to="/orders" onClick={toggleModal} className="menu-link">
-                    <i className="bi bi-bag"></i>
-                    <span>Mes commandes</span>
-                  </Link>
                 </li>
               </ul>
             </div>
@@ -127,9 +119,6 @@ function MenuBurger({ toggleModal, onOpenCart, onOpenFavorites }: MenuBurgerProp
                   >
                     <div className="quick-action-icon cart-icon">
                       <i className="bi bi-cart"></i>
-                      {getCartCount() > 0 && (
-                        <span className="quick-action-badge">{getCartCount()}</span>
-                      )}
                     </div>
                     <span>Panier</span>
                   </button>
