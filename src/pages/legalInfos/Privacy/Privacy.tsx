@@ -59,8 +59,7 @@ function Privacy() {
                         <h3>2.2. Données de compte</h3>
                         <ul>
                             <li>Identifiants de connexion (email et mot de passe crypté)</li>
-                            <li>Historique des commandes</li>
-                            <li>Préférences de compte</li>
+                            <li>Informations du compte</li>
                         </ul>
 
                         <h3>2.3. Données professionnelles (pour les comptes professionnels)</h3>
@@ -72,11 +71,6 @@ function Privacy() {
                             <li>Adresse de l'entreprise</li>
                         </ul>
 
-                        <h3>2.4. Données de paiement</h3>
-                        <ul>
-                            <li>Informations de paiement (traitées par Stripe, non stockées par MAFRA)</li>
-                            <li>Historique des transactions</li>
-                        </ul>
 
                         <h3>2.5. Données de navigation</h3>
                         <ul>
@@ -91,14 +85,6 @@ function Privacy() {
                         <p>
                             Vos données personnelles sont collectées et traitées pour les finalités suivantes :
                         </p>
-
-                        <h3>3.1. Gestion des commandes</h3>
-                        <ul>
-                            <li>Traitement et suivi de vos commandes</li>
-                            <li>Préparation et livraison des produits</li>
-                            <li>Facturation</li>
-                            <li>Gestion des retours et remboursements</li>
-                        </ul>
                         <p className="legal-basis">
                             <strong>Base légale :</strong> Exécution du contrat de vente
                         </p>
@@ -107,7 +93,6 @@ function Privacy() {
                         <ul>
                             <li>Création et gestion de votre compte</li>
                             <li>Authentification et sécurisation de l'accès</li>
-                            <li>Historique des commandes</li>
                         </ul>
                         <p className="legal-basis">
                             <strong>Base légale :</strong> Exécution du contrat et consentement
@@ -165,7 +150,6 @@ function Privacy() {
                             <li>
                                 <strong>Prestataires de services :</strong>
                                 <ul>
-                                    <li>Stripe : Traitement sécurisé des paiements</li>
                                     <li>Hébergeur du site web</li>
                                 </ul>
                             </li>
@@ -198,9 +182,6 @@ function Privacy() {
                                 <strong>Données de commande et factures :</strong> 10 ans (obligation légale comptable)
                             </li>
                             <li>
-                                <strong>Données de paiement :</strong> 13 mois (obligation légale bancaire)
-                            </li>
-                            <li>
                                 <strong>Cookies :</strong> 13 mois maximum
                             </li>
                             <li>
@@ -230,7 +211,6 @@ function Privacy() {
                         <ul>
                             <li>Cryptage des mots de passe</li>
                             <li>Connexion sécurisée HTTPS</li>
-                            <li>Paiement sécurisé via Stripe (certifié PCI-DSS)</li>
                             <li>Accès restreint aux données personnelles</li>
                             <li>Sauvegardes régulières</li>
                         </ul>

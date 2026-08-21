@@ -37,9 +37,6 @@ function Footer() {
                 <Link to="/sav">SAV</Link>
               </li>
               <li>
-                <Link to="/shipping">Livraison</Link>
-              </li>
-              <li>
                 <Link to="/returns">Retours & Remboursements</Link>
               </li>
             </ul>

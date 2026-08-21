@@ -22,7 +22,6 @@ import Expertise from "./pages/expertise/Expertise";
 import Guide from "./pages/guide/Guide";
 import GuideTheme from "./pages/guide/GuideTheme";
 import SAV from "./pages/sav/SAV";
-import Shipping from "./pages/shipping/Shipping";
 import Returns from "./pages/returns/Returns";
 import CGV from "./pages/legalInfos/CGV/cgv";
 import Privacy from "./pages/legalInfos/Privacy/Privacy";
@@ -46,7 +45,6 @@ function App() {
         <Route path="/guide" element={<Guide />} />
         <Route path="/guide/:themeId" element={<GuideTheme />} />
         <Route path="/sav" element={<SAV />} />
-        <Route path="/shipping" element={<Shipping />} />
         <Route path="/returns" element={<Returns />} />
         <Route path="/terms" element={<CGV />} />
         <Route path="/privacy" element={<Privacy />} />

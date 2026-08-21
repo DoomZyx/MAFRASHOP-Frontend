@@ -55,13 +55,12 @@ function SAV() {
 
               <div className="sav-service-card">
                 <i className="bi bi-cart-check"></i>
-                <h3>Suivi de commande</h3>
+                <h3>Faire une commande ou suivre votre commande</h3>
                 <p>
                   Informations concernant votre commande en cours.
                 </p>
                 <ul>
                   <li>État de la commande</li>
-                  <li>Numéro de suivi</li>
                   <li>Date de livraison estimée</li>
                   <li>Modification de commande</li>
                 </ul>
@@ -89,7 +88,7 @@ function SAV() {
                 </p>
                 <ul>
                   <li>Retour sous 14 jours</li>
-                  <li>Demande d'étiquette retour</li>
+                  <li>A retourner à l'adresse du dépôt</li>
                   <li>Suivi du remboursement</li>
                   <li>Conditions de retour</li>
                 </ul>
@@ -155,7 +154,7 @@ function SAV() {
                   Comment suivre ma commande ?
                 </h3>
                 <p>
-                  Vous pouvez suivre votre commande en consultant la page mes commandes, cliquez sur la commande effectué, la carte va s'agrandir et vous verrez le statut de livraison et la date et l'heure à laquelle le livreur a indiqué
+                  Vous pouvez appelez le SAV de 9h à 18h
                 </p>
               </div>
 
@@ -165,20 +164,8 @@ function SAV() {
                   Que faire si mon produit est défectueux ?
                 </h3>
                 <p>
-                  Contactez-nous avec votre numéro de commande et une description du problème. 
+                  Contactez-nous avec votre numéro de BL ou facture et une description du problème. 
                   Nous procéderons à l'échange ou au remboursement selon les conditions de vente.
-                </p>
-              </div>
-
-              <div className="sav-faq-item">
-                <h3>
-                  <i className="bi bi-question-circle-fill"></i>
-                  Comment faire un retour ?
-                </h3>
-                <p>
-                  Consultez notre page "Retours & Remboursements" pour connaître les conditions 
-                  et la procédure de retour. Vous disposez de 14 jours pour exercer votre droit 
-                  de rétractation.
                 </p>
               </div>
             </div>

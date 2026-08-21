@@ -18,7 +18,7 @@ function Expertise() {
           <h1>Nos Produits</h1>
           <div className="expertise-hero-line"></div>
           <p className="expertise-hero-subtitle">
-            Plus de 100 produits d'entretien automobile MA-FRA
+            Plus de 200 produits d'entretien automobile MA-FRA
           </p>
         </div>
 
@@ -26,9 +26,9 @@ function Expertise() {
           <section className="expertise-intro">
             <h2>La gamme MA-FRA</h2>
             <p>
-              MA-FRA est une marque italienne de produits d'entretien automobile fondée 
-              en 1965. Nous proposons plus de 100 produits de cette gamme sur notre 
-              boutique en ligne.
+              MA-FRA est une marque italienne de produits d'entretien automobile
+              fondée en 1965. Nous proposons plus de 200 produits de cette gamme
+              sur notre boutique en ligne.
             </p>
           </section>
 
@@ -40,9 +40,7 @@ function Expertise() {
                   <i className="bi bi-droplet-fill"></i>
                 </div>
                 <h3>Lavage</h3>
-                <p>
-                  Produits pour le lavage extérieur des véhicules.
-                </p>
+                <p>Produits pour le lavage extérieur des véhicules.</p>
                 <ul>
                   <li>Shampooings auto</li>
                   <li>Prélavages</li>
@@ -72,9 +70,7 @@ function Expertise() {
                   <i className="bi bi-shield-check"></i>
                 </div>
                 <h3>Protection</h3>
-                <p>
-                  Produits de protection pour la carrosserie.
-                </p>
+                <p>Produits de protection pour la carrosserie.</p>
                 <ul>
                   <li>Cires</li>
                   <li>Sealants</li>
@@ -88,9 +84,7 @@ function Expertise() {
                   <i className="bi bi-car-front-fill"></i>
                 </div>
                 <h3>Intérieur</h3>
-                <p>
-                  Produits pour l'entretien de l'habitacle.
-                </p>
+                <p>Produits pour l'entretien de l'habitacle.</p>
                 <ul>
                   <li>Nettoyants plastiques</li>
                   <li>Nettoyants cuir</li>
@@ -104,9 +98,7 @@ function Expertise() {
                   <i className="bi bi-tools"></i>
                 </div>
                 <h3>Accessoires</h3>
-                <p>
-                  Accessoires pour l'application des produits.
-                </p>
+                <p>Accessoires pour l'application des produits.</p>
                 <ul>
                   <li>Microfibres</li>
                   <li>Applicateurs</li>
@@ -120,9 +112,7 @@ function Expertise() {
                   <i className="bi bi-briefcase"></i>
                 </div>
                 <h3>Gamme Pro</h3>
-                <p>
-                  Produits destinés aux professionnels.
-                </p>
+                <p>Produits destinés aux professionnels.</p>
                 <ul>
                   <li>Formats professionnels</li>
                   <li>Produits concentrés</li>
@@ -140,29 +130,27 @@ function Expertise() {
                 <div className="expertise-step-number">1</div>
                 <h3>Parcourir le catalogue</h3>
                 <p>
-                  Consultez notre sélection de produits MAFRA disponibles en ligne.
+                  Consultez notre sélection de produits MAFRA disponibles en
+                  ligne.
                 </p>
               </div>
               <div className="expertise-step">
                 <div className="expertise-step-number">2</div>
-                <h3>Ajouter au panier</h3>
+                <h3>Ajouter à vos favoris</h3>
                 <p>
-                  Sélectionnez les produits souhaités et ajoutez-les à votre panier.
+                  Sélectionnez les produits souhaités et ajoutez-les à vos coups
+                  de coeur.
                 </p>
               </div>
               <div className="expertise-step">
                 <div className="expertise-step-number">3</div>
                 <h3>Valider la commande</h3>
-                <p>
-                  Finalisez votre commande et procédez au paiement sécurisé en ligne.
-                </p>
+                <p>Appeler au 06 71 33 59 83 pour pouvoir commander</p>
               </div>
               <div className="expertise-step">
                 <div className="expertise-step-number">4</div>
                 <h3>Recevoir vos produits</h3>
-                <p>
-                  Votre commande est préparée et expédiée sous 72h ouvrées.
-                </p>
+                <p>Votre commande est préparée et expédiée sous 72h ouvrées.</p>
               </div>
             </div>
           </section>
@@ -170,7 +158,8 @@ function Expertise() {
           <section className="expertise-cta">
             <h2>Consulter notre catalogue</h2>
             <p>
-              Découvrez les plus de 100 produits MA-FRA disponibles sur notre boutique en ligne.
+              Découvrez les plus de 200 produits MA-FRA disponibles sur notre
+              boutique en ligne.
             </p>
             <div className="expertise-cta-buttons">
               <a href="/shop" className="expertise-cta-button primary">

@@ -80,7 +80,7 @@ function Returns() {
                 <div className="returns-step-number">1</div>
                 <h3>Contacter le service client</h3>
                 <p>
-                  Contactez notre service client par email avec votre numéro de commande 
+                  Contactez notre service client par téléphone avec votre n°BL ou facture
                   pour demander un retour.
                 </p>
               </div>
@@ -88,7 +88,7 @@ function Returns() {
                 <div className="returns-step-number">2</div>
                 <h3>Recevoir l'adresse</h3>
                 <p>
-                  Nous vous envoyons par email l'adresse de notre dépôt pour le retour.
+                  Nous vous communiquerons l'adresse de notre dépôt pour le retour.
                 </p>
               </div>
               <div className="returns-step">
@@ -142,13 +142,13 @@ function Returns() {
                 </p>
                 <ul>
                   <li>Délai : Signalement sous 48h après réception</li>
+                  <li>Preuve : Filmez votre reception de la commande</li>
                   <li>Frais de retour : Pris en charge</li>
                   <li>Remboursement ou échange : Selon disponibilité</li>
                   <li>Produit : Peut être ouvert</li>
                 </ul>
                 <div className="returns-type-note">
-                  Contactez notre service client avec photos du défaut et votre numéro 
-                  de commande.
+                  Contactez notre service client avec photos du défaut et votre n° de BL ou facture.
                 </div>
               </div>
 
@@ -167,8 +167,7 @@ function Returns() {
                   <li>Produit : Emballage scellé obligatoire</li>
                 </ul>
                 <div className="returns-type-note">
-                  Contactez notre service client avec votre numéro de commande et une 
-                  description de l'erreur.
+                  Contactez notre service client avec votre n° de BL ou facture.
                 </div>
               </div>
             </div>
@@ -257,7 +256,7 @@ function Returns() {
                 <p>
                   L'emballage peut présenter des traces d'ouverture, mais il doit être 
                   complet et permettre de protéger le produit. Si l'emballage est trop 
-                  endommagé, utilisez un carton adapté.
+                  endommagé, vous pouvez utiliser un autre carton adapté.
                 </p>
               </div>
 
@@ -279,9 +278,7 @@ function Returns() {
                   Comment suivre mon retour ?
                 </h3>
                 <p>
-                  Le numéro de suivi fourni avec l'étiquette de retour vous permet de 
-                  suivre votre colis. Vous recevrez également un email de confirmation 
-                  dès réception du produit par nos services.
+                  Vous pouvez contacter le SAV demander le statut en founissant 
                 </p>
               </div>
 
@@ -305,9 +302,6 @@ function Returns() {
               Contactez notre service client pour toute question concernant un retour.
             </p>
             <div className="returns-cta-buttons">
-              <a href="/orders" className="returns-cta-button primary">
-                Mes commandes
-              </a>
               <a href="/sav" className="returns-cta-button secondary">
                 Nous contacter
               </a>

@@ -48,8 +48,7 @@ function About() {
               <div className="about-values-grid">
                 <div className="about-value-card">
                   <i className="bi bi-box-seam"></i>
-                  <h3>Plus de 100 produits</h3>
-                  <p>Catalogue MA-FRA</p>
+                  <h3>Plus de 200 produits</h3>
                 </div>
                 <div className="about-value-card">
                   <i className="bi bi-geo-alt"></i>
@@ -57,9 +56,9 @@ function About() {
                   <p>20km autout de notre dépôt</p>
                 </div>
                 <div className="about-value-card">
-                  <i className="bi bi-truck"></i>
-                  <h3>Livraison</h3>
-                  <p>72h - 7,50€</p>
+                  <i className="bi bi-phone"></i>
+                  <h3>06 71 33 59 83</h3>
+                  <p>Pour toute commandes et informations</p>
                 </div>
                 <div className="about-value-card">
                   <i className="bi bi-arrow-return-left"></i>
@@ -76,15 +75,11 @@ function About() {
               <ul className="about-list">
                 <li>
                   <i className="bi bi-check-circle-fill"></i>
-                  Plus de 100 produits MA-FRA disponibles
+                  Plus de 200 produits MA-FRA disponibles
                 </li>
                 <li>
                   <i className="bi bi-check-circle-fill"></i>
-                  Commande en ligne 24h/24
-                </li>
-                <li>
-                  <i className="bi bi-check-circle-fill"></i>
-                  Livraison en main propre sous 72h
+                  Livraison en main propre
                 </li>
                 <li>
                   <i className="bi bi-check-circle-fill"></i>

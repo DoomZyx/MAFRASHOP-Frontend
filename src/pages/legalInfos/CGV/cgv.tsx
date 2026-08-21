@@ -44,7 +44,7 @@ function CGV() {
 
                     <LegalArticle title="Article 2 - Produits">
                         <p>
-                            MAFRA propose à la vente plus de 100 produits d'entretien automobile 
+                            MAFRA propose à la vente plus de 200 produits d'entretien automobile 
                             de la marque MA-FRA, répartis dans les catégories suivantes :
                         </p>
                         <ul>
@@ -82,19 +82,10 @@ function CGV() {
                         </p>
                     </LegalArticle>
 
-                    <LegalArticle title="Article 4 - Frais de Livraison">
-                        <p>
-                            Les frais de livraison s'élèvent à 7,50 € par commande.
-                        </p>
-                        <p>
-                            Les frais de livraison sont offerts pour toute commande d'un montant égal 
-                            ou supérieur à 120 € (hors TVA pour les professionnels, TTC pour les particuliers).
-                        </p>
-                    </LegalArticle>
 
-                    <LegalArticle title="Article 5 - Commandes">
+                    <LegalArticle title="Article 4 - Commandes">
                         <p>
-                            Les commandes sont passées exclusivement via le site internet de MAFRA.
+                            Les commandes sont passées exclusivement par téléphone.
                         </p>
                         <p>
                             Pour passer commande, le client doit créer un compte utilisateur et renseigner 
@@ -112,24 +103,19 @@ function CGV() {
                         </p>
                     </LegalArticle>
 
-                    <LegalArticle title="Article 6 - Validation de la Commande">
+                    <LegalArticle title="Article 5 - Validation de la Commande">
                         <p>
                             La validation d'une commande implique l'acceptation pleine et entière des 
                             présentes Conditions Générales de Vente.
-                        </p>
-                        <p>
-                            Après validation de la commande, un email de confirmation contenant le 
-                            récapitulatif de la commande est envoyé au client.
                         </p>
                         <p>
                             La commande devient définitive après réception du paiement.
                         </p>
                     </LegalArticle>
 
-                    <LegalArticle title="Article 7 - Paiement">
+                    <LegalArticle title="Article 6 - Paiement">
                         <p>
-                            Le paiement s'effectue exclusivement par carte bancaire via la plateforme 
-                            de paiement sécurisée Stripe.
+                            Le paiement s'effectue exclusivement via virement 
                         </p>
                         <p>
                             Le débit de la carte bancaire est effectué au moment de la validation du 
@@ -141,7 +127,7 @@ function CGV() {
                         </p>
                     </LegalArticle>
 
-                    <LegalArticle title="Article 8 - Disponibilité">
+                    <LegalArticle title="Article 7 - Disponibilité">
                         <p>
                             Les produits sont proposés dans la limite des stocks disponibles.
                         </p>
@@ -152,10 +138,7 @@ function CGV() {
                         </p>
                     </LegalArticle>
 
-                    <LegalArticle title="Article 9 - Livraison">
-                        <p>
-                            Les livraisons sont effectuées partout en France et les pays voisins.
-                        </p>
+                    <LegalArticle title="Article 8 - Livraison">
                         <p>
                             La livraison est effectuée en main propre par un employé de MAFRA à 
                             l'adresse indiquée lors de la commande.
@@ -179,7 +162,7 @@ function CGV() {
                         </p>
                     </LegalArticle>
 
-                    <LegalArticle title="Article 10 - Droit de Rétractation">
+                    <LegalArticle title="Article 9 - Droit de Rétractation">
                         <p>
                             Conformément aux articles L221-18 et suivants du Code de la consommation, 
                             le client dispose d'un délai de 14 jours à compter de la réception de la 
@@ -188,7 +171,7 @@ function CGV() {
                         </p>
                         <p>
                             Pour exercer ce droit, le client doit contacter le service client de 
-                            MAFRA par email en indiquant son numéro de commande et sa volonté de 
+                            MAFRA par email en indiquant son numéro de BL ou facture et sa volonté de 
                             se rétracter.
                         </p>
                         <p>
@@ -197,7 +180,7 @@ function CGV() {
                             produits d'entretien automobile ouverts ou entamés ne peuvent être repris.
                         </p>
                         <p>
-                            L'adresse de retour est communiquée par email par le service client.
+                            L'adresse de retour est communiquée par téléphone.
                         </p>
                         <p>
                             Les frais de retour sont à la charge du client en cas d'exercice du droit 
@@ -213,11 +196,11 @@ function CGV() {
                         </p>
                     </LegalArticle>
 
-                    <LegalArticle title="Article 11 - Produits Défectueux ou Non Conformes">
+                    <LegalArticle title="Article 10 - Produits Défectueux ou Non Conformes">
                         <p>
                             En cas de réception d'un produit défectueux, endommagé ou non conforme à 
                             la commande, le client doit le signaler au service client dans un délai de 
-                            48 heures suivant la réception, en fournissant son numéro de commande et 
+                            48 heures suivant la réception, en fournissant votre n° de BL ou facture et 
                             des photos du défaut ou de la non-conformité.
                         </p>
                         <p>
@@ -230,7 +213,7 @@ function CGV() {
                         </p>
                     </LegalArticle>
 
-                    <LegalArticle title="Article 12 - Garanties Légales">
+                    <LegalArticle title="Article 11 - Garanties Légales">
                         <p>
                             Tous les produits vendus par MAFRA bénéficient de la garantie légale 
                             de conformité (articles L217-4 et suivants du Code de la consommation) et 
@@ -243,7 +226,7 @@ function CGV() {
                         </p>
                     </LegalArticle>
 
-                    <LegalArticle title="Article 13 - Données Personnelles">
+                    <LegalArticle title="Article 12 - Données Personnelles">
                         <p>
                             Les données personnelles collectées lors de la commande sont nécessaires au 
                             traitement et à la livraison de la commande.
@@ -269,7 +252,7 @@ function CGV() {
                         </p>
                     </LegalArticle>
 
-                    <LegalArticle title="Article 15 - Droit Applicable et Litiges">
+                    <LegalArticle title="Article 14 - Droit Applicable et Litiges">
                         <p>
                             Les présentes Conditions Générales de Vente sont soumises au droit français.
                         </p>
